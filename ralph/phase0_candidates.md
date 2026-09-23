@@ -1,10 +1,12 @@
 # phase0_candidates.md — thesis question candidates (master, 2026-09-23)
 
-Status: **v2** — hours reconciled against the measured smoke cost in `ralph/results/phase0_codebase.json`
-(2026-09-23 19:40). Ranking unchanged from v1.
+Status: **v3** — hours reconciled against the measured smoke cost (`ralph/results/phase0_codebase.json`) and the
+literature facts corrected against `ralph/phase0_related.md` (2026-09-23 19:55 UTC). Ranking unchanged.
 
 ## Shared facts that constrain every candidate
-- Upstream protocol: 1000 epochs, batch 8, crop 256, Adam 1e-4 cosine, 485 LOLv1 train pairs. One full-protocol
+- **Baseline protocol = the code, not the paper text**: 1000 epochs, batch 8, crop 256, Adam 1e-4 with 3-epoch warmup
+  (epoch 1 at lr 0) then cosine, no effective gradient clipping, 485 LOLv1 train pairs. The paper text says 1500 epochs
+  and 400² crops; those do not fit the released code or an 11 GB GPU at batch 8, and the code is what anyone can run. One full-protocol
   run on one RTX 2080 Ti = **R ≈ 9.1 h** measured (26.2 s/epoch train + 50-image validation each epoch; 7.3 h
   train-only; peak 9.8 GiB of 11; key `cost.projected_hours_full_schedule` in phase0_codebase.json). Validating
   every 5 epochs instead of every epoch brings R to ≈ 7.7 h. 4 GPUs → ≈ 10–12 runs/day; ≈ 70 runs/week.
@@ -22,14 +24,19 @@ Status: **v2** — hours reconciled against the measured smoke cost in `ralph/re
 ## C1 — Does the HVI color space itself buy anything, under an identical network and seeds?
 **Question.** With the CIDNet architecture, loss, and protocol frozen, does training in HVI outperform training in
 sRGB, HSV, and YCbCr by more than the seed-to-seed spread?
-**Why open.** The paper's color-space ablation (sRGB 20.06 / HSV 21.35 / HVI 24.11 dB) is one dataset (LOLv2-Real),
-one run, no variance, test-selected. Every prior color-space LLIE paper (Bread/YCbCr, LYT-Net/YUV, DCC-Net) compares
-its own space inside its own network. No neutral comparison exists.
+**Why open.** The paper's color-space ablation (LOL-v2-Real, single run, no variance) was run on a *proxy* network
+(UNet + self-attention), not on CIDNet: sRGB 20.06 / HSV 21.35 / HVI-polarization-only 21.56 / HVI-C_k-only 21.54 dB.
+The HVI-vs-HSV margin there is ≈ 0.2 dB — smaller than any plausible seed spread — and the 24.11 dB headline is the
+full CIDNet, a different network. Every prior color-space LLIE paper (Bread/YCbCr, LYT-Net/YUV, DCC-Net) compares its
+own space inside its own network. No comparison under one fixed network with seeds exists, and YCbCr has never been
+put through this architecture.
 **If it works.** "HVI's gain over HSV/YCbCr/sRGB survives seeds and validation-based selection: Δ = x ± s dB on
 LOLv1 across 3 seeds." Plus the decomposition: HVI-without-C_k vs full isolates the density term.
 **If it fails.** "Under matched training, the choice of color space changes LOLv1 PSNR by less than the seed spread
-(s dB); the reported 3–4 dB gaps are not reproducible under seeded, validation-selected training." A negative result
-with three seeds is the thesis.
+(s dB); the paper's 0.2 dB HVI-over-HSV margin is not distinguishable from noise, and the 4 dB HSV-over-sRGB margin
+either survives or does not." A negative result with three seeds is the thesis.
+**Metrics.** PSNR/SSIM/LPIPS (ungated, no GT-mean primary; gated and GT-mean secondary, labelled) plus a colour-fidelity
+metric (CIEDE2000 / ab-error, already exported by the instrument) — the colour-space question deserves a colour metric.
 **Minimal experiment.** 5 conditions {sRGB, HSV, YCbCr, HVI w/o C_k, HVI} × 3 seeds = **15 runs** (≈ 135 GPU-h,
 ≈ 1.5 days on 4 GPUs). Selection on val; one final test eval per condition. Secondary, free analysis: seed SD per
 condition, and the val-selected vs "upstream-style" checkpoint gap (see C2).
@@ -40,8 +47,11 @@ way (V/HS, Y/CbCr, max/normalised-RG), documented in the protocol. That mapping 
 ## C2 — How much of the reported gap is seed noise and test-set selection?
 **Question.** For a fixed configuration, what is the seed-to-seed SD of LOLv1 PSNR/SSIM, and how much does
 picking the best checkpoint on the test split (upstream practice) inflate the number over validation-based selection?
-**Why open.** GitHub issues #160/#162 report non-reproducibility (23.89 vs 24.11); the README admits lost
-hyper-parameters; no paper in this family reports variance.
+**Why open.** GitHub issue #160 reports LOL-v1 as not reproducible (closed unanswered) and #162 reports a 0.2 dB
+shortfall on LOL-v2-Real; the README admits lost hyper-parameters; LOL-v1 ships `w_perc` / `wo_perc` /
+`test_finetuning` weights, the LOL-v2-Real ones are named `best_PSNR` / `best_SSIM` — selection on a scored test set is
+the family's practice; no paper in this family reports variance. LOL-v1 reference points: README 23.81 dB (no
+GT-mean) / 27.71 (GT-mean); paper table 28.20 (GT-mean).
 **If it works.** "Seed SD is s dB; test-selection inflates by b dB; the reported margins over the runner-up are
 within s + b." **If it fails** (SD tiny, bias tiny): "HVI-CIDNet is reproducible to ±s dB under a fixed seed and
 val-selection; the published number is not an artefact." Either is a clean, useful thesis chapter.
@@ -52,7 +62,8 @@ script whose JSON says so* — it is a measurement of the practice, never used t
 study. Recommended as **C1's companion, not a stand-alone**.
 
 ## C3 — The density term: does k matter, and what happens near black?
-**Question.** Fixed k ∈ {0.1, 0.2, 0.5, 1.0, 2.0} vs learnable k (upstream default): does k change LOLv1 quality,
+**Question.** Fixed k ∈ {0.1, 0.2, 0.5, 1.0, 2.0} (code convention; the code's k is the reciprocal of the paper's)
+vs learnable k (upstream default, init 0.2): does k change LOLv1 quality,
 and does the exact-black singularity (inverse divides by C_k ≈ 0.025 at I≡0; hue → arbitrary) show up as measurable
 error in the darkest intensity bins? (Measured: for I<1/255 the inverse gain is 0.014 per unit chroma, so any effect
 is confined to pixels at or within one code value of black, plus whatever k does to training.)
@@ -101,7 +112,8 @@ and the finding is generic to any U-Net; weakest link to the HVI idea.
 | 5 | C6 efficiency | 9 | yes, ~1 day | small | weak | ★★ |
 
 **Recommendation: C1 as the primary study, C2 as its built-in second study, C5 as the zero-cost third study.
-C3 is the pre-committed pivot** if C1's instrument shows the non-HVI spaces cannot be trained fairly in the
+C3 is the pre-committed pivot** and a close second overall — the literature file marks k, the only learned part of HVI,
+as never studied — if C1's instrument shows the non-HVI spaces cannot be trained fairly in the
 two-branch net (then the thesis narrows to "inside HVI, what does the density term do?"). Total budget ≈ 17 runs ≈ 155 GPU-h ≈ 1.6 days on 4 GPUs
 (+ 18 runs ≈ 1.7 days if the pivot fires), well inside a two-week window.
 
