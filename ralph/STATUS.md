@@ -1,6 +1,6 @@
 # STATUS.md — master's dashboard
 
-**Phase:** 0 — topic selection. Team launched 2026-09-23 18:00 in herdr session `ralph`. `HVI-PLAN.md` §0 is empty; no study runs.
+**Phase:** 0 — topic selection. **All Phase 0 inputs exist** (codebase JSON, related.md, candidates.md). **Gate 0 waits for the author** (`[human] topic confirmed: <#>` in INBOX.md). No study runs; GPUs idle by design.
 
 ## Gates
 | Gate | State | Evidence |
@@ -15,7 +15,7 @@
 |---|---|---|
 | master | candidates C1–C6 written and ranked; recommendation C1 in INBOX; **Gate 0 waits for the author**; sweeping, judging prompts, reconciling hours when cost.smoke lands | 2026-09-23 18:40 |
 | experiment | Phase 0 deliverables DONE (phase0_codebase.json, smoke + export green, rule-9 audit green, cost 9.1 h/run). Adapters + listing guard delivered (commit 0f0ed67). **Holding until Gate 0.** All 4 GPUs idle by design | 2026-09-23 19:20 UTC |
-| writing | phase0_related.md (code-grounded half on disk) + custom.bib verification via DBLP/Crossref/OpenAlex/CVF; skeleton green | 2026-09-23 18:05 UTC |
+| writing | Phase 0 deliverables DONE (phase0_related.md, custom.bib 28 verified, pushed 2042e4f). Next: related-work appendix prose (no claims) + gen-table spec scaffold for C1 | 2026-09-23 19:45 UTC |
 
 ## Next actions
 - master: Gate 0 open, waiting for `[human] topic confirmed: <#>` in INBOX (the only wait). On confirmation: fill HVI-PLAN.md §0–§8 from phase0_candidates.md + phase0_codebase.json, then dispatch the post-Gate-0 openings. Meanwhile: reconcile candidate hours with cost.smoke; keep workers on instrument work; sweep every ~30 min.
