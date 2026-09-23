@@ -27,9 +27,17 @@ Layout:
   eval15 (listing + GT embedding for clustering, recorded in its JSON).
 - `phase0_codebase.py` — writes `ralph/results/phase0_codebase.json` (upstream facts with
   file:line pointers, parameter/MAC counts, latency, the smoke run's cost block).
-- `final_eval_test.py` — the ONLY script allowed to read the test split (eval15); run once per
-  reported configuration after the plan's final gate; refuses a second read of the same label;
-  writes `ralph/results/final_eval__test.json`. `--preflight` runs on validation images only.
+- `final_eval_test.py` + `c1_metrics.py` — the ONLY script that evaluates on the test split
+  (eval15), frozen before launch (sha256 in its JSON). Final mode: one pass per label with raw and
+  GT-mean metrics (ONE scalar luminance gain), GT-intensity deciles (RGB MSE, ΔE00, chroma-weighted
+  circular hue error) and the darkness stress test (×1, ×0.5, ×0.25 + Poisson-Gaussian) →
+  `ralph/results/final_eval__test.json`. `--oracle` mode scores every 10-epoch snapshot of a job on
+  eval15 in one post-hoc pass → `final_eval__oracle.json`, labelled oracle, never used for
+  selection. `--preflight` variants run on validation images only.
+- `analysis_c1.py` — the pre-registered analysis (paired-by-seed t, Holm, sign-flip permutation,
+  TOST ±0.3 dB, mixed model, decile mechanism rule, stress dose-response, MSE decomposition,
+  selection bias vs oracle) → `ralph/results/c1__analysis.json`; `--selftest` on synthetic data
+  with planted effect/null → `ralph/results/phase0_analysis_selftest.json`.
 - `analysis/` — scripts that turn `ralph/results/<run>.json` into `<run>__analysis.json`
   (seed means/SD, paired deltas). Each writes a `sources` block with input sha256s.
 - `plots/` — scripts that read `ralph/results/*.json` (never raw CSVs) and write

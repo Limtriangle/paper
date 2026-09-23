@@ -1,0 +1,123 @@
+{
+  "written_at": "2026-09-23T22:54:10",
+  "script_sha256": "1f93ea819de5db5b7c597c67bd74f1cba676505da747c9500898c8c995c520ba",
+  "synthetic_model": "psnr = arm_mean + seed(0.15) + image(1.5) + eps(0.08); 5 seeds x 15 images; hue_err/dE00 planted in deciles 0-2 of A2/A3/A4; stress slope planted in A2",
+  "planted_delta_db": {
+    "A0-A1": 0.0,
+    "A0-A2": 0.6,
+    "A2-A3": 0.0,
+    "A3-A4": 0.15
+  },
+  "outcomes": {
+    "A0-A1": {
+      "planted": 0.0,
+      "estimated": -0.009690644861486675,
+      "ci_holm": [
+        -0.056753027460086966,
+        0.03737173773711362
+      ],
+      "p": 0.5152762662557789,
+      "p_holm": 1.0,
+      "perm_p": 0.5625,
+      "tost_equivalent": true,
+      "mixed_model": {
+        "coef": -0.009690644861485631,
+        "p": 0.4739029198661441,
+        "vc": {
+          "image": 2.1531945878131493,
+          "seed": 0.004510536215648063
+        },
+        "residual_var": 0.006866522640389996,
+        "converged": true
+      },
+      "verdict": "equivalent"
+    },
+    "A0-A2": {
+      "planted": 0.6,
+      "estimated": 0.5934159870727875,
+      "ci_holm": [
+        0.5483956920774004,
+        0.6384362820681747
+      ],
+      "p": 5.723586846770266e-07,
+      "p_holm": 2.2894347387081065e-06,
+      "perm_p": 0.0625,
+      "tost_equivalent": false,
+      "mixed_model": {
+        "coef": 0.5934159870727919,
+        "p": 0.0,
+        "vc": {
+          "image": 2.150744609493896,
+          "seed": 0.0031402246450109787
+        },
+        "residual_var": 0.008836108427979996,
+        "converged": true
+      },
+      "verdict": "difference"
+    },
+    "A2-A3": {
+      "planted": 0.0,
+      "estimated": -0.0011735681520860907,
+      "ci_holm": [
+        -0.05046221247822289,
+        0.048115076174050704
+      ],
+      "p": 0.949560001174353,
+      "p_holm": 1.0,
+      "perm_p": 0.9375,
+      "tost_equivalent": true,
+      "mixed_model": {
+        "coef": -0.0011735681520886488,
+        "p": 0.9387988461289515,
+        "vc": {
+          "image": 2.1676950293471284,
+          "seed": 0.0027959117981079637
+        },
+        "residual_var": 0.008761041365092547,
+        "converged": true
+      },
+      "verdict": "equivalent"
+    },
+    "A3-A4": {
+      "planted": 0.15,
+      "estimated": 0.15850967356005868,
+      "ci_holm": [
+        0.10188695297342903,
+        0.21513239414668833
+      ],
+      "p": 0.00037633481622364285,
+      "p_holm": 0.0011290044486709286,
+      "perm_p": 0.0625,
+      "tost_equivalent": true,
+      "mixed_model": {
+        "coef": 0.15850967356006063,
+        "p": 6.049386247819552e-30,
+        "vc": {
+          "image": 2.1795229952363546,
+          "seed": 0.00279694796838432
+        },
+        "residual_var": 0.007291049501269955,
+        "converged": true
+      },
+      "verdict": "equivalent"
+    }
+  },
+  "mechanism": {
+    "hue_err_rule5": true,
+    "delta_e00_rule5": true,
+    "stress_monotone": true,
+    "stress_delta": {
+      "1.0": 8.752061237861513e-05,
+      "0.5": -0.020323100575924423,
+      "0.25": -0.03003215545653908
+    }
+  },
+  "expected_verdicts": {
+    "A0-A1": "equivalent",
+    "A0-A2": "difference",
+    "A2-A3": "equivalent",
+    "A3-A4": "equivalent"
+  },
+  "expected_note": "A3-A4 plants +0.15 dB: below the 0.3 dB SESOI (rule 3b fails) and inside the +-0.3 dB TOST margin with the small synthetic seed SD, so 'equivalent' is the correct verdict",
+  "all_as_expected": true
+}
