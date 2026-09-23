@@ -1,46 +1,12 @@
-\section{Experimental Protocol}
+\section{Method and Protocol}
 \label{sec:method}
 
-\paragraph{Model.} We use the public \mname implementation \citep{yan2025hvi} unchanged.
-The network takes an sRGB image, converts it to \hvi, processes the intensity map and the
-chroma map along two interacting branches, and converts the result back to sRGB. The base
-channel count $W$ sets the width of every stage; the original configuration is $W=36$.
+\paragraph{Model.} We use the public \mname implementation \citep{yan2025hvi}. The network
+takes an sRGB image, converts it to \hvi, processes the intensity map and the chroma map
+along two interacting branches, and converts the result back to sRGB.
 
-\paragraph{Dual-space objective.} Let $\hat{y}$ be the sRGB prediction and $y$ the
-ground truth, and let $T(\cdot)$ denote the \hvi transform. The training loss is
-\begin{equation}
-\label{eq:loss}
-\mathcal{L} = \sum_{s \in \{\mathrm{RGB},\,\hvi\}} \Big[
-\lambda_1 \, \ell_1(s) + \lambda_{\mathrm{S}} \, \ell_{\mathrm{SSIM}}(s)
-+ \lambda_{\mathrm{E}} \, \ell_{\mathrm{edge}}(s) + \lambda_{\mathrm{P}} \, \ell_{\mathrm{perc}}(s) \Big],
-\end{equation}
-where each term is evaluated on $(\hat{y}, y)$ for $s=\mathrm{RGB}$ and on
-$(T(\hat{y}), T(y))$ for $s=\hvi$, with $\ell_{\mathrm{perc}}$ the VGG-19 feature loss
-\citep{johnson2016perceptual} and weights $\lambda_1 = 1$, $\lambda_{\mathrm{S}} = 0.5$,
-$\lambda_{\mathrm{E}} = 50$, $\lambda_{\mathrm{P}} = 0.01$ as in the original code. The
-leave-one-out ablation drops exactly one of the eight terms and keeps the summation order
-otherwise identical; the full objective is verified bitwise against the reference
-implementation before any ablation run starts.
-
-\paragraph{Frozen protocol.} All experiments use \dataset \citep{wei2018retinex}: 485
-training pairs and 15 validation pairs. Training uses random $128 \times 128$ crops, batch
-size 1, Adam with a learning rate of $10^{-4}$ for the first 50 epochs followed by a cosine
-decay to $10^{-7}$, and a total budget of 500 epochs. Precision is FP32 with TF32 disabled
-and no mixed precision, on \hw. The reported checkpoint is the one with the highest
-validation full-image RGB PSNR; the validation set is never used for gradient updates,
-and the 15-image test set is read only by a separate final-evaluation script, once per
-configuration. Each run records the SHA-256 of the training script, the upstream commit,
-and the split file, so that every number in this paper can be traced to a protocol.
-
-\paragraph{Metrics.} We report PSNR, SSIM \citep{wang2004ssim}, LPIPS
-\citep{zhang2018lpips}, and the CIEDE2000 color difference $\Delta E_{00}$
-\citep{sharma2005ciede2000}, all on full validation images, together with the same metrics
-restricted to edge pixels. Means are reported with the sample standard deviation across
-seeds; a comparison with fewer than three seeds is reported per seed.
-
-\paragraph{Studies.} We run three studies under this protocol. \emph{Loss ablation:}
-the full objective and its eight leave-one-out variants at $W \in \{18, 36\}$.
-\emph{Width:} $W \in \{18, 24, 30, 36\}$ with the full objective.
-\emph{Input prefilter:} a baseline (B0) against a hue--value prefilter (H3), an
-intensity-only prefilter (I3), and both (HI3), with a pre-registered confirmation on
-fresh seeds for the exploratory winner.
+\paragraph{Protocol.} All runs share one frozen protocol: the same dataset split, seeds,
+optimizer, schedule, and hardware (\hw). Checkpoints are selected on the validation split
+only; the test split is read once, by a separate final-evaluation script, per reported
+configuration. Each run records the SHA-256 of its training script, the upstream commit,
+and the split file.

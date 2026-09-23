@@ -1,24 +1,6 @@
 \section{Results}
 \label{sec:experiments}
 
-\input{tables/width_table}
-\input{tables/prefilter_table}
-
-\paragraph{Width.} \Cref{tab:width} reports the width sweep. Widening from $W=18$ to
-$W=36$ raises validation PSNR by \ph{0.6}\,dB and lowers LPIPS by \ph{0.03}, at a
-\ph{4}$\times$ increase in parameters. The gain from 30 to 36 channels is \ph{0.1}\,dB,
-within the seed spread we measure at $W=18$ (\ph{0.2}\,dB).
-
-\paragraph{Loss ablation.} Removing the \hvi-space perceptual term costs \ph{0.3}\,dB of
-PSNR and \ph{0.02} LPIPS at $W=18$; removing any other single \hvi-space term changes
-PSNR by less than \ph{0.1}\,dB. Removing all four \hvi-space terms at once (RGB-only
-training) costs \ph{0.4}\,dB. The full table is in \Cref{sec:app-loss}.
-
-\paragraph{Input prefilter.} On the exploratory seed, the intensity-only prefilter (I3)
-improves LPIPS and SSIM over the baseline (\Cref{tab:prefilter}). A pre-registered
-confirmation on two fresh seeds required LPIPS lower, SSIM higher, and PSNR within
-0.10\,dB of the baseline at the selected checkpoint. Seed 43 passes every criterion and
-seed 44 fails every criterion, so the screen returns \emph{hold}: the exploratory gain does
-not replicate, and we do not adopt the prefilter.
-
-Further per-image analysis and the complete ablation tables are in \Cref{sec:app-experiments}.
+Results are reported here once the studies defined in the project plan have run. Every
+table in this section is generated from a result file, and every number is bound to the
+key it was read from.

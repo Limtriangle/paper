@@ -1,23 +1,53 @@
 # HVI-PLAN.md — project spec (the source of truth)
 
-> Status: **DRAFT v0, 2026-09-24.** Written by the scaffold from the study scripts and result
-> files that already exist under `/home/work/research`. Lines marked **[CONFIRM]** are the
-> author's to confirm or change in `ralph/INBOX.md`; until then agents treat them as the
-> pre-committed default. Everything else is derived from what the code actually does.
+> Status: **PHASE 0 — topic not yet chosen.** Scope: a bachelor's thesis paper related to
+> HVI-CIDNet (Yan et al., CVPR 2025: low-light enhancement in the HVI color space). ICML
+> format, English, 4-page body + appendix. Until §0 is filled and the author has written
+> `[human] topic confirmed` in `ralph/INBOX.md`, nothing in §4–§8 is binding and no study
+> runs.
 
 ## 0. The one question
 
-*Which components of the dual-space HVI-CIDNet training recipe measurably improve
-low-light enhancement quality on LOL-v1, and which are indistinguishable from seed noise?*
+*(empty — filled at Gate 0)*
 
-TL;DR (one sentence, guidelines §3.1): Under one frozen protocol, we isolate the effect of
-each HVI-space loss term, of model width, and of input prefiltering in HVI-CIDNet, and
-report every effect against its seed spread.
+TL;DR (one sentence, guidelines §3.1): *(empty)*
 
-**[CONFIRM]** This frames the thesis as a *controlled study*, not a new method. If the
-thesis is instead meant to propose a modification (e.g. a prefilter or a DySample
-upsampler as the contribution), say so in INBOX.md and the storyline in §6 flips to
-"method + ablations".
+## Phase 0 — how the topic gets chosen
+
+Owner: `master`, with the author. Output: §0, §4, §5, §6, §8 of this file, written
+**before** any experiment runs (the upstream method: generate the plan first, with a paper
+story for every outcome, then run).
+
+1. **Ground truth first.** `experiment` reads the upstream code and reports, as a file
+   (`ralph/results/phase0_codebase.json`), what HVI-CIDNet actually does: the HVI transform,
+   the two-branch architecture, the loss terms and weights, the training protocol in the
+   repo's configs, the datasets its README uses, the released checkpoints, and what one
+   training run costs on one RTX 2080 Ti (measured with a 1-epoch smoke run). `writing`
+   reads the HVI-CIDNet paper and its closest related work and writes
+   `ralph/phase0_related.md`: what the paper claims, what it ablates, what it leaves open.
+2. **Candidate questions.** `master` writes 4–6 candidates in `ralph/phase0_candidates.md`.
+   Each candidate has: the one-sentence question; why it is open (cite the gap from step 1);
+   the claim we would make if it works; the claim we would make if it fails (a negative
+   result must still be a thesis); the minimal experiment that decides it; its GPU cost in
+   2080 Ti-hours against the ~4-GPU budget; and the risk that the answer is trivial.
+   Candidate families worth considering (not a list to copy): color-space design
+   (what the HVI transform buys over HSV/LAB/YCbCr under an identical network), the
+   dual-space objective (which terms matter, with seed spread), robustness (noise, JPEG,
+   real-world unpaired data, other datasets), efficiency (width/depth/latency trade-off on
+   consumer GPUs), failure modes of the polar chroma mapping near black, or a targeted
+   modification with a pre-registered success criterion.
+3. **Recommendation.** `master` ranks them by (decidability with our compute) × (size of the
+   open gap) × (survives a negative result), writes the ranking and the recommended pick
+   into `ralph/INBOX.md` under `## Open questions`, and logs it in DECISIONS.md.
+4. **Gate 0 — the author's call.** The author edits INBOX.md: `[human] topic confirmed: <#>`
+   (or names a different one). Master then fills §0–§8 below, `writing` writes the full
+   4-page draft with `\ph{}` values, `experiment` writes the study scripts. Only then does
+   Gate A open.
+
+While Phase 0 is open, `experiment` may only do **instrument work**: make the upstream repo
+train and evaluate end to end (1-epoch smoke run, one GPU), fix the run-directory convention
+so `tooling/export_results.py` ingests it, and measure cost. `writing` keeps the skeleton
+compiling and prepares the related-work appendix and the verified bibliography.
 
 ## 1. Rules of claim (from writing-guidelines §2 and the integrity floor)
 
@@ -25,111 +55,51 @@ upsampler as the contribution), say so in INBOX.md and the storyline in §6 flip
   number and a spread.
 - Every number in the paper is a `\phm{}` bound to a JSON key, or it is deleted.
 - A difference smaller than the seed-to-seed sample SD is reported as *no measurable
-  difference*, with the spread. Never by sign.
-- Checkpoint selection by validation PSNR only. `test15` is read once, by a dedicated
-  script, at the very end, and the table that reports it says so.
+  difference*, with the spread. Never by sign. Three seeds before any mean is cited.
+- Checkpoint selection by validation only. The test split is read once, by one script, at
+  the end, and the table that reports it says so.
 
-## 2. What already exists (inventory, 2026-09-24)
+## 2. Run-directory convention (what `export_results.py` expects)
 
-| Study | Run | Cells complete | Protocol | Notes |
-|---|---|---|---|---|
-| width_study | width500_v1 | W18/24/30/36 × seed 42 | `hvi_width_trial.py` (protocol root, sha `32337aa3…`) | 500 epochs, full objective |
-| width_study | width_smoke_v1 | 4 × seed 42 | same, 1 epoch | smoke only, not citable |
-| loss_ablation | repro_check_v1 | FULL_W18_seed42 (1 epoch) | `hvi_loss_ablation.py` | verifies FULL == width objective bitwise |
-| loss_ablation | throughput_v1 | FULL_W36_seed1001 | same | timing only |
-| loss_study | dysample50_v1 / dysample_smoke_v1 | A2/A4/B0/B1 × seed 42 | `hvi_dysample_trial.py` | 50 epochs |
-| loss_study | kdiag_v1 | baseline / i_ssim / rgb_perceptual | `hvi_k_diagnostic.py` | no validation_summary |
-| prefilter_study | prefilter50_v1, prefilter500_v1 | B0/H3/I3/HI3 × seed 42 | `hvi_prefilter_trial.py` | 50 and 500 epochs |
-| prefilter_study | ifilter_confirm50_v1 | B0/I3 × seeds 43, 44 | `hvi_ifilter_confirm.py` + `protocol.json` | pre-registered screen → **HOLD** |
+```
+/home/work/research/outputs/<study>/<run>/manifest.json        protocol + script sha256 + upstream commit + split sha256
+/home/work/research/outputs/<study>/<run>/<job>/config.json     variant, seed, width, weights, gpu, torch, "test": "NEVER READ"
+/home/work/research/outputs/<study>/<run>/<job>/status.json     {"state": "running"|"complete"|"failed"}
+/home/work/research/outputs/<study>/<run>/<job>/metrics.csv     per-epoch: epoch, loss, val_psnr, ...
+/home/work/research/outputs/<study>/<run>/<job>/validation_summary.csv   rows checkpoint=best|last, metric columns
+```
+Jobs never overwrite or resume in place (`mkdir(exist_ok=False)`). A protocol change is a
+new script hash and a new run name.
 
-Exported by `tooling/export_results.py` into `ralph/results/<study>__<run>.json`.
+## 3. Frozen protocol
 
-## 3. Frozen protocol (from the manifests; do not change without a new run name)
-
-LOL-v1, 485 train / 15 eval, split sha `b8eb9baf…`; random 128×128 crops, batch 1; Adam,
-lr 1e-4 fixed for 50 epochs then cosine to 1e-7 through epoch 500; FP32, TF32 off, no AMP;
-one RTX 2080 Ti per job; loss weights L1 1.0, SSIM 0.5, edge 50, perceptual 0.01, HVI 1.0;
-selection = highest validation full-image RGB PSNR; `test15` NEVER READ.
+*(empty — fixed at Gate 0 from the upstream configs plus whatever the question needs.
+Defaults inherited from the upstream repo unless the plan says otherwise: its dataset
+splits, crop size, batch size, optimizer, schedule, and loss weights; FP32 on RTX 2080 Ti.)*
 
 ## 4. Studies and claims
 
-Each claim is written first; the experiment exists to support or refute it.
+*(empty — each claim is written first; the experiment exists to support or refute it.)*
 
-### S1 — Loss-term ablation (leave-one-out)
-Claim: the HVI-space perceptual term is the HVI-space component that matters; the other
-HVI-space terms are within noise. **[CONFIRM the expected winner]**
-Cells: FULL, NO_L1, NO_SSIM, NO_EDGE, NO_PERC, NO_PERC_HVI, RGB_ONLY, HVI_ONLY × W ∈ {18, 36}
-× seeds {42, 43, 44}. Script: `hvi_loss_ablation.py` via `hvi_loss_queue.py`.
-Cost: ~8 variants × 2 widths × 3 seeds = 48 jobs × 500 epochs. **[CONFIRM budget]** —
-default: W18 all variants × 3 seeds first (24 jobs); W36 only FULL / RGB_ONLY / NO_PERC_HVI.
-Output: `loss_ablation__<run>.json` + `__analysis.json` (per-variant seed mean/SD, paired delta vs FULL).
-
-### S2 — Width
-Claim: PSNR grows with width with diminishing returns; 30→36 is within noise.
-Cells: W18/24/30/36 × seeds {42, 43, 44}. Seed 42 done. Script: `hvi_width_trial.py`.
-Output: `width_study__width500_v1.json` + analysis (per-width mean/SD, params).
-
-### S3 — Input prefilter
-Claim (pre-registered, already tested): I3 improves LPIPS/SSIM at equal PSNR. Result so
-far: seed 43 passes all criteria, seed 44 fails all → **HOLD**. Default: report as
-non-replicating; no expansion. Optional: one more seed (45) at 500 epochs for B0/I3 only
-**[CONFIRM]**.
-
-### S4 — Final test evaluation (last)
-One script, run once per configuration that appears in the paper's main table, reads
-`test15`, writes `final_eval__test15.json`. Never before Gate C.
-
-## 5. Gates (master calls them from files, not from chat)
+## 5. Gates
 
 | Gate | Needs | PASS default | FAIL default |
 |---|---|---|---|
-| **A — instrument** | export of all existing runs; hash check of every manifest vs `hvi_width_trial.py`; FULL_W18 repro equals width500 W18 within 1e-6 on validation PSNR | launch S1/S2 seeds 43–44 | fix the instrument; nothing else runs |
-| **B — width & seeds** | S2 with 3 seeds; S1 W18 FULL/RGB_ONLY/NO_PERC_HVI with 3 seeds | storyline §6 as written | Pivot P1 or P2 |
-| **C — ablation complete** | S1 W18 all variants × 3 seeds | freeze the method table; run S4 | report the completed subset; freeze |
-| **D — final** | S4 done; `verify-phm.py` 0 unbacked; `writing-audit.sh --final` PASS | submit-ready | delete unbacked claims; submit-ready |
+| **0 — topic** | `phase0_codebase.json`, `phase0_related.md`, `phase0_candidates.md`, `[human] topic confirmed` in INBOX.md | fill §0–§8; open Gate A | — (the author decides) |
+| **A — instrument** | upstream trains + evaluates end to end; export ingests the smoke run; protocol hash pinned | launch the first study | fix the instrument; nothing else runs |
+| **B / C** | *(set at Gate 0)* | | |
+| **D — final** | final-eval JSON; `verify-phm.py` 0 unbacked; `writing-audit.sh --final` PASS | submit-ready | delete unbacked claims; submit-ready |
 
-## 6. Storyline (writing agent's spine)
+## 6. Storyline
 
-1. Background: learned enhancers dominate LOL-v1; HVI-CIDNet changes the color space of
-   both computation and supervision.
-2. Problem: the recipe bundles eight loss terms, a width, and a raw input; its paper does
-   not isolate them, and single-seed ablations overstate small gaps.
-3. Approach: one frozen, hash-pinned protocol; every comparison with seed spread; every
-   number file-bound.
-4. Results: (S1) which HVI-space term matters; (S2) width curve; (S3) prefilter does not
-   replicate.
-5. Conclusion: what to keep from the recipe, what is noise.
+*(empty — five moves: background, problem, approach, results, conclusion; intro follows the
+style guide's 7-move arc; lead figure is a results figure.)*
 
-Intro follows the 7-move arc (style guide §12). Lead figure: PSNR/LPIPS vs width with
-per-seed points (`writing/figures/fig1_width.pdf`). Figure 2: loss-ablation deltas vs FULL
-with seed SD bars (`fig2_ablation.pdf`). Tables: width (`tab:width`), prefilter
-(`tab:prefilter`), full ablation in appendix. Page budget: style guide §2.
+## 7. Provisional values (for `\ph{}` only)
 
-## 7. Provisional values (for `\ph{}` only; replaced as JSON lands)
-
-- Width 18→36: +0.6 dB PSNR, −0.03 LPIPS, ~4× params. 30→36: +0.1 dB.
-- NO_PERC_HVI vs FULL at W18: −0.3 dB PSNR, +0.02 LPIPS. RGB_ONLY vs FULL: −0.4 dB.
-- Seed SD at W18: 0.2 dB PSNR.
-These are guesses. They are never confidence intervals. They die at the milestone audit.
+*(empty)*
 
 ## 8. Pivots (pre-committed; master logs which one fired)
 
-- **P1 — no HVI-space term matters** (all within SD): the paper becomes "the HVI-space
-  supervision is redundant given RGB supervision under this protocol"; headline is the
-  RGB_ONLY vs FULL delta with its SD. Positive-framing: simpler recipe, same quality.
-- **P2 — everything matters** (removing any term hurts beyond SD): the paper becomes "the
-  dual-space objective is jointly necessary"; headline is the smallest single-term drop.
-- **P3 — width is flat** (18≈36): headline flips to "a 4× smaller HVI-CIDNet matches the
-  original"; the width table leads.
-- **P4 — instrument fails at Gate A**: nothing is cited until fixed; the paper's appendix
-  documents the failure and the fix.
-- **P5 — GPU budget runs out before Gate C**: report the completed subset with its exact
-  cell count; never fill a missing cell.
-
-## 9. Open questions for the author (also mirrored in `ralph/INBOX.md`)
-
-1. [CONFIRM] Controlled-study framing (§0) vs. proposing a modification.
-2. [CONFIRM] GPU budget for S1 (48 full jobs ≈ several days on 4 GPUs at 500 epochs).
-3. [CONFIRM] Whether S3 gets a third seed.
-4. Author name / affiliation for the camera-ready build (anonymous now).
-5. Thesis deadline date, so master can set the calendar for Gates B–D.
+*(empty — one pivot per outcome of each study, including "no effect" and "budget runs
+out". A negative result with three seeds is a thesis.)*

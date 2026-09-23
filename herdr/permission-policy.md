@@ -12,14 +12,14 @@ Read before every `approve` / `deny`. Mode: `python3 herdr/herdr_sync.py mode` (
 - Edits/writes inside the agent's own territory (CLAUDE.md ownership table).
 - `bash tooling/*.sh`, `python3 tooling/*.py`, `python3 herdr/herdr_sync.py …`.
 - `git add/commit/pull --rebase/push` in `/home/work/paper` (writing only).
-- `nvidia-smi`, `CUDA_VISIBLE_DEVICES=N python3 /home/work/research/hvi_*.py …` (experiment only).
+- `nvidia-smi`, `CUDA_VISIBLE_DEVICES=N python3 auto-research/*.py …` (experiment only).
 - `tectonic`, `uv`, `pip install` into the venv.
 - Host-classifier false positives on harmless shell expansion inside read-only commands.
 
 ## ESCALATE (leave waiting, write to ralph/INBOX.md)
 - Anything touching paths outside the in-scope dirs.
 - `rm -r` of any `outputs/<study>/<run>` directory, or of `ralph/results/`.
-- Any command containing `test15` outside `auto-research/final_eval*.py`.
+- Any command that reads the test split outside `auto-research/final_eval*.py`.
 - Network installs of new software not already in bootstrap.sh.
 
 ## DENY

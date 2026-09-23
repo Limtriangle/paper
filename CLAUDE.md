@@ -2,14 +2,14 @@
 
 This directory (`/home/work/paper`, physically `/home/work/research/paper`) is the
 **orchestration root** for a writing-driven, three-agent research loop that produces a
-bachelor's thesis paper (ICML format, English) on **HVI-CIDNet low-light image
-enhancement** — the dual-space (RGB + HVI) loss, model width, and input prefilter studies
-already running in `/home/work/research`.
+bachelor's thesis paper (ICML format, English) on a topic related to **HVI-CIDNet**
+(low-light image enhancement in the HVI color space, Yan et al. 2025).
 
-**`HVI-PLAN.md` is the spec.** Read it before any research or writing decision. It holds the
-research question, the claims, the gates, the pre-committed pivots for every outcome
-(including negative ones), and the paper storyline. The persona files under `harness/` are
-the operating manuals; the plan is the source of truth.
+**`HVI-PLAN.md` is the spec.** Read it before any research or writing decision. Until its
+§0 names the research question and the author has confirmed it (Gate 0), the project is in
+**Phase 0 — topic selection**: no study runs, no result is cited, and the paper is a
+compiling skeleton with no claims. After Gate 0 the plan holds the claims, the gates, the
+pre-committed pivots for every outcome, and the storyline.
 
 The method is adapted from
 [writing-driven-autoresearch](https://github.com/happyhappy-jun/writing-driven-autoresearch)
@@ -23,18 +23,19 @@ Read the persona file for whichever role you are before doing anything.
 
 | Agent | Persona | Owns | Never touches |
 |---|---|---|---|
-| `master` | `harness/master.md` | gates, decisions, shared state (`ralph/`), the audit | doesn't run experiments or edit LaTeX |
+| `master` | `harness/master.md` | gates, decisions, shared state (`ralph/`), the audit, Phase 0 ideation | doesn't run experiments or edit LaTeX |
 | `experiment` | `harness/experiment.md` | `auto-research/`, `/home/work/research/`, all 4 GPUs, all training/eval, `ralph/results/*.json`, `writing/figures/*.pdf` | `writing/**/*.tex` — not one character |
-| `writing` | `harness/writing.md` | `writing/` (all `.tex`, `.bib`, captions, the build), `ralph/PH-LEDGER.md` | never runs a model or touches a GPU |
+| `writing` | `harness/writing.md` | `writing/` (all `.tex`, `.bib`, captions, the build), `ralph/PH-LEDGER.md`, `ralph/phm-spec.json` | never runs a model or touches a GPU |
 
 Also read: `harness/writing-guidelines.md` (process), `harness/writing-style-guide.md` (form).
 
-**The human is asynchronous.** The author (Byungjun's harness said "there is no human"; here
-there is one, but they are not watching). They read `ralph/DECISIONS.md` and `ralph/STATUS.md`
-and answer through `ralph/INBOX.md`. **Never call `AskUserQuestion`; never end a turn waiting
-for input.** Apply the pre-committed default from your persona or the plan, log the decision
-with its reason in `ralph/DECISIONS.md`, and keep moving. If a question truly needs the human,
-write it under `## Open questions` in `ralph/INBOX.md` and continue with something else.
+**The human is asynchronous.** The author reads `ralph/DECISIONS.md` and `ralph/STATUS.md`
+and answers through `ralph/INBOX.md`. **Never call `AskUserQuestion`; never end a turn
+waiting for input.** Apply the pre-committed default from your persona or the plan, log the
+decision with its reason in `ralph/DECISIONS.md`, and keep moving. The **one exception is
+Gate 0 (the topic)**: it is the author's call. Master prepares candidates and a
+recommendation in `HVI-PLAN.md` §0 and `ralph/INBOX.md`, then the team does only
+instrument work (§Phase 0 in the plan) until the author writes `[human] topic confirmed`.
 
 ## Shared state — the contract between agents
 
@@ -63,18 +64,21 @@ bash tooling/writing-audit.sh          # definition-of-done as code; --final als
 python3 tooling/verify-phm.py          # every \phm{} verified BY KEY against ralph/results/*.json
 python3 tooling/gen-table.py --check   # tables regenerated from JSON, never typed; --write to apply
 bash tooling/unwrap-phm.sh --dry       # \phm{X} -> X, purity-checked; --apply to do it
-python3 tooling/export_results.py      # /home/work/research/outputs/** -> ralph/results/*.json
+python3 tooling/export_results.py      # /home/work/research/outputs/<study>/<run>/<job> -> ralph/results/*.json
 bash tooling/status.sh                 # phase, git state, result counts, GPU occupancy
 python3 herdr/herdr_sync.py status     # who is idle / working / blocked
 python3 herdr/herdr_sync.py send <agent> "<one line>"
 ```
 
-## Hardware reality
+## Hardware and code reality
 
-- **This host (main1)**: 4× NVIDIA GeForce RTX 2080 Ti, 11 GB each, `sm_75`, **no bf16**,
-  FP32 training is the protocol. 15 CPU cores, 125 GB RAM. CUDA 12.8 toolkit.
-- Python: `/home/work/research/env/hvi` (venv over the NGC system torch 2.7). It is
-  activated by `paper/env.sh` (sourced from `~/.bashrc`).
+- **This host (main1)**: 4× NVIDIA GeForce RTX 2080 Ti, 11 GB each, `sm_75`, **no bf16**.
+  15 CPU cores, 125 GB RAM. CUDA 12.8 toolkit.
+- Python: `/home/work/research/env/hvi` (venv over the NGC system torch 2.7), activated by
+  `paper/env.sh` (sourced from `~/.bashrc`).
+- Upstream code: `/home/work/research/code/HVI-CIDNet` (clone of Fediory/HVI-CIDNet).
+  Dataset on disk: `/home/work/research/datasets/LOLv1`. Anything else is downloaded into
+  `/home/work/research/datasets/` and its source and checksum are logged.
 - **No sudo. No SLURM.** `experiment` assigns GPUs itself via explicit `CUDA_VISIBLE_DEVICES`
   per job; at most one training job per GPU.
 - **`/home/work` is ephemeral** (wiped when the compute session ends). Only
@@ -91,7 +95,8 @@ python3 herdr/herdr_sync.py send <agent> "<one line>"
    `tooling/verify-phm.py`. Unwrap only after it passes.
 3. Tables are generated by `tooling/gen-table.py` from result JSON and never hand-edited.
    Bold marks the best value per column whoever attains it — typography is a claim.
-4. The test split (`test15`) is **never read** by any training or selection code. Every job
-   config carries `"test15": "NEVER READ"`; a run that violates this is discarded.
+4. The test split is **never read** by training or checkpoint-selection code. Selection uses
+   the validation split only; one dedicated final-evaluation script reads the test split
+   once per reported configuration and its JSON says so.
 5. No hallucinated citations. A BibTeX entry that cannot be verified is cut.
 6. Never `git push --force`, never `git reset --hard`. The history is the audit trail.
