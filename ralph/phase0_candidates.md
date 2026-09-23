@@ -99,9 +99,11 @@ with A1 + R + U ≈ 34 runs ≈ 2.7 days. Order: the 5 A0 seeds first (pipeline 
 wall-clock), then the rest in waves of 4. One pilot pair (A0, A3) checks whether the ranking at 250/500/1000 epochs is
 stable to 0.1 dB before any schedule shortening (R2 §4d); the schedule is re-annealed, never truncated.
 
-**Protocol additions this candidate requires (instrument work, no training).** (i) Scene-disjoint val split: cluster
-all 500 LOL-v1 images by scene (embedding + pHash on the GT), val ≈ 40 pairs from clusters containing no test image;
-report how many test images have a train near-duplicate (cosine > 0.9). (ii) k0 constant and detached in the loss.
+**Protocol additions this candidate requires (instrument work, no training).** (i) Scene-disjoint val split — **done** (`auto-research/split_scene_v1.json`, 40 val / 445 train, sha b0dde627).
+**Measured caveat:** 14 of the 15 LOL-v1 test images have a train near-duplicate at DINOv2 cosine > 0.9 (13 at > 0.95), and
+24 train images share a scene cluster with the test set. Default: they stay in training (matched across arms, keeps
+upstream comparability and the pipeline gate); the thesis states this, and the deduplicated LOL-v2-Real evaluation is
+mandatory, not optional. (ii) k0 constant and detached in the loss.
 (iii) Checkpoints saved every 10 epochs. (iv) Transforms kept in FP32 (no AMP on atan2 / max / pow).
 (v) Parameter counts asserted identical across arms.
 

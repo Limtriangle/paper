@@ -14,8 +14,8 @@
 | Agent | Doing | Since |
 |---|---|---|
 | master | candidates C1–C6 written and ranked; recommendation C1 in INBOX; **Gate 0 waits for the author**; sweeping, judging prompts, reconciling hours when cost.smoke lands | 2026-09-23 18:40 |
-| experiment | Phase 0 deliverables DONE (phase0_codebase.json, smoke + export green, rule-9 audit green, cost 9.1 h/run). Instrument work for the R2 ladder: scene-disjoint val split (embedding + pHash), frozen-k0 detached HVI loss (no VGG), ckpt every 10 ep, val every 5 ep, FP32 transforms, arm adapters A0/A2/A3/A4/L1/R/U + param-count assertion + CPU preflight. No training | 2026-09-23 19:15 UTC |
-| writing | Phase 0 deliverables DONE (phase0_related.md, custom.bib 28 verified, pushed 2042e4f). Next: related-work appendix prose (no claims) + gen-table spec scaffold for C1 | 2026-09-23 19:45 UTC |
+| experiment | Phase 0 deliverables DONE (phase0_codebase.json, smoke + export green, rule-9 audit green, cost 9.1 h/run). Scene-disjoint split DONE (6965222; caveat: 14/15 test images have train near-duplicates). **Holding until 22:40 UTC reset.** Then: frozen-k0 detached HVI loss (no VGG), ckpt every 10 ep, val every 5 ep, FP32 transforms, arm adapters A0/A2/A3/A4/L1/R/U + param-count assertion + CPU preflight. No training | 2026-09-23 19:40 UTC |
+| writing | Corrections + appendix prose + C1 table scaffold DONE (2991e67). **Holding until 22:40 UTC reset.** Then: gen-table --check must fail on missing src; finish 12 comparator bib verifications | 2026-09-23 19:40 UTC |
 
 ## Next actions
 - master: Gate 0 open, waiting for `[human] topic confirmed: <#>` in INBOX (the only wait). On confirmation: fill HVI-PLAN.md §0–§8 from phase0_candidates.md + phase0_codebase.json, then dispatch the post-Gate-0 openings. Meanwhile: reconcile candidate hours with cost.smoke; keep workers on instrument work; sweep every ~30 min.
