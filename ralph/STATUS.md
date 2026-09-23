@@ -6,7 +6,7 @@
 | Gate | State | Evidence |
 |---|---|---|
 | 0 — topic (author's call) | open | needs ralph/results/phase0_codebase.json (experiment), ralph/phase0_related.md (writing), ralph/phase0_candidates.md (master), then `[human] topic confirmed: <#>` in INBOX.md |
-| A — instrument | ready: smoke exported, rule-9 audit green, test guard (open+list) green, adapters lossless; verdict stamped at Gate 0 with the protocol hash | ralph/results/baseline__smoke_v1.json |
+| A — instrument | READY: smoke exported, rule-9 audit green, test guard (open+list) green, scene split, 7 arms preflight green; verdict stamped at Gate 0 with the protocol hash | ralph/results/baseline__smoke_v1.json |
 | B / C | undefined until Gate 0 | |
 | D — final | pending | |
 
@@ -14,7 +14,7 @@
 | Agent | Doing | Since |
 |---|---|---|
 | master | candidates C1–C6 written and ranked; recommendation C1 in INBOX; **Gate 0 waits for the author**; sweeping, judging prompts, reconciling hours when cost.smoke lands | 2026-09-23 18:40 |
-| experiment | Phase 0 deliverables DONE (phase0_codebase.json, smoke + export green, rule-9 audit green, cost 9.1 h/run). Scene-disjoint split DONE (6965222; caveat: 14/15 test images have train near-duplicates). Resumed 22:45 UTC: frozen-k0 detached HVI loss (no VGG), ckpt every 10 ep, val every 5 ep, FP32 transforms, arm adapters A0/A2/A3/A4/L1/R/U + param-count assertion + CPU preflight. No training | 2026-09-23 19:40 UTC |
+| experiment | R2 ladder fully instrumented (d124e95: 7 arms preflight green, params matched, k0 detached, FP32, knobs identity, val/5, ckpt/10, split scene_v1). **Holding for Gate 0.** GPUs idle by design | 2026-09-23 23:05 UTC |
 | writing | Corrections + appendix prose + C1 table scaffold DONE (2991e67). Resumed 22:45 UTC: gen-table --check must fail on missing src; merge the author's survey.bib after own verification; fill related.md §5; finish 12 comparator bib checks | 2026-09-23 19:40 UTC |
 
 ## Next actions
