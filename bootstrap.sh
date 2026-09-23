@@ -98,10 +98,21 @@ if ! have claude; then
     curl -fsSL https://claude.ai/install.sh | bash
 fi
 
+if ! have pdftotext; then
+    echo "installing poppler (pdftotext/pdfinfo) via micromamba"
+    mkdir -p "$TOOLS/mm" && ( cd "$TOOLS/mm" && [ -x bin/micromamba ] || curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | tar -xj bin/micromamba )
+    MAMBA_ROOT_PREFIX="$TOOLS/mm/root" "$TOOLS/mm/bin/micromamba" create -y -q -p "$TOOLS/mm/envs/poppler" -c conda-forge poppler
+    ln -sf "$TOOLS/mm/envs/poppler/bin/pdftotext" "$TOOLS/bin/pdftotext"
+    ln -sf "$TOOLS/mm/envs/poppler/bin/pdfinfo"   "$TOOLS/bin/pdfinfo"
+fi
+
+# herdr agent-state detection for Claude Code panes (idempotent)
+have herdr && herdr integration install claude >/dev/null 2>&1 || true
+
 # --- 5. summary --------------------------------------------------------------
 echo
 echo "=== bootstrap summary ==="
-for t in tectonic uv herdr claude git python3 nvidia-smi; do
+for t in tectonic uv herdr claude pdftotext git python3 nvidia-smi; do
     printf '  %-11s %s\n' "$t" "$(command -v $t 2>/dev/null || echo MISSING)"
 done
 echo "  paper       $(readlink -f /home/work/paper)"

@@ -1,0 +1,19 @@
+{
+  "local_workspace": "ralph",
+  "local_sessions": ["ralph"],
+  "monitor": {"local_label": "monitor", "command": null},
+  "watch_targets": ["experiment", "writing"],
+  "watch_ignore": [],
+  "idle_nudge": {
+    "enabled": true,
+    "after_sec": 1200,
+    "max_nudges": 2,
+    "text": "status? if blocked, log it in ralph/DECISIONS.md and continue with the next item in ralph/STATUS.md"
+  },
+  "local_agents": [
+    {"name": "master",     "label": "master",     "resume_cmd": "cd /home/work/paper && source env.sh && claude --continue"},
+    {"name": "experiment", "label": "experiment", "resume_cmd": "cd /home/work/paper && source env.sh && claude --continue"},
+    {"name": "writing",    "label": "writing",    "resume_cmd": "cd /home/work/paper && source env.sh && claude --continue"}
+  ],
+  "remotes": []
+}

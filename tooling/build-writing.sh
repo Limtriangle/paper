@@ -18,17 +18,16 @@ rm -rf "$STAGE"; mkdir -p "$STAGE"
 cp -r "$ROOT"/section "$ROOT"/tables "$ROOT"/figures "$STAGE"/
 cp "$ROOT"/icml2024/* "$STAGE"/
 # \DeclareUnicodeCharacter is a pdfLaTeX/inputenc command, undefined in XeTeX.
-sed -i '1i \\providecommand{\\DeclareUnicodeCharacter}[2]{}' "$STAGE/main.tex"
+{ printf '%s\n' '\providecommand{\DeclareUnicodeCharacter}[2]{}'; cat "$STAGE/main.tex"; } > "$STAGE/main.tex.tmp"
+mv "$STAGE/main.tex.tmp" "$STAGE/main.tex"
 
 cd "$STAGE"
 echo "==> tectonic build"
 tectonic -X compile main.tex --keep-logs --keep-intermediates ${TECTONIC_ARGS:-}
 cp "$STAGE/main.pdf" "$PDF"
 cp "$STAGE/main.log" "$OUT/main.log" 2>/dev/null || true
-echo "==> wrote $PDF ($(python3 - "$PDF" <<'EOF'
-import sys, re
-data = open(sys.argv[1], 'rb').read()
-m = re.findall(rb'/Type\s*/Page[^s]', data)
-print(f"{len(m)} pages")
-EOF
-))"
+if command -v pdfinfo >/dev/null; then
+    echo "==> wrote $PDF ($(pdfinfo "$PDF" | awk '/^Pages:/{print $2}') pages)"
+else
+    echo "==> wrote $PDF"
+fi
