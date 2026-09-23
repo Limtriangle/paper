@@ -53,8 +53,9 @@ study. Recommended as **C1's companion, not a stand-alone**.
 
 ## C3 — The density term: does k matter, and what happens near black?
 **Question.** Fixed k ∈ {0.1, 0.2, 0.5, 1.0, 2.0} vs learnable k (upstream default): does k change LOLv1 quality,
-and does the near-black failure (inverse divides by C_k ≈ 0.025 at I≈0; hue → arbitrary) show up as measurable
-error in the darkest intensity bins?
+and does the exact-black singularity (inverse divides by C_k ≈ 0.025 at I≡0; hue → arbitrary) show up as measurable
+error in the darkest intensity bins? (Measured: for I<1/255 the inverse gain is 0.014 per unit chroma, so any effect
+is confined to pixels at or within one code value of black, plus whatever k does to training.)
 **Why open.** No k sweep in the paper; the learnable k also receives gradient through the target transform HVIT(gt),
 so the model can shrink its own loss by collapsing chroma — unexamined. RHVI-FDD / BC-IHV (2026) replace the
 intensity law with new modules but never sweep the original.

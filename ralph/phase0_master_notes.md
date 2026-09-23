@@ -5,7 +5,7 @@ Upstream HEAD eb43d7d. Facts to cross-check against ralph/results/phase0_codebas
 ## HVI transform (net/HVI_transform.py)
 - H,S standard HSV; I = max(R,G,B). k is a learnable nn.Parameter(0.2) (reciprocal of paper's k).
 - C = (sin(πV/2)+1e-8)^k; H = C·S·cos(2πh), V = C·S·sin(2πh).
-- Inverse divides by C using a stored float (no grad to k through inverse). Near black C≈(1e-8)^0.2≈0.025 → H/V errors amplified ~40× then hidden by clamp; atan2(eps,eps) → arbitrary 45° hue. **Candidate: near-black failure mode.**
+- Inverse divides by C using a stored float (no grad to k through inverse). Near black: at I≡0, C≈(1e-8)^0.2≈0.025 and the inverse divides by it; atan2(eps,eps) → arbitrary 45° hue. **Measured (phase0_colorspace_roundtrip.json):** for I<1/255 the inverse gain per unit chroma is only 0.014 (hvi) / 0.005 (hvi_nock) vs 1.25 (ycbcr) — no amplification in float32 except at exact black. **Candidate: near-black failure mode is about exact-black hue indeterminacy and k, not a 40× blow-up.**
 - Hidden test-time knobs: `gated` (S×1.3, on for LOLv1 eval), `gated2`/alpha (RGB×0.8–0.84 for LOLv2-real), user gamma for unpaired sets.
 
 ## Network (net/CIDNet.py, net/LCA.py)

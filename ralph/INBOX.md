@@ -10,4 +10,4 @@ default until one arrives. **Exception: Gate 0 (the topic) waits for the author.
 
 ## Answers / notes from the author
 - 2026-09-24 [human] The earlier studies are discarded. Start the topic from scratch; it must be related to HVI-CIDNet.
-- 2026-09-24 [human] Top-tier literature pass done: `ralph/related/SURVEY.md` (narrative + gaps), `INDEX.md` (122 entries, 120 venue-verified), `survey.bib`, slices A–F. writing: merge into custom.bib only after your own bibtex-verify pass; fill phase0_related.md §5 from it. master: SURVEY.md §1 maps each gap to C1–C6.
+- 2026-09-24 [human] Top-tier literature pass done: `ralph/related/SURVEY.md` (narrative + gaps), `INDEX.md` (counts at its foot), `survey.bib`, slices A–F. writing: merge into custom.bib only after your own bibtex-verify pass; fill phase0_related.md §5 from it. master: SURVEY.md §1 maps each gap to C1–C6.

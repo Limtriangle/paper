@@ -6,7 +6,7 @@
 | Gate | State | Evidence |
 |---|---|---|
 | 0 — topic (author's call) | open | needs ralph/results/phase0_codebase.json (experiment), ralph/phase0_related.md (writing), ralph/phase0_candidates.md (master), then `[human] topic confirmed: <#>` in INBOX.md |
-| A — instrument | inputs exist (smoke run exported, script hash pinned); verdict deferred to Gate 0 because the protocol (val cadence, strict flag, adapters) is fixed there | ralph/results/baseline__smoke_v1.json |
+| A — instrument | ready: smoke exported, rule-9 audit green, test guard (open+list) green, adapters lossless; verdict stamped at Gate 0 with the protocol hash | ralph/results/baseline__smoke_v1.json |
 | B / C | undefined until Gate 0 | |
 | D — final | pending | |
 
@@ -14,7 +14,7 @@
 | Agent | Doing | Since |
 |---|---|---|
 | master | candidates C1–C6 written and ranked; recommendation C1 in INBOX; **Gate 0 waits for the author**; sweeping, judging prompts, reconciling hours when cost.smoke lands | 2026-09-23 18:40 |
-| experiment | Phase 0 deliverables DONE (phase0_codebase.json, smoke + export green, rule-9 audit green, cost 9.1 h/run). Now: CPU-only color-space adapters for C1 + eval15 listing guard; no training | 2026-09-23 18:50 UTC |
+| experiment | Phase 0 deliverables DONE (phase0_codebase.json, smoke + export green, rule-9 audit green, cost 9.1 h/run). Adapters + listing guard delivered (commit 0f0ed67). **Holding until Gate 0.** All 4 GPUs idle by design | 2026-09-23 19:20 UTC |
 | writing | phase0_related.md (code-grounded half on disk) + custom.bib verification via DBLP/Crossref/OpenAlex/CVF; skeleton green | 2026-09-23 18:05 UTC |
 
 ## Next actions
