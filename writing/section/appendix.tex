@@ -1,0 +1,25 @@
+\section{Additional Experiments}
+\label{sec:app-experiments}
+
+\subsection{Full Loss Ablation}
+\label{sec:app-loss}
+
+The complete leave-one-out table (eight variants, two widths, all seeds) is generated
+from the loss-ablation result files once the runs complete. Until then this section
+reports the reproduction check: the full objective trained under the ablation script
+reproduces the width-study run of the same configuration, which verifies that the two
+scripts implement the same protocol.
+
+\subsection{Per-Image Analysis}
+\label{sec:app-perimage}
+
+Per-image PSNR, SSIM, LPIPS, and $\Delta E_{00}$ for the 15 validation images are
+reported for each condition of the prefilter study, together with the edge-pixel
+restricted metrics, to show whether the aggregate differences are driven by a few images.
+
+\subsection{Protocol Details}
+\label{sec:app-protocol}
+
+Each run directory records the training-script SHA-256, the upstream \mname commit, the
+split-file SHA-256, the torch version, and the GPU name. The validation summary written at
+the end of every run is the only source of the numbers in this paper.

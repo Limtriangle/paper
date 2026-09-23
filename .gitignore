@@ -1,0 +1,12 @@
+writing-build/
+__pycache__/
+*.pyc
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+.claude/settings.local.json
+auto-research/legacy
+.DS_Store

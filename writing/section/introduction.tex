@@ -1,0 +1,44 @@
+\section{Introduction}
+\label{sec:introduction}
+
+Low-light image enhancement recovers a well-exposed image from an underexposed capture,
+and learned enhancers now dominate the paired benchmarks such as \dataset
+\citep{wei2018retinex, cai2023retinexformer, guo2020zerodce}. A recent line of work argues
+that the color space in which the network operates and is supervised matters as much as
+the architecture: \mname \citep{yan2025hvi} maps images into a polar Horizontal/Vertical/
+Intensity (\hvi) space, enhances intensity and chroma along separate branches, and is
+trained with a loss summed over both the RGB output and its \hvi transform.
+
+The cost of that recipe is that it bundles several design choices together. The training
+objective has eight terms (L1, SSIM, edge, and VGG perceptual, each applied in RGB and in
+\hvi), the network width is fixed, and the input is fed raw. The original paper reports the
+combined system; it does not report which of these choices carries the benefit, nor how
+much of the reported gap to other methods survives seed-to-seed variation.
+
+Existing ablations of enhancement networks typically vary one factor at a time on a single
+seed, and select the reported checkpoint on the test set. Both practices make small
+differences look decisive.
+
+\begin{center}
+\emph{Which components of the dual-space \mname recipe \\ measurably improve enhancement
+quality, \\ and which are indistinguishable from seed noise?}
+\end{center}
+
+We answer this with a controlled study rather than a new method. Every run in this paper
+shares one frozen protocol: the same \dataset train/validation split, the same optimizer
+and learning-rate schedule, FP32 training on \hw, checkpoint selection by validation PSNR
+only, and a held-out test split that no training or selection code ever reads. The
+protocol is hash-pinned, and each result number in this paper is read from the run's
+result file by a verification script rather than typed.
+
+Our key observation is that the exploratory seed is not representative. An intensity-only
+input prefilter improved LPIPS and SSIM on seed 42, but on two fresh seeds it fails a
+pre-registered screen (\Cref{sec:experiments}). We therefore report every comparison with
+its seed spread, and treat a difference smaller than that spread as no difference.
+
+Concretely, we contribute: (1) a leave-one-out ablation of all eight loss terms of \mname
+at two widths, which shows that the \hvi-space perceptual term accounts for \ph{0.3}\,dB
+of validation PSNR while the remaining \hvi-space terms are within \ph{0.1}\,dB of noise;
+(2) a width sweep from 18 to 36 base channels under the same protocol, which gains
+\ph{0.6}\,dB PSNR for a \ph{4}$\times$ parameter increase; and (3) a pre-registered
+confirmation study of input prefiltering, which does not replicate the exploratory gain.

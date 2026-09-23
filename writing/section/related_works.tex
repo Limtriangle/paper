@@ -1,0 +1,18 @@
+\section{Related Work}
+\label{sec:related}
+
+\paragraph{Learned low-light enhancement.} Retinex-inspired decomposition networks
+\citep{wei2018retinex}, curve-estimation methods that need no paired data
+\citep{guo2020zerodce}, and transformer enhancers \citep{cai2023retinexformer} form the
+main families evaluated on \dataset. \mname \citep{yan2025hvi} differs by changing the
+color space in which enhancement and supervision happen rather than the backbone.
+
+\paragraph{Color spaces for enhancement.} Separating luminance from chroma is a long-standing
+idea in enhancement; the \hvi space adds a polar chroma parameterization intended to reduce
+color artifacts near black. To our knowledge, the individual contribution of supervising in
+that space, as opposed to operating in it, has not been isolated before.
+
+\paragraph{Perceptual and structural losses.} SSIM \citep{wang2004ssim}, VGG feature losses
+\citep{johnson2016perceptual}, and LPIPS \citep{zhang2018lpips} are standard components and
+evaluation metrics for restoration. Our ablation asks which of them still matter when
+duplicated in a second color space.

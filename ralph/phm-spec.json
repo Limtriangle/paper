@@ -1,0 +1,293 @@
+{
+ "_doc": "Binds every \\phm{written} in writing/ to a JSON key under ralph/results/. Read by tooling/verify-phm.py. Table cells: regenerate with `python3 tooling/gen-table.py --spec-entries` and paste under entries.",
+ "entries": [
+  {
+   "written": "524931",
+   "src": "width_study__width500_v1.json",
+   "key": "jobs.W18_seed42.config.parameters",
+   "only_in": [
+    "width_table.tex"
+   ]
+  },
+  {
+   "written": "22.36",
+   "src": "width_study__width500_v1.json",
+   "key": "jobs.W18_seed42.best.psnr",
+   "only_in": [
+    "width_table.tex"
+   ]
+  },
+  {
+   "written": "0.856",
+   "src": "width_study__width500_v1.json",
+   "key": "jobs.W18_seed42.best.ssim",
+   "only_in": [
+    "width_table.tex"
+   ]
+  },
+  {
+   "written": "0.127",
+   "src": "width_study__width500_v1.json",
+   "key": "jobs.W18_seed42.best.lpips",
+   "only_in": [
+    "width_table.tex"
+   ]
+  },
+  {
+   "written": "8.54",
+   "src": "width_study__width500_v1.json",
+   "key": "jobs.W18_seed42.best.delta_e00",
+   "only_in": [
+    "width_table.tex"
+   ]
+  },
+  {
+   "written": "905661",
+   "src": "width_study__width500_v1.json",
+   "key": "jobs.W24_seed42.config.parameters",
+   "only_in": [
+    "width_table.tex"
+   ]
+  },
+  {
+   "written": "22.31",
+   "src": "width_study__width500_v1.json",
+   "key": "jobs.W24_seed42.best.psnr",
+   "only_in": [
+    "width_table.tex"
+   ]
+  },
+  {
+   "written": "0.860",
+   "src": "width_study__width500_v1.json",
+   "key": "jobs.W24_seed42.best.ssim",
+   "only_in": [
+    "width_table.tex"
+   ]
+  },
+  {
+   "written": "0.124",
+   "src": "width_study__width500_v1.json",
+   "key": "jobs.W24_seed42.best.lpips",
+   "only_in": [
+    "width_table.tex"
+   ]
+  },
+  {
+   "written": "8.22",
+   "src": "width_study__width500_v1.json",
+   "key": "jobs.W24_seed42.best.delta_e00",
+   "only_in": [
+    "width_table.tex"
+   ]
+  },
+  {
+   "written": "1389207",
+   "src": "width_study__width500_v1.json",
+   "key": "jobs.W30_seed42.config.parameters",
+   "only_in": [
+    "width_table.tex"
+   ]
+  },
+  {
+   "written": "22.43",
+   "src": "width_study__width500_v1.json",
+   "key": "jobs.W30_seed42.best.psnr",
+   "only_in": [
+    "width_table.tex"
+   ]
+  },
+  {
+   "written": "0.863",
+   "src": "width_study__width500_v1.json",
+   "key": "jobs.W30_seed42.best.ssim",
+   "only_in": [
+    "width_table.tex"
+   ]
+  },
+  {
+   "written": "0.114",
+   "src": "width_study__width500_v1.json",
+   "key": "jobs.W30_seed42.best.lpips",
+   "only_in": [
+    "width_table.tex"
+   ]
+  },
+  {
+   "written": "8.32",
+   "src": "width_study__width500_v1.json",
+   "key": "jobs.W30_seed42.best.delta_e00",
+   "only_in": [
+    "width_table.tex"
+   ]
+  },
+  {
+   "written": "1975569",
+   "src": "width_study__width500_v1.json",
+   "key": "jobs.W36_seed42.config.parameters",
+   "only_in": [
+    "width_table.tex"
+   ]
+  },
+  {
+   "written": "22.69",
+   "src": "width_study__width500_v1.json",
+   "key": "jobs.W36_seed42.best.psnr",
+   "only_in": [
+    "width_table.tex"
+   ]
+  },
+  {
+   "written": "0.867",
+   "src": "width_study__width500_v1.json",
+   "key": "jobs.W36_seed42.best.ssim",
+   "only_in": [
+    "width_table.tex"
+   ]
+  },
+  {
+   "written": "0.105",
+   "src": "width_study__width500_v1.json",
+   "key": "jobs.W36_seed42.best.lpips",
+   "only_in": [
+    "width_table.tex"
+   ]
+  },
+  {
+   "written": "8.10",
+   "src": "width_study__width500_v1.json",
+   "key": "jobs.W36_seed42.best.delta_e00",
+   "only_in": [
+    "width_table.tex"
+   ]
+  },
+  {
+   "written": "22.89",
+   "src": "prefilter_study__prefilter500_v1.json",
+   "key": "jobs.B0_seed42.best.psnr",
+   "only_in": [
+    "prefilter_table.tex"
+   ]
+  },
+  {
+   "written": "0.869",
+   "src": "prefilter_study__prefilter500_v1.json",
+   "key": "jobs.B0_seed42.best.ssim",
+   "only_in": [
+    "prefilter_table.tex"
+   ]
+  },
+  {
+   "written": "0.109",
+   "src": "prefilter_study__prefilter500_v1.json",
+   "key": "jobs.B0_seed42.best.lpips",
+   "only_in": [
+    "prefilter_table.tex"
+   ]
+  },
+  {
+   "written": "7.75",
+   "src": "prefilter_study__prefilter500_v1.json",
+   "key": "jobs.B0_seed42.best.delta_e00",
+   "only_in": [
+    "prefilter_table.tex"
+   ]
+  },
+  {
+   "written": "22.07",
+   "src": "prefilter_study__prefilter500_v1.json",
+   "key": "jobs.H3_seed42.best.psnr",
+   "only_in": [
+    "prefilter_table.tex"
+   ]
+  },
+  {
+   "written": "0.866",
+   "src": "prefilter_study__prefilter500_v1.json",
+   "key": "jobs.H3_seed42.best.ssim",
+   "only_in": [
+    "prefilter_table.tex"
+   ]
+  },
+  {
+   "written": "0.107",
+   "src": "prefilter_study__prefilter500_v1.json",
+   "key": "jobs.H3_seed42.best.lpips",
+   "only_in": [
+    "prefilter_table.tex"
+   ]
+  },
+  {
+   "written": "8.44",
+   "src": "prefilter_study__prefilter500_v1.json",
+   "key": "jobs.H3_seed42.best.delta_e00",
+   "only_in": [
+    "prefilter_table.tex"
+   ]
+  },
+  {
+   "written": "22.43",
+   "src": "prefilter_study__prefilter500_v1.json",
+   "key": "jobs.I3_seed42.best.psnr",
+   "only_in": [
+    "prefilter_table.tex"
+   ]
+  },
+  {
+   "written": "0.867",
+   "src": "prefilter_study__prefilter500_v1.json",
+   "key": "jobs.I3_seed42.best.ssim",
+   "only_in": [
+    "prefilter_table.tex"
+   ]
+  },
+  {
+   "written": "0.108",
+   "src": "prefilter_study__prefilter500_v1.json",
+   "key": "jobs.I3_seed42.best.lpips",
+   "only_in": [
+    "prefilter_table.tex"
+   ]
+  },
+  {
+   "written": "8.18",
+   "src": "prefilter_study__prefilter500_v1.json",
+   "key": "jobs.I3_seed42.best.delta_e00",
+   "only_in": [
+    "prefilter_table.tex"
+   ]
+  },
+  {
+   "written": "22.61",
+   "src": "prefilter_study__prefilter500_v1.json",
+   "key": "jobs.HI3_seed42.best.psnr",
+   "only_in": [
+    "prefilter_table.tex"
+   ]
+  },
+  {
+   "written": "0.865",
+   "src": "prefilter_study__prefilter500_v1.json",
+   "key": "jobs.HI3_seed42.best.ssim",
+   "only_in": [
+    "prefilter_table.tex"
+   ]
+  },
+  {
+   "written": "0.107",
+   "src": "prefilter_study__prefilter500_v1.json",
+   "key": "jobs.HI3_seed42.best.lpips",
+   "only_in": [
+    "prefilter_table.tex"
+   ]
+  },
+  {
+   "written": "8.17",
+   "src": "prefilter_study__prefilter500_v1.json",
+   "key": "jobs.HI3_seed42.best.delta_e00",
+   "only_in": [
+    "prefilter_table.tex"
+   ]
+  }
+ ]
+}

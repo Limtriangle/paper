@@ -1,0 +1,276 @@
+{
+ "exported_at": "2026-09-23T17:22:15",
+ "jobs": {
+  "B0_seed42": {
+   "best": {
+    "ab_error": 5.884602044979959,
+    "delta_e00": 9.228875858865322,
+    "edge_ab_error": 7.915181723596854,
+    "edge_delta_e00": 10.211252154661857,
+    "edge_psnr": 20.564544357543024,
+    "epoch": 36,
+    "lpips": 0.19918423496186732,
+    "n": 50,
+    "n_images": 50,
+    "psnr": 21.522107520903933,
+    "ssim": 0.8301484715938569
+   },
+   "config": {
+    "batch_size": 1,
+    "condition": "B0",
+    "crop": 128,
+    "gpu": "NVIDIA GeForce RTX 2080 Ti",
+    "lr": 0.0001,
+    "prefilter": {
+     "downsample": "original bilinear align_corners=True",
+     "kernel": "outer([1,2,1],[1,2,1])/16",
+     "padding": "replicate",
+     "stride": 1
+    },
+    "script_sha256": "65dee02e967c3231fd796bdf9bd048a24fc2505d9897420db84f5cd40f831fe9",
+    "seed": 42,
+    "torch": "2.7.0a0+7c8ec84dab.nv25.03",
+    "val_limit": 0,
+    "weights": {
+     "HVI": 1.0,
+     "L1": 1.0,
+     "SSIM": 0.5,
+     "edge": 50.0,
+     "perceptual": 0.01
+    }
+   },
+   "curve": {
+    "best_val_psnr": 21.522107520903933,
+    "best_val_psnr_epoch": 36,
+    "final_train_loss": 0.9123127423141194,
+    "final_val_psnr": 20.916599498534115,
+    "n_epochs": 50,
+    "train_seconds_total": 0
+   },
+   "last": {
+    "ab_error": 5.552124207922304,
+    "delta_e00": 9.594149667107077,
+    "edge_ab_error": 7.723239963673755,
+    "edge_delta_e00": 10.529666127397766,
+    "edge_psnr": 20.173601807207486,
+    "epoch": 50,
+    "lpips": 0.17162853494286537,
+    "n": 50,
+    "n_images": 50,
+    "psnr": 20.916599498534115,
+    "ssim": 0.8352496552467347
+   },
+   "status": "complete"
+  },
+  "H3_seed42": {
+   "best": {
+    "ab_error": 5.708380333406001,
+    "delta_e00": 9.309833775987771,
+    "edge_ab_error": 8.087405270136184,
+    "edge_delta_e00": 10.404197588077874,
+    "edge_psnr": 20.279645519032368,
+    "epoch": 43,
+    "lpips": 0.15860533021390438,
+    "n": 50,
+    "n_images": 50,
+    "psnr": 21.241641682118278,
+    "ssim": 0.8441755962371826
+   },
+   "config": {
+    "batch_size": 1,
+    "condition": "H3",
+    "crop": 128,
+    "gpu": "NVIDIA GeForce RTX 2080 Ti",
+    "lr": 0.0001,
+    "prefilter": {
+     "downsample": "original bilinear align_corners=True",
+     "kernel": "outer([1,2,1],[1,2,1])/16",
+     "padding": "replicate",
+     "stride": 1
+    },
+    "script_sha256": "65dee02e967c3231fd796bdf9bd048a24fc2505d9897420db84f5cd40f831fe9",
+    "seed": 42,
+    "torch": "2.7.0a0+7c8ec84dab.nv25.03",
+    "val_limit": 0,
+    "weights": {
+     "HVI": 1.0,
+     "L1": 1.0,
+     "SSIM": 0.5,
+     "edge": 50.0,
+     "perceptual": 0.01
+    }
+   },
+   "curve": {
+    "best_val_psnr": 21.241641682118278,
+    "best_val_psnr_epoch": 43,
+    "final_train_loss": 0.9087686101081728,
+    "final_val_psnr": 20.501660517600495,
+    "n_epochs": 50,
+    "train_seconds_total": 0
+   },
+   "last": {
+    "ab_error": 5.590534161662837,
+    "delta_e00": 9.99123244100412,
+    "edge_ab_error": 7.867810390837374,
+    "edge_delta_e00": 10.90259965533563,
+    "edge_psnr": 19.75058406758564,
+    "epoch": 50,
+    "lpips": 0.1579694479703903,
+    "n": 50,
+    "n_images": 50,
+    "psnr": 20.501660517600495,
+    "ssim": 0.8384570932388306
+   },
+   "status": "complete"
+  },
+  "HI3_seed42": {
+   "best": {
+    "ab_error": 5.769702029080876,
+    "delta_e00": 9.519589010886909,
+    "edge_ab_error": 7.717938362105702,
+    "edge_delta_e00": 10.392932590387456,
+    "edge_psnr": 20.2761911055677,
+    "epoch": 47,
+    "lpips": 0.1824418507516384,
+    "n": 50,
+    "n_images": 50,
+    "psnr": 21.158439162678988,
+    "ssim": 0.8346573424339294
+   },
+   "config": {
+    "batch_size": 1,
+    "condition": "HI3",
+    "crop": 128,
+    "gpu": "NVIDIA GeForce RTX 2080 Ti",
+    "lr": 0.0001,
+    "prefilter": {
+     "downsample": "original bilinear align_corners=True",
+     "kernel": "outer([1,2,1],[1,2,1])/16",
+     "padding": "replicate",
+     "stride": 1
+    },
+    "script_sha256": "65dee02e967c3231fd796bdf9bd048a24fc2505d9897420db84f5cd40f831fe9",
+    "seed": 42,
+    "torch": "2.7.0a0+7c8ec84dab.nv25.03",
+    "val_limit": 0,
+    "weights": {
+     "HVI": 1.0,
+     "L1": 1.0,
+     "SSIM": 0.5,
+     "edge": 50.0,
+     "perceptual": 0.01
+    }
+   },
+   "curve": {
+    "best_val_psnr": 21.158439162678988,
+    "best_val_psnr_epoch": 47,
+    "final_train_loss": 0.9244528600196729,
+    "final_val_psnr": 20.85457629022392,
+    "n_epochs": 50,
+    "train_seconds_total": 0
+   },
+   "last": {
+    "ab_error": 5.721847054919575,
+    "delta_e00": 9.817171264941184,
+    "edge_ab_error": 7.836836481286046,
+    "edge_delta_e00": 10.715766840955368,
+    "edge_psnr": 19.968276302038294,
+    "epoch": 50,
+    "lpips": 0.17483521789312362,
+    "n": 50,
+    "n_images": 50,
+    "psnr": 20.85457629022392,
+    "ssim": 0.8380772066116333
+   },
+   "status": "complete"
+  },
+  "I3_seed42": {
+   "best": {
+    "ab_error": 5.542157085496106,
+    "delta_e00": 9.036368893527372,
+    "edge_ab_error": 7.806027454677288,
+    "edge_delta_e00": 10.085123302582668,
+    "edge_psnr": 20.661711662874776,
+    "epoch": 43,
+    "lpips": 0.15619723089039325,
+    "n": 50,
+    "n_images": 50,
+    "psnr": 21.567674034369656,
+    "ssim": 0.8465868854522705
+   },
+   "config": {
+    "batch_size": 1,
+    "condition": "I3",
+    "crop": 128,
+    "gpu": "NVIDIA GeForce RTX 2080 Ti",
+    "lr": 0.0001,
+    "prefilter": {
+     "downsample": "original bilinear align_corners=True",
+     "kernel": "outer([1,2,1],[1,2,1])/16",
+     "padding": "replicate",
+     "stride": 1
+    },
+    "script_sha256": "65dee02e967c3231fd796bdf9bd048a24fc2505d9897420db84f5cd40f831fe9",
+    "seed": 42,
+    "torch": "2.7.0a0+7c8ec84dab.nv25.03",
+    "val_limit": 0,
+    "weights": {
+     "HVI": 1.0,
+     "L1": 1.0,
+     "SSIM": 0.5,
+     "edge": 50.0,
+     "perceptual": 0.01
+    }
+   },
+   "curve": {
+    "best_val_psnr": 21.567674034369656,
+    "best_val_psnr_epoch": 43,
+    "final_train_loss": 0.9045069386904268,
+    "final_val_psnr": 21.04721435548971,
+    "n_epochs": 50,
+    "train_seconds_total": 0
+   },
+   "last": {
+    "ab_error": 5.533623963562889,
+    "delta_e00": 9.519369812217779,
+    "edge_ab_error": 7.727700711867434,
+    "edge_delta_e00": 10.4796405610846,
+    "edge_psnr": 20.169865371744812,
+    "epoch": 50,
+    "lpips": 0.15102411322295667,
+    "n": 50,
+    "n_images": 50,
+    "psnr": 21.04721435548971,
+    "ssim": 0.8461461114883423
+   },
+   "status": "complete"
+  }
+ },
+ "n_jobs": {
+  "complete": 4,
+  "total": 4
+ },
+ "root": "/home/work/research/outputs/prefilter_study/prefilter50_v1",
+ "run": "prefilter50_v1",
+ "run_id": "prefilter_study__prefilter50_v1",
+ "sources": {
+  "B0_seed42/config.json": "10c09f54f8d7067b2b829c6b1fe482a54fd9439e5d29f99a855966e7e2eb22c2",
+  "B0_seed42/metrics.csv": "315a45c56debc89f1166af3543ec3f8a06732fa94ed2538527a5e6b61c0ac438",
+  "B0_seed42/status.json": "c620b5826cabcff57db3fe7722b3a72ec1e70d5452d84b8afeb6e436f3330012",
+  "B0_seed42/validation_summary.csv": "5dbd0947dd8ee57d7266f9c2eff89824ea86449df2705d2dc4927bc8d2273e6c",
+  "H3_seed42/config.json": "23789bdd6378ecf1be78ef2d03db2b95079861df50ea0864d9312b8e75fb5a7c",
+  "H3_seed42/metrics.csv": "af1fa45bacde77bf60ae3508ff127c38e193b61db687b60ddae46c22c9841b21",
+  "H3_seed42/status.json": "316f6fc8e40c924bda0e8ed996dcb6e4233acc0196c8ed238242133dae32edb3",
+  "H3_seed42/validation_summary.csv": "b62314ce3e259bfded12301aeb6a3cccd1987edae882e60070e84c9561717029",
+  "HI3_seed42/config.json": "f8374ede277dd3c0a64653678a27b6eea6b8d88b97385eff7991a1bbb86b1e26",
+  "HI3_seed42/metrics.csv": "7df214ab26ffa14b62d241bce93e4f8b077b4e74ac0e74774576567cead9911f",
+  "HI3_seed42/status.json": "c2acfe103ac60b0686fd0ad96df4949af6d36a201cf9bb90642af3f181af1985",
+  "HI3_seed42/validation_summary.csv": "cd10cbf2b0f2f6c661322b5484ccd4daeb6a2526a48eca345da65ffa2603a052",
+  "I3_seed42/config.json": "482a6ca5a8f1eade9183af57745c6a3de8f036d42c826b1a736bd68b9fca2766",
+  "I3_seed42/metrics.csv": "b346e09ad0dcf72f4a07133cbbea9f81d23d9c1be0919da9f1eb24a86a7b30c1",
+  "I3_seed42/status.json": "877bd965fb36a9bcd946d8701a7821aeb2a576679e4bc824ee99bbf8e9a4ea8f",
+  "I3_seed42/validation_summary.csv": "2888da622dd136575a66178440cc432f5a8b5790e683fb36e94cbbe27f6a4a3a"
+ },
+ "status": "complete",
+ "study": "prefilter_study"
+}

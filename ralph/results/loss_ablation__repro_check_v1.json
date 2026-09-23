@@ -1,0 +1,168 @@
+{
+ "exported_at": "2026-09-23T17:22:15",
+ "jobs": {
+  "FULL_W18_seed42": {
+   "best": {
+    "ab_error": 8.77236011948335,
+    "delta_e00": 20.377509968754595,
+    "edge_ab_error": 11.576315193872011,
+    "edge_delta_e00": 18.764728692780537,
+    "edge_psnr": 14.914526769563368,
+    "epoch": 1,
+    "lpips": 0.4355470508337021,
+    "n": 50,
+    "n_images": 50,
+    "psnr": 14.059153172148244,
+    "ssim": 0.5767020440101623
+   },
+   "config": {
+    "CUDA_VISIBLE_DEVICES": "0",
+    "channels": [
+     18,
+     18,
+     36,
+     72
+    ],
+    "enabled_terms": [
+     "hvi_edge",
+     "hvi_l1",
+     "hvi_perc",
+     "hvi_ssim",
+     "rgb_edge",
+     "rgb_l1",
+     "rgb_perc",
+     "rgb_ssim"
+    ],
+    "epochs_schedule": 500,
+    "epochs_trained": 1,
+    "gpu": "NVIDIA GeForce RTX 2080 Ti",
+    "parameters": 524931,
+    "script_sha256": "d5161da62c63bfbddf74d4e850d77c06c6bcdc9433c2b0b32dffd09e96ba7578",
+    "seed": 42,
+    "step_limit": 0,
+    "test15": "NEVER READ",
+    "torch": "2.7.0a0+7c8ec84dab.nv25.03",
+    "val_limit": 0,
+    "variant": "FULL",
+    "weights": {
+     "L1": 1.0,
+     "SSIM": 0.5,
+     "edge": 50.0,
+     "perceptual": 0.01
+    },
+    "width": 18
+   },
+   "curve": {
+    "best_val_psnr": 14.059153172148244,
+    "best_val_psnr_epoch": 1,
+    "final_train_loss": 2.6925121088822683,
+    "final_val_psnr": 14.059153172148244,
+    "n_epochs": 1,
+    "train_seconds_total": 57.71287798881531
+   },
+   "epochs_trained": 1,
+   "last": {
+    "ab_error": 8.77236011948335,
+    "delta_e00": 20.377509968754595,
+    "edge_ab_error": 11.576315193872011,
+    "edge_delta_e00": 18.764728692780537,
+    "edge_psnr": 14.914526769563368,
+    "epoch": 1,
+    "lpips": 0.4355470508337021,
+    "n": 50,
+    "n_images": 50,
+    "psnr": 14.059153172148244,
+    "ssim": 0.5767020440101623
+   },
+   "status": "complete"
+  }
+ },
+ "manifest": {
+  "helper_sha256": "65dee02e967c3231fd796bdf9bd048a24fc2505d9897420db84f5cd40f831fe9",
+  "script_sha256": "d5161da62c63bfbddf74d4e850d77c06c6bcdc9433c2b0b32dffd09e96ba7578",
+  "split_sha256": "b8eb9baf182d474edf855b6bbb4e240b18518c4ade08a92d8a2a0aa9c198dd89",
+  "variants": {
+   "FULL": [
+    "hvi_edge",
+    "hvi_l1",
+    "hvi_perc",
+    "hvi_ssim",
+    "rgb_edge",
+    "rgb_l1",
+    "rgb_perc",
+    "rgb_ssim"
+   ],
+   "HVI_ONLY": [
+    "hvi_edge",
+    "hvi_l1",
+    "hvi_perc",
+    "hvi_ssim"
+   ],
+   "NO_EDGE": [
+    "hvi_l1",
+    "hvi_perc",
+    "hvi_ssim",
+    "rgb_l1",
+    "rgb_perc",
+    "rgb_ssim"
+   ],
+   "NO_L1": [
+    "hvi_edge",
+    "hvi_perc",
+    "hvi_ssim",
+    "rgb_edge",
+    "rgb_perc",
+    "rgb_ssim"
+   ],
+   "NO_PERC": [
+    "hvi_edge",
+    "hvi_l1",
+    "hvi_ssim",
+    "rgb_edge",
+    "rgb_l1",
+    "rgb_ssim"
+   ],
+   "NO_PERC_HVI": [
+    "hvi_edge",
+    "hvi_l1",
+    "hvi_ssim",
+    "rgb_edge",
+    "rgb_l1",
+    "rgb_perc",
+    "rgb_ssim"
+   ],
+   "NO_SSIM": [
+    "hvi_edge",
+    "hvi_l1",
+    "hvi_perc",
+    "rgb_edge",
+    "rgb_l1",
+    "rgb_perc"
+   ],
+   "RGB_ONLY": [
+    "rgb_edge",
+    "rgb_l1",
+    "rgb_perc",
+    "rgb_ssim"
+   ]
+  },
+  "width_protocol_sha256": "32337aa3610a720ab49ec94e1a968ecfd9fc550c5ad905ba9f31793f7a53ce5c"
+ },
+ "n_jobs": {
+  "complete": 1,
+  "total": 1
+ },
+ "protocol": "width500_v1 protocol; only enabled loss terms differ",
+ "root": "/home/work/research/outputs/loss_ablation/repro_check_v1",
+ "run": "repro_check_v1",
+ "run_id": "loss_ablation__repro_check_v1",
+ "sources": {
+  "FULL_W18_seed42/config.json": "e9ecbc23e9ee6c13e85ccabf920c8a2b348d1dd3d147e746a143717f63957f4f",
+  "FULL_W18_seed42/metrics.csv": "f370db81d829271652caf202be63a3b37606565f9b9d95ef278fdafe005fbc52",
+  "FULL_W18_seed42/status.json": "11b8f51f922079470198e1712483810364e4079aa572a0d6b203006a3b34fe87",
+  "FULL_W18_seed42/validation_summary.csv": "86d821a8e8e30f99ab46a16d9157b8d805e5954eb758cdae24cc154c65128cd5",
+  "manifest.json": "295149539dbc2dfb17e3a314ca1e378f8af1e7d852d6fe3730365ede04c83f0a"
+ },
+ "status": "complete",
+ "study": "loss_ablation"
+}

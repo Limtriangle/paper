@@ -1,0 +1,41 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(bash tooling/*)",
+      "Bash(python3 tooling/*)",
+      "Bash(python3 herdr/herdr_sync.py *)",
+      "Bash(bash tooling/status.sh)",
+      "Bash(git status*)",
+      "Bash(git log*)",
+      "Bash(git diff*)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git pull --rebase origin main)",
+      "Bash(git push origin main)",
+      "Bash(nvidia-smi*)",
+      "Bash(tectonic *)",
+      "Bash(sha256sum *)",
+      "Bash(ls *)",
+      "Bash(cat *)",
+      "Bash(head *)",
+      "Bash(tail *)",
+      "Bash(grep *)",
+      "Bash(find *)",
+      "Bash(wc *)",
+      "Read(/home/work/research/**)",
+      "Read(/home/work/paper/**)"
+    ],
+    "deny": [
+      "Bash(git push --force*)",
+      "Bash(git push -f*)",
+      "Bash(git reset --hard*)",
+      "Bash(git clean *)",
+      "Bash(rm -rf /home/work/research/outputs*)",
+      "Bash(rm -rf ralph/results*)"
+    ]
+  },
+  "env": {
+    "PAPER": "/home/work/research/paper",
+    "RESEARCH": "/home/work/research"
+  }
+}

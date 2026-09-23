@@ -1,0 +1,93 @@
+%%%%%%%% ICML 2024 LaTeX submission — HVI-CIDNet thesis paper %%%%%%%%%%%%%%%%%
+\documentclass{article}
+
+\usepackage{caption}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\newcommand{\theHalgorithm}{\arabic{algorithm}}
+
+% Anonymous (review) build. For the camera-ready / thesis-deposit build use:
+% \usepackage[accepted]{icml2024}
+\usepackage{icml2024}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{url}
+\usepackage{amsfonts}
+\usepackage{nicefrac}
+\usepackage{xcolor}
+\usepackage{xspace}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage[capitalize,noabbrev]{cleveref}
+\usepackage{subcaption}
+\usepackage{wrapfig}
+\usepackage{enumitem}
+\usepackage{colortbl}
+\usepackage{bm}
+\usepackage{float}
+\usepackage{makecell}
+\usepackage{siunitx}
+
+\graphicspath{{figures/}}
+
+% ---------------------------------------------------------------- macros ----
+% Provisional-value contract (see harness/writing.md §2). Both render unchanged.
+\newcommand{\ph}[1]{#1}    % INVENTED: no measurement exists. Must land or be deleted.
+\newcommand{\phm}[1]{#1}   % MEASURED: bound to a JSON key in ralph/phm-spec.json.
+
+\newcommand{\mname}{HVI-CIDNet\xspace}
+\newcommand{\hvi}{HVI\xspace}
+\newcommand{\dataset}{LOL-v1\xspace}
+\newcommand{\hw}{a single NVIDIA GeForce RTX 2080~Ti (11\,GB) in FP32\xspace}
+\newcommand{\graymidrule}{\arrayrulecolor{gray!50}\midrule\arrayrulecolor{black}}
+
+\crefname{section}{Section}{Sections}
+\Crefname{section}{Section}{Sections}
+\crefname{equation}{Eq.}{Eqs.}
+\Crefname{equation}{Eq.}{Eqs.}
+
+\icmltitlerunning{A Controlled Study of Dual-Space Training for HVI-CIDNet}
+
+\begin{document}
+
+\twocolumn[
+\icmltitle{What Makes the HVI Color Space Work? \\ A Controlled Study of Dual-Space Losses, Width, and Input Prefiltering in HVI-CIDNet}
+
+\icmlsetsymbol{equal}{*}
+
+\begin{icmlauthorlist}
+\icmlauthor{Anonymous Author}{aff}
+\end{icmlauthorlist}
+
+\icmlaffiliation{aff}{Anonymous Institution}
+\icmlcorrespondingauthor{Anonymous Author}{anon@example.com}
+\icmlkeywords{low-light image enhancement, color space, HVI, loss ablation}
+
+\vskip 0.3in
+]
+
+\printAffiliationsAndNotice{}
+
+\input{section/abstract}
+\input{section/introduction}
+\input{section/method}
+\input{section/experiments}
+\input{section/conclusion}
+
+\bibliography{custom}
+\bibliographystyle{icml2024}
+
+\newpage
+\appendix
+\onecolumn
+\input{section/related_works}
+\input{section/appendix}
+
+\end{document}

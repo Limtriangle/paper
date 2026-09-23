@@ -1,0 +1,355 @@
+{
+ "exported_at": "2026-09-23T17:22:15",
+ "jobs": {
+  "W18_seed42": {
+   "best": {
+    "ab_error": 8.662515883434326,
+    "delta_e00": 34.905193617122976,
+    "edge_ab_error": 12.183981597538383,
+    "edge_delta_e00": 30.7837376731929,
+    "edge_psnr": 8.391351574089775,
+    "epoch": 1,
+    "lpips": 0.7170374691486359,
+    "n": 5,
+    "n_images": 5,
+    "psnr": 7.463461472517283,
+    "ssim": 0.0852447509765625
+   },
+   "config": {
+    "batch_size": 1,
+    "channels": [
+     18,
+     18,
+     36,
+     72
+    ],
+    "condition": "W18",
+    "crop": 128,
+    "gpu": "NVIDIA GeForce RTX 2080 Ti",
+    "heads": [
+     1,
+     2,
+     4,
+     8
+    ],
+    "parameters": 524931,
+    "script_sha256": "32337aa3610a720ab49ec94e1a968ecfd9fc550c5ad905ba9f31793f7a53ce5c",
+    "seed": 42,
+    "step_limit": 8,
+    "test15": "NEVER READ",
+    "torch": "2.7.0a0+7c8ec84dab.nv25.03",
+    "val_limit": 5,
+    "weights": {
+     "HVI": 1.0,
+     "L1": 1.0,
+     "SSIM": 0.5,
+     "edge": 50.0,
+     "perceptual": 0.01
+    }
+   },
+   "curve": {
+    "best_val_psnr": 7.463461472517283,
+    "best_val_psnr_epoch": 1,
+    "final_train_loss": 3.67749947309494,
+    "final_val_psnr": 7.463461472517283,
+    "n_epochs": 1,
+    "train_seconds_total": 1.9603915214538574
+   },
+   "last": {
+    "ab_error": 8.662515883434326,
+    "delta_e00": 34.905193617122976,
+    "edge_ab_error": 12.183981597538383,
+    "edge_delta_e00": 30.7837376731929,
+    "edge_psnr": 8.391351574089775,
+    "epoch": 1,
+    "lpips": 0.7170374691486359,
+    "n": 5,
+    "n_images": 5,
+    "psnr": 7.463461472517283,
+    "ssim": 0.0852447509765625
+   },
+   "status": "complete"
+  },
+  "W24_seed42": {
+   "best": {
+    "ab_error": 8.28814368321142,
+    "delta_e00": 33.8579234523781,
+    "edge_ab_error": 11.729661740411554,
+    "edge_delta_e00": 30.02248712546524,
+    "edge_psnr": 8.738221916117624,
+    "epoch": 1,
+    "lpips": 0.6481757819652557,
+    "n": 5,
+    "n_images": 5,
+    "psnr": 7.855249279593809,
+    "ssim": 0.14486966133117676
+   },
+   "config": {
+    "batch_size": 1,
+    "channels": [
+     24,
+     24,
+     48,
+     96
+    ],
+    "condition": "W24",
+    "crop": 128,
+    "gpu": "NVIDIA GeForce RTX 2080 Ti",
+    "heads": [
+     1,
+     2,
+     4,
+     8
+    ],
+    "parameters": 905661,
+    "script_sha256": "32337aa3610a720ab49ec94e1a968ecfd9fc550c5ad905ba9f31793f7a53ce5c",
+    "seed": 42,
+    "step_limit": 8,
+    "test15": "NEVER READ",
+    "torch": "2.7.0a0+7c8ec84dab.nv25.03",
+    "val_limit": 5,
+    "weights": {
+     "HVI": 1.0,
+     "L1": 1.0,
+     "SSIM": 0.5,
+     "edge": 50.0,
+     "perceptual": 0.01
+    }
+   },
+   "curve": {
+    "best_val_psnr": 7.855249279593809,
+    "best_val_psnr_epoch": 1,
+    "final_train_loss": 3.6334030628204346,
+    "final_val_psnr": 7.855249279593809,
+    "n_epochs": 1,
+    "train_seconds_total": 1.9749014377593994
+   },
+   "last": {
+    "ab_error": 8.28814368321142,
+    "delta_e00": 33.8579234523781,
+    "edge_ab_error": 11.729661740411554,
+    "edge_delta_e00": 30.02248712546524,
+    "edge_psnr": 8.738221916117624,
+    "epoch": 1,
+    "lpips": 0.6481757819652557,
+    "n": 5,
+    "n_images": 5,
+    "psnr": 7.855249279593809,
+    "ssim": 0.14486966133117676
+   },
+   "status": "complete"
+  },
+  "W30_seed42": {
+   "best": {
+    "ab_error": 8.365605700160552,
+    "delta_e00": 32.22034593881933,
+    "edge_ab_error": 11.506290957132236,
+    "edge_delta_e00": 28.507119057475574,
+    "edge_psnr": 9.544277006021275,
+    "epoch": 1,
+    "lpips": 0.619152057170868,
+    "n": 5,
+    "n_images": 5,
+    "psnr": 8.616941538028545,
+    "ssim": 0.2647547125816345
+   },
+   "config": {
+    "batch_size": 1,
+    "channels": [
+     30,
+     30,
+     60,
+     120
+    ],
+    "condition": "W30",
+    "crop": 128,
+    "gpu": "NVIDIA GeForce RTX 2080 Ti",
+    "heads": [
+     1,
+     2,
+     4,
+     8
+    ],
+    "parameters": 1389207,
+    "script_sha256": "32337aa3610a720ab49ec94e1a968ecfd9fc550c5ad905ba9f31793f7a53ce5c",
+    "seed": 42,
+    "step_limit": 8,
+    "test15": "NEVER READ",
+    "torch": "2.7.0a0+7c8ec84dab.nv25.03",
+    "val_limit": 5,
+    "weights": {
+     "HVI": 1.0,
+     "L1": 1.0,
+     "SSIM": 0.5,
+     "edge": 50.0,
+     "perceptual": 0.01
+    }
+   },
+   "curve": {
+    "best_val_psnr": 8.616941538028545,
+    "best_val_psnr_epoch": 1,
+    "final_train_loss": 3.556138128042221,
+    "final_val_psnr": 8.616941538028545,
+    "n_epochs": 1,
+    "train_seconds_total": 1.9368464946746826
+   },
+   "last": {
+    "ab_error": 8.365605700160552,
+    "delta_e00": 32.22034593881933,
+    "edge_ab_error": 11.506290957132236,
+    "edge_delta_e00": 28.507119057475574,
+    "edge_psnr": 9.544277006021275,
+    "epoch": 1,
+    "lpips": 0.619152057170868,
+    "n": 5,
+    "n_images": 5,
+    "psnr": 8.616941538028545,
+    "ssim": 0.2647547125816345
+   },
+   "status": "complete"
+  },
+  "W36_seed42": {
+   "best": {
+    "ab_error": 8.567555761626132,
+    "delta_e00": 34.23024888260761,
+    "edge_ab_error": 11.927963427294818,
+    "edge_delta_e00": 30.293513304085458,
+    "edge_psnr": 8.63321991330291,
+    "epoch": 1,
+    "lpips": 0.6552961707115174,
+    "n": 5,
+    "n_images": 5,
+    "psnr": 7.72191806279169,
+    "ssim": 0.11641744375228882
+   },
+   "config": {
+    "batch_size": 1,
+    "channels": [
+     36,
+     36,
+     72,
+     144
+    ],
+    "condition": "W36",
+    "crop": 128,
+    "gpu": "NVIDIA GeForce RTX 2080 Ti",
+    "heads": [
+     1,
+     2,
+     4,
+     8
+    ],
+    "parameters": 1975569,
+    "script_sha256": "32337aa3610a720ab49ec94e1a968ecfd9fc550c5ad905ba9f31793f7a53ce5c",
+    "seed": 42,
+    "step_limit": 8,
+    "test15": "NEVER READ",
+    "torch": "2.7.0a0+7c8ec84dab.nv25.03",
+    "val_limit": 5,
+    "weights": {
+     "HVI": 1.0,
+     "L1": 1.0,
+     "SSIM": 0.5,
+     "edge": 50.0,
+     "perceptual": 0.01
+    }
+   },
+   "curve": {
+    "best_val_psnr": 7.72191806279169,
+    "best_val_psnr_epoch": 1,
+    "final_train_loss": 3.5957497358322144,
+    "final_val_psnr": 7.72191806279169,
+    "n_epochs": 1,
+    "train_seconds_total": 1.9122390747070312
+   },
+   "last": {
+    "ab_error": 8.567555761626132,
+    "delta_e00": 34.23024888260761,
+    "edge_ab_error": 11.927963427294818,
+    "edge_delta_e00": 30.293513304085458,
+    "edge_psnr": 8.63321991330291,
+    "epoch": 1,
+    "lpips": 0.6552961707115174,
+    "n": 5,
+    "n_images": 5,
+    "psnr": 7.72191806279169,
+    "ssim": 0.11641744375228882
+   },
+   "status": "complete"
+  }
+ },
+ "manifest": {
+  "controller_sha256": "32337aa3610a720ab49ec94e1a968ecfd9fc550c5ad905ba9f31793f7a53ce5c",
+  "helper_sha256": "65dee02e967c3231fd796bdf9bd048a24fc2505d9897420db84f5cd40f831fe9"
+ },
+ "n_jobs": {
+  "complete": 4,
+  "total": 4
+ },
+ "protocol": {
+  "batch_size": 1,
+  "changes": "CIDNet channels only; NO injection or checkpoint inheritance",
+  "claim_limit": "single-seed validation exploration",
+  "commit": "eb43d7d91e9a336c66856824ff9e4603ae41f408",
+  "crop": 128,
+  "data_order": "seed+epoch; per-image augmentation seed+epoch*1000003+index",
+  "epochs": 1,
+  "from_scratch": true,
+  "heads": [
+   1,
+   2,
+   4,
+   8
+  ],
+  "initialization": "same seed, different tensor shapes; NOT identical initial weights",
+  "lr_max": 0.0001,
+  "lr_min": 1e-07,
+  "mode": "smoke",
+  "optimizer": "Adam",
+  "precision": "FP32, TF32 disabled, no AMP",
+  "schedule": "first50 fixed 1e-4; epoch51..end inclusive cosine to 1e-7",
+  "seed": 42,
+  "selection": "highest validation mean full-image RGB PSNR, no GT mean",
+  "split_sha256": "b8eb9baf182d474edf855b6bbb4e240b18518c4ade08a92d8a2a0aa9c198dd89",
+  "step_limit": 8,
+  "test15": "NEVER READ",
+  "val_limit": 5,
+  "weights": {
+   "HVI": 1.0,
+   "L1": 1.0,
+   "SSIM": 0.5,
+   "edge": 50.0,
+   "perceptual": 0.01
+  },
+  "widths": {
+   "W18": 18,
+   "W24": 24,
+   "W30": 30,
+   "W36": 36
+  }
+ },
+ "root": "/home/work/research/outputs/width_study/width_smoke_v1",
+ "run": "width_smoke_v1",
+ "run_id": "width_study__width_smoke_v1",
+ "sources": {
+  "W18_seed42/config.json": "2e8589ed88701e18bdfdeb8a8767dc14a4d91e4b63a002df0f02bc89cfd42c95",
+  "W18_seed42/metrics.csv": "e4b7ac8edb906c495dc3c18e39141e36af489507042f2f5642a4ce2e4ac534a6",
+  "W18_seed42/status.json": "beb0abf13c5fafc1dd47bb62cf3d57258caf42bb7b2df1dddbb2777b132d8f68",
+  "W18_seed42/validation_summary.csv": "57dd13603fc5cd727ba704e0fdb1a39a88b0c01664ffdabeb38c75b659503005",
+  "W24_seed42/config.json": "642ad9d5dcc9236c0b049184055ffd1c9504dca08bb271267dc57039b9d57c50",
+  "W24_seed42/metrics.csv": "8e710fca30ce613fc1ecdf42faf8d92038ec2f8e725a0b9c42221a8d2ab2d0db",
+  "W24_seed42/status.json": "f369dee546bfc80109de2ef50dc14d0c32b7ac1b952b574f5ac02f584c237ff5",
+  "W24_seed42/validation_summary.csv": "a8cb13682b73978db0a88429bdd866141a7cc86517f2929e3644559b09ad036f",
+  "W30_seed42/config.json": "e7c1cd989f258d10db2a816712d353b041a2493d6f781f109326be4ad6625f5b",
+  "W30_seed42/metrics.csv": "b9bce3559d4768643a182118d29fa848deb99a8f5d92f8ee319c4e0e8b41574e",
+  "W30_seed42/status.json": "23007e1da2dce64965ab0e81dce0e8f16065bf5bf36b5ae4d42fa0514fd30338",
+  "W30_seed42/validation_summary.csv": "aa13382b66310b7c24db87553749dbc2e3abcf8c913150e16a4f9fc60efa84bf",
+  "W36_seed42/config.json": "ad7e9b274ffe49618c2e6f8e298afe43bc491227c2a23d4f7e5a0ab4cfb6e3f6",
+  "W36_seed42/metrics.csv": "3a2a35954e2e410102308a039aba4e1352347114eaf95534eea74b041bd250d8",
+  "W36_seed42/status.json": "dc213e3b940114fa4b59faa47f316b686a4afd607235927f1103db1a9a60e013",
+  "W36_seed42/validation_summary.csv": "8fecc72757eef3a4373c1694d8e49983d0b963738153202ebad0a22b7ad9f637",
+  "manifest.json": "9ff4b2cae97324304be08b82ea5d25a4bc6f74549e34361ab3cdeae898dccee8"
+ },
+ "status": "complete",
+ "study": "width_study"
+}

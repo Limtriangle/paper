@@ -1,0 +1,342 @@
+{
+ "exported_at": "2026-09-23T17:22:15",
+ "jobs": {
+  "B0_seed42": {
+   "best": {
+    "ab_error": 4.435067198315275,
+    "delta_e00": 7.750299159170462,
+    "edge_ab_error": 6.311723560287456,
+    "edge_delta_e00": 8.669388677349966,
+    "edge_psnr": 21.859354197407615,
+    "epoch": 259,
+    "lpips": 0.1092954022809863,
+    "n": 50,
+    "n_images": 50,
+    "psnr": 22.888626837134314,
+    "ssim": 0.8688495600223541
+   },
+   "config": {
+    "batch_size": 1,
+    "condition": "B0",
+    "crop": 128,
+    "gpu": "NVIDIA GeForce RTX 2080 Ti",
+    "lr": 0.0001,
+    "prefilter": {
+     "downsample": "original bilinear align_corners=True",
+     "kernel": "outer([1,2,1],[1,2,1])/16",
+     "padding": "replicate",
+     "stride": 1
+    },
+    "script_sha256": "ee9ddfa311632fa35f75d79f0c95d731dd3bca5c6b5081bfebe1ee88da90a801",
+    "seed": 42,
+    "torch": "2.7.0a0+7c8ec84dab.nv25.03",
+    "val_limit": 0,
+    "weights": {
+     "HVI": 1.0,
+     "L1": 1.0,
+     "SSIM": 0.5,
+     "edge": 50.0,
+     "perceptual": 0.01
+    }
+   },
+   "curve": {
+    "best_val_psnr": 22.888626837134314,
+    "best_val_psnr_epoch": 259,
+    "final_train_loss": 0.5746414457758268,
+    "final_val_psnr": 22.273878314426582,
+    "n_epochs": 500,
+    "train_seconds_total": 0
+   },
+   "last": {
+    "ab_error": 4.354791870464042,
+    "delta_e00": 8.407769728759215,
+    "edge_ab_error": 6.188191606982692,
+    "edge_delta_e00": 9.21528317106087,
+    "edge_psnr": 21.313647794469617,
+    "epoch": 500,
+    "lpips": 0.10797218833118677,
+    "n": 50,
+    "n_images": 50,
+    "psnr": 22.273878314426582,
+    "ssim": 0.8642598974704743
+   },
+   "status": "complete"
+  },
+  "H3_seed42": {
+   "best": {
+    "ab_error": 4.571095303378624,
+    "delta_e00": 8.44437376496155,
+    "edge_ab_error": 6.414449463913484,
+    "edge_delta_e00": 9.393181439750306,
+    "edge_psnr": 21.05921820416344,
+    "epoch": 330,
+    "lpips": 0.10703269593417644,
+    "n": 50,
+    "n_images": 50,
+    "psnr": 22.072763010271647,
+    "ssim": 0.8664389216899872
+   },
+   "config": {
+    "batch_size": 1,
+    "condition": "H3",
+    "crop": 128,
+    "gpu": "NVIDIA GeForce RTX 2080 Ti",
+    "lr": 0.0001,
+    "prefilter": {
+     "downsample": "original bilinear align_corners=True",
+     "kernel": "outer([1,2,1],[1,2,1])/16",
+     "padding": "replicate",
+     "stride": 1
+    },
+    "script_sha256": "ee9ddfa311632fa35f75d79f0c95d731dd3bca5c6b5081bfebe1ee88da90a801",
+    "seed": 42,
+    "torch": "2.7.0a0+7c8ec84dab.nv25.03",
+    "val_limit": 0,
+    "weights": {
+     "HVI": 1.0,
+     "L1": 1.0,
+     "SSIM": 0.5,
+     "edge": 50.0,
+     "perceptual": 0.01
+    }
+   },
+   "curve": {
+    "best_val_psnr": 22.072763010271647,
+    "best_val_psnr_epoch": 330,
+    "final_train_loss": 0.5848584757625371,
+    "final_val_psnr": 21.67939410717924,
+    "n_epochs": 500,
+    "train_seconds_total": 0
+   },
+   "last": {
+    "ab_error": 4.362877947491791,
+    "delta_e00": 8.767736498283423,
+    "edge_ab_error": 6.207920683198388,
+    "edge_delta_e00": 9.711546752293918,
+    "edge_psnr": 20.737064763563374,
+    "epoch": 500,
+    "lpips": 0.10665113762021065,
+    "n": 50,
+    "n_images": 50,
+    "psnr": 21.67939410717924,
+    "ssim": 0.8643504023551941
+   },
+   "status": "complete"
+  },
+  "HI3_seed42": {
+   "best": {
+    "ab_error": 4.225374845993759,
+    "delta_e00": 8.174127225539323,
+    "edge_ab_error": 6.109743815298637,
+    "edge_delta_e00": 9.154249532767388,
+    "edge_psnr": 21.380603126713922,
+    "epoch": 431,
+    "lpips": 0.10674327708780766,
+    "n": 50,
+    "n_images": 50,
+    "psnr": 22.60883279648004,
+    "ssim": 0.8654248702526093
+   },
+   "config": {
+    "batch_size": 1,
+    "condition": "HI3",
+    "crop": 128,
+    "gpu": "NVIDIA GeForce RTX 2080 Ti",
+    "lr": 0.0001,
+    "prefilter": {
+     "downsample": "original bilinear align_corners=True",
+     "kernel": "outer([1,2,1],[1,2,1])/16",
+     "padding": "replicate",
+     "stride": 1
+    },
+    "script_sha256": "ee9ddfa311632fa35f75d79f0c95d731dd3bca5c6b5081bfebe1ee88da90a801",
+    "seed": 42,
+    "torch": "2.7.0a0+7c8ec84dab.nv25.03",
+    "val_limit": 0,
+    "weights": {
+     "HVI": 1.0,
+     "L1": 1.0,
+     "SSIM": 0.5,
+     "edge": 50.0,
+     "perceptual": 0.01
+    }
+   },
+   "curve": {
+    "best_val_psnr": 22.60883279648004,
+    "best_val_psnr_epoch": 431,
+    "final_train_loss": 0.6022901582135551,
+    "final_val_psnr": 22.45986958038127,
+    "n_epochs": 500,
+    "train_seconds_total": 0
+   },
+   "last": {
+    "ab_error": 4.210247820809648,
+    "delta_e00": 8.212610735760267,
+    "edge_ab_error": 6.06371753152327,
+    "edge_delta_e00": 9.136158179347397,
+    "edge_psnr": 21.339986128459767,
+    "epoch": 500,
+    "lpips": 0.10680236980319023,
+    "n": 50,
+    "n_images": 50,
+    "psnr": 22.45986958038127,
+    "ssim": 0.8653551578521729
+   },
+   "status": "complete"
+  },
+  "I3_seed42": {
+   "best": {
+    "ab_error": 4.5297607985602095,
+    "delta_e00": 8.180537758764517,
+    "edge_ab_error": 6.320120273458397,
+    "edge_delta_e00": 9.142869170632935,
+    "edge_psnr": 21.310700947880388,
+    "epoch": 306,
+    "lpips": 0.10777881503105163,
+    "n": 50,
+    "n_images": 50,
+    "psnr": 22.4255601650488,
+    "ssim": 0.8670572316646576
+   },
+   "config": {
+    "batch_size": 1,
+    "condition": "I3",
+    "crop": 128,
+    "gpu": "NVIDIA GeForce RTX 2080 Ti",
+    "lr": 0.0001,
+    "prefilter": {
+     "downsample": "original bilinear align_corners=True",
+     "kernel": "outer([1,2,1],[1,2,1])/16",
+     "padding": "replicate",
+     "stride": 1
+    },
+    "script_sha256": "ee9ddfa311632fa35f75d79f0c95d731dd3bca5c6b5081bfebe1ee88da90a801",
+    "seed": 42,
+    "torch": "2.7.0a0+7c8ec84dab.nv25.03",
+    "val_limit": 0,
+    "weights": {
+     "HVI": 1.0,
+     "L1": 1.0,
+     "SSIM": 0.5,
+     "edge": 50.0,
+     "perceptual": 0.01
+    }
+   },
+   "curve": {
+    "best_val_psnr": 22.4255601650488,
+    "best_val_psnr_epoch": 306,
+    "final_train_loss": 0.5972434002606348,
+    "final_val_psnr": 21.81677160554558,
+    "n_epochs": 500,
+    "train_seconds_total": 0
+   },
+   "last": {
+    "ab_error": 4.36718222536291,
+    "delta_e00": 8.779013143002643,
+    "edge_ab_error": 6.172685976102314,
+    "edge_delta_e00": 9.679265792723822,
+    "edge_psnr": 20.825287308210434,
+    "epoch": 500,
+    "lpips": 0.10649457346647978,
+    "n": 50,
+    "n_images": 50,
+    "psnr": 21.81677160554558,
+    "ssim": 0.863821074962616
+   },
+   "status": "complete"
+  }
+ },
+ "manifest": {
+  "controller_sha256": "ee9ddfa311632fa35f75d79f0c95d731dd3bca5c6b5081bfebe1ee88da90a801",
+  "helper_sha256": "65dee02e967c3231fd796bdf9bd048a24fc2505d9897420db84f5cd40f831fe9"
+ },
+ "n_jobs": {
+  "complete": 4,
+  "total": 4
+ },
+ "protocol": {
+  "controller_sha256": "ee9ddfa311632fa35f75d79f0c95d731dd3bca5c6b5081bfebe1ee88da90a801",
+  "created_at": 1790009282.841522,
+  "helper_sha256": "65dee02e967c3231fd796bdf9bd048a24fc2505d9897420db84f5cd40f831fe9",
+  "jobs": [
+   {
+    "condition": "B0",
+    "gpu": 0,
+    "pid": 2314
+   },
+   {
+    "condition": "H3",
+    "gpu": 1,
+    "pid": 2315
+   },
+   {
+    "condition": "I3",
+    "gpu": 2,
+    "pid": 2316
+   },
+   {
+    "condition": "HI3",
+    "gpu": 3,
+    "pid": 2317
+   }
+  ],
+  "launch_error": null,
+  "root": "/home/work/research",
+  "run": "prefilter500_v1",
+  "source_run": "prefilter50_v1",
+  "sources": {
+   "B0": {
+    "best_sha256": "0c93568b266dfbf06b86ee93003fd36ad1d07a00986e3c2a9bb5d8ddccd6ad9e",
+    "config_sha256": "10c09f54f8d7067b2b829c6b1fe482a54fd9439e5d29f99a855966e7e2eb22c2",
+    "initial_model_sha256": "79b908c95621c4ce108a3004cbf4cac79d8bd0cc4220d8fe5dd1dbb0b576e815",
+    "last_sha256": "718f2c40197315ada3b33010ff5d89dad227444376c7f5fdc450a4689ef897b1",
+    "split_sha256": "b8eb9baf182d474edf855b6bbb4e240b18518c4ade08a92d8a2a0aa9c198dd89"
+   },
+   "H3": {
+    "best_sha256": "491db5fc0b93750915d33517e5743a24fed86a22afc862d0f3c1740a85577f66",
+    "config_sha256": "23789bdd6378ecf1be78ef2d03db2b95079861df50ea0864d9312b8e75fb5a7c",
+    "initial_model_sha256": "79b908c95621c4ce108a3004cbf4cac79d8bd0cc4220d8fe5dd1dbb0b576e815",
+    "last_sha256": "6854c102960b26c46f031f96909d15c5f01e7c5a07602951d2dbc63860b12193",
+    "split_sha256": "b8eb9baf182d474edf855b6bbb4e240b18518c4ade08a92d8a2a0aa9c198dd89"
+   },
+   "HI3": {
+    "best_sha256": "d73b42b57fac943f9cfdf79c9022cb980ca34dafb01f3b3759e0c7279159b49a",
+    "config_sha256": "f8374ede277dd3c0a64653678a27b6eea6b8d88b97385eff7991a1bbb86b1e26",
+    "initial_model_sha256": "79b908c95621c4ce108a3004cbf4cac79d8bd0cc4220d8fe5dd1dbb0b576e815",
+    "last_sha256": "4c1720ce2161e33e67d6f261cd352b2c7dbd9957fffc7a09c2b93eb9dc8a90e1",
+    "split_sha256": "b8eb9baf182d474edf855b6bbb4e240b18518c4ade08a92d8a2a0aa9c198dd89"
+   },
+   "I3": {
+    "best_sha256": "6624fd4f133bd911fa2877e11868d0869c9dc0a567e6f6d0b21e131ba9586abf",
+    "config_sha256": "482a6ca5a8f1eade9183af57745c6a3de8f036d42c826b1a736bd68b9fca2766",
+    "initial_model_sha256": "79b908c95621c4ce108a3004cbf4cac79d8bd0cc4220d8fe5dd1dbb0b576e815",
+    "last_sha256": "56282799471603e5ffc82ba5a32708b5d98f06651bf1eb78168dd03e198cf83f",
+    "split_sha256": "b8eb9baf182d474edf855b6bbb4e240b18518c4ade08a92d8a2a0aa9c198dd89"
+   }
+  }
+ },
+ "root": "/home/work/research/outputs/prefilter_study/prefilter500_v1",
+ "run": "prefilter500_v1",
+ "run_id": "prefilter_study__prefilter500_v1",
+ "sources": {
+  "B0_seed42/config.json": "9090a1c11d1102393c913e8706f8de5edf8cb5faaf676235d41e72ee4e3c511f",
+  "B0_seed42/metrics.csv": "3ba3962596d1ce14f537ba0b9a0e9204ed2302bab363d5f40b83b2401716a371",
+  "B0_seed42/status.json": "327aa41b579dcfbdf1069a907bf0ad9d5ca4ba57f617d5bc727c8ce7f21ee5f2",
+  "B0_seed42/validation_summary.csv": "8e342fc93b7fdb02b28742026c6b56ad11f3be5666e6f8b34cd3f63da5eed79c",
+  "H3_seed42/config.json": "d718f691712d0ded0e1bdb4797a37a7020c2630d5a1467d4b671c527879b31e0",
+  "H3_seed42/metrics.csv": "f8cb1d57e234b1a32f2faa6e4fc5d51da9e013d2073a8e0a9243a0f37dadd81e",
+  "H3_seed42/status.json": "4cfba2f52079c56596a120df3964ef56c19dda5c9884d4dc97eae714e5cabc3c",
+  "H3_seed42/validation_summary.csv": "c0daee346dfb8ee3b7714b3a36647255ad59a075f3fcb95a7de059e720a0c664",
+  "HI3_seed42/config.json": "e6aa7f9826cb7cd5aa17caf7d3a987619ab091280defbf564482d08c1027a401",
+  "HI3_seed42/metrics.csv": "fef57d10b1fab7f571b9a7196349816029af01d678afb220cfab289039295eda",
+  "HI3_seed42/status.json": "ba189e352d5554d1ac3105138b7f5ca9f963042bef42f01a5e2fad88d0907354",
+  "HI3_seed42/validation_summary.csv": "eb2ee7ac4b3e204977a2902fd5c961a70239af9b4dd3e20cb604b46a3ea4cb67",
+  "I3_seed42/config.json": "7c551c44974b588253ad4723498dd0350c1e0c70aa2bf5224c4b0138c1993072",
+  "I3_seed42/metrics.csv": "7b55ef3dba5025c14cbcff37b2306193a19d63deb03c53c30f317f55eeadbec6",
+  "I3_seed42/status.json": "40c4b9f6c1796d2276f247241578052671733d06f6b6f6c7d80ba733533a55e3",
+  "I3_seed42/validation_summary.csv": "047e60bfcc3027355f15bc11de40e0ce93a94b64a41750f013bf1271dae1304a",
+  "manifest.json": "8c79295a23225ed9fa548c416cc20cf4f7d4d62657e9d75d8a5ae7d23004ffc3"
+ },
+ "status": "complete",
+ "study": "prefilter_study"
+}

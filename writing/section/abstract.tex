@@ -1,0 +1,16 @@
+\begin{abstract}
+\mname is a low-light image enhancement network that is trained with a loss applied in two
+color spaces at once: the standard RGB space and the \hvi (Horizontal/Vertical/Intensity)
+space it introduces. Which parts of that recipe actually matter is not established. We run
+a controlled study of the \mname training recipe on \dataset under a single frozen
+protocol: (1) a leave-one-out ablation of the eight loss terms (L1, SSIM, edge, and
+perceptual, each in RGB and in \hvi), (2) model width from 18 to 36 base channels, and
+(3) intensity-only and hue--value input prefilters. All runs share the same split, seeds,
+optimizer, schedule, and hardware (\hw), and every reported number is read from a result
+file rather than transcribed. We find that removing the \hvi-space perceptual term changes
+validation PSNR by \ph{0.3}\,dB and LPIPS by \ph{0.02}, that widening from 18 to 36 channels
+gains \ph{0.6}\,dB at \ph{4}$\times$ the parameter count, and that the intensity-only
+prefilter does not reproduce its exploratory-seed gain on two fresh seeds. The study
+isolates which components of the dual-space recipe carry its benefit and which are within
+seed noise.
+\end{abstract}
