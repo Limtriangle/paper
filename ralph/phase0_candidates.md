@@ -1,7 +1,7 @@
 # phase0_candidates.md — thesis question candidates (master, 2026-09-23)
 
-Status: **v3** — hours reconciled against the measured smoke cost (`ralph/results/phase0_codebase.json`) and the
-literature facts corrected against `ralph/phase0_related.md` (2026-09-23 19:55 UTC). Ranking unchanged.
+Status: **v5** — v3 reconciled cost + literature; v4 rewrote C1 as the author's R2 ladder; v5 (2026-09-23 22:55 UTC)
+reconciles against the author's survey `ralph/related/SURVEY.md` §1 (gap → candidate map). Ranking unchanged.
 
 ## Shared facts that constrain every candidate
 - **Baseline protocol = the code, not the paper text**: 1000 epochs, batch 8, crop 256, Adam 1e-4 with 3-epoch warmup
@@ -29,6 +29,15 @@ strawman the authors already ran (R1: CVPR'25 Table 4 on LOL-v2-Real and CIDNet+
 the sRGB-vs-HSV sign flips between them); and with n = 3 seeds no paired test can reach p < 0.05, so "within seed
 spread" would have been a guaranteed non-finding. R1's verdict: partially done, not redundant — no seeded, validation-
 selected, YCbCr-inclusive comparison exists in any restoration task.
+**Survey reconciliation (SURVEY.md §1, gaps 1, 3, 4).** Two contrasts on the ladder have single-run precedents and are
+stated as *seeded replications with mechanism localisation*, not new ground: (a) C_k on/off inside CIDNet — HVI-CIDNet+
+(`yan2025hvicidnetplus`) reports C_k-only 27.99 vs full HVI 28.85 dB on LOL-v1, one run — this is A0 − A2; (b) YCbCr vs
+HVI — TPCNet (`shi2025tpcnet`) ran HVI / LAB / YCbCr in *its own* network on LOL-v2-Real, one run, with YCbCr ahead
+(24.98 vs 24.64); VCR (`cheng2026vcr`) and RHVI-FDD (`yang2026rhvifdd`) also ablate spaces in their own nets. YCbCr
+has never been run inside CIDNet (A3, A4). No seeded colour-space comparison exists in any restoration task; the
+seed-variance framing follows Bouthillier et al. (`bouthillier2021variance`) and Musgrave et al. (`musgrave2020reality`).
+The published LOL-v1 spread the ladder must explain — 23.5–24.0 dB raw (third-party) vs 28.2 dB (paper, GT-mean) —
+is SURVEY gap 4 (FusionNet `shi2025fusionnet`, PAL, issue #66).
 
 **Question.** Along a nested ladder of single-factor steps inside the same two-branch CIDNet, with the same loss in
 every arm and five matched seeds, which step moves LOL-v1 quality by more than the paired seed spread — and is the
@@ -61,7 +70,9 @@ labelled `oracle`, never used to rank arms. Selection bias (old C2) = oracle −
 max-over-seeds of the oracle is the "paper-style" number.
 
 **Metrics (R2 §4c).** Primary: **GT-mean PSNR with one scalar luminance gain** (never per-channel), mean over the 15
-test images, per run. Secondary: raw PSNR, SSIM, LPIPS, ΔE00 (raw and after scalar gain), log-exposure error
+test images, per run. GT-mean has no citable origin beyond LLFlow/KinD/Retinexformer practice (SURVEY gap 5) and uses
+the GT at inference (Retinexformer's leakage warning; GT-Mean Loss, Liao et al. ICCV 2025 `liao2025gtmean` quantifies
+the 23.8 → 27.7 dB jump); the raw-PSNR decomposition below is reported alongside for exactly that reason. Secondary: raw PSNR, SSIM, LPIPS, ΔE00 (raw and after scalar gain), log-exposure error
 log(mean_out/mean_gt), and the decomposition raw MSE ≈ gain error + GT-mean residual. Zero-run analyses on saved
 outputs: per-GT-intensity-decile RGB MSE, ΔE00 and chroma-weighted circular hue error |Δh|·S_gt per arm and seed with
 seed-level CIs; darkness stress test (inputs × 0.5, × 0.25 + Poisson–Gaussian noise) giving a dose–response curve of
@@ -135,7 +146,8 @@ by GT intensity) on saved outputs. **Risk of triviality.** Low–medium (flat cu
 ## C4 — Dual-space objective: which loss terms matter, with seeds?
 **Question.** {RGB+HVI loss (default), RGB only, HVI only} × {with, without VGG-perceptual}: which of the six
 objectives differ by more than the seed spread on LOLv1?
-**Why open.** Paper's loss ablation is single-run on LOLv2-Real (23.22 / 23.32 / 24.11); issue #163 asks how the
+**Why open.** Paper's loss ablation is single-run on LOLv2-Real (23.22 / 23.32 / 24.11); the duplicated dual-space
+objective has no Tier-1 precedent (SURVEY gap 6; U-Shape Transformer is the nearest); issue #163 asks how the
 weights (edge 50, SSIM 0.5, VGG 0.01) were chosen; the perceptual loss shifts its RGB input to [0.5,1] before ImageNet
 normalisation (range_norm), so the RGB-side perceptual term sees a systematically brightened image — worth measuring.
 **Works / fails.** "Dual-space loss adds x ± s dB over RGB-only" / "the second loss space adds nothing measurable;
@@ -145,7 +157,9 @@ the perceptual term adds nothing measurable at weight 0.01." **Minimal experimen
 ## C5 — Robustness: do color-space models degrade differently under noise / JPEG / domain shift?
 **Question.** Apply Gaussian noise (σ ∈ {5, 15, 25}/255), JPEG (q ∈ {90, 70, 50}) to LOLv1 test inputs, and
 evaluate on LOLv2-Real test and unpaired sets (NIQE): does the color-space ranking from C1 hold?
-**Why open.** RHVI-FDD argues max-RGB intensity is noise-sensitive but only tests its own fix.
+**Why open.** RHVI-FDD argues max-RGB intensity is noise-sensitive but only tests its own fix; SURVEY gap 7: HVI's
+robustness claims are untested, learned-k generalisation is examined only inside FusionNet/Multinex
+(`shi2025fusionnet`), and MILL (`pilligua2025mill`) covers intensity levels only.
 **Minimal experiment.** **0 training runs** — reuses C1 checkpoints; eval-only, ~1 GPU-h. The darkness/noise
 dose–response part is now inside C1 (decision rule 5); the LOL-v2-Real part needs a download and deduplication against
 the LOL-v1 train set. **Risk of triviality.** Medium; works only as C1's follow-on, not stand-alone.
@@ -162,7 +176,7 @@ and the finding is generic to any U-Net; weakest link to the HVI idea.
 
 | # | Candidate | Runs | Decidable with our compute | Gap size | Negative result still a thesis | Score |
 |---|---|---|---|---|---|---|
-| 1 | **C1 nested HVI ladder (A0/A2/A3/A4 + L1), 5 matched seeds; C2 folded in** | 25 (+9 opt.) | yes, ≈ 2.0 (2.7) days on 4 GPUs | large (the paper's central claim, never seeded; k and YCbCr never run) | yes: TOST/inconclusive + mechanism + selection bias | ★★★★★ |
+| 1 | **C1 nested HVI ladder (A0/A2/A3/A4 + L1), 5 matched seeds; C2 folded in** | 25 (+9 opt.) | yes, ≈ 2.0 (2.7) days on 4 GPUs | large (the paper's central claim, never seeded; C_k on/off run once unseeded; YCbCr never inside CIDNet; k never swept) | yes: TOST/inconclusive + mechanism + selection bias | ★★★★★ |
 | 2 | C3 density k + near black | 18 | yes, ≈ 1.7 days | medium–large (untested knob, real artefact) | yes | ★★★★ |
 | 3 | C4 dual-space loss + seeds | 18 | yes, ≈ 1.7 days | medium (issue #163, perceptual oddity) | yes | ★★★ |
 | 4 | C5 robustness | 0 | yes, hours | medium | partly | ★★★ (as C1's follow-on) |
