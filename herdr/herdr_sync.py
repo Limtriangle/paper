@@ -602,11 +602,11 @@ def _agent_send_text(kind, ctx, pid, text):
     the text (it does NOT press Enter — that is herdr's documented behavior), so
     we follow it with an explicit `send-keys enter` to actually deliver."""
     if kind == "local":
-        run(local_session_cmd(ctx, f'agent send {pid} "{_shq(text)}"'))
+        run(local_session_cmd(ctx, f'pane send-text {pid} "{_shq(text)}"'))
         time.sleep(0.3)
         run(local_session_cmd(ctx, f"pane send-keys {pid} enter"))
     else:
-        run(f"""ssh {ctx['host']} 'herdr --session {ctx['session']} agent send {pid} "{_shq(text)}"'""")
+        run(f"""ssh {ctx['host']} 'herdr --session {ctx['session']} pane send-text {pid} "{_shq(text)}"'""")
         time.sleep(0.3)
         run(remote_cmd(ctx, f"pane send-keys {pid} enter"))
 
