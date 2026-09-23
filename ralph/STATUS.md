@@ -1,6 +1,6 @@
 # STATUS.md — master's dashboard
 
-**Phase:** 0 — topic selection. **All Phase 0 inputs exist** (codebase JSON, related.md, candidates.md). **Gate 0 waits for the author** (`[human] topic confirmed: <#>` in INBOX.md). No study runs; GPUs idle by design.
+**Phase:** 0 — topic selection. All Phase 0 inputs exist; the author red-teamed C1 (ralph/related/redteam/R1, R2) and C1 is now the R2 nested ladder (candidates v4, recommendation re-posted in INBOX). **Gate 0 waits for the author** (`[human] topic confirmed: <#>` in INBOX.md). No study runs.
 
 ## Gates
 | Gate | State | Evidence |
@@ -14,7 +14,7 @@
 | Agent | Doing | Since |
 |---|---|---|
 | master | candidates C1–C6 written and ranked; recommendation C1 in INBOX; **Gate 0 waits for the author**; sweeping, judging prompts, reconciling hours when cost.smoke lands | 2026-09-23 18:40 |
-| experiment | Phase 0 deliverables DONE (phase0_codebase.json, smoke + export green, rule-9 audit green, cost 9.1 h/run). Adapters + listing guard delivered (commit 0f0ed67). **Holding until Gate 0.** All 4 GPUs idle by design | 2026-09-23 19:20 UTC |
+| experiment | Phase 0 deliverables DONE (phase0_codebase.json, smoke + export green, rule-9 audit green, cost 9.1 h/run). Instrument work for the R2 ladder: scene-disjoint val split (embedding + pHash), frozen-k0 detached HVI loss (no VGG), ckpt every 10 ep, val every 5 ep, FP32 transforms, arm adapters A0/A2/A3/A4/L1/R/U + param-count assertion + CPU preflight. No training | 2026-09-23 19:15 UTC |
 | writing | Phase 0 deliverables DONE (phase0_related.md, custom.bib 28 verified, pushed 2042e4f). Next: related-work appendix prose (no claims) + gen-table spec scaffold for C1 | 2026-09-23 19:45 UTC |
 
 ## Next actions
