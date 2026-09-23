@@ -136,7 +136,7 @@ git push origin main
 
 - **Never push a broken build.** Never force-push. Never `git reset --hard`.
 - Commit messages name the change: `"intro: 7-move arc, provisional headline"`,
-  `"table 1: width500 seed-42 values, phm-bound"`.
+  `"table 1: S1 seed-42 values, phm-bound"`.
 - One commit per landed result (each `\ph`→`\phm` conversion is its own commit).
 - If a push fails on auth, tell master; do not go hunting for credentials.
 

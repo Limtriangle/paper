@@ -126,7 +126,7 @@ judge them. Run `python3 herdr/herdr_sync.py watch` under the Monitor tool (mode
 On `BLOCKED:` → `pending`, judge against `herdr/permission-policy.md`, then
 `approve`/`deny`/`dismiss`. **Approve liberally inside `/home/work/paper` and
 `/home/work/research`**; deny anything that deletes result directories, force-pushes,
-reads `test15`, or leaves those two trees. On `STALLED:` → `read`, diagnose, `send` a
+reads the test split, or leaves those two trees. On `STALLED:` → `read`, diagnose, `send` a
 concrete next action.
 
 ---

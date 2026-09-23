@@ -2,7 +2,7 @@
 """Export raw HVI-CIDNet study runs into paper-citable result JSON.
 
     python3 tooling/export_results.py            # all runs under $RESEARCH/outputs
-    python3 tooling/export_results.py --run width_study/width500_v1
+    python3 tooling/export_results.py --run s1/run_v1
     python3 tooling/export_results.py --summary  # print a table of what was exported
 
 Input layout (written by hvi_*.py):
@@ -15,7 +15,7 @@ Input layout (written by hvi_*.py):
 
 Output: $PAPER/ralph/results/<study>__<run>.json
     {
-      "run_id": "width_study__width500_v1", "study": ..., "run": ...,
+      "run_id": "s1__run_v1", "study": ..., "run": ...,
       "exported_at": ISO, "status": "complete"|"partial",
       "protocol": <manifest.protocol or the manifest minus bulky fields>,
       "jobs": {"<job>": {"status", "config": {...subset...}, "epochs_trained",

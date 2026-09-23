@@ -140,7 +140,7 @@ incomplete — master cannot decide on data that does not exist.
 
 - Do not change a protocol mid-study. A new protocol is a new run name and a new hash.
 - Do not run a new hypothesis until the current gate closes (propose it in DECISIONS.md).
-- Do not read `test15` outside the one final evaluation script.
+- Do not read the test split outside the one final evaluation script.
 - Do not launch more than one training job per GPU.
 - Do not delete or move any run directory. Failed runs stay, marked `failed`.
 
@@ -153,7 +153,7 @@ incomplete — master cannot decide on data that does not exist.
 | A job crashes | Restart once, same protocol, new job dir suffix `_retry1`. Second failure → mark `failed`, report. |
 | OOM | Never reduce batch/crop silently (that is a protocol change). Report; master decides. |
 | A condition is marginally better but more complex | Take the simpler one. |
-| Results look too good | Suspect a bug: check split hash, that val ≠ train, that test15 was not read, that the baseline is the real baseline. |
+| Results look too good | Suspect a bug: check split hash, that val ≠ train, that the test split was not read, that the baseline is the real baseline. |
 | A result contradicts the storyline | Report immediately. Never bend the number. |
 | Which GPU | Lowest-numbered free GPU by `nvidia-smi`; record it in the job config. |
 | Seeds for a new confirmation | Next unused integers after 44; never reuse the exploratory seed. |

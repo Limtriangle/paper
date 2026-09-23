@@ -9,16 +9,16 @@ Spec: writing/tables/spec.json
 {
   "tables": [
     {
-      "name": "width_table",                       -> writing/tables/width_table.tex
-      "src": "width_study__width500_v1.json",
-      "caption": "\\textbf{Width scaling.} ...  Best value per column in \\textbf{bold}.",
-      "label": "tab:width",
+      "name": "main_table",                        -> writing/tables/main_table.tex
+      "src": "s1__run_v1.json",
+      "caption": "\\textbf{Main comparison.} ...  Best value per column in \\textbf{bold}.",
+      "label": "tab:main",
       "star": false,                                  -> table vs table*
-      "row_label": "Width",
-      "rows": [ {"label": "$W=18$", "job": "W18_seed42"}, ... ],
+      "row_label": "Variant",
+      "rows": [ {"label": "Baseline", "job": "baseline_seed42"}, ... ],
       "cols": [ {"label": "PSNR$\\uparrow$", "key": "best.psnr", "fmt": ".2f", "best": "max"},
                 {"label": "LPIPS$\\downarrow$", "key": "best.lpips", "fmt": ".3f", "best": "min"} ],
-      "ours": "W36_seed42"                            -> optional: that row is labelled last and bold
+      "ours": "ours_seed42"                           -> optional: that row is labelled last and bold
     }
   ]
 }

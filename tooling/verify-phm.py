@@ -9,8 +9,8 @@ BY KEY (never by value): the binding lives in ralph/phm-spec.json, written by `w
 
     {"entries": [
       {"written": "21.36",
-       "src":     "prefilter_study__ifilter_confirm50_v1.json",
-       "key":     "jobs.B0_seed43.best.psnr",
+       "src":     "s1__run_v1.json",
+       "key":     "jobs.baseline_seed43.best.psnr",
        "only_in": ["experiments.tex"]},          # optional: restrict to these .tex files
       {"written": "$-0.04$", "src": "...__analysis.json", "key": "paired.psnr.mean_delta"}
     ]}
