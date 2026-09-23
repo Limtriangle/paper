@@ -127,8 +127,8 @@ loss     = loss_rgb + HVI_weight * loss_hvi
   **unverified**, no bib entries; the sets are named as the upstream README names them].
 - Follow-up: HVI-CIDNet+ (`yan2025hvicidnetplus`, arXiv 2507.06814), separate repo. The
   README also names FusionNet (arXiv 2504.19295) as the authors' NTIRE 2025 LLIE challenge
-  entry that fuses HVI-CIDNet with other models (README claim, **unverified** until its bib
-  entry lands; see §5).
+  entry that fuses HVI-CIDNet with other models (README claim, **unverified**;
+  no bib entry; verification was cut short by the session limit).
 
 ---
 
@@ -181,7 +181,7 @@ unpaired NIQE 3.523 average, from a separately trained "LOLv2+" model with rando
 (§10.8, the paper itself says it "avoid[s] direct comparisons" there).
 Plug-in claim (Table 3, LOL-v2-real): wrapping six other networks in HVIT/PHVIT raises PSNR
 for all six (+0.381 to +3.562 dB); SSIM drops for SNR-Aware (`xu2022snr`, -0.009) and LPIPS
-worsens for FourLLIE [bib key pending, see §5] (+0.011), so "improves across metrics" is not
+worsens for FourLLIE [**unverified**, no bib entry] (+0.011), so "improves across metrics" is not
 uniformly true in its own table.
 Cross-dataset (Table 5, train LOL-v1 -> test LOL-v2-syn): CIDNet 19.457/0.817/0.193, but
 only with the extra hue-bias mechanism (Eqs. 12-13) that the main model does not use;
@@ -235,7 +235,7 @@ residual add); the RGB-space loss cannot move k. Whichever explanation is right,
 stated mechanism is not the shipped one.
 
 **Never ablated, in any version:** YCbCr / LAB / HSL / YUV under the same network (YCbCr
-appears only through the Bread baseline [bib key pending, see §5]); the value of k (fixed vs trainable, a sweep, or
+appears only through the Bread baseline [**unverified**, no bib entry]); the value of k (fixed vs trainable, a sweep, or
 the learned value per dataset); the choice of the collapse function F (sine vs linear vs
 log, Eqs. 9-11, justified only by a gradient-stability argument); the HVI-loss weight
 lambda_c; the edge and SSIM terms individually; alpha_S / alpha_I; depth, width or number
@@ -255,7 +255,7 @@ of LCA stages; epsilon; any seed.
 - Replacing the Transformer with Mamba [**unverified**, no bib entry]; use inside large
   vision models.
 - The hue-bias parameters gamma_G, gamma_B cannot be set for an unknown camera.
-- LPIPS is worse than GLARE [bib key pending, see §5] on LOL-v2-real and worse than Zero-DCE
+- LPIPS is worse than GLARE [**unverified**, no bib entry] on LOL-v2-real and worse than Zero-DCE
   (`guo2020zerodce`) cross-dataset; BRISQUE [**unverified**] does not beat RetinexNet
   (`wei2018retinex`).
 
@@ -271,7 +271,7 @@ of LCA stages; epsilon; any seed.
    model's SSIM is 0.871 in Table 4 but 0.868 in Table 12, the old tables, and the README.
 3. **One proxy network per color space.** The color-space ablation uses UNet+self-attention,
    not CIDNet, and compares only sRGB, HSV and two HVI halves. No YCbCr, LAB, HSL or YUV
-   control (YCbCr and YUV appear only inside other methods: Bread [bib key pending] and
+   control (YCbCr and YUV appear only inside other methods: Bread [**unverified**, no bib entry] and
    LYT-Net `brateanu2025lytnet`); no "HSV with a wrap-aware hue loss" control. Polarization is a property of any
    cos/sin hue embedding (the paper concedes YCbCr already solves hue discontinuity), so the
    experiment does not isolate what HVI adds over a cheap fix.
