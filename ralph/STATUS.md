@@ -14,7 +14,7 @@
 | Agent | Doing | Since |
 |---|---|---|
 | master | candidates C1–C6 written and ranked; recommendation C1 in INBOX; **Gate 0 waits for the author**; sweeping, judging prompts, reconciling hours when cost.smoke lands | 2026-09-23 18:40 |
-| experiment | R2 ladder fully instrumented (d124e95: 7 arms preflight green, params matched, k0 detached, FP32, knobs identity, val/5, ckpt/10, split scene_v1). **Holding for Gate 0.** GPUs idle by design | 2026-09-23 23:05 UTC |
+| experiment | ALL pre-registration instruments done (f330fb2: final/oracle eval, metrics, analysis with self-test). **Holding for Gate 0.** GPUs idle by design | 2026-09-23 23:20 UTC |
 | writing | Corrections + appendix prose + C1 table scaffold DONE (2991e67). Resumed 22:45 UTC: gen-table --check must fail on missing src; merge the author's survey.bib after own verification; fill related.md §5; finish 12 comparator bib checks | 2026-09-23 19:40 UTC |
 
 ## Next actions
