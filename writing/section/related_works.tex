@@ -1,13 +1,45 @@
 \section{Related Work}
 \label{sec:related}
 
-\paragraph{Learned low-light enhancement.} Retinex-inspired decomposition networks
-\citep{wei2018retinex}, curve-estimation methods that need no paired data
-\citep{guo2020zerodce}, and transformer enhancers \citep{cai2023retinexformer} form the
-main families evaluated on paired low-light benchmarks. \mname \citep{yan2025hvi} differs by
-changing the color space in which enhancement and supervision happen rather than the
-backbone.
+\paragraph{Retinex-based enhancement.} Retinex theory \citep{land1977retinex} models an
+image as the product of illumination and reflectance, and most learned low-light enhancers
+descend from it. RetinexNet \citep{wei2018retinex} learns the decomposition end to end and
+introduced the \dataset benchmark; KinD \citep{zhang2019kind} enhances illumination and
+reflectance along separate branches; URetinex-Net \citep{wu2022uretinex} and RUAS
+\citep{liu2021ruas} unroll the decomposition into a network, the latter with architecture
+search. Retinexformer \citep{cai2023retinexformer} folds the illumination estimate into a
+one-stage transformer and is the published model closest in size to \mname.
 
-\paragraph{Perceptual and structural losses.} SSIM \citep{wang2004ssim}, VGG feature losses
-\citep{johnson2016perceptual}, and LPIPS \citep{zhang2018lpips} are standard components and
-evaluation metrics for restoration.
+\paragraph{Supervised enhancers in other formulations.} LLFlow \citep{wang2022llflow} models
+the conditional distribution of normal-light images with a normalizing flow; SNR-Aware
+\citep{xu2022snr} routes between local and global processing by a spatial signal-to-noise
+estimate; LLFormer \citep{wang2023llformer} targets ultra-high-definition inputs; GSAD
+\citep{hou2023gsad} and Diff-Retinex \citep{yi2023diffretinex} use diffusion models. The
+channel-attention block inside \mname follows the design of Restormer
+\citep{zamir2022restormer}. LEDNet \citep{zhou2022lolblur} treats enhancement and deblurring
+jointly and introduced the LOL-Blur dataset.
+
+\paragraph{Unsupervised and zero-reference methods.} Zero-DCE \citep{guo2020zerodce}
+estimates per-pixel enhancement curves without paired data; EnlightenGAN
+\citep{jiang2021enlightengan} trains adversarially on unpaired images; SCI \citep{ma2022sci}
+learns a self-calibrated illumination map with a very small network. \mname is trained with
+pairs only and its authors list unsupervised training as open.
+
+\paragraph{Color spaces for enhancement.} Most of the methods above operate on sRGB. LYT-Net
+\citep{brateanu2025lytnet} processes luminance and chrominance separately in YUV. \mname
+\citep{yan2025hvi} instead maps sRGB into a polar Horizontal/Vertical/Intensity (\hvi)
+space in which hue is an angle, saturation a radius, and the radius is shrunk toward the
+origin as intensity goes to zero by a learned collapse function; the network enhances
+intensity and chroma along two interacting branches and is supervised in both sRGB and
+\hvi. An earlier version of the method \citep{yan2024onecolorspace} and a successor for
+extreme darkness \citep{yan2025hvicidnetplus} exist; we study the CVPR 2025 version whose
+code is public.
+
+\paragraph{Datasets and metrics.} We use the paired \dataset benchmark of
+\citet{wei2018retinex}; its successor LOL-v2 \citep{yang2021lolv2}, SID \citep{chen2018sid},
+SICE \citep{cai2018sice}, and LOL-Blur \citep{zhou2022lolblur} are the other paired sets on
+which \mname was reported. Full-reference quality is measured by PSNR, SSIM
+\citep{wang2004ssim}, and LPIPS \citep{zhang2018lpips}; no-reference quality by NIQE
+\citep{mittal2013niqe}. The perceptual loss term of \mname is the VGG feature loss of
+\citet{johnson2016perceptual}. Color fidelity, when we report it, uses the CIEDE2000
+difference \citep{sharma2005ciede2000}.
