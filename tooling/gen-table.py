@@ -44,13 +44,23 @@ def get(obj, path):
 
 
 def cell_value(data, job, key):
+    key = key.replace("{cond}", job)     # absolute keys may name the row's job as {cond}
     if key.startswith("/"):
         return get(data, key[1:])
     return get(data["jobs"][job], key)
 
 
+def load_src(tbl):
+    """A src that does not exist yet yields an all-'--' table (scaffold before the study runs)."""
+    path = R / tbl["src"]
+    if not path.exists():
+        print(f"MISSING ralph/results/{tbl['src']} (table {tbl['name']}: every cell rendered as --)", file=sys.stderr)
+        return {"jobs": {}}
+    return json.load(open(path))
+
+
 def render(tbl):
-    data = json.load(open(R / tbl["src"]))
+    data = load_src(tbl)
     cols = tbl["cols"]
     vals = {}   # (row_idx, col_idx) -> float|None
     for i, row in enumerate(tbl["rows"]):
@@ -97,7 +107,7 @@ def render(tbl):
 
 
 def spec_entries(tbl):
-    data = json.load(open(R / tbl["src"]))
+    data = load_src(tbl)
     ents = []
     for row in tbl["rows"]:
         for col in tbl["cols"]:
@@ -106,7 +116,8 @@ def spec_entries(tbl):
             except (KeyError, IndexError):
                 continue
             s = format(v, col.get("fmt", "")) if isinstance(v, (int, float)) else str(v)
-            key = col["key"][1:] if col["key"].startswith("/") else f"jobs.{row['job']}.{col['key']}"
+            k = col["key"].replace("{cond}", row["job"])
+            key = k[1:] if k.startswith("/") else f"jobs.{row['job']}.{k}"
             ents.append({"written": s, "src": tbl["src"], "key": key, "only_in": [f"{tbl['name']}.tex"]})
     return ents
 

@@ -1,3 +1,179 @@
 {
-  "tables": []
+ "_doc": "SCAFFOLD for candidate C1 (HVI-PLAN.md \u00a74 once Gate 0 passes). src does not exist yet; gen-table.py renders every cell as -- and prints MISSING. Contract for experiment: the C1 run export c1__colorspace_v1.json carries analysis.analysis_c1.decision.summary.<cond>.<metric>.{mean,sd,n} with cond in {srgb,hsv,ycbcr,hvi_nock,hvi}, metric in {psnr,ssim,lpips,delta_e00,psnr_gated,ssim_gated,lpips_gated,psnr_gtmean,ssim_gtmean,lpips_gtmean}, computed over the 3 seeds from the one final test evaluation per condition. Keys containing {cond} are expanded per row from the row's job. Neither table is \\input by the paper until the src exists.",
+ "tables": [
+  {
+   "name": "c1_colorspace",
+   "src": "c1__colorspace_v1.json",
+   "label": "tab:c1",
+   "star": true,
+   "row_label": "Color space",
+   "caption": "\\textbf{Color space under an identical network.} \\mname trained in each color space with the same architecture, loss, schedule, and seeds on \\dataset; PSNR, SSIM, LPIPS, and CIEDE2000 on the test split, evaluated once per condition by the final-evaluation script after validation-based checkpoint selection, on \\hw. Cells are the mean over three seeds with the seed SD beside them; no gating and no GT-mean rescaling. The best mean in each column is in \\textbf{bold}, whichever color space attains it.",
+   "rows": [
+    {
+     "label": "sRGB",
+     "job": "srgb"
+    },
+    {
+     "label": "HSV",
+     "job": "hsv"
+    },
+    {
+     "label": "YCbCr",
+     "job": "ycbcr"
+    },
+    {
+     "label": "HVI without $C_k$",
+     "job": "hvi_nock"
+    },
+    {
+     "label": "HVI",
+     "job": "hvi"
+    }
+   ],
+   "cols": [
+    {
+     "label": "PSNR$\\uparrow$",
+     "key": "/analysis.analysis_c1.decision.summary.{cond}.psnr.mean",
+     "fmt": ".2f",
+     "best": "max"
+    },
+    {
+     "label": "SD",
+     "key": "/analysis.analysis_c1.decision.summary.{cond}.psnr.sd",
+     "fmt": ".2f"
+    },
+    {
+     "label": "SSIM$\\uparrow$",
+     "key": "/analysis.analysis_c1.decision.summary.{cond}.ssim.mean",
+     "fmt": ".3f",
+     "best": "max"
+    },
+    {
+     "label": "SD",
+     "key": "/analysis.analysis_c1.decision.summary.{cond}.ssim.sd",
+     "fmt": ".3f"
+    },
+    {
+     "label": "LPIPS$\\downarrow$",
+     "key": "/analysis.analysis_c1.decision.summary.{cond}.lpips.mean",
+     "fmt": ".3f",
+     "best": "min"
+    },
+    {
+     "label": "SD",
+     "key": "/analysis.analysis_c1.decision.summary.{cond}.lpips.sd",
+     "fmt": ".3f"
+    },
+    {
+     "label": "$\\Delta E_{00}\\downarrow$",
+     "key": "/analysis.analysis_c1.decision.summary.{cond}.delta_e00.mean",
+     "fmt": ".2f",
+     "best": "min"
+    },
+    {
+     "label": "SD",
+     "key": "/analysis.analysis_c1.decision.summary.{cond}.delta_e00.sd",
+     "fmt": ".2f"
+    }
+   ]
+  },
+  {
+   "name": "c1_colorspace_gated",
+   "src": "c1__colorspace_v1.json",
+   "label": "tab:c1-gated",
+   "star": true,
+   "row_label": "Color space",
+   "caption": "\\textbf{Color space under upstream evaluation conventions.} The same checkpoints as \\Cref{tab:c1} on the \\dataset test split on \\hw, scored (left) with the upstream inference-time saturation gate and (right) with GT-mean brightness rescaling. Mean over three seeds with the seed SD beside it. The best mean in each column is in \\textbf{bold}, whichever color space attains it.",
+   "rows": [
+    {
+     "label": "sRGB",
+     "job": "srgb"
+    },
+    {
+     "label": "HSV",
+     "job": "hsv"
+    },
+    {
+     "label": "YCbCr",
+     "job": "ycbcr"
+    },
+    {
+     "label": "HVI without $C_k$",
+     "job": "hvi_nock"
+    },
+    {
+     "label": "HVI",
+     "job": "hvi"
+    }
+   ],
+   "cols": [
+    {
+     "label": "PSNR$\\uparrow$",
+     "key": "/analysis.analysis_c1.decision.summary.{cond}.psnr_gated.mean",
+     "fmt": ".2f",
+     "best": "max"
+    },
+    {
+     "label": "SD",
+     "key": "/analysis.analysis_c1.decision.summary.{cond}.psnr_gated.sd",
+     "fmt": ".2f"
+    },
+    {
+     "label": "SSIM$\\uparrow$",
+     "key": "/analysis.analysis_c1.decision.summary.{cond}.ssim_gated.mean",
+     "fmt": ".3f",
+     "best": "max"
+    },
+    {
+     "label": "SD",
+     "key": "/analysis.analysis_c1.decision.summary.{cond}.ssim_gated.sd",
+     "fmt": ".3f"
+    },
+    {
+     "label": "LPIPS$\\downarrow$",
+     "key": "/analysis.analysis_c1.decision.summary.{cond}.lpips_gated.mean",
+     "fmt": ".3f",
+     "best": "min"
+    },
+    {
+     "label": "SD",
+     "key": "/analysis.analysis_c1.decision.summary.{cond}.lpips_gated.sd",
+     "fmt": ".3f"
+    },
+    {
+     "label": "PSNR$\\uparrow$",
+     "key": "/analysis.analysis_c1.decision.summary.{cond}.psnr_gtmean.mean",
+     "fmt": ".2f",
+     "best": "max"
+    },
+    {
+     "label": "SD",
+     "key": "/analysis.analysis_c1.decision.summary.{cond}.psnr_gtmean.sd",
+     "fmt": ".2f"
+    },
+    {
+     "label": "SSIM$\\uparrow$",
+     "key": "/analysis.analysis_c1.decision.summary.{cond}.ssim_gtmean.mean",
+     "fmt": ".3f",
+     "best": "max"
+    },
+    {
+     "label": "SD",
+     "key": "/analysis.analysis_c1.decision.summary.{cond}.ssim_gtmean.sd",
+     "fmt": ".3f"
+    },
+    {
+     "label": "LPIPS$\\downarrow$",
+     "key": "/analysis.analysis_c1.decision.summary.{cond}.lpips_gtmean.mean",
+     "fmt": ".3f",
+     "best": "min"
+    },
+    {
+     "label": "SD",
+     "key": "/analysis.analysis_c1.decision.summary.{cond}.lpips_gtmean.sd",
+     "fmt": ".3f"
+    }
+   ]
+  }
+ ]
 }

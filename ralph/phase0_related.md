@@ -271,7 +271,8 @@ of LCA stages; epsilon; any seed.
    model's SSIM is 0.871 in Table 4 but 0.868 in Table 12, the old tables, and the README.
 3. **One proxy network per color space.** The color-space ablation uses UNet+self-attention,
    not CIDNet, and compares only sRGB, HSV and two HVI halves. No YCbCr, LAB, HSL or YUV
-   control; no "HSV with a wrap-aware hue loss" control. Polarization is a property of any
+   control (YCbCr and YUV appear only inside other methods: Bread [bib key pending] and
+   LYT-Net `brateanu2025lytnet`); no "HSV with a wrap-aware hue loss" control. Polarization is a property of any
    cos/sin hue embedding (the paper concedes YCbCr already solves hue discontinuity), so the
    experiment does not isolate what HVI adds over a cheap fix.
 4. **k is never studied.** Trainable k (init 0.2 in code, i.e. paper k = 5) is the one
