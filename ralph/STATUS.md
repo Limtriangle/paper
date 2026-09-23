@@ -13,15 +13,16 @@
 ## Agents
 | Agent | Doing | Since |
 |---|---|---|
-| master | opening sequence done; watcher live; 3 subagents scouting (upstream code, literature gap, writing rules) to draft `ralph/phase0_candidates.md` | 2026-09-23 18:05 |
+| master | candidates C1–C6 written and ranked; recommendation C1 in INBOX; **Gate 0 waits for the author**; sweeping, judging prompts, reconciling hours when cost.smoke lands | 2026-09-23 18:40 |
 | experiment | phase0_codebase.json + 1-epoch smoke run on GPU 0 (LOLv1) + export ingest + cost.smoke | 2026-09-23 18:05 |
 | writing | phase0_related.md + verified custom.bib; skeleton stays green | 2026-09-23 18:05 |
 
 ## Next actions
-- master: when phase0_codebase.json and phase0_related.md exist → write phase0_candidates.md (4–6 candidates, ranked) → INBOX recommendation → wait for `[human] topic confirmed` (only thing that waits). Meanwhile keep workers on instrument work; sweep every ~30 min.
+- master: Gate 0 open, waiting for `[human] topic confirmed: <#>` in INBOX (the only wait). On confirmation: fill HVI-PLAN.md §0–§8 from phase0_candidates.md + phase0_codebase.json, then dispatch the post-Gate-0 openings. Meanwhile: reconcile candidate hours with cost.smoke; keep workers on instrument work; sweep every ~30 min.
 - experiment: after the smoke run, validate export_results.py + verify-phm.py by planting a wrong number (rule 9), then nothing else until Gate 0.
 - writing: after phase0_related.md, prepare the related-work appendix prose (no claims) and the gen-table spec scaffolding.
 
 ## Log
 - 2026-09-23 scaffold created; project reset to Phase 0 (topic to be chosen from scratch, HVI-CIDNet related).
+- 2026-09-23 18:40 master: phase0_candidates.md v1 (C1–C6) + INBOX recommendation (C1, pivot C3). Gate 0 now waits for the author.
 - 2026-09-23 18:00 master opening sequence: topology installed to ~/.config/herdr-mgr, permission mode live, watcher armed, both workers dispatched with Phase 0 tasks.
