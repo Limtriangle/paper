@@ -10,8 +10,8 @@ Status: **v2** — hours reconciled against the measured smoke cost in `ralph/re
   every 5 epochs instead of every epoch brings R to ≈ 7.7 h. 4 GPUs → ≈ 10–12 runs/day; ≈ 70 runs/week.
   Same-seed run-to-run noise (non-deterministic CUDA kernels) is measurable (0.04 dB val PSNR after 2 epochs) and
   will be reported as a floor under the seed spread; bitwise-strict mode costs 1.5× and is not the default.
-- Upstream reports **single runs with a random, unlogged seed**, and **selects checkpoints on the test split**
-  (eval15). Our frozen protocol will hold out a validation subset of the 485 training pairs and select on it. So
+- Upstream reports **single runs with a random, unlogged seed**, and its training loop **scores every 10th
+  checkpoint on the test split** (eval15); the released `best_PSNR`/`best_SSIM` weights imply selection on those scores. Our frozen protocol will hold out a validation subset of the 485 training pairs and select on it. So
   every candidate below produces, as a by-product, the first seeded reproduction of HVI-CIDNet on LOLv1.
 - Three seeds per condition is the floor (plan §1). A difference smaller than the seed SD is "no measurable
   difference" — and that is a publishable thesis result here.
@@ -68,10 +68,10 @@ by GT intensity) on saved outputs. **Risk of triviality.** Low–medium (flat cu
 **Question.** {RGB+HVI loss (default), RGB only, HVI only} × {with, without VGG-perceptual}: which of the six
 objectives differ by more than the seed spread on LOLv1?
 **Why open.** Paper's loss ablation is single-run on LOLv2-Real (23.22 / 23.32 / 24.11); issue #163 asks how the
-weights (edge 50, SSIM 0.5, VGG 0.01) were chosen; the perceptual loss is applied to HVI tensors in [-1,1] with
-ImageNet normalisation — a likely no-op or a bug worth measuring.
+weights (edge 50, SSIM 0.5, VGG 0.01) were chosen; the perceptual loss shifts its RGB input to [0.5,1] before ImageNet
+normalisation (range_norm), so the RGB-side perceptual term sees a systematically brightened image — worth measuring.
 **Works / fails.** "Dual-space loss adds x ± s dB over RGB-only" / "the second loss space adds nothing measurable;
-the perceptual term on HVI channels is inert." **Minimal experiment.** 6 × 3 = **18 runs**.
+the perceptual term adds nothing measurable at weight 0.01." **Minimal experiment.** 6 × 3 = **18 runs**.
 **Risk of triviality.** Medium: loss ablations are common; the seeded angle and the HVI-perceptual oddity are new.
 
 ## C5 — Robustness: do color-space models degrade differently under noise / JPEG / domain shift?

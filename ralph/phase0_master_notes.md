@@ -13,14 +13,15 @@ Upstream HEAD eb43d7d. Facts to cross-check against ralph/results/phase0_codebas
 - Wiring oddities: LCA2 outputs only reach skips (L94-95); I_LCA5 output overwritten (L109) → dead compute.
 
 ## Loss (train.py, losses.py, options.py)
-- Same four terms in RGB and HVI: L1 (1.0), 1−SSIM (0.5), edge/Laplacian (50), VGG perceptual (0.01). total = rgb + 1.0·hvi. Perceptual loss on HVI channels in [-1,1] with ImageNet normalisation.
+- Same four terms in RGB and HVI: L1 (1.0), 1−SSIM (0.5), edge/Laplacian (50), VGG perceptual (0.01). total = rgb + 1.0·hvi. **Corrected by phase0_codebase.json:** the perceptual loss applies range_norm x→(x+1)/2 before ImageNet normalisation, so the RGB branch is fed in [0.5,1] (shifted) while HVI lands in [0,1]; the oddity is on the RGB side.
 - No per-dataset configs; README admits some training params lost.
 - Learnable k receives gradient through HVIT(gt) too → model can shrink HVI loss by collapsing chroma. **Candidate: k dynamics / fixed vs learned k.**
 
 ## Protocol (options.py, train.py)
 - 1000 epochs, batch 8, crop 256, flips, Adam 1e-4, 3-epoch warmup then cosine to 1e-7. Grad clipping is a no-op (runs before backward).
 - Seed is random.randint, never logged; single run, no error bars.
-- **Validation every 10 epochs runs on the TEST split (eval15); checkpoints chosen on test.** Our protocol must carve a val split from the 485 train pairs (integrity rule 4).
+- **Every 10 epochs the code evaluates the checkpoint on the TEST split (eval15) with gated=True (1.3× saturation).** The code does not pick a checkpoint itself; the released names best_PSNR/best_SSIM imply manual selection on those test scores. Our protocol carves a 50-image val split from our485 (seeded shuffle, sha256-pinned) and never opens eval15 outside final_eval_test.py (integrity rule 4).
+- Epoch 1 trains at lr=0 (warmup bug); the paper's protocol (1500 epochs, 400² crops) differs from the code's (1000, 256). Measured params 1,975,569 incl. the dead I_LCA5 (70,960 never receive a gradient).
 - GT-mean rescaling moves LOLv1 23.8→27.7 dB. Test-set finetuning reported in README.
 
 ## Data on disk
