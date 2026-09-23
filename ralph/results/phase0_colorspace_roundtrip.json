@@ -1,0 +1,112 @@
+{
+  "written_at": "2026-09-23T18:45:23",
+  "torch": "2.7.0a0+7c8ec84dab.nv25.03",
+  "layout": "[chroma0, chroma1, intensity]",
+  "adapters": {
+    "srgb": {
+      "doc": "srgb    intensity I = max(R,G,B); chroma = chromaticity minus the achromatic point:",
+      "roundtrip_max_abs_error_random_uniform": 3.5762786865234375e-07,
+      "roundtrip_max_abs_error_17x17x17_grid_incl_black_white_grey": 1.7881393432617188e-07,
+      "chroma_range": [
+        -0.3333214819431305,
+        0.656376838684082
+      ],
+      "intensity_range": [
+        0.051248013973236084,
+        0.9999432563781738
+      ],
+      "differentiable": true,
+      "near_black_I_below_1_over_255": {
+        "n": 4097,
+        "max_abs_roundtrip_error": 1.1175870895385742e-08,
+        "max_abs_chroma": 0.6358247995376587,
+        "max_inverse_gain": 0.021457355469465256,
+        "black_maps_to_black_error": 0.0
+      }
+    },
+    "hsv": {
+      "doc": "hsv     I = V = max(R,G,B); chroma = (h - 1/2, s - 1/2), h in [0,1) the standard hue,",
+      "roundtrip_max_abs_error_random_uniform": 3.3527612686157227e-07,
+      "roundtrip_max_abs_error_17x17x17_grid_incl_black_white_grey": 3.5762786865234375e-07,
+      "chroma_range": [
+        -0.4999709129333496,
+        0.4999832510948181
+      ],
+      "intensity_range": [
+        0.051248013973236084,
+        0.9999432563781738
+      ],
+      "differentiable": true,
+      "near_black_I_below_1_over_255": {
+        "n": 4097,
+        "max_abs_roundtrip_error": 1.0244548320770264e-08,
+        "max_abs_chroma": 0.5,
+        "max_inverse_gain": 0.01726563833653927,
+        "black_maps_to_black_error": 0.0
+      }
+    },
+    "ycbcr": {
+      "doc": "ycbcr   ITU-R BT.601 full range: Y = .299R + .587G + .114B; Cb = .564(B-Y); Cr = .713(R-Y).",
+      "roundtrip_max_abs_error_random_uniform": 1.341104507446289e-07,
+      "roundtrip_max_abs_error_17x17x17_grid_incl_black_white_grey": 1.4901161193847656e-07,
+      "chroma_range": [
+        -0.4844503104686737,
+        0.4814373254776001
+      ],
+      "intensity_range": [
+        0.01959589123725891,
+        0.9895752668380737
+      ],
+      "differentiable": true,
+      "near_black_I_below_1_over_255": {
+        "n": 4097,
+        "max_abs_roundtrip_error": 5.238689482212067e-10,
+        "max_abs_chroma": 0.0017473646439611912,
+        "max_inverse_gain": 1.2537356615066528,
+        "black_maps_to_black_error": 0.0
+      }
+    },
+    "hvi_nock": {
+      "doc": "hvi_nock  HVI with C_k = 1: chroma = s*(cos 2*pi*h, sin 2*pi*h), I = V. Inverse: s = |chroma|,",
+      "roundtrip_max_abs_error_random_uniform": 6.556510925292969e-07,
+      "roundtrip_max_abs_error_17x17x17_grid_incl_black_white_grey": 0.00010001659393310547,
+      "chroma_range": [
+        -0.9993865489959717,
+        0.9979723691940308
+      ],
+      "intensity_range": [
+        0.051248013973236084,
+        0.9999432563781738
+      ],
+      "differentiable": true,
+      "near_black_I_below_1_over_255": {
+        "n": 4097,
+        "max_abs_roundtrip_error": 1.0710209608078003e-08,
+        "max_abs_chroma": 0.9977812170982361,
+        "max_inverse_gain": 0.004723493009805679,
+        "black_maps_to_black_error": 0.0
+      }
+    },
+    "hvi": {
+      "doc": "hvi     the upstream RGB_HVI module verbatim (net/HVI_transform.py) with k fixed to its",
+      "roundtrip_max_abs_error_random_uniform": 6.891787052154541e-07,
+      "roundtrip_max_abs_error_17x17x17_grid_incl_black_white_grey": 0.00010001659393310547,
+      "chroma_range": [
+        -0.9950193166732788,
+        0.9958905577659607
+      ],
+      "intensity_range": [
+        0.051248013973236084,
+        0.9999432563781738
+      ],
+      "differentiable": true,
+      "near_black_I_below_1_over_255": {
+        "n": 4097,
+        "max_abs_roundtrip_error": 1.1408701539039612e-08,
+        "max_abs_chroma": 0.3463935852050781,
+        "max_inverse_gain": 0.014031196013092995,
+        "black_maps_to_black_error": 0.0
+      }
+    }
+  }
+}
