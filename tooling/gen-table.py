@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Regenerate the paper's tables directly from ralph/results/*.json. Never type a number.
 
-    python3 tooling/gen-table.py --check      # regenerate and diff against writing/tables/*.tex (exit 1 on drift)
+    python3 tooling/gen-table.py --check      # regenerate and diff against writing/tables/*.tex (exit 1 on drift or MISSING src)
+    python3 tooling/gen-table.py --check --allow-missing   # scaffold audit: a MISSING src is reported, not fatal
     python3 tooling/gen-table.py --write      # regenerate and overwrite
     python3 tooling/gen-table.py <name>       # print one table to stdout
 
@@ -50,10 +51,15 @@ def cell_value(data, job, key):
     return get(data["jobs"][job], key)
 
 
+MISSING = []   # srcs that did not exist when a table was rendered
+
+
 def load_src(tbl):
-    """A src that does not exist yet yields an all-'--' table (scaffold before the study runs)."""
+    """A src that does not exist yet yields an all-'--' table (scaffold before the study runs).
+    --check then exits 1 unless --allow-missing is passed: a scaffold is never silently green."""
     path = R / tbl["src"]
     if not path.exists():
+        MISSING.append(tbl["src"])
         print(f"MISSING ralph/results/{tbl['src']} (table {tbl['name']}: every cell rendered as --)", file=sys.stderr)
         return {"jobs": {}}
     return json.load(open(path))
@@ -126,7 +132,9 @@ def main():
     if not SPEC.exists():
         print("no writing/tables/spec.json — nothing to generate"); return
     spec = json.load(open(SPEC))
-    mode = sys.argv[1] if len(sys.argv) > 1 else "--check"
+    allow_missing = "--allow-missing" in sys.argv
+    args = [a for a in sys.argv[1:] if a != "--allow-missing"]
+    mode = args[0] if args else "--check"
     drift = 0
     if mode == "--spec-entries":
         ents = [e for t in spec["tables"] for e in spec_entries(t)]
@@ -144,6 +152,9 @@ def main():
                 print(f"ok    {dest.relative_to(PAPER)}")
         elif mode == tbl["name"]:
             print(tex)
+    if mode == "--check" and MISSING and not allow_missing:
+        print(f"FAIL {len(MISSING)} table source(s) missing: {', '.join(sorted(set(MISSING)))} (pass --allow-missing only for a scaffold audit)")
+        sys.exit(1)
     sys.exit(1 if drift else 0)
 
 

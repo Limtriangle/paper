@@ -132,11 +132,26 @@ else
     red "\\phm{} verification failed:"; printf '%s\n' "$out" | tail -15 | sed 's/^/       /'
 fi
 
-# 9c. Generated tables match their JSON sources.
+# 9c. Generated tables match their JSON sources. A MISSING source is tolerated only before
+#     --final (a scaffold); at --final every source must exist.
 if [ -f "$ROOT/tables/spec.json" ]; then
-    if out=$(python3 "$PAPER/tooling/gen-table.py" --check 2>&1); then grn "generated tables match JSON"
-    else red "generated tables drifted from JSON (run gen-table.py --write):"; printf '%s\n' "$out" | tail -8 | sed 's/^/       /'; fi
+    ALLOW="--allow-missing"; [ "$FINAL" -eq 1 ] && ALLOW=""
+    if out=$(python3 "$PAPER/tooling/gen-table.py" --check $ALLOW 2>&1); then
+        m=$(printf '%s\n' "$out" | grep -c '^MISSING' || true)
+        [ "$m" -eq 0 ] && grn "generated tables match JSON" || warn "generated tables match JSON; $m source(s) MISSING (scaffold, fatal at --final)"
+    else red "generated tables drifted from JSON or a source is MISSING (run gen-table.py --write):"; printf '%s\n' "$out" | tail -8 | sed 's/^/       /'; fi
 fi
+
+# 9d. No table that the paper \input's may carry an empty ("--") cell: an empty cell in the
+#     PDF is a visible gap. Fatal at --final, a warning before.
+empty=0
+for t in $(grep -rhoE '\\input\{tables/[^}]+\}' section/ icml2024/main.tex 2>/dev/null | sed -E 's/\\input\{tables\/([^}]+)\}/\1/' | sort -u); do
+    f="$ROOT/tables/$t"; [ -f "$f" ] || f="$ROOT/tables/$t.tex"
+    [ -f "$f" ] || continue
+    n=$(grep -cE '(^|&)[[:space:]]*--[[:space:]]*(&|\\\\)' "$f" || true)
+    if [ "$n" -gt 0 ]; then empty=$((empty+n)); [ "$FINAL" -eq 1 ] && red "$n empty (--) cell(s) in input table tables/$t" || warn "$n empty (--) cell(s) in input table tables/$t (fatal at --final)"; fi
+done
+[ "$empty" -eq 0 ] && grn "no empty (--) cells in input tables"
 
 # 10. Pushed.
 cd "$PAPER"
