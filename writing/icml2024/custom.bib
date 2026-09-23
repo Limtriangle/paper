@@ -93,14 +93,17 @@
   year    = {2024}
 }
 
-% verified: arXiv 2507.06814 (v1, 2025-07-09). A journal version (IEEE TCSVT 36(8), 2026,
-% doi 10.1109/TCSVT.2026.3710237) was found on Crossref with a different author list;
-% we cite the arXiv version the upstream README links to. Re-check at the milestone pass.
+% verified: https://api.crossref.org/works/10.1109/tcsvt.2026.3710237 (journal version, two independent
+% Crossref fetches on 2026-09-23; the arXiv v1 2507.06814 lists Yan, Shi, Feng, Hu, Wu, Pang, Zhang)
 @article{yan2025hvicidnetplus,
-  author  = {Yan, Qingsen and Shi, Kangbiao and Feng, Yixu and Hu, Tao and Wu, Peng and Pang, Guansong and Zhang, Yanning},
   title   = {{HVI-CIDNet+}: Beyond Extreme Darkness for Low-Light Image Enhancement},
-  journal = {arXiv preprint arXiv:2507.06814},
-  year    = {2025}
+  author  = {Shi, Kangbiao and Ma, Xiaowen and Feng, Yixu and Hu, Tao and Wu, Peng and Pang, Guansong and Yan, Qingsen},
+  journal = {IEEE Transactions on Circuits and Systems for Video Technology},
+  volume  = {36},
+  number  = {8},
+  pages   = {12126--12139},
+  year    = {2026}
+}
 }
 
 % verified: Crossref 10.1145/3343031.3350926
@@ -276,4 +279,799 @@
   number  = {6},
   pages   = {108--128},
   year    = {1977}
+}
+
+% Section C — merged from the author's survey (ralph/related/survey.bib, 103 entries) after writing's
+% own verification pass on 2026-09-23 (five subagents, one fetched page per entry: Crossref, CVF,
+% arXiv, OpenAlex, ACL Anthology, JMLR, MLSys, NeurIPS, IJCAI). Survey duplicates of Section A/B
+% keys were dropped (wei2018retinexnet->wei2018retinex, yang2021sgm->yang2021lolv2,
+% wu2022uretinexnet->wu2022uretinex, xu2022snraware->xu2022snr, pilligua2025multiintensity->
+% pilligua2025mill). Every key candidates v5 cites survives under its own name.
+
+% verified: https://api.crossref.org/works/10.1007/s11263-022-01667-9 (publisher author order Guo, Hu; arXiv 2111.15557 lists Hu, Guo)
+@article{guo2023bread,
+  title   = {Low-light Image Enhancement via Breaking Down the Darkness},
+  author  = {Guo, Xiaojie and Hu, Qiming},
+  journal = {International Journal of Computer Vision},
+  volume  = {131},
+  number  = {1},
+  pages   = {48--66},
+  year    = {2023}
+}
+
+% verified: openaccess.thecvf.com CVPR2022 (doi 10.1109/CVPR52688.2022.00194)
+@inproceedings{zhang2022dccnet,
+  title     = {Deep Color Consistent Network for Low-Light Image Enhancement},
+  author    = {Zhang, Zhao and Zheng, Huan and Hong, Richang and Xu, Mingliang and Yan, Shuicheng and Wang, Meng},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  pages     = {1899--1908},
+  year      = {2022}
+}
+
+% verified: https://api.crossref.org/works/10.1109/tnnls.2021.3071245
+@article{ma2022csdnet,
+  title   = {Learning Deep Context-Sensitive Decomposition for Low-Light Image Enhancement},
+  author  = {Ma, Long and Liu, Risheng and Zhang, Jiaao and Fan, Xin and Luo, Zhongxuan},
+  journal = {IEEE Transactions on Neural Networks and Learning Systems},
+  volume  = {33},
+  number  = {10},
+  pages   = {5666--5680},
+  year    = {2022}
+}
+
+% verified: https://arxiv.org/abs/2205.14871 (comment "BMVC 2022"; proceedings PDF bmvc2022.mpi-inf.mpg.de/0238.pdf indexed, site unreachable on 2026-09-23)
+@inproceedings{cui2022iat,
+  title     = {You Only Need 90{K} Parameters to Adapt Light: A Light Weight Transformer for Image Enhancement and Exposure Correction},
+  author    = {Cui, Ziteng and Li, Kunchang and Gu, Lin and Su, Shenghan and Gao, Peng and Jiang, Zhengkai and Qiao, Yu and Harada, Tatsuya},
+  booktitle = {Proceedings of the 33rd British Machine Vision Conference (BMVC)},
+  year      = {2022}
+}
+
+% verified: https://api.crossref.org/works/10.1145/3581783.3612145
+@inproceedings{yin2023clediffusion,
+  title     = {{CLE} Diffusion: Controllable Light Enhancement Diffusion Model},
+  author    = {Yin, Yuyang and Xu, Dejia and Tan, Chuangchuang and Liu, Ping and Zhao, Yao and Wei, Yunchao},
+  booktitle = {Proceedings of the 31st ACM International Conference on Multimedia (ACM MM)},
+  pages     = {8145--8156},
+  year      = {2023}
+}
+
+% verified: https://api.crossref.org/works/10.1016/j.patcog.2016.06.008
+@article{lore2017llnet,
+  title   = {{LLNet}: A Deep Autoencoder Approach to Natural Low-Light Image Enhancement},
+  author  = {Lore, Kin Gwn and Akintayo, Adedotun and Sarkar, Soumik},
+  journal = {Pattern Recognition},
+  volume  = {61},
+  pages   = {650--662},
+  year    = {2017}
+}
+
+% verified: https://api.crossref.org/works/10.1007/978-3-031-19797-0_20
+@inproceedings{wang2022lcdpnet,
+  title     = {Local Color Distributions Prior for Image Enhancement},
+  author    = {Wang, Haoyuan and Xu, Ke and Lau, Rynson W. H.},
+  booktitle = {Computer Vision -- ECCV 2022},
+  publisher = {Springer},
+  pages     = {343--359},
+  year      = {2022}
+}
+
+% verified: https://api.crossref.org/works/10.1109/tip.2021.3076367
+@article{li2021ucolor,
+  title   = {Underwater Image Enhancement via Medium Transmission-Guided Multi-Color Space Embedding},
+  author  = {Li, Chongyi and Anwar, Saeed and Hou, Junhui and Cong, Runmin and Guo, Chunle and Ren, Wenqi},
+  journal = {IEEE Transactions on Image Processing},
+  volume  = {30},
+  pages   = {4985--5000},
+  year    = {2021}
+}
+
+% verified: https://api.crossref.org/works/10.3390/s25175353
+@article{he2025dlfenet,
+  title   = {{DLFE-Net}: Preserving Details and Removing Noise Using {HVI} Color Space for Low-Light Image Enhancement},
+  author  = {He, Zhaokun and Yuan, Xin and Hao, Guozhu and Wang, Wei},
+  journal = {Sensors},
+  volume  = {25},
+  number  = {17},
+  pages   = {5353},
+  year    = {2025}
+}
+
+% verified: https://arxiv.org/abs/2604.05781 (arXiv-only; the paper's own "ICMR 2026" claim has no proceedings page)
+@article{yang2026rhvifdd,
+  title   = {{RHVI-FDD}: A Hierarchical Decoupling Framework for Low-Light Image Enhancement},
+  author  = {Yang, Junhao and Yang, Bo and Ge, Hongwei and Liang, Yanchun and Lee, Heow Pueh and Wu, Chunguo},
+  journal = {arXiv preprint arXiv:2604.05781},
+  year    = {2026}
+}
+
+% verified: https://arxiv.org/abs/2607.13925 (arXiv-only)
+@article{wu2026tcanet,
+  title   = {Thresholded Cross-Attention for Reliable Intensity-Chromaticity Fusion in Low-Light Image Enhancement},
+  author  = {Wu, Yanyi and Zhang, Xu and Chen, Junkai and Chang, Laibin and Ma, Jiaqi and Chen, Shi and Zhu, Linwei and Di, Jianglei and Zhang, Huan},
+  journal = {arXiv preprint arXiv:2607.13925},
+  year    = {2026}
+}
+
+% verified: https://arxiv.org/abs/2608.10512 (arXiv-only; ACM MM 2026 acceptance claimed in the arXiv comment, no proceedings page yet)
+@article{yang2026cage,
+  title   = {Towards Color-Faithful Low-Light Image Enhancement via Adaptive Color Debiasing and Saturation Rectification},
+  author  = {Yang, Zhichen and Xu, Rui and Niu, Yuzhen and Li, Fusheng and Da, Hui and Cheng, Ri},
+  journal = {arXiv preprint arXiv:2608.10512},
+  year    = {2026}
+}
+
+% verified: https://arxiv.org/abs/2601.17349 (arXiv-only)
+@article{yan2026yuvrevisit,
+  title   = {Revisiting Lightweight Low-Light Image Enhancement: From a {YUV} Color Space Perspective},
+  author  = {Yan, Hailong and Liu, Shice and Zhang, Xiangtao and Yao, Lujian and Yang, Fengxiang and Chen, Jinwei and Li, Bo},
+  journal = {arXiv preprint arXiv:2601.17349},
+  year    = {2026}
+}
+
+% verified: https://arxiv.org/abs/2605.02627 (arXiv-only)
+@article{bai2026logdomain,
+  title   = {Rethinking Low-Light Image Enhancement: A Log-Domain Intensity--Chromaticity Decoupling Perspective},
+  author  = {Bai, Guangrui and Mei, Yifan and Deng, Yahui and Chen, Yuhan and Qiu, Yuze and Liu, Wenhai and Dong, Erbao},
+  journal = {arXiv preprint arXiv:2605.02627},
+  year    = {2026}
+}
+
+% verified: https://api.crossref.org/works/10.1007/s11263-020-01407-x
+@article{zhang2021kindpp,
+  title   = {Beyond Brightening Low-light Images},
+  author  = {Zhang, Yonghua and Guo, Xiaojie and Ma, Jiayi and Liu, Wei and Zhang, Jiawan},
+  journal = {International Journal of Computer Vision},
+  volume  = {129},
+  number  = {4},
+  pages   = {1013--1037},
+  year    = {2021}
+}
+
+% verified: openaccess.thecvf.com CVPR2020 (doi 10.1109/CVPR42600.2020.00313)
+@inproceedings{yang2020drbn,
+  title     = {From Fidelity to Perceptual Quality: A Semi-Supervised Approach for Low-Light Image Enhancement},
+  author    = {Yang, Wenhan and Wang, Shiqi and Fang, Yuming and Wang, Yue and Liu, Jiaying},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  pages     = {3063--3072},
+  year      = {2020}
+}
+
+% verified: https://api.crossref.org/works/10.1109/TPAMI.2021.3063604 (print issue 2022, 44(8))
+@article{li2021zerodcepp,
+  title   = {Learning to Enhance Low-Light Image via Zero-Reference Deep Curve Estimation},
+  author  = {Li, Chongyi and Guo, Chunle and Loy, Chen Change},
+  journal = {IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  volume  = {44},
+  number  = {8},
+  pages   = {4225--4238},
+  year    = {2022}
+}
+
+% verified: https://api.crossref.org/works/10.1007/978-3-030-58595-2_30
+@inproceedings{zamir2020mirnet,
+  title     = {Learning Enriched Features for Real Image Restoration and Enhancement},
+  author    = {Zamir, Syed Waqas and Arora, Aditya and Khan, Salman and Hayat, Munawar and Khan, Fahad Shahbaz and Yang, Ming-Hsuan and Shao, Ling},
+  booktitle = {Computer Vision -- ECCV 2020},
+  publisher = {Springer},
+  pages     = {492--511},
+  year      = {2020}
+}
+
+% verified: openaccess.thecvf.com CVPR2022 + Crossref 10.1109/CVPR52688.2022.01716
+@inproceedings{wang2022uformer,
+  title     = {Uformer: A General {U}-Shaped Transformer for Image Restoration},
+  author    = {Wang, Zhendong and Cun, Xiaodong and Bao, Jianmin and Zhou, Wengang and Liu, Jianzhuang and Li, Houqiang},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  pages     = {17683--17693},
+  year      = {2022}
+}
+
+% verified: openaccess.thecvf.com CVPR2019 + Crossref 10.1109/CVPR.2019.00701
+@inproceedings{wang2019deepupe,
+  title     = {Underexposed Photo Enhancement Using Deep Illumination Estimation},
+  author    = {Wang, Ruixing and Zhang, Qing and Fu, Chi-Wing and Shen, Xiaoyong and Zheng, Wei-Shi and Jia, Jiaya},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  pages     = {6842--6850},
+  year      = {2019}
+}
+
+% verified: openaccess.thecvf.com CVPR2020 + Crossref 10.1109/CVPR42600.2020.00235
+@inproceedings{xu2020fide,
+  title     = {Learning to Restore Low-Light Images via Decomposition-and-Enhancement},
+  author    = {Xu, Ke and Yang, Xin and Yin, Baocai and Lau, Rynson W.H.},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  pages     = {2278--2287},
+  year      = {2020}
+}
+
+% verified: openaccess.thecvf.com CVPR2023 + Crossref 10.1109/CVPR52729.2023.02131
+@inproceedings{fu2023pairlie,
+  title     = {Learning a Simple Low-Light Image Enhancer From Paired Low-Light Instances},
+  author    = {Fu, Zhenqi and Yang, Yan and Tu, Xiaotong and Huang, Yue and Ding, Xinghao and Ma, Kai-Kuang},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  pages     = {22252--22261},
+  year      = {2023}
+}
+
+% verified: openaccess.thecvf.com ICCV2023 + Crossref 10.1109/ICCV51070.2023.00743
+@inproceedings{liang2023cliplit,
+  title     = {Iterative Prompt Learning for Unsupervised Backlit Image Enhancement},
+  author    = {Liang, Zhexin and Li, Chongyi and Zhou, Shangchen and Feng, Ruicheng and Loy, Chen Change},
+  booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
+  pages     = {8094--8103},
+  year      = {2023}
+}
+
+% verified: openaccess.thecvf.com ICCV2023 + Crossref 10.1109/ICCV51070.2023.01187
+@inproceedings{yang2023nerco,
+  title     = {Implicit Neural Representation for Cooperative Low-light Image Enhancement},
+  author    = {Yang, Shuzhou and Ding, Moxuan and Wu, Yanmin and Li, Zihan and Zhang, Jian},
+  booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
+  pages     = {12918--12927},
+  year      = {2023}
+}
+
+% verified: openaccess.thecvf.com CVPR2023 + Crossref 10.1109/CVPR52729.2023.00166
+@inproceedings{wu2023skf,
+  title     = {Learning Semantic-Aware Knowledge Guidance for Low-Light Image Enhancement},
+  author    = {Wu, Yuhui and Pan, Chen and Wang, Guoqing and Yang, Yang and Wei, Jiwei and Li, Chongyi and Shen, Heng Tao},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  pages     = {1662--1671},
+  year      = {2023}
+}
+
+% verified: https://api.openalex.org/works?search=Low-Light Image Enhancement via Structure Modeling and Guidance
+@inproceedings{xu2023smg,
+  title     = {Low-Light Image Enhancement via Structure Modeling and Guidance},
+  author    = {Xu, Xiaogang and Wang, Ruixing and Lu, Jiangbo},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  pages     = {9893--9903},
+  year      = {2023}
+}
+
+% verified: https://api.openalex.org/works?search=ZERO-IG (doi 10.1109/CVPR52733.2024.00291)
+@inproceedings{shi2024zeroig,
+  title     = {{ZERO-IG}: Zero-Shot Illumination-Guided Joint Denoising and Adaptive Enhancement for Low-Light Images},
+  author    = {Shi, Yiqi and Liu, Duo and Zhang, Liguo and Tian, Ye and Xia, Xuezhi and Fu, Xiaojing},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  pages     = {3015--3024},
+  year      = {2024}
+}
+
+% verified: OpenAlex (doi 10.1007/978-3-031-73195-2_10) + arXiv 2407.08939
+@inproceedings{jiang2024lightendiffusion,
+  title     = {{LightenDiffusion}: Unsupervised Low-Light Image Enhancement with Latent-Retinex Diffusion Models},
+  author    = {Jiang, Hai and Luo, Ao and Liu, Xiaohong and Han, Songchen and Liu, Shuaicheng},
+  booktitle = {Computer Vision -- ECCV 2024},
+  publisher = {Springer},
+  pages     = {161--179},
+  year      = {2024}
+}
+
+% verified: OpenAlex (doi 10.1007/978-3-031-73016-0_24)
+@inproceedings{chobola2024colie,
+  title     = {Fast Context-Based Low-Light Image Enhancement via Neural Implicit Representations},
+  author    = {Chobola, Tom\'{a}\v{s} and Liu, Yu and Zhang, Hanyi and Schnabel, Julia A. and Peng, Tingying},
+  booktitle = {Computer Vision -- ECCV 2024},
+  publisher = {Springer},
+  pages     = {413--430},
+  year      = {2024}
+}
+
+% verified: Crossref query (doi 10.1109/CVPR52733.2024.02462)
+@inproceedings{wang2024quadprior,
+  title     = {Zero-Reference Low-Light Enhancement via Physical Quadruple Priors},
+  author    = {Wang, Wenjing and Yang, Huan and Fu, Jianlong and Liu, Jiaying},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  pages     = {26057--26066},
+  year      = {2024}
+}
+
+% verified: OpenAlex (doi 10.52202/079017-0862) + arXiv 2405.16105
+@inproceedings{weng2024mambaLLIE,
+  title     = {{MambaLLIE}: Implicit Retinex-Aware Low Light Enhancement with Global-then-Local State Space},
+  author    = {Weng, Jiangwei and Yan, Zhiqiang and Tai, Ying and Qian, Jianjun and Yang, Jian and Li, Jun},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  volume    = {37},
+  year      = {2024}
+}
+
+% verified: OpenAlex (doi 10.1007/978-3-031-73195-2_3) + arXiv 2407.12431
+@inproceedings{zhou2024glare,
+  title     = {{GLARE}: Low Light Image Enhancement via Generative Latent Feature Based Codebook Retrieval},
+  author    = {Zhou, Han and Dong, Wei and Liu, Xiaohong and Liu, Shuaicheng and Min, Xiongkuo and Zhai, Guangtao and Chen, Jun},
+  booktitle = {Computer Vision -- ECCV 2024},
+  publisher = {Springer},
+  pages     = {36--54},
+  year      = {2024}
+}
+
+% verified: OpenAlex (doi 10.1007/978-3-031-73010-8_16) + arXiv 2408.16235
+@inproceedings{yu2024lmtgp,
+  title     = {{LMT-GP}: Combined Latent Mean-Teacher and Gaussian Process for Semi-supervised Low-light Image Enhancement},
+  author    = {Yu, Ye and Chen, Fengxin and Yu, Jun and Kan, Zhen},
+  booktitle = {Computer Vision -- ECCV 2024},
+  publisher = {Springer},
+  pages     = {261--279},
+  year      = {2024}
+}
+
+% verified: OpenAlex (doi 10.1109/CVPR52734.2025.01982)
+@inproceedings{lan2025efficientdiffusion,
+  title     = {Efficient Diffusion as Low Light Enhancer},
+  author    = {Lan, Guanzhou and Ma, Qianli and Yang, Yuqi and Wang, Zhigang and Wang, Dong and Li, Xuelong and Zhao, Bin},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  pages     = {21277--21286},
+  year      = {2025}
+}
+
+% verified: OpenAlex (doi 10.1109/ICCV51701.2025.00822) + arXiv 2507.10689 (authors)
+@inproceedings{zhang2025cwnet,
+  title     = {{CWNet}: Causal Wavelet Network for Low-Light Image Enhancement},
+  author    = {Zhang, Tongshun and Liu, Pingping and Lu, Yubing and Cai, Mengen and Zhang, Zijian and Zhang, Zhe and Zhou, Qiuzhan},
+  booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
+  pages     = {8789--8799},
+  year      = {2025}
+}
+
+% verified: OpenAlex (doi 10.1109/ICCV51701.2025.00628) + arXiv 2504.09379
+@inproceedings{sun2025retinev,
+  title     = {Low-Light Image Enhancement Using Event-Based Illumination Estimation},
+  author    = {Sun, Lei and Bao, Yuhan and Zhai, Jiajun and Liang, Jingyun and Zhang, Yulun and Wang, Kaiwei and Paudel, Danda Pani and Van Gool, Luc},
+  booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
+  pages     = {6667--6677},
+  year      = {2025}
+}
+
+% verified: OpenAlex (doi 10.1109/ICCV51701.2025.01281)
+@inproceedings{wang2025bridge,
+  title     = {From Enhancement to Understanding: Build a Generalized Bridge for Low-light Vision via Semantically Consistent Unsupervised Fine-tuning},
+  author    = {Wang, Sen and Zeng, Shao and Gu, Tianjun and Zhang, Zhizhong and Zhang, Ruixin and Ding, Shouhong and Zhang, Jingyun and Wang, Jun and Tan, Xin and Xie, Yuan and Ma, Lizhuang},
+  booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
+  pages     = {13804--13814},
+  year      = {2025}
+}
+
+% verified: OpenAlex (doi 10.1109/CVPRW67362.2025.00101)
+@inproceedings{shi2025fusionnet,
+  title     = {{FusionNet}: Multi-Model Linear Fusion Framework for Low-Light Image Enhancement},
+  author    = {Shi, Kangbiao and Feng, Yixu and Hu, Tao and Cao, Yu and Wu, Peng and Liang, Yijin and Zhang, Yanning and Yan, Qingsen},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops},
+  pages     = {1019--1028},
+  year      = {2025}
+}
+
+% verified: OpenAlex (doi 10.1109/CVPRW67362.2025.00114)
+@inproceedings{liu2025ntire,
+  title     = {{NTIRE} 2025 Challenge on Low Light Image Enhancement: Methods and Results},
+  author    = {Liu, Xiaoning and Wu, Zongwei and Vasluianu, Florin-Alexandru and Yan, Hailong and Ren, Bin and Zhang, Yulun and Gu, Shuhang and Zhang, Le and Zhu, Ce and Timofte, Radu and others},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops},
+  pages     = {1196--1206},
+  year      = {2025}
+}
+
+% verified: https://arxiv.org/abs/2604.17669 (arXiv-only)
+@article{ciubotariu2026ntire,
+  title   = {Low Light Image Enhancement Challenge at {NTIRE} 2026},
+  author  = {Ciubotariu, George and Sharif, S M A and Rehman, Abdur and Dharejo, Fayaz Ali and Naqvi, Rizwan Ali and Conde, Marcos V. and Timofte, Radu and others},
+  journal = {arXiv preprint arXiv:2604.17669},
+  year    = {2026}
+}
+
+% verified: https://arxiv.org/abs/2605.02212 (arXiv-only)
+@article{yan2026ntireellie,
+  title   = {{NTIRE} 2026 Challenge on Efficient Low Light Image Enhancement: Methods and Results},
+  author  = {Yan, Jiebin and Tu, Chenyu and Zhang, Weixia and Wang, Zhihua and Cao, Peibei and Lin, Qinghua and Fang, Yuming and Liu, Xiaoning and Wu, Zongwei and Zhou, Zhuyun and Timofte, Radu},
+  journal = {arXiv preprint arXiv:2605.02212},
+  year    = {2026}
+}
+
+% verified: https://arxiv.org/abs/2608.21847 (arXiv-only)
+@article{ai2026bcihv,
+  title   = {{BC-IHV}: Conditioning the Color Space for Stable Rectified-Flow Low-Light Enhancement},
+  author  = {Ai, Yi and Chen, Zheng and Cai, Yuanhao and Zhang, Yulun and Yang, Xiaokang},
+  journal = {arXiv preprint arXiv:2608.21847},
+  year    = {2026}
+}
+
+% verified: https://api.crossref.org/works/10.1109/TCSVT.2026.3689584
+@article{cheng2026vcr,
+  title   = {{VCR}: Variance-Driven Channel Recalibration for Robust Low-Light Enhancement},
+  author  = {Cheng, Zhixin and Zhang, Fangwen and Yin, Xiaotian and Yin, Baoqun and Wang, Haodian},
+  journal = {IEEE Transactions on Circuits and Systems for Video Technology},
+  volume  = {36},
+  number  = {9},
+  pages   = {13598--13611},
+  year    = {2026}
+}
+
+% verified: https://api.openalex.org/works?filter=doi:10.1109/TIP.2026.3714857
+@article{wang2026haimnet,
+  title   = {{HAIMNet}: A Hierarchical Adaptive Interaction Modulation Network for Low-Light Image Enhancement},
+  author  = {Wang, Xiaofeng and Wang, Ziqian and Guo, Meijia and Chen, Qiuwei and Hao, Yajie and Liu, Yonghuai},
+  journal = {IEEE Transactions on Image Processing},
+  volume  = {35},
+  pages   = {8180--8194},
+  year    = {2026}
+}
+
+% verified: https://arxiv.org/abs/2603.25296 (arXiv-only)
+@article{han2026clerwkv,
+  title   = {Towards Controllable Low-Light Image Enhancement: A Continuous Multi-illumination Dataset and Efficient State Space Framework},
+  author  = {Han, Hongru and Guo, Tingrui and Zhang, Liming and Su, Yan and Xu, Qiwen and Ye, Zhuohua},
+  journal = {arXiv preprint arXiv:2603.25296},
+  year    = {2026}
+}
+
+% verified: https://www.ijcai.org/proceedings/2026/0202 (+ arXiv 2605.19982)
+@inproceedings{wang2026interlight,
+  title     = {{InterLight}: Leveraging Intrinsic Illumination Priors for Low-Light Image Enhancement},
+  author    = {Wang, Ziqi and Zhang, Xu and Chang, Laibin and Chen, Shi and Ma, Jiaqi and Zhang, Huan},
+  booktitle = {Proceedings of the Thirty-Fifth International Joint Conference on Artificial Intelligence (IJCAI)},
+  pages     = {1812--1820},
+  year      = {2026}
+}
+
+% verified: https://api.crossref.org/works/10.1007/978-3-032-37095-2_34 (peer-reviewed ECCV 2026 version; the arXiv preprint 2511.22052 carries a different title)
+@inproceedings{shi2025tpcnet,
+  title     = {{TPCNet}: A Low-Light Image Enhancement Network Inspired by Triple Physical Constraints},
+  author    = {Shi, Jing-Yi and Li, Ming-Fei and Wu, Ling-An},
+  booktitle = {Computer Vision -- ECCV 2026},
+  publisher = {Springer},
+  pages     = {627--645},
+  year      = {2026}
+}
+
+% verified: openaccess.thecvf.com WACV2026 + Crossref 10.1109/WACV61042.2026.00365 (proceedings author order)
+@inproceedings{cheng2026lhsi,
+  title     = {Perception-Inspired Color Space Design for Photo White Balance Editing},
+  author    = {Cheng, Yang and Cui, Ziteng and Gu, Lin and Su, Shenghan and Zhang, Zenghui},
+  booktitle = {Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)},
+  pages     = {3741--3749},
+  year      = {2026}
+}
+
+% verified: https://arxiv.org/abs/2604.08172 (arXiv-only)
+@article{li2026pal,
+  title   = {On the Global Photometric Alignment for Low-Level Vision},
+  author  = {Li, Mingjia and Du, Tianle and Wang, Hainuo and Hu, Qiming and Guo, Xiaojie},
+  journal = {arXiv preprint arXiv:2604.08172},
+  year    = {2026}
+}
+
+% verified: https://arxiv.org/abs/2511.15496 (arXiv-only; survey key pilligua2025multiintensity merged into this one)
+@article{pilligua2025mill,
+  title   = {Evaluating Low-Light Image Enhancement Across Multiple Intensity Levels},
+  author  = {Pilligua, Maria and Serrano-Lozano, David and Peng, Pai and Baldrich, Ramon and Brown, Michael S. and Vazquez-Corral, Javier},
+  journal = {arXiv preprint arXiv:2511.15496},
+  year    = {2025}
+}
+
+% verified: https://openaccess.thecvf.com/CVPR2026?day=all (+ arXiv 2604.10359)
+@inproceedings{brateanu2026multinex,
+  title     = {Multinex: Lightweight Low-light Image Enhancement via Multi-prior Retinex},
+  author    = {Brateanu, Alexandru and Mu, Tingting and Ancuti, Codruta O. and Ancuti, Cosmin},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  pages     = {29887--29896},
+  year      = {2026}
+}
+
+% verified: https://arxiv.org/abs/2603.15472 (arXiv-only)
+@article{du2026atp,
+  title   = {Anchor then Polish for Low-light Enhancement},
+  author  = {Du, Tianle and Li, Mingjia and Wang, Hainuo and Guo, Xiaojie},
+  journal = {arXiv preprint arXiv:2603.15472},
+  year    = {2026}
+}
+
+% verified: Crossref 10.1109/CVPR52734.2025.02084
+@inproceedings{lin2025jarvisir,
+  title     = {{JarvisIR}: Elevating Autonomous Driving Perception with Intelligent Image Restoration},
+  author    = {Lin, Yunlong and Lin, Zixu and Chen, Haoyu and Pan, Panwang and Li, Chenxin and Chen, Sixiang and Wen, Kairun and Jin, Yeying and Li, Wenbo and Ding, Xinghao},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  pages     = {22369--22380},
+  year      = {2025}
+}
+
+% verified: Crossref 10.1109/CVPRW67362.2025.00117
+@inproceedings{verma2025qcidnet,
+  title     = {{Q-CIDNet}: Perceptual Quality Aware Color and Intensity Decoupling Network for Video Quality Enhancement},
+  author    = {Verma, Ajeet Kumar and Tripathi, Shweta and Jakhetiya, Vinit and Subudhi, Badri N. and Jaiswal, Sunil},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops},
+  pages     = {1238--1244},
+  year      = {2025}
+}
+
+% verified: https://api.crossref.org/works/10.52202/085713-0111 + neurips.cc/virtual/2025/poster/118470
+@inproceedings{guan2025cstnet,
+  title     = {Rethinking Nighttime Image Deraining via Learnable Color Space Transformation},
+  author    = {Guan, Qiyuan and Chen, Xiang and Jin, Guiyue and Jin, Jiyu and Fan, Shumin and Song, Tianyu and Pan, Jinshan},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  volume    = {38},
+  pages     = {3565--3601},
+  year      = {2025}
+}
+
+% verified: https://api.crossref.org/works/10.1109/TCSVT.2026.3700071
+@article{wu2026catformer,
+  title   = {Device-Independent Low-Light Image Enhancement via Learnable Von Kries Chromatic Adaptation Transform},
+  author  = {Wu, Kunyang and Lin, Jun and Li, Zhengpeng and Miao, Jiawei and Xing, Genyuan and Luo, Jinxin and Zhao, Huanyu and Liu, Yang and Zhang, Guanyu},
+  journal = {IEEE Transactions on Circuits and Systems for Video Technology},
+  volume  = {36},
+  number  = {9},
+  pages   = {13488--13503},
+  year    = {2026}
+}
+
+% verified: https://api.crossref.org/works/10.1109/tpami.2021.3126387
+@article{li2022llie,
+  title   = {Low-Light Image and Video Enhancement Using Deep Learning: A Survey},
+  author  = {Li, Chongyi and Guo, Chunle and Han, Linghao and Jiang, Jun and Cheng, Ming-Ming and Gu, Jinwei and Loy, Chen Change},
+  journal = {IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  volume  = {44},
+  number  = {12},
+  pages   = {9396--9416},
+  year    = {2022}
+}
+
+% verified: Crossref 10.1007/s11263-020-01418-8
+@article{liu2021benchmarking,
+  title   = {Benchmarking Low-Light Image Enhancement and Beyond},
+  author  = {Liu, Jiaying and Xu, Dejia and Yang, Wenhan and Fan, Minhao and Huang, Haofeng},
+  journal = {International Journal of Computer Vision},
+  volume  = {129},
+  number  = {4},
+  pages   = {1153--1184},
+  year    = {2021}
+}
+
+% verified: Crossref 10.1109/TNNLS.2025.3566647
+@article{zhao2025lowlightvision,
+  title   = {Deep Learning for Low-Light Vision: A Comprehensive Survey},
+  author  = {Zhao, Qian and Li, Gang and He, Bin and Shen, Runjie},
+  journal = {IEEE Transactions on Neural Networks and Learning Systems},
+  volume  = {36},
+  number  = {9},
+  pages   = {15685--15705},
+  year    = {2025}
+}
+
+% verified: Crossref 10.1109/WACV57701.2024.00410 (pages corrected from the survey's 4146-4157)
+@inproceedings{nguyen2024diffusiondark,
+  title     = {Diffusion in the Dark: A Diffusion Model for Low-Light Text Recognition},
+  author    = {Nguyen, Cindy M. and Chan, Eric R. and Bergman, Alexander W. and Wetzstein, Gordon},
+  booktitle = {Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)},
+  pages     = {4134--4145},
+  year      = {2024}
+}
+
+% verified: Crossref 10.1109/ICCV51701.2025.00577
+@inproceedings{liao2025gtmean,
+  title     = {{GT-Mean} Loss: A Simple Yet Effective Solution for Brightness Mismatch in Low-Light Image Enhancement},
+  author    = {Liao, Jingxi and Hao, Shijie and Hong, Richang and Wang, Meng},
+  booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
+  pages     = {6112--6121},
+  year      = {2025}
+}
+
+% verified: Crossref 10.1109/MSP.2008.930649
+@article{wang2009mse,
+  title   = {Mean Squared Error: Love It or Leave It? A New Look at Signal Fidelity Measures},
+  author  = {Wang, Zhou and Bovik, Alan C.},
+  journal = {IEEE Signal Processing Magazine},
+  volume  = {26},
+  number  = {1},
+  pages   = {98--117},
+  year    = {2009}
+}
+
+% verified: https://api.crossref.org/works/10.1109/tip.2012.2214050
+@article{mittal2012brisque,
+  title   = {No-Reference Image Quality Assessment in the Spatial Domain},
+  author  = {Mittal, Anish and Moorthy, Anush Krishna and Bovik, Alan C.},
+  journal = {IEEE Transactions on Image Processing},
+  volume  = {21},
+  number  = {12},
+  pages   = {4695--4708},
+  year    = {2012}
+}
+
+% verified: https://api.crossref.org/works/10.1007/978-3-030-11021-5_21 (publisher year 2019; workshop held 2018)
+@inproceedings{blau2018pirm,
+  title     = {The 2018 {PIRM} Challenge on Perceptual Image Super-Resolution},
+  author    = {Blau, Yochai and Mechrez, Roey and Timofte, Radu and Michaeli, Tomer and Zelnik-Manor, Lihi},
+  booktitle = {Computer Vision -- ECCV 2018 Workshops},
+  publisher = {Springer},
+  pages     = {334--355},
+  year      = {2019}
+}
+
+% verified: https://proceedings.mlsys.org/paper_files/paper/2021/hash/0184b0cd3cfb185989f858a1d9f5c1eb-Abstract.html
+@inproceedings{bouthillier2021variance,
+  title={Accounting for Variance in Machine Learning Benchmarks},
+  author={Bouthillier, Xavier and Delaunay, Pierre and Bronzi, Mirko and Trofimov, Assya and Nichyporuk, Brennan and Szeto, Justin and Sepahvand, Nazanin Mohammadi and Raff, Edward and Madan, Kanika and Voleti, Vikram and Kahou, Samira Ebrahimi and Michalski, Vincent and Arbel, Tal and Pal, Chris and Varoquaux, Ga{\"e}l and Vincent, Pascal},
+  booktitle={Proceedings of Machine Learning and Systems (MLSys)},
+  volume={3},
+  year={2021}
+}
+
+% verified: https://jmlr.org/papers/v22/20-303.html
+@article{pineau2021reproducibility,
+  title={Improving Reproducibility in Machine Learning Research (A Report from the {NeurIPS} 2019 Reproducibility Program)},
+  author={Pineau, Joelle and Vincent-Lamarre, Philippe and Sinha, Koustuv and Larivi{\`e}re, Vincent and Beygelzimer, Alina and d'Alch{\'e}-Buc, Florence and Fox, Emily and Larochelle, Hugo},
+  journal={Journal of Machine Learning Research},
+  volume={22},
+  number={164},
+  pages={1--20},
+  year={2021}
+}
+
+% verified: https://api.crossref.org/works/10.1007/978-3-030-58595-2_41
+@inproceedings{musgrave2020reality,
+  title={A Metric Learning Reality Check},
+  author={Musgrave, Kevin and Belongie, Serge and Lim, Ser-Nam},
+  booktitle={Computer Vision -- ECCV 2020},
+  publisher={Springer},
+  pages={681--699},
+  year={2020}
+}
+
+% verified: https://proceedings.mlr.press/v97/recht19a.html
+@inproceedings{recht2019imagenet,
+  title={Do {ImageNet} Classifiers Generalize to {ImageNet}?},
+  author={Recht, Benjamin and Roelofs, Rebecca and Schmidt, Ludwig and Shankar, Vaishaal},
+  booktitle={Proceedings of the 36th International Conference on Machine Learning (ICML)},
+  volume={97},
+  pages={5389--5400},
+  year={2019}
+}
+
+% verified: https://arxiv.org/abs/2605.05990 (arXiv-only)
+@article{shafi2026iphoneblur,
+  title={{iPhoneBlur}: A Difficulty-Stratified Benchmark for Consumer Device Motion Deblurring},
+  author={Shafi, Abdullah Al and Alam, Kazi Saeed},
+  journal={arXiv preprint arXiv:2605.05990},
+  year={2026}
+}
+
+% verified: https://openaccess.thecvf.com/CVPR2024_workshops/NTIRE (official BibTeX) + arXiv 2404.14248
+@inproceedings{liu2024ntire,
+  title={{NTIRE} 2024 Challenge on Low Light Image Enhancement: Methods and Results},
+  author={Liu, Xiaoning and Wu, Zongwei and Li, Ao and Vasluianu, Florin-Alexandru and Zhang, Yulun and Gu, Shuhang and Zhang, Le and Zhu, Ce and Timofte, Radu and Jin, Zhi and Wu, Hongjun and Wang, Chenxi and Ling, Haitao and Cai, Yuanhao and Bian, Hao and Zheng, Yuxin and Lin, Jing and Yuille, Alan and Shao, Ben and Guo, Jin and Liu, Tian and Wu, Mohao and Feng, Yixu and Hou, Shuo and Lin, Haotian and Zhu, Yu and Wu, Peng and Dong, Wei and Sun, Jinqiu and Zhang, Yanning and Yan, Qingsen and Zou, Wenbin and Yang, Weipeng and Li, Yunxiang and Wei, Qiaomu and Ye, Tian and Chen, Sixiang and Zhang, Zhao and Zhao, Suiyi and Wang, Bo and Luo, Yan and Zuo, Zhichao and Wang, Mingshen and Wang, Junhu and Wei, Yanyan and Sun, Xiaopeng and Gao, Yu and Huang, Jiancheng and Chen, Hongming and Chen, Xiang and Tang, Hui and Chen, Yuanbin and Zhou, Yuanbo and Dai, Xinwei and Qiu, Xintao and Deng, Wei and Gao, Qinquan and Tong, Tong and Li, Mingjia and Hu, Jin and He, Xinyu and Guo, Xiaojie and Sabarinathan, Sabarinathan and Uma, K and Sasithradevi, A and Rama, B Sathya and Roomi, S. Mohamed Mansoor and Srivatsav, V. and Wang, Jinjuan and Sun, Long and Chen, Qiuying and Shao, Jiahong and Zhang, Yizhi and Conde, Marcos V. and Feijoo, Daniel and Benito, Juan C. and Garcia, Alvaro and Lee, Jaeho and Kim, Seongwan and A, Sharif S M and Khujaev, Nodirkhuja and Tsoy, Roman and Murtaza, Ali and Khairuddin, Uswah and Faudzi, Amad Athif Mohd and Malagi, Sampada and Joshi, Amogh and Akalwadi, Nikhil and Desai, Chaitra and Tabib, Ramesh Ashok and Mudenagudi, Uma and Yashaswini, Palani and Upasi, Nitish and Hegde, Dikshit and Patil, Ujwala and C, Sujata and Yan, Xingzhuo and Hao, Wei and Fu, Minghan and Choksy, Pooja and Sarvaiya, Anjali and Upla, Kishor and Raja, Kiran and Yan, Hailong and Zhang, Yunkai and Li, Baiang and Zhang, Jingyi and Zheng, Huan},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops},
+  pages={6571--6594},
+  year={2024}
+}
+
+% verified: https://aclanthology.org/P18-1128/
+@inproceedings{dror2018hitchhiker,
+  title={The Hitchhiker's Guide to Testing Statistical Significance in Natural Language Processing},
+  author={Dror, Rotem and Baumer, Gili and Shlomov, Segev and Reichart, Roi},
+  booktitle={Proceedings of the 56th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},
+  pages={1383--1392},
+  year={2018}
+}
+
+% verified: https://aclanthology.org/W04-3250/
+@inproceedings{koehn2004bootstrap,
+  title={Statistical Significance Tests for Machine Translation Evaluation},
+  author={Koehn, Philipp},
+  booktitle={Proceedings of the 2004 Conference on Empirical Methods in Natural Language Processing (EMNLP)},
+  pages={388--395},
+  year={2004}
+}
+
+% verified: https://api.crossref.org/works/10.1109/CVPR.2017.19
+@inproceedings{ledig2017srgan,
+  title={Photo-Realistic Single Image Super-Resolution Using a Generative Adversarial Network},
+  author={Ledig, Christian and Theis, Lucas and Husz{\'a}r, Ferenc and Caballero, Jose and Cunningham, Andrew and Acosta, Alejandro and Aitken, Andrew and Tejani, Alykhan and Totz, Johannes and Wang, Zehan and Shi, Wenzhe},
+  booktitle={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+  pages={105--114},
+  year={2017}
+}
+
+% verified: https://api.crossref.org/works/10.1109/TCI.2016.2644865
+@article{zhao2017loss,
+  title={Loss Functions for Image Restoration With Neural Networks},
+  author={Zhao, Hang and Gallo, Orazio and Frosio, Iuri and Kautz, Jan},
+  journal={IEEE Transactions on Computational Imaging},
+  volume={3},
+  number={1},
+  pages={47--57},
+  year={2017}
+}
+
+% verified: https://api.crossref.org/works/10.1109/CVPR.2017.618
+@inproceedings{lai2017lapsrn,
+  title={Deep {Laplacian} Pyramid Networks for Fast and Accurate Super-Resolution},
+  author={Lai, Wei-Sheng and Huang, Jia-Bin and Ahuja, Narendra and Yang, Ming-Hsuan},
+  booktitle={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+  pages={5835--5843},
+  year={2017}
+}
+
+% verified: https://api.crossref.org/works/10.1109/CVPR46437.2021.01458
+@inproceedings{zamir2021mprnet,
+  title={Multi-Stage Progressive Image Restoration},
+  author={Zamir, Syed Waqas and Arora, Aditya and Khan, Salman and Hayat, Munawar and Khan, Fahad Shahbaz and Yang, Ming-Hsuan and Shao, Ling},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  pages={14816--14826},
+  year={2021}
+}
+
+% verified: https://api.crossref.org/works/10.1109/CVPR46437.2021.00904
+@inproceedings{afifi2021exposure,
+  title={Learning Multi-Scale Photo Exposure Correction},
+  author={Afifi, Mahmoud and Derpanis, Konstantinos G. and Ommer, Bj{\"o}rn and Brown, Michael S.},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  pages={9153--9163},
+  year={2021}
+}
+
+% verified: https://api.crossref.org/works/10.1109/CVPRW50498.2020.00220
+@inproceedings{jo2020investigating,
+  title={Investigating Loss Functions for Extreme Super-Resolution},
+  author={Jo, Younghyun and Yang, Sejong and Kim, Seon Joo},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops},
+  pages={1705--1712},
+  year={2020}
+}
+
+% verified: https://api.crossref.org/works/10.1109/TIP.2023.3276332
+@article{peng2023ushape,
+  title={U-Shape Transformer for Underwater Image Enhancement},
+  author={Peng, Lintao and Zhu, Chunli and Bian, Liheng},
+  journal={IEEE Transactions on Image Processing},
+  volume={32},
+  pages={3066--3079},
+  year={2023}
+}
+
+% verified: https://api.crossref.org/works/10.1007/978-3-031-20071-7_2
+@inproceedings{chen2022nafnet,
+  title={Simple Baselines for Image Restoration},
+  author={Chen, Liangyu and Chu, Xiaojie and Zhang, Xiangyu and Sun, Jian},
+  booktitle={Computer Vision -- ECCV 2022},
+  publisher={Springer},
+  pages={17--33},
+  year={2022}
+}
+
+% verified: https://api.crossref.org/works/10.1109/ICCVW54120.2021.00210
+@inproceedings{liang2021swinir,
+  title={{SwinIR}: Image Restoration Using {Swin} Transformer},
+  author={Liang, Jingyun and Cao, Jiezhang and Sun, Guolei and Zhang, Kai and Van Gool, Luc and Timofte, Radu},
+  booktitle={Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV) Workshops},
+  pages={1833--1844},
+  year={2021}
+}
+
+% Section D — comparators not in the survey (verified 2026-09-23).
+
+% verified: https://api.crossref.org/works/10.1145/3581783.3611909 (+ OpenAlex)
+@inproceedings{wang2023fourllie,
+  author    = {Wang, Chenxi and Wu, Hongjun and Jin, Zhi},
+  title     = {{FourLLIE}: Boosting Low-Light Image Enhancement by {Fourier} Frequency Information},
+  booktitle = {Proceedings of the 31st ACM International Conference on Multimedia (ACM MM)},
+  pages     = {7459--7469},
+  year      = {2023}
+}
+
+% verified: openaccess.thecvf.com CVPR2024W/NTIRE + Crossref 10.1109/CVPRW63382.2024.00619
+@inproceedings{feng2024difflight,
+  author    = {Feng, Yixu and Hou, Shuo and Lin, Haotian and Zhu, Yu and Wu, Peng and Dong, Wei and Sun, Jinqiu and Yan, Qingsen and Zhang, Yanning},
+  title     = {{DiffLight}: Integrating Content and Detail for Low-light Image Enhancement},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops},
+  pages     = {6143--6152},
+  year      = {2024}
+}
+
+% verified: https://api.crossref.org/works/10.1145/800248.807361 (journal reprint: ACM SIGGRAPH Computer Graphics 12(3):12-19)
+@inproceedings{smith1978hsv,
+  author    = {Smith, Alvy Ray},
+  title     = {Color Gamut Transform Pairs},
+  booktitle = {Proceedings of the 5th Annual Conference on Computer Graphics and Interactive Techniques (SIGGRAPH)},
+  pages     = {12--19},
+  year      = {1978}
 }

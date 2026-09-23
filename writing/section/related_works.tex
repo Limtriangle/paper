@@ -25,8 +25,15 @@ estimates per-pixel enhancement curves without paired data; EnlightenGAN
 learns a self-calibrated illumination map with a very small network. \mname is trained with
 pairs only and its authors list unsupervised training as open.
 
-\paragraph{Color spaces for enhancement.} Most of the methods above operate on sRGB. LYT-Net
-\citep{brateanu2025lytnet} processes luminance and chrominance separately in YUV. \mname
+\paragraph{Color spaces for enhancement.} Most of the methods above operate on sRGB, and the
+HSV space that \mname starts from dates to \citet{smith1978hsv}. Bread \citep{guo2023bread}
+splits an image into luminance and chrominance and lets the enhanced luminance guide a
+chrominance mapper; LYT-Net \citep{brateanu2025lytnet} processes Y and UV along separate
+lightweight paths; DCC-Net \citep{zhang2022dccnet} separates a gray image from an explicit
+color histogram; Ucolor \citep{li2021ucolor} embeds RGB, HSV and Lab features jointly; CoLIE
+\citep{chobola2024colie} fits an implicit illumination field in HSV; CSTNet
+\citep{guan2025cstnet} learns a YCbCr-like transform for nighttime deraining, and CATformer
+\citep{wu2026catformer} learns a von Kries adaptation before CIELAB. \mname
 \citep{yan2025hvi} instead maps sRGB into a polar Horizontal/Vertical/Intensity (\hvi)
 space in which hue is an angle, saturation a radius, and the radius is shrunk toward the
 origin as intensity goes to zero by a learned collapse function; the network enhances
@@ -35,11 +42,35 @@ intensity and chroma along two interacting branches and is supervised in both sR
 extreme darkness \citep{yan2025hvicidnetplus} exist; we study the CVPR 2025 version whose
 code is public.
 
+\paragraph{Work that builds on or questions \hvi.} FusionNet \citep{shi2025fusionnet}
+fuses \mname with two sRGB enhancers and won the NTIRE 2025 challenge
+\citep{liu2025ntire}; DiffLight \citep{feng2024difflight} and Q-CIDNet
+\citep{verma2025qcidnet} reuse the network for diffusion-based and video enhancement, and
+JarvisIR \citep{lin2025jarvisir} calls it as an off-the-shelf tool. Several works modify the
+intensity or the fusion: RHVI-FDD \citep{yang2026rhvifdd} argues that the max-RGB intensity
+is sensitive to noise spikes, BC-IHV \citep{ai2026bcihv} replaces the linear intensity by a
+learnable Box-Cox law, VCR \citep{cheng2026vcr} recalibrates channels by their variance,
+HAIMNet \citep{wang2026haimnet} and TCA-Net \citep{wu2026tcanet} change how the two
+branches interact, and TPCNet \citep{shi2025tpcnet} adds physical constraints. Others report
+sensitivity of \mname to input brightness \citep{pilligua2025mill, du2026atp} or to
+per-pair photometric mismatch in the training data \citep{li2026pal}. None of these reports
+a seed spread, and none compares color spaces under one fixed network with more than one run.
+
+\paragraph{Evaluation practice.} Model selection on the test split is a documented source
+of inflated benchmark numbers \citep{musgrave2020reality, recht2019imagenet}, and
+single-run comparisons hide variance that changes conclusions
+\citep{bouthillier2021variance, pineau2021reproducibility}. For low-light enhancement in
+particular, \citet{nguyen2024diffusiondark} document scene overlap between the \dataset
+train and test splits, and \citet{liao2025gtmean} show that the brightness mismatch hidden
+by GT-mean rescaling is systematic. We therefore select checkpoints on a scene-disjoint
+validation split, read the test split once, report every mean with its seed spread, and
+report the GT-mean and gated variants separately from the primary numbers.
+
 \paragraph{Datasets and metrics.} We use the paired \dataset benchmark of
 \citet{wei2018retinex}; its successor LOL-v2 \citep{yang2021lolv2}, SID \citep{chen2018sid},
 SICE \citep{cai2018sice}, and LOL-Blur \citep{zhou2022lolblur} are the other paired sets on
 which \mname was reported. Full-reference quality is measured by PSNR, SSIM
 \citep{wang2004ssim}, and LPIPS \citep{zhang2018lpips}; no-reference quality by NIQE
-\citep{mittal2013niqe}. The perceptual loss term of \mname is the VGG feature loss of
+\citep{mittal2013niqe} and BRISQUE \citep{mittal2012brisque}. The perceptual loss term of \mname is the VGG feature loss of
 \citet{johnson2016perceptual}. Color fidelity, when we report it, uses the CIEDE2000
 difference \citep{sharma2005ciede2000}.

@@ -122,13 +122,12 @@ loss     = loss_rgb + HVI_weight * loss_hvi
   and that the weights are reproducible "by parameter tuning". Exact reproduction of the
   README numbers is therefore not guaranteed by the released config.
 - Random gamma augmentation (added 2025-01) is claimed to improve cross-dataset
-  generalisation, measured by NIQE (`mittal2013niqe`) and BRISQUE [**unverified**, no bib
-  entry] on the five unpaired sets DICM/LIME/MEF/NPE/VV [their dataset papers are
+  generalisation, measured by NIQE (`mittal2013niqe`) and BRISQUE (`mittal2012brisque`) on the five unpaired sets DICM/LIME/MEF/NPE/VV [their dataset papers are
   **unverified**, no bib entries; the sets are named as the upstream README names them].
-- Follow-up: HVI-CIDNet+ (`yan2025hvicidnetplus`, arXiv 2507.06814), separate repo. The
-  README also names FusionNet (arXiv 2504.19295) as the authors' NTIRE 2025 LLIE challenge
-  entry that fuses HVI-CIDNet with other models (README claim, **unverified**;
-  no bib entry; verification was cut short by the session limit).
+- Follow-up: HVI-CIDNet+ (`yan2025hvicidnetplus`, TCSVT 2026; arXiv 2507.06814), separate repo. The
+  README also names FusionNet (`shi2025fusionnet`, CVPRW 2025) as the authors' NTIRE 2025
+  LLIE challenge entry that fuses HVI-CIDNet with other models; the challenge report
+  `liu2025ntire` lists it first.
 
 ---
 
@@ -181,7 +180,7 @@ unpaired NIQE 3.523 average, from a separately trained "LOLv2+" model with rando
 (§10.8, the paper itself says it "avoid[s] direct comparisons" there).
 Plug-in claim (Table 3, LOL-v2-real): wrapping six other networks in HVIT/PHVIT raises PSNR
 for all six (+0.381 to +3.562 dB); SSIM drops for SNR-Aware (`xu2022snr`, -0.009) and LPIPS
-worsens for FourLLIE [**unverified**, no bib entry] (+0.011), so "improves across metrics" is not
+worsens for FourLLIE (`wang2023fourllie`, +0.011), so "improves across metrics" is not
 uniformly true in its own table.
 Cross-dataset (Table 5, train LOL-v1 -> test LOL-v2-syn): CIDNet 19.457/0.817/0.193, but
 only with the extra hue-bias mechanism (Eqs. 12-13) that the main model does not use;
@@ -235,7 +234,7 @@ residual add); the RGB-space loss cannot move k. Whichever explanation is right,
 stated mechanism is not the shipped one.
 
 **Never ablated, in any version:** YCbCr / LAB / HSL / YUV under the same network (YCbCr
-appears only through the Bread baseline [**unverified**, no bib entry]); the value of k (fixed vs trainable, a sweep, or
+appears only through the Bread baseline `guo2023bread`); the value of k (fixed vs trainable, a sweep, or
 the learned value per dataset); the choice of the collapse function F (sine vs linear vs
 log, Eqs. 9-11, justified only by a gradient-stability argument); the HVI-loss weight
 lambda_c; the edge and SSIM terms individually; alpha_S / alpha_I; depth, width or number
@@ -250,13 +249,12 @@ of LCA stages; epsilon; any seed.
 - Whether a better collapse function than Eq. 9 exists.
 - Only supervised training; unsupervised, semi-supervised and zero-shot untested.
 - HVI and CIDNet cannot be trained separately (no ground truth exists in HVI).
-- Other tasks: one SwinIR x2 super-resolution try gave +0.14 dB [SwinIR **unverified**, no
-  bib entry]; nothing else.
-- Replacing the Transformer with Mamba [**unverified**, no bib entry]; use inside large
+- Other tasks: one SwinIR x2 super-resolution try gave +0.14 dB (`liang2021swinir`); nothing else.
+- Replacing the Transformer with Mamba (cf. `weng2024mambaLLIE`); use inside large
   vision models.
 - The hue-bias parameters gamma_G, gamma_B cannot be set for an unknown camera.
-- LPIPS is worse than GLARE [**unverified**, no bib entry] on LOL-v2-real and worse than Zero-DCE
-  (`guo2020zerodce`) cross-dataset; BRISQUE [**unverified**] does not beat RetinexNet
+- LPIPS is worse than GLARE (`zhou2024glare`) on LOL-v2-real and worse than Zero-DCE
+  (`guo2020zerodce`) cross-dataset; BRISQUE (`mittal2012brisque`) does not beat RetinexNet
   (`wei2018retinex`).
 
 ### 4.2 Our observations (gaps a careful reader sees; not claims)
@@ -271,7 +269,7 @@ of LCA stages; epsilon; any seed.
    model's SSIM is 0.871 in Table 4 but 0.868 in Table 12, the old tables, and the README.
 3. **One proxy network per color space.** The color-space ablation uses UNet+self-attention,
    not CIDNet, and compares only sRGB, HSV and two HVI halves. No YCbCr, LAB, HSL or YUV
-   control (YCbCr and YUV appear only inside other methods: Bread [**unverified**, no bib entry] and
+   control (YCbCr and YUV appear only inside other methods: Bread `guo2023bread` and
    LYT-Net `brateanu2025lytnet`); no "HSV with a wrap-aware hue loss" control. Polarization is a property of any
    cos/sin hue embedding (the paper concedes YCbCr already solves hue discontinuity), so the
    experiment does not isolate what HVI adds over a cheap fix.
@@ -318,49 +316,159 @@ their checksums.
 
 ## 5. Closest related work (one line each; every key exists in `custom.bib` and was verified)
 
-Verification 2026-09-23 against Crossref, CVF open access, arXiv and OpenAlex (DBLP and
-Semantic Scholar were blocked from this host). Keys in `writing/icml2024/custom.bib`.
+Sources: the author's literature survey in `ralph/related/` (SURVEY.md, INDEX.md, slices A-F,
+survey.bib, 103 entries) merged into `custom.bib` on 2026-09-23 after writing's own
+verification pass (five subagents, one fetched page per entry: Crossref, CVF open access,
+arXiv, OpenAlex, ACL Anthology, JMLR, MLSys, NeurIPS, IJCAI; DBLP and Semantic Scholar are
+blocked from this host). 103/103 survey entries verified; corrections applied: Bread author
+order (publisher: Guo, Hu), Retinexformer second author (Hao Bian), HVI-CIDNet+ is now IEEE
+TCSVT 36(8) 2026 with a different author list from the arXiv v1, InterLight is IJCAI 2026,
+Multinex is CVPR 2026, TPCNet is ECCV 2026 under a changed title, LHSI author order per the
+WACV proceedings, Diffusion-in-the-Dark pages 4134-4145, PIRM publisher year 2019,
+Zero-DCE++ print issue TPAMI 44(8) 2022, the two Pilligua keys merged into
+`pilligua2025mill`. Still arXiv-only (venue claims not backed by a proceedings page):
+`yang2026rhvifdd`, `yang2026cage`, `wu2026tcanet`, `yan2026yuvrevisit`, `bai2026logdomain`,
+`ai2026bcihv`, `han2026clerwkv`, `li2026pal`, `du2026atp`, `pilligua2025mill`,
+`shafi2026iphoneblur`, `ciubotariu2026ntire`, `yan2026ntireellie`. `cui2022iat`'s BMVC 2022
+venue rests on the arXiv comment plus an indexed proceedings URL (site unreachable that day).
 
-**The HVI line itself**
-- `yan2025hvi` (CVPR 2025, pp. 5678-5687): the paper under study; see §2-§4.
+### 5.1 The HVI line itself
+- `yan2025hvi` (CVPR 2025, pp. 5678-5687): the paper under study; §2-§4.
 - `yan2024onecolorspace` (arXiv 2402.05809): earlier version; prints wP/oP and normal/GT-mean
   numbers separately and the numeric loss ablation the final version turned into a figure.
-- `yan2025hvicidnetplus` (arXiv 2507.06814): follow-up for extreme darkness; separate repo,
-  not the code we run. Cite only as "there is a successor".
+- `yan2025hvicidnetplus` (TCSVT 2026): adds vision-language priors and a region refinement
+  block on top of HVI; its Table V is a single-run sRGB/HSV/HVI comparison on LOL-v1 (GT-mean).
+- `shi2025fusionnet` (CVPRW 2025, NTIRE 2025 LLIE winner): linear fusion of CIDNet,
+  Retinexformer and a CNN; states that a trainable k makes HVI data-dependent.
+- `liu2024ntire`, `liu2025ntire`, `ciubotariu2026ntire`, `yan2026ntireellie`: the challenge
+  reports (hidden test GT, composite PSNR/SSIM/LPIPS ranks); HVI entries rank 1st in 2025,
+  4th-12th in 2026; zero-shot CIDNet scores 13.85 dB on NTIRE 2026 data (per the report).
 
-**Color-space and decomposition approaches (the family HVI belongs to)**
+### 5.2 Works that extend or criticise HVI (slice D)
+- `yang2026rhvifdd` (arXiv): max-RGB intensity is sensitive to positive noise spikes; robust
+  HVI plus a DCT decoupling module; single-run HSV/HVI/RHVI comparison.
+- `ai2026bcihv` (arXiv): replaces the linear intensity by a learnable Box-Cox law for a
+  rectified-flow enhancer; no sRGB/HSV/YCbCr arm.
+- `wu2026tcanet` (arXiv): argues the weak point is the two-stream fusion, not the color
+  representation; thresholded cross-attention.
+- `cheng2026vcr` (TCSVT 2026): channel-level luminance/chrominance inconsistency in HVI
+  methods; variance-guided channel recalibration; HVI vs HSV only.
+- `wang2026haimnet` (TIP 2026): replaces the CIDNet interaction with attention modulation and
+  gated affine fusion; 11 datasets.
+- `wang2026interlight` (IJCAI 2026): intrinsic illumination priors and sensor-level augmentation.
+- `shi2025tpcnet` (ECCV 2026): Kubelka-Munk physical constraints; single-run HVI/LAB/YCbCr on
+  LOL-v2-real with YCbCr ahead (24.98 vs 24.64 dB, as printed there).
+- `han2026clerwkv` (arXiv): controllable enhancement conditioned on target luminance; uses
+  HVI for noise-decoupled supervision.
+- `li2026pal` (arXiv) and `du2026atp` (arXiv): per-pair photometric inconsistency dominates
+  pixel losses; retrained CIDNet at 23.97 dB on LOL-v1 without GT-mean (their number).
+- `pilligua2025mill` (arXiv): CIDNet degrades sharply when input brightness moves off the
+  training distribution (26.4 -> 17.7 dB at a 20% blend toward GT, their numbers).
+- `brateanu2026multinex` (CVPR 2026): calls HVI's learnable mappings data-dependent and
+  unstable; multi-prior Retinex alternative.
+- `he2025dlfenet` (Sensors 2025), `verma2025qcidnet` (CVPRW 2025), `lin2025jarvisir`
+  (CVPR 2025): reuse CIDNet as a module (detail/noise branches, video quality, autonomous
+  driving restoration).
+- `cheng2026lhsi` (WACV 2026): a learnable HSI space for white-balance editing, the nearest
+  "learned polar color space" outside LLIE.
+
+### 5.3 Color-space and decomposition approaches (slice A)
 - `land1977retinex`: the Retinex decomposition every Retinex-family method invokes.
-- `wei2018retinex` (BMVC 2018): RetinexNet and the LOL-v1 dataset (485 train / 15 test).
-- `yang2021lolv2` (TIP 2021): the LOL-v2 real and synthetic datasets.
-- `zhang2019kind` (ACM MM 2019): KinD, Retinex decomposition with separate illumination and
-  reflectance branches, the closest structural ancestor of a two-branch design.
-- `wu2022uretinex` (CVPR 2022): URetinex-Net, Retinex unfolding.
-- `liu2021ruas` (CVPR 2021): RUAS, Retinex-inspired unrolling with architecture search.
-- `cai2023retinexformer` (ICCV 2023): Retinexformer, the strongest published Retinex-style
-  transformer and the baseline HVI-CIDNet is closest to in size (1.53M vs 1.88M params).
-- `brateanu2025lytnet` (SPL 2025): LYT-Net, a YUV-space transformer; the nearest published
-  "other luminance/chroma space" competitor.
-- `xu2022snr` (CVPR 2022): SNR-Aware, spatially varying SNR to route between local and
-  global processing; used by HVI-CIDNet as a plug-in host.
+- `guo2023bread` (IJCV 2023): luminance/chrominance split with the enhanced luminance guiding
+  a chrominance mapper; YCbCr-like; the closest two-branch, two-space precedent.
+- `brateanu2025lytnet` (SPL 2025): fixed YUV split, lightweight Y and UV paths with cross-fusion.
+- `zhang2022dccnet` (CVPR 2022): gray image plus an explicit color histogram, re-injected
+  through a pyramid color embedding.
+- `li2021ucolor` (TIP 2021): RGB, HSV and Lab encoded jointly with attention (underwater).
+- `guan2025cstnet` (NeurIPS 2025): a learnable YCbCr-like converter for nighttime deraining,
+  the closest Tier-1 "learnable color space" idea.
+- `wu2026catformer` (TCSVT 2026): learnable per-pixel von Kries adaptation then CIELAB.
+- `yan2026yuvrevisit`, `bai2026logdomain`, `yang2026cage` (arXiv): YUV frequency analysis,
+  log-domain intensity/chroma decoupling, adaptive LAB with saturation rectification.
+- `chobola2024colie` (ECCV 2024): implicit neural illumination in HSV, zero-reference.
+- `cui2022iat` (BMVC 2022), `wang2022lcdpnet` (ECCV 2022): sRGB with a learned global color
+  matrix/gamma, and local color-distribution priors.
+- `ma2022csdnet` (TNNLS 2022): context-sensitive Retinex decomposition, two streams.
+- `smith1978hsv` (SIGGRAPH 1978): the HSV definition.
 
-**Other supervised enhancers in the comparison tables**
-- `wang2022llflow` (AAAI 2022): LLFlow, normalising flow; a strong GT-mean baseline.
-- `wang2023llformer` (AAAI 2023): LLFormer, UHD transformer.
-- `hou2023gsad` (NeurIPS 2023): GSAD, diffusion with global structure; the LPIPS competitor.
-- `yi2023diffretinex` (ICCV 2023): Diff-Retinex, generative diffusion in Retinex form.
-- `zamir2022restormer` (CVPR 2022): Restormer, whose channel-attention design the CAB in
-  LCA follows (query/key/value with depthwise convs, attention over channels).
+### 5.4 Canonical deep LLIE 2017-2022 (slice B)
+- `lore2017llnet` (PR 2017): the first deep LLIE autoencoder.
+- `wei2018retinex` (BMVC 2018): RetinexNet and LOL-v1 (485/15).
+- `yang2021lolv2` (TIP 2021): LOL-v2 real (689/100) and synthetic (900/100).
+- `zhang2019kind` (ACM MM 2019), `zhang2021kindpp` (IJCV 2021): illumination/reflectance
+  branches; KinD++ adds multi-scale illumination attention.
+- `wang2019deepupe` (CVPR 2019): predicts an illumination map from expert-retouched pairs.
+- `yang2020drbn` (CVPR 2020): recursive band network, semi-supervised.
+- `xu2020fide` (CVPR 2020): frequency-based decomposition and enhancement.
+- `guo2020zerodce` (CVPR 2020), `li2021zerodcepp` (TPAMI 2022): zero-reference curves and
+  the 10K-parameter version; the color-constancy loss lives here.
+- `jiang2021enlightengan` (TIP 2021): unpaired adversarial training.
+- `zamir2020mirnet` (ECCV 2020): multi-resolution streams with selective fusion.
+- `liu2021ruas` (CVPR 2021), `wu2022uretinex` (CVPR 2022), `ma2022sci` (CVPR 2022):
+  Retinex unrolling with NAS, Retinex unfolding, self-calibrated illumination.
+- `xu2022snr` (CVPR 2022): SNR-routed transformer/CNN, a plug-in host in HVI-CIDNet Table 3.
+- `wang2022llflow` (AAAI 2022): conditional normalizing flow; strong GT-mean baseline.
+- `zamir2022restormer` (CVPR 2022), `wang2022uformer` (CVPR 2022), `chen2022nafnet`
+  (ECCV 2022), `liang2021swinir` (ICCVW 2021): the restoration backbones; Restormer's MDTA +
+  GDFN is what the LCA block in CIDNet follows.
 
-**Unsupervised / zero-reference**
-- `guo2020zerodce` (CVPR 2020): Zero-DCE, curve estimation without pairs.
-- `jiang2021enlightengan` (TIP 2021): EnlightenGAN, unpaired adversarial training.
-- `ma2022sci` (CVPR 2022): SCI, self-calibrated illumination, very small model.
+### 5.5 Deep LLIE 2023-2025, non-HVI (slice C)
+- `cai2023retinexformer` (ICCV 2023): the size-matched Retinex transformer baseline (1.53M
+  vs 1.88M params); its README documents the GT-mean test option and advises against it.
+- `yi2023diffretinex` (ICCV 2023), `hou2023gsad` (NeurIPS 2023), `yin2023clediffusion`
+  (ACM MM 2023), `jiang2024lightendiffusion` (ECCV 2024), `lan2025efficientdiffusion`
+  (CVPR 2025): the diffusion line; GSAD is the LPIPS competitor in Table 1.
+- `fu2023pairlie` (CVPR 2023): self-supervised from pairs of low-light shots.
+- `liang2023cliplit` (ICCV 2023), `yang2023nerco` (ICCV 2023), `wu2023skf` (CVPR 2023),
+  `xu2023smg` (CVPR 2023): CLIP prompts, implicit neural fitting, semantic guidance,
+  structure modeling.
+- `wang2023llformer` (AAAI 2023): UHD benchmark and axis-based transformer.
+- `shi2024zeroig` (CVPR 2024), `wang2024quadprior` (CVPR 2024): zero-shot and zero-reference
+  with physical priors.
+- `weng2024mambaLLIE` (NeurIPS 2024): state-space backbone (the "Mamba" the paper names as
+  future work).
+- `zhou2024glare` (ECCV 2024): codebook retrieval; beats HVI-CIDNet on LOL-v2-real LPIPS.
+- `yu2024lmtgp` (ECCV 2024): semi-supervised mean teacher.
+- `zhang2025cwnet`, `sun2025retinev`, `wang2025bridge` (ICCV 2025): causal wavelets, event
+  cameras, unsupervised fine-tuning of generative priors.
 
-**Datasets and metrics**
-- `chen2018sid` (CVPR 2018): SID; Sony-Total-Dark is the authors' re-rendering of it.
-- `zhou2022lolblur` (ECCV 2022): LEDNet and the LOL-Blur dataset.
-- `cai2018sice` (TIP 2018): SICE multi-exposure dataset (Mix / Grad test protocols).
-- `wang2004ssim`, `zhang2018lpips`, `mittal2013niqe`: SSIM, LPIPS, NIQE.
-- `johnson2016perceptual`: the VGG perceptual loss used as the P term.
-- `sharma2005ciede2000`: CIEDE2000, the color-difference metric the paper does not report
-  and any color-fidelity study would need.
+### 5.6 Evaluation methodology, reproducibility, statistics (slice E)
+- `li2022llie` (TPAMI 2022), `liu2021benchmarking` (IJCV 2021), `zhao2025lowlightvision`
+  (TNNLS 2025): surveys and benchmarks; metric rankings disagree across families.
+- `nguyen2024diffusiondark` (WACV 2024): documents LOL train/test scene overlap and the
+  brightness gap between train and test GT (supplement S3.2).
+- `pilligua2025mill` (arXiv): LOL-type sets fix one brightness per scene; multi-intensity test.
+- `liao2025gtmean` (ICCV 2025): defines brightness mismatch and moves GT-mean into training.
+- `wang2009mse` (SPM 2009): why PSNR/MSE punish global intensity shifts people barely see.
+- `wang2004ssim`, `zhang2018lpips`, `mittal2013niqe`, `mittal2012brisque`, `blau2018pirm`:
+  SSIM, LPIPS, NIQE, BRISQUE, and the perception-distortion index.
+- `sharma2005ciede2000`: CIEDE2000, the color-fidelity metric the paper does not report.
+- `bouthillier2021variance` (MLSys 2021), `pineau2021reproducibility` (JMLR 2021): variance
+  from seeds and hyperparameters changes benchmark conclusions; the reproducibility checklist.
+- `musgrave2020reality` (ECCV 2020): test-set model selection inflates reported progress.
+- `recht2019imagenet` (ICML 2019): test-set reuse and adaptive overfitting.
+- `shafi2026iphoneblur` (arXiv): a restoration benchmark that reports mean +- SD over three
+  seeds (0.2-0.4 dB PSNR spread, their numbers).
+- `dror2018hitchhiker` (ACL 2018), `koehn2004bootstrap` (EMNLP 2004): paired significance
+  tests and bootstrap resampling for small test sets (15 images).
+
+### 5.7 Losses and architectures (slice F)
+- `johnson2016perceptual` (ECCV 2016), `ledig2017srgan` (CVPR 2017): VGG perceptual loss.
+- `zhao2017loss` (TCI 2017): L1/L2/SSIM/MS-SSIM comparisons; loss-weight sensitivity.
+- `lai2017lapsrn` (CVPR 2017), `zamir2021mprnet` (CVPR 2021), `afifi2021exposure`
+  (CVPR 2021): Laplacian-pyramid and edge losses of the kind CIDNet's E term uses.
+- `jo2020investigating` (CVPRW 2020): LPIPS as a training loss and weight sensitivity.
+- `peng2023ushape` (TIP 2023): the one precedent for one composite loss duplicated across RGB
+  and a second color space (Lab/LCH, underwater).
+- `zamir2020mirnet`, `zamir2022restormer`, `wang2022uformer`, `chen2022nafnet`,
+  `liang2021swinir`: backbones (listed in 5.4).
+- `chen2018sid` (CVPR 2018), `zhou2022lolblur` (ECCV 2022), `cai2018sice` (TIP 2018): the
+  other paired datasets HVI-CIDNet reports on.
+
+### 5.8 Also verified (comparators from the paper's tables, not in the survey)
+- `wang2023fourllie` (ACM MM 2023): Fourier-frequency enhancement; plug-in host in Table 3.
+- `feng2024difflight` (CVPRW 2024): the same group's diffusion enhancer; plug-in host in Table 3.
+
+### 5.9 Still without a verified entry
+- The five unpaired sets DICM, LIME, MEF, NPE, VV (dataset papers not in the survey); the
+  third-party 24.7401 dB README row (no paper exists).
