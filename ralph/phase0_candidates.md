@@ -1,13 +1,15 @@
 # phase0_candidates.md — thesis question candidates (master, 2026-09-23)
 
-Status: **draft v1**, written from master's own scouting (`ralph/phase0_master_notes.md`) plus
-writing's partial `ralph/phase0_related.md`. To be reconciled once `ralph/results/phase0_codebase.json`
-lands (cost per run) — the ranking is not expected to change; the hour figures are.
+Status: **v2** — hours reconciled against the measured smoke cost in `ralph/results/phase0_codebase.json`
+(2026-09-23 19:40). Ranking unchanged from v1.
 
 ## Shared facts that constrain every candidate
 - Upstream protocol: 1000 epochs, batch 8, crop 256, Adam 1e-4 cosine, 485 LOLv1 train pairs. One full-protocol
-  run on one RTX 2080 Ti = **R hours** (R measured by the smoke run; assumed ≈ 6–10 h until then).
-  4 GPUs → ~4·24/R ≈ 10–16 runs/day. A one-week study budget is ≈ 60–90 runs; a comfortable thesis uses ≤ 45.
+  run on one RTX 2080 Ti = **R ≈ 9.1 h** measured (26.2 s/epoch train + 50-image validation each epoch; 7.3 h
+  train-only; peak 9.8 GiB of 11; key `cost.projected_hours_full_schedule` in phase0_codebase.json). Validating
+  every 5 epochs instead of every epoch brings R to ≈ 7.7 h. 4 GPUs → ≈ 10–12 runs/day; ≈ 70 runs/week.
+  Same-seed run-to-run noise (non-deterministic CUDA kernels) is measurable (0.04 dB val PSNR after 2 epochs) and
+  will be reported as a floor under the seed spread; bitwise-strict mode costs 1.5× and is not the default.
 - Upstream reports **single runs with a random, unlogged seed**, and **selects checkpoints on the test split**
   (eval15). Our frozen protocol will hold out a validation subset of the 485 training pairs and select on it. So
   every candidate below produces, as a by-product, the first seeded reproduction of HVI-CIDNet on LOLv1.
@@ -28,8 +30,8 @@ LOLv1 across 3 seeds." Plus the decomposition: HVI-without-C_k vs full isolates 
 **If it fails.** "Under matched training, the choice of color space changes LOLv1 PSNR by less than the seed spread
 (s dB); the reported 3–4 dB gaps are not reproducible under seeded, validation-selected training." A negative result
 with three seeds is the thesis.
-**Minimal experiment.** 5 conditions {sRGB, HSV, YCbCr, HVI w/o C_k, HVI} × 3 seeds = **15 runs** (≈ 15R GPU-h,
-~1.5 days on 4 GPUs). Selection on val; one final test eval per condition. Secondary, free analysis: seed SD per
+**Minimal experiment.** 5 conditions {sRGB, HSV, YCbCr, HVI w/o C_k, HVI} × 3 seeds = **15 runs** (≈ 135 GPU-h,
+≈ 1.5 days on 4 GPUs). Selection on val; one final test eval per condition. Secondary, free analysis: seed SD per
 condition, and the val-selected vs "upstream-style" checkpoint gap (see C2).
 **Risk of triviality.** Low. Whichever way it comes out it answers something nobody measured. Implementation risk:
 the HV branch is a 2-channel chroma branch; sRGB/HSV/YCbCr must be mapped to (intensity, 2-ch chroma) the same
@@ -59,7 +61,7 @@ intensity law with new modules but never sweep the original.
 **If it works.** "k is a sensitive knob: Δ = x ± s dB across the sweep; learned k drifts to k*; error is concentrated
 in the bottom-decile intensity bin." **If it fails.** "Quality is flat in k within seed spread; the density term's
 claimed role is not measurable on LOLv1" — a thesis, and a direct comment on the paper's ablation.
-**Minimal experiment.** 6 conditions × 3 seeds = **18 runs**; plus a free per-pixel analysis (PSNR/hue error binned
+**Minimal experiment.** 6 conditions × 3 seeds = **18 runs** (≈ 165 GPU-h, ≈ 1.7 days on 4 GPUs); plus a free per-pixel analysis (PSNR/hue error binned
 by GT intensity) on saved outputs. **Risk of triviality.** Low–medium (flat curves are plausible and still a result).
 
 ## C4 — Dual-space objective: which loss terms matter, with seeds?
@@ -91,16 +93,16 @@ and the finding is generic to any U-Net; weakest link to the HVI idea.
 
 | # | Candidate | Runs | Decidable with our compute | Gap size | Negative result still a thesis | Score |
 |---|---|---|---|---|---|---|
-| 1 | **C1 color space + C2 seeds/selection** | 15 (+2) | yes, ~1.5–2 days | large (the paper's central claim, never seeded) | yes, strongly | ★★★★★ |
-| 2 | C3 density k + near black | 18 | yes, ~2 days | medium–large (untested knob, real artefact) | yes | ★★★★ |
-| 3 | C4 dual-space loss + seeds | 18 | yes, ~2 days | medium (issue #163, perceptual oddity) | yes | ★★★ |
+| 1 | **C1 color space + C2 seeds/selection** | 15 (+2) | yes, ≈ 1.6 days on 4 GPUs | large (the paper's central claim, never seeded) | yes, strongly | ★★★★★ |
+| 2 | C3 density k + near black | 18 | yes, ≈ 1.7 days | medium–large (untested knob, real artefact) | yes | ★★★★ |
+| 3 | C4 dual-space loss + seeds | 18 | yes, ≈ 1.7 days | medium (issue #163, perceptual oddity) | yes | ★★★ |
 | 4 | C5 robustness | 0 | yes, hours | medium | partly | ★★★ (as C1's follow-on) |
 | 5 | C6 efficiency | 9 | yes, ~1 day | small | weak | ★★ |
 
 **Recommendation: C1 as the primary study, C2 as its built-in second study, C5 as the zero-cost third study.
 C3 is the pre-committed pivot** if C1's instrument shows the non-HVI spaces cannot be trained fairly in the
-two-branch net (then the thesis narrows to "inside HVI, what does the density term do?"). Total budget ≈ 17 runs
-(+ 18 if the pivot fires), well inside a two-week window at 4 GPUs.
+two-branch net (then the thesis narrows to "inside HVI, what does the density term do?"). Total budget ≈ 17 runs ≈ 155 GPU-h ≈ 1.6 days on 4 GPUs
+(+ 18 runs ≈ 1.7 days if the pivot fires), well inside a two-week window.
 
 Rejected families and why: a targeted new module (needs a pre-registered improvement and competes with 2026
 follow-ups we cannot beat in a bachelor's budget); more datasets before the LOLv1 question is settled (adds download

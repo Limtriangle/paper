@@ -1,0 +1,486 @@
+{
+  "written_at": "2026-09-23T18:23:53",
+  "upstream": {
+    "repo": "/home/work/research/code/HVI-CIDNet",
+    "remote": "https://github.com/Fediory/HVI-CIDNet",
+    "commit": "eb43d7d91e9a336c66856824ff9e4603ae41f408",
+    "commit_date": "2026-03-09",
+    "license": "MIT (LICENSE file)",
+    "files": [
+      "app.py",
+      "data/LOLdataset.py",
+      "data/SICE_blur_SID.py",
+      "data/data.py",
+      "data/eval_sets.py",
+      "data/fivek.py",
+      "data/options.py",
+      "data/scheduler.py",
+      "data/util.py",
+      "eval.py",
+      "eval_SID_blur.py",
+      "eval_hf.py",
+      "loss/loss_utils.py",
+      "loss/losses.py",
+      "loss/niqe_utils.py",
+      "loss/vgg_arch.py",
+      "measure.py",
+      "measure_SID_blur.py",
+      "measure_niqe_bris.py",
+      "net/CIDNet.py",
+      "net/HVI_transform.py",
+      "net/LCA.py",
+      "net/transformer_utils.py",
+      "net_test.py",
+      "train.py"
+    ]
+  },
+  "facts": {
+    "hvi_transform": {
+      "class": "code/HVI-CIDNet/net/HVI_transform.py:6-122 RGB_HVI(nn.Module)",
+      "forward_HVIT": {
+        "hue_saturation_value": "HSV computed per pixel from RGB (max/min); hue in [0,1), saturation = (max-min)/(max+1e-8), value = max; hue is 0 where max==min code/HVI-CIDNet/net/HVI_transform.py:17-31",
+        "density_k": "learnable scalar nn.Parameter initialised at 0.2; the code comment says k is the reciprocal of the paper's k code/HVI-CIDNet/net/HVI_transform.py:9",
+        "color_sensitive": "C_k = (sin(pi*V/2) + 1e-8) ** k code/HVI-CIDNet/net/HVI_transform.py:40",
+        "H": "C_k * S * cos(2*pi*h) code/HVI-CIDNet/net/HVI_transform.py:41,43",
+        "V": "C_k * S * sin(2*pi*h) code/HVI-CIDNet/net/HVI_transform.py:42,44",
+        "I": "value (= max(R,G,B)), unchanged code/HVI-CIDNet/net/HVI_transform.py:45",
+        "output": "cat([H, V, I], dim=1): H,V in [-1,1], I in [0,1] code/HVI-CIDNet/net/HVI_transform.py:46",
+        "this_k_side_effect": "HVIT stores k.item() into self.this_k (a Python float) code/HVI-CIDNet/net/HVI_transform.py:37-38"
+      },
+      "inverse_PHVIT": {
+        "k_used": "self.this_k (Python float captured in the last HVIT call) \u2014 the inverse is NOT differentiable w.r.t. k code/HVI-CIDNet/net/HVI_transform.py:59-60",
+        "steps": "clamp H,V to [-1,1], I to [0,1]; divide H,V by C_k(I)+1e-8; clamp again; h = atan2(V+eps, H+eps)/(2pi) mod 1; s = sqrt(H^2+V^2+eps); HSV->RGB by the standard 6-sector formula code/HVI-CIDNet/net/HVI_transform.py:53-115",
+        "gated_saturation": "if self.gated: s *= alpha_s (alpha_s = 1.3); eval.py enables this for LOLv1 only code/HVI-CIDNet/net/HVI_transform.py:12-13,69-70; code/HVI-CIDNet/eval.py:18-19,47-48",
+        "gated2_intensity": "if self.gated2: rgb *= alpha (LOLv2-real and unpaired eval; alpha 0.8-0.84 in eval.py) code/HVI-CIDNet/net/HVI_transform.py:120-121; code/HVI-CIDNet/eval.py:20-25,105-113"
+      }
+    },
+    "architecture": {
+      "class": "code/HVI-CIDNet/net/CIDNet.py:8-126 CIDNet(channels=[36,36,72,144], heads=[1,2,4,8], norm=False)",
+      "input": "RGB -> HVIT -> hvi (3ch); I branch takes hvi[:,2] (1ch), HV branch takes the full 3-channel hvi tensor code/HVI-CIDNet/net/CIDNet.py:73-78",
+      "branches": "two U-Nets: HV branch (HVE_block0-3 / HVD_block3-0) and I branch (IE_block0-3 / ID_block3-0) code/HVI-CIDNet/net/CIDNet.py:20-53",
+      "stem": "ReplicationPad2d(1) + Conv2d 3x3 no bias code/HVI-CIDNet/net/CIDNet.py:21-24,39-42",
+      "down": "NormDownsample = Conv3x3(no bias) -> UpsamplingBilinear2d(0.5) -> PReLU; LayerNorm only if norm=True (default False) code/HVI-CIDNet/net/transformer_utils.py:31-48",
+      "up": "NormUpsample = Conv3x3 -> UpsamplingBilinear2d(2) -> cat(skip) -> Conv1x1 -> PReLU code/HVI-CIDNet/net/transformer_utils.py:50-70",
+      "lca": "6 HV_LCA + 6 I_LCA blocks at levels 2,3,4,4,3,2. CAB: channel-wise cross-attention (q from x, k/v from y; L2-normalised q,k; learnable temperature per head). IEL: gated FFN (expansion 2.66, depthwise 3x3, tanh residual gates). HV_LCA: x = x + CAB(norm x, norm y); x = IEL(norm x) (NO residual on the IEL). I_LCA: both sub-blocks residual code/HVI-CIDNet/net/LCA.py:7-93",
+      "cross_wiring": "each LCA takes its own branch as x and the other branch as y code/HVI-CIDNet/net/CIDNet.py:83-84,90-91,97-101,105-106,111-112",
+      "residual_output": "output_hvi = cat([hv_0, i_dec0]) + hvi; output_rgb = PHVIT(output_hvi) code/HVI-CIDNet/net/CIDNet.py:119-120",
+      "forward_quirk": "IE_block3 / HVE_block3 are fed i_enc2 / hv_2 (the level-3 downsample outputs), not the I_LCA2 / HV_LCA2 outputs; those LCA2 outputs reach the decoder only through the skip connections v_jump2 / hv_jump2 code/HVI-CIDNet/net/CIDNet.py:90-95,103-104",
+      "dead_block": "I_LCA5's output (i_dec2 at line 105) is overwritten by ID_block2(i_dec3, v_jump1) at line 109 before any use, so I_LCA5 (13 tensors) receives no gradient and contributes nothing; the I branch effectively has 5 LCA blocks, the HV branch 6 code/HVI-CIDNet/net/CIDNet.py:105,109 (measured: p.grad is None for all I_LCA5.* after backward)",
+      "huggingface_mixin": "CIDNet inherits PyTorchModelHubMixin code/HVI-CIDNet/net/CIDNet.py:6,8"
+    },
+    "losses": {
+      "total": "loss = loss_rgb + HVI_weight * loss_hvi, with loss_X = L1 + SSIM + Edge + P_weight * Perceptual computed in X in {RGB, HVI}; HVI tensors via model.HVIT() code/HVI-CIDNet/train.py:60-64",
+      "weights": {
+        "L1": 1.0,
+        "SSIM(D)": 0.5,
+        "Edge(E)": 50.0,
+        "Perceptual(P)": 0.01,
+        "HVI": 1.0,
+        "pointer": "code/HVI-CIDNet/data/options.py:64-68; code/HVI-CIDNet/train.py:168-178"
+      },
+      "L1": "mean absolute error code/HVI-CIDNet/loss/losses.py:10-37",
+      "SSIM": "1 - SSIM, 11x11 gaussian sigma 1.5, C1=0.01^2, C2=0.03^2 on the raw tensor range code/HVI-CIDNet/loss/losses.py:166-190; code/HVI-CIDNet/loss/loss_utils.py:113-145",
+      "Edge": "MSE between Laplacian-pyramid residuals (5-tap binomial kernel, 1 level, replicate pad); kernel is created with .cuda() code/HVI-CIDNet/loss/losses.py:41-65",
+      "Perceptual": "VGG19 features conv1_2, conv2_2, conv3_4, conv4_4 (weight 1 each), MSE; range_norm=True maps x -> (x+1)/2 BEFORE ImageNet normalisation, so RGB in [0,1] is fed as [0.5,1] and HVI (H,V in [-1,1]) as [0,1]; VGG weights from torchvision pretrained=True code/HVI-CIDNet/loss/losses.py:68-161; code/HVI-CIDNet/loss/vgg_arch.py:156-168,181-186,213-217,228-230",
+      "gradient_clip": "clip_grad_norm_(0.01) is called BEFORE optimizer.zero_grad()/loss.backward(), i.e. on stale gradients that are then zeroed: it has no effect on the update code/HVI-CIDNet/train.py:67-72"
+    },
+    "training_protocol_upstream": {
+      "options_file": "code/HVI-CIDNet/data/options.py:11-92",
+      "batch_size": 8,
+      "crop": 256,
+      "epochs": 1000,
+      "lr": 0.0001,
+      "optimizer": "Adam (defaults)",
+      "scheduler": "cos_restart=True, start_warmup=True, warmup_epochs=3: GradualWarmupScheduler(multiplier=1, total_epoch=3) wrapping CosineAnnealingRestartLR(periods=[997], eta_min=1e-7); scheduler.step() once per epoch code/HVI-CIDNet/train.py:150-166,219",
+      "schedule_measured": "see instrument.schedule (simulated with the upstream classes): epoch 1 trains with lr=0, epochs 2-3 at 1/3 and 2/3 of 1e-4, epoch 4-5 at 1e-4, then cosine",
+      "snapshots": "checkpoint + evaluation every 10 epochs code/HVI-CIDNet/data/options.py:18; code/HVI-CIDNet/train.py:221",
+      "threads": 16,
+      "shuffle": true,
+      "seed": "random.randint(1, 1e6) per run; NOT reproducible code/HVI-CIDNet/train.py:21-28",
+      "cudnn_benchmark": "True code/HVI-CIDNet/train.py:32",
+      "gpu": "CUDA_VISIBLE_DEVICES forced to '0' inside train.py code/HVI-CIDNet/train.py:33",
+      "augmentation": "RandomCrop(256), RandomHorizontalFlip, RandomVerticalFlip, ToTensor; same random seed re-applied for low and high code/HVI-CIDNet/data/data.py:7-13; code/HVI-CIDNet/data/LOLdataset.py:32-40",
+      "dataset_class": "LOLDatasetFromFolder lists both folders on EVERY __getitem__ and pairs low/high by os.listdir order (not sorted); __len__ hard-coded 485 code/HVI-CIDNet/data/LOLdataset.py:13-44",
+      "random_gamma": "off by default; if on, input ** U{0.60..1.20} code/HVI-CIDNet/data/options.py:71-73; code/HVI-CIDNet/train.py:52-55",
+      "precision": "FP32 (no AMP anywhere)",
+      "checkpoint_monitoring_split": "for lol_v1 the per-snapshot evaluation reads datasets/LOLdataset/eval15 \u2014 the LOLv1 TEST set used in the paper's tables; there is no separate validation split code/HVI-CIDNet/data/options.py:43,53; code/HVI-CIDNet/train.py:104-106,226-228,262-265",
+      "monitoring_eval_switches": "eval(..., LOL=True) -> trans.gated=True (saturation x1.3) during training-time evaluation of lol_v1 code/HVI-CIDNet/train.py:260-263",
+      "metrics_logged": "PSNR/SSIM/LPIPS via measure.metrics(use_GT_mean=False) on saved PNGs code/HVI-CIDNet/train.py:265-276"
+    },
+    "evaluation_protocol_upstream": {
+      "eval": "loads weights, sets gated (LOLv1) / gated2+alpha (LOLv2-real, unpaired), forward on the full image (input ** gamma, gamma=1), clamp [0,1], save PNG code/HVI-CIDNet/eval.py:12-51",
+      "measure": "PSNR (float32, 255 scale, +1e-8), SSIM (MATLAB-style, per channel, 11x11 gaussian sigma 1.5, 5-px border crop, on [0,255]), LPIPS-alex on uint8 via lpips.im2tensor; optional GT-mean: scale prediction by mean_gray(GT)/mean_gray(pred) code/HVI-CIDNet/measure.py:15-113",
+      "gt_mean_note": "README: GT-mean numbers follow LLFlow/KinD/Retinexformer; only for paired sets",
+      "readme_lolv1_numbers": {
+        "w_perc": {
+          "psnr": 23.8091,
+          "ssim": 0.8574,
+          "lpips": 0.0856
+        },
+        "w_perc_gtmean": {
+          "psnr": 27.7146,
+          "ssim": 0.876,
+          "lpips": 0.0791
+        },
+        "wo_perc": {
+          "psnr": 23.5,
+          "ssim": 0.8703,
+          "lpips": 0.1053
+        },
+        "wo_perc_gtmean": {
+          "psnr": 28.1405,
+          "ssim": 0.8887,
+          "lpips": 0.0988
+        },
+        "test_finetuning": {
+          "psnr": 25.4036,
+          "ssim": 0.8652,
+          "lpips": 0.0897
+        },
+        "peer_4070": {
+          "psnr": 24.7401,
+          "ssim": 0.8604,
+          "lpips": 0.0896
+        },
+        "source": "code/HVI-CIDNet/Readme.md:Weights and Results table",
+        "note": "README numbers, not ours; 'wo perc' weights are trained without the perceptual term (the README does not give that training command)"
+      }
+    },
+    "datasets_readme": {
+      "paired": [
+        "LOLv1 (our485 train / eval15 test)",
+        "LOLv2-real (685 train)",
+        "LOLv2-syn (900 train)",
+        "LOL-Blur (low_blur / high_sharp_scaled)",
+        "Sony-Total-Dark (SID)",
+        "SICE-Mix / SICE-Grad",
+        "FiveK (Retinexformer split)"
+      ],
+      "unpaired": [
+        "DICM",
+        "LIME",
+        "MEF",
+        "NPE",
+        "VV"
+      ],
+      "on_disk": "LOLv1 only: our485 (485 pairs, 600x400 PNG) + eval15 (15 pairs); /home/work/research/datasets/LOLv1 (zip sha256 prefix 47d85314b7927470)",
+      "pointer": "code/HVI-CIDNet/Readme.md:Data Preparation; code/HVI-CIDNet/data/options.py:33-59"
+    },
+    "released_checkpoints_readme": {
+      "LOLv1": [
+        "w_perc.pth",
+        "wo_perc.pth",
+        "test_finetuning.pth",
+        "other/PSNR_24.74.pth"
+      ],
+      "LOLv2_real": [
+        "best_PSNR.pth",
+        "best_SSIM.pth",
+        "w_prec.pth"
+      ],
+      "LOLv2_syn": [
+        "generalization.pth",
+        "w_perc.pth",
+        "wo_perc.pth"
+      ],
+      "other": [
+        "LOL-Blur.pth",
+        "SICE.pth",
+        "SID.pth",
+        "fivek.pth"
+      ],
+      "hosting": "Baidu Pan / OneDrive (code yixu) and HuggingFace (e.g. fediory/HVI-CIDNet-LOLv1-wperc via eval_hf.py)",
+      "on_disk": "none (weights/ directory absent)"
+    },
+    "code_facts_a_paper_reader_may_not_expect": [
+      "Reported LOLv1 metrics come from outputs with a fixed 1.3x saturation gain applied in the inverse transform at test time (trans.gated), which is not part of training",
+      "The inverse transform uses k as a captured Python float, so k is trained only through the forward HVIT (loss in HVI space and the residual add), never through the RGB output path",
+      "Gradient clipping in train.py is a no-op (called before backward on zeroed gradients)",
+      "The training seed is random and unrecorded; runs are not reproducible from the repo alone",
+      "Checkpoint monitoring during training reads the LOLv1 test set (eval15); the repo has no validation split for LOLv1",
+      "Epoch 1 of the default schedule trains with lr=0 (warmup starts at 0 with multiplier=1)",
+      "The perceptual loss's range_norm maps [0,1] RGB to [0.5,1] before VGG normalisation",
+      "IE_block3/HVE_block3 bypass the level-3 LCA outputs on the main path (net/CIDNet.py:94-95)",
+      "I_LCA5 is dead code: its output is overwritten before use (net/CIDNet.py:105,109); its parameters never receive a gradient",
+      "Training on CUDA is not bitwise reproducible in default mode (atomic-add backward kernels); same-seed replicates differ by ~0.02 dB validation PSNR after 2 epochs; strict deterministic mode is bitwise exact at higher cost (see cost.strict)",
+      "requirements.txt pins torch 1.13.1 / Python 3.7; this host runs torch 2.7 / Python 3.12 (torchvision 'pretrained=True' still works with a deprecation warning)"
+    ]
+  },
+  "measured": {
+    "default_config": {
+      "channels": [
+        36,
+        36,
+        72,
+        144
+      ],
+      "heads": [
+        1,
+        2,
+        4,
+        8
+      ]
+    },
+    "parameters": {
+      "hv_branch": 273786,
+      "i_branch": 272814,
+      "hv_lca": 714484,
+      "i_lca": 714484,
+      "k": 1,
+      "total": 1975569
+    },
+    "macs_256x256": 8132935680,
+    "macs_400x600": 29783700000,
+    "macs_note": "thop counts (conv/linear only, attention matmuls not counted), as net_test.py does",
+    "density_k_init": 0.20000000298023224,
+    "latency_400x600": {
+      "median_ms": 53.85001003742218,
+      "min_ms": 53.80222946405411,
+      "n": 50,
+      "device": "NVIDIA GeForce RTX 2080 Ti",
+      "batch": 1,
+      "shape": [
+        400,
+        600
+      ],
+      "precision": "FP32, TF32 disabled"
+    },
+    "latency_256x256": {
+      "median_ms": 23.531798738986254,
+      "min_ms": 23.32764584571123,
+      "n": 50,
+      "device": "NVIDIA GeForce RTX 2080 Ti",
+      "batch": 1,
+      "shape": [
+        256,
+        256
+      ],
+      "precision": "FP32, TF32 disabled"
+    }
+  },
+  "instrument": {
+    "scripts": {
+      "auto-research/hvilib.py": "5eaa453abf881771b2bb6d4f444cbafed3aa8c4a88716aafe332b56c9ea49d22",
+      "auto-research/hvi_baseline.py": "f825c4546f18fe3f0a2a2d7546c8cf1bac7f2555162282050883208b5c0b340a"
+    },
+    "protocol": {
+      "dataset": "LOLv1",
+      "train_source": "our485 minus the held-out validation images",
+      "val_source": "50 images held out from our485 (split seed 42)",
+      "test_source": "eval15",
+      "test15": "NEVER READ",
+      "crop": 256,
+      "batch_size": 8,
+      "epochs": 1000,
+      "optimizer": "Adam",
+      "lr": 0.0001,
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "schedule": "GradualWarmupScheduler(multiplier=1,total_epoch=3) -> CosineAnnealingRestartLR(periods=[epochs-3], eta_min=1e-7); scheduler.step() once per epoch after training (train.py:160-161,219)",
+      "warmup_epochs": 3,
+      "lr_min": 1e-07,
+      "weights": {
+        "L1": 1.0,
+        "SSIM": 0.5,
+        "edge": 50.0,
+        "perceptual": 0.01,
+        "HVI": 1.0
+      },
+      "perceptual": {
+        "vgg": "vgg19",
+        "layers": [
+          "conv1_2",
+          "conv2_2",
+          "conv3_4",
+          "conv4_4"
+        ],
+        "criterion": "mse",
+        "range_norm": true,
+        "use_input_norm": true
+      },
+      "random_gamma": false,
+      "grad_clip": "none (upstream calls clip_grad_norm_ before backward: no effect)",
+      "augmentation": "RandomCrop(crop) + RandomHorizontalFlip + RandomVerticalFlip, same crop/flips for low and high (data/data.py:7-13)",
+      "shuffle": true,
+      "drop_last": false,
+      "precision": "FP32, TF32 disabled, no AMP",
+      "cudnn": "deterministic=True, benchmark=False (upstream: benchmark=True, random seed)",
+      "val_every": 1,
+      "selection": "highest validation mean PSNR (uint8, ungated, no GT mean) over epochs",
+      "eval_gated": "reported both ways; upstream eval.py:18-19 sets trans.gated=True (alpha_s=1.3 saturation gain) for LOLv1",
+      "channels": [
+        36,
+        36,
+        72,
+        144
+      ],
+      "heads": [
+        1,
+        2,
+        4,
+        8
+      ]
+    },
+    "split": {
+      "sha256": "3b79241338e52ac320a70847ea8ab79bbf6b28c48e874997f3281bd5b374816d",
+      "n_train": 435,
+      "n_val": 50,
+      "rule": "sorted our485 names, random.Random(42).shuffle, first 50 = val",
+      "test": "eval15, guarded in hvilib.open_rgb, NEVER READ"
+    },
+    "dataset_fingerprint_our485": {
+      "root": "/home/work/research/datasets/LOLv1/our485",
+      "n_files": 970,
+      "sha256": "1aa515b730c54edcab7178d1386d905c497f363c85e8f00fa78109a29117fe50",
+      "computed_at": 1790187052.3660054
+    },
+    "schedule": {
+      "lr_epoch_1_to_6": [
+        0.0,
+        3.3333333333333335e-05,
+        6.666666666666667e-05,
+        0.0001,
+        0.0001,
+        9.999975202119301e-05
+      ],
+      "lr_epoch_1000": 1.009919127657827e-07
+    },
+    "deviations_from_upstream": [
+      "validation on 50 images held out from our485 instead of eval15 (integrity floor #4)",
+      "deterministic seeding, cudnn.deterministic, TF32 off (upstream: random seed, benchmark on)",
+      "validation every epoch (upstream: every 10) with PSNR only; full metrics at the end on best/last",
+      "no gradient clipping (upstream's call is a no-op, see facts.losses.gradient_clip)",
+      "DataLoader workers 3 per job (upstream 16) to share 15 cores across 4 GPUs"
+    ]
+  },
+  "environment": {
+    "python": "3.12.3",
+    "torch": "2.7.0a0+7c8ec84dab.nv25.03",
+    "torchvision": "0.22.0a0",
+    "cuda": "12.8",
+    "cudnn": 90800,
+    "lpips": "0.1.4",
+    "pillow": "11.1.0",
+    "numpy": "1.26.4",
+    "venv": "/home/work/research/env/hvi"
+  },
+  "cost": {
+    "run": "baseline/smoke_v1",
+    "job": "upstream_seed42",
+    "state": "complete",
+    "protocol": {
+      "crop": 256,
+      "batch_size": 8,
+      "epochs_schedule": 1000,
+      "epochs_trained": 2,
+      "precision": "FP32, TF32 disabled, no AMP",
+      "workers": 3,
+      "strict_deterministic": null
+    },
+    "gpu": "NVIDIA GeForce RTX 2080 Ti",
+    "steps_per_epoch": 55,
+    "images_per_epoch": 435,
+    "train_seconds_per_epoch": [
+      26.855157136917114,
+      26.159937620162964
+    ],
+    "val_seconds_per_epoch_50_images_x2": [
+      6.562626838684082,
+      6.53483510017395
+    ],
+    "peak_mem_alloc_mib": 9754.89599609375,
+    "peak_mem_reserved_mib": 10472.0,
+    "projected_hours_full_schedule": 9.085741274886662,
+    "projected_hours_train_only": 7.266649338934156,
+    "note": "seconds/epoch = mean over epochs after the first (first includes cudnn/VGG init); validation = 50 full 600x400 images, ungated + gated forward each"
+  },
+  "cost_strict": {
+    "run": "baseline/smoke_strict_v1",
+    "job": "upstream_seed42",
+    "state": "complete",
+    "protocol": {
+      "crop": 256,
+      "batch_size": 8,
+      "epochs_schedule": 1000,
+      "epochs_trained": 2,
+      "precision": "FP32, TF32 disabled, no AMP",
+      "workers": 3,
+      "strict_deterministic": true
+    },
+    "gpu": "NVIDIA GeForce RTX 2080 Ti",
+    "steps_per_epoch": 55,
+    "images_per_epoch": 435,
+    "train_seconds_per_epoch": [
+      40.703463315963745,
+      40.188961029052734
+    ],
+    "val_seconds_per_epoch_50_images_x2": [
+      8.747422456741333,
+      8.640143871307373
+    ],
+    "peak_mem_alloc_mib": 9632.22021484375,
+    "peak_mem_reserved_mib": 10322.0,
+    "projected_hours_full_schedule": 13.578540053632524,
+    "projected_hours_train_only": 11.163600285847982,
+    "note": "seconds/epoch = mean over epochs after the first (first includes cudnn/VGG init); validation = 50 full 600x400 images, ungated + gated forward each"
+  },
+  "reproducibility": {
+    "runs": {
+      "smoke_v1": {
+        "initial_model_sha256": "48d3027ff66b8f5bc784797278f539e95af9da4e9a4d0f48e6173043d73507fe",
+        "strict_deterministic": false,
+        "epoch_rows": [
+          {
+            "loss": 2.871910944851962,
+            "val_psnr": 7.410690857443399,
+            "k": 0.20000000298023224
+          },
+          {
+            "loss": 2.8466290907426313,
+            "val_psnr": 7.424839013414357,
+            "k": 0.2016209065914154
+          }
+        ]
+      },
+      "determinism_a": {
+        "initial_model_sha256": "48d3027ff66b8f5bc784797278f539e95af9da4e9a4d0f48e6173043d73507fe",
+        "strict_deterministic": false,
+        "epoch_rows": [
+          {
+            "loss": 2.871910944851962,
+            "val_psnr": 7.410690857443399,
+            "k": 0.20000000298023224
+          },
+          {
+            "loss": 2.8503230094909666,
+            "val_psnr": 7.45095372464734,
+            "k": 0.20162586867809296
+          }
+        ]
+      },
+      "determinism_b": {
+        "initial_model_sha256": "48d3027ff66b8f5bc784797278f539e95af9da4e9a4d0f48e6173043d73507fe",
+        "strict_deterministic": false,
+        "epoch_rows": [
+          {
+            "loss": 2.871910944851962,
+            "val_psnr": 7.410690857443399,
+            "k": 0.20000000298023224
+          },
+          {
+            "loss": 2.86313127821142,
+            "val_psnr": 7.467282976200137,
+            "k": 0.20171304047107697
+          }
+        ]
+      }
+    },
+    "initial_weights_identical": true,
+    "epoch1_identical_(lr=0,_no_update)": true,
+    "epoch2_identical_(after_updates)": false,
+    "epoch2_val_psnr_spread_db": 0.042443962785779554,
+    "diagnosis": "default CUDA mode: identical data order/forward/validation; gradients differ at ~1e-7 (atomic-add backward kernels) and diverge under Adam. torch.use_deterministic_algorithms(True) gives bitwise-identical gradients (measured on one step) at ~1.7x step cost (batch 2, 128x128)."
+  }
+}

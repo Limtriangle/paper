@@ -1,0 +1,184 @@
+{
+ "exported_at": "2026-09-23T18:18:57",
+ "jobs": {
+  "upstream_seed42": {
+   "best": {
+    "ab_error": 9.137649900099158,
+    "delta_e00": 36.44540445238437,
+    "edge_ab_error": 13.350773346861569,
+    "edge_delta_e00": 33.207595519864775,
+    "edge_psnr": 8.221889840043447,
+    "epoch": 2,
+    "lpips": 0.5854848390817642,
+    "lpips_gated": 0.5856176614761353,
+    "lpips_gtmean": 0.4788130430877209,
+    "n": 50,
+    "n_images": 50,
+    "psnr": 7.45095372464734,
+    "psnr_gated": 7.389084790021895,
+    "psnr_gtmean": 15.520177164026345,
+    "ssim": 0.15584761518221768,
+    "ssim_gated": 0.1446773740078734,
+    "ssim_gtmean": 0.397811895997638
+   },
+   "config": {
+    "CUDA_VISIBLE_DEVICES": "2",
+    "amp": false,
+    "batch_size": 8,
+    "channels": [
+     36,
+     36,
+     72,
+     144
+    ],
+    "condition": "upstream",
+    "crop": 256,
+    "epochs_schedule": 1000,
+    "epochs_trained": 2,
+    "gpu": "NVIDIA GeForce RTX 2080 Ti",
+    "heads": [
+     1,
+     2,
+     4,
+     8
+    ],
+    "lr": 0.0001,
+    "parameters": 1975569,
+    "script_sha256": "a6ad62f32c675e5d94315c6f0bb4d11e299b6686773f7c22017defdff926860a",
+    "seed": 42,
+    "step_limit": 0,
+    "test15": "NEVER READ",
+    "torch": "2.7.0a0+7c8ec84dab.nv25.03",
+    "val_limit": 0,
+    "variant": "upstream",
+    "weights": {
+     "HVI": 1.0,
+     "L1": 1.0,
+     "SSIM": 0.5,
+     "edge": 50.0,
+     "perceptual": 0.01
+    },
+    "width": 36
+   },
+   "curve": {
+    "best_val_psnr": 7.45095372464734,
+    "best_val_psnr_epoch": 2,
+    "final_train_loss": 2.8503230094909666,
+    "final_val_psnr": 7.45095372464734,
+    "n_epochs": 2,
+    "train_seconds_total": 53.35871720314026
+   },
+   "epochs_trained": 2,
+   "last": {
+    "ab_error": 9.137649900099158,
+    "delta_e00": 36.44540445238437,
+    "edge_ab_error": 13.350773346861569,
+    "edge_delta_e00": 33.207595519864775,
+    "edge_psnr": 8.221889840043447,
+    "epoch": 2,
+    "lpips": 0.5854848390817642,
+    "lpips_gated": 0.5856176614761353,
+    "lpips_gtmean": 0.4788130430877209,
+    "n": 50,
+    "n_images": 50,
+    "psnr": 7.45095372464734,
+    "psnr_gated": 7.389084790021895,
+    "psnr_gtmean": 15.520177164026345,
+    "ssim": 0.15584761518221768,
+    "ssim_gated": 0.1446773740078734,
+    "ssim_gtmean": 0.397811895997638
+   },
+   "status": "complete"
+  }
+ },
+ "manifest": {
+  "script_sha256": "a6ad62f32c675e5d94315c6f0bb4d11e299b6686773f7c22017defdff926860a",
+  "split_sha256": "3b79241338e52ac320a70847ea8ab79bbf6b28c48e874997f3281bd5b374816d"
+ },
+ "n_jobs": {
+  "complete": 1,
+  "total": 1
+ },
+ "protocol": {
+  "augmentation": "RandomCrop(crop) + RandomHorizontalFlip + RandomVerticalFlip, same crop/flips for low and high (data/data.py:7-13)",
+  "batch_size": 8,
+  "betas": [
+   0.9,
+   0.999
+  ],
+  "channels": [
+   36,
+   36,
+   72,
+   144
+  ],
+  "commit": "eb43d7d91e9a336c66856824ff9e4603ae41f408",
+  "condition": "upstream",
+  "crop": 256,
+  "cudnn": "deterministic=True, benchmark=False (upstream: benchmark=True, random seed)",
+  "dataset": "LOLv1",
+  "drop_last": false,
+  "epochs": 1000,
+  "epochs_schedule": 1000,
+  "epochs_trained": 2,
+  "eval_gated": "reported both ways; upstream eval.py:18-19 sets trans.gated=True (alpha_s=1.3 saturation gain) for LOLv1",
+  "grad_clip": "none (upstream calls clip_grad_norm_ before backward: no effect)",
+  "heads": [
+   1,
+   2,
+   4,
+   8
+  ],
+  "lr": 0.0001,
+  "lr_min": 1e-07,
+  "mode": "smoke",
+  "optimizer": "Adam",
+  "perceptual": {
+   "criterion": "mse",
+   "layers": [
+    "conv1_2",
+    "conv2_2",
+    "conv3_4",
+    "conv4_4"
+   ],
+   "range_norm": true,
+   "use_input_norm": true,
+   "vgg": "vgg19"
+  },
+  "precision": "FP32, TF32 disabled, no AMP",
+  "random_gamma": false,
+  "schedule": "GradualWarmupScheduler(multiplier=1,total_epoch=3) -> CosineAnnealingRestartLR(periods=[epochs-3], eta_min=1e-7); scheduler.step() once per epoch after training (train.py:160-161,219)",
+  "seed": 42,
+  "selection": "highest validation mean PSNR (uint8, ungated, no GT mean) over epochs",
+  "shuffle": true,
+  "split_sha256": "3b79241338e52ac320a70847ea8ab79bbf6b28c48e874997f3281bd5b374816d",
+  "step_limit": 0,
+  "test15": "NEVER READ",
+  "test_source": "eval15",
+  "train_source": "our485 minus the held-out validation images",
+  "val_every": 1,
+  "val_limit": 0,
+  "val_source": "50 images held out from our485 (split seed 42)",
+  "warmup_epochs": 3,
+  "weights": {
+   "HVI": 1.0,
+   "L1": 1.0,
+   "SSIM": 0.5,
+   "edge": 50.0,
+   "perceptual": 0.01
+  },
+  "workers": 3
+ },
+ "root": "/home/work/research/outputs/baseline/determinism_a",
+ "run": "determinism_a",
+ "run_id": "baseline__determinism_a",
+ "sources": {
+  "manifest.json": "64d6bc08a1ceae4fd1329a36cc81aebc38ff2578e83a84ddd108ade59914c064",
+  "upstream_seed42/config.json": "3d093c0f85bdb1d7d3abf30ca7f0c25472fa10650769491e5146feb89991cf8d",
+  "upstream_seed42/metrics.csv": "e4d041fb1ba6b5a2465b1c2652625b6232525aa835bb2c3e0db69f241e677349",
+  "upstream_seed42/status.json": "ab61951d622d5dec0e8822229ccc9c903ae1cbfb4a2b7cb703f3ffed7ffd7c42",
+  "upstream_seed42/validation_summary.csv": "6a2af47349df76899542bcf732a8f98133fe905285c3818811e2125c0c9e6d79"
+ },
+ "status": "complete",
+ "study": "baseline"
+}
