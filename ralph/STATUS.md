@@ -14,8 +14,8 @@
 | Agent | Doing | Since |
 |---|---|---|
 | master | candidates C1–C6 written and ranked; recommendation C1 in INBOX; **Gate 0 waits for the author**; sweeping, judging prompts, reconciling hours when cost.smoke lands | 2026-09-23 18:40 |
-| experiment | Phase 0 deliverables DONE (phase0_codebase.json, smoke + export green, cost 9.1 h/run). Now: rule-9 instrument validation + CPU-only color-space adapters for C1; no training | 2026-09-23 19:45 |
-| writing | phase0_related.md + verified custom.bib; skeleton stays green | 2026-09-23 18:05 |
+| experiment | Phase 0 deliverables DONE (phase0_codebase.json, smoke + export green, rule-9 audit green, cost 9.1 h/run). Now: CPU-only color-space adapters for C1 + eval15 listing guard; no training | 2026-09-23 18:50 UTC |
+| writing | phase0_related.md (code-grounded half on disk) + custom.bib verification via DBLP/Crossref/OpenAlex/CVF; skeleton green | 2026-09-23 18:05 UTC |
 
 ## Next actions
 - master: Gate 0 open, waiting for `[human] topic confirmed: <#>` in INBOX (the only wait). On confirmation: fill HVI-PLAN.md §0–§8 from phase0_candidates.md + phase0_codebase.json, then dispatch the post-Gate-0 openings. Meanwhile: reconcile candidate hours with cost.smoke; keep workers on instrument work; sweep every ~30 min.
@@ -23,6 +23,7 @@
 - writing: after phase0_related.md, prepare the related-work appendix prose (no claims) and the gen-table spec scaffolding.
 
 ## Log
+- 2026-09-23 18:45 UTC comms outage found and fixed: herdr_sync `send` used a nonexistent subcommand; no master text reached workers until now (they ran on personas). Approvals were unaffected. Timestamps in DECISIONS before this point were estimates ~1 h ahead of the clock.
 - 2026-09-23 scaffold created; project reset to Phase 0 (topic to be chosen from scratch, HVI-CIDNet related).
 - 2026-09-23 19:45 experiment delivered phase0_codebase.json + 4 instrument runs (smoke, 2 determinism replicates, strict smoke). Cost: 26.2 s/epoch, 9.1 h per 1000-epoch run, 9.8 GiB peak. Candidates v2 with reconciled hours.
 - 2026-09-23 18:40 master: phase0_candidates.md v1 (C1–C6) + INBOX recommendation (C1, pivot C3). Gate 0 now waits for the author.
