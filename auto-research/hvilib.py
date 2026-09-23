@@ -229,13 +229,21 @@ def count_parameters(model):
 _TEST_ALLOWED = False
 
 
+_TEST_ALLOWED_SCRIPTS = {
+    "final_eval_test.py": "evaluate: the one final evaluation per reported configuration",
+    "scene_split.py": "list + embed eval15 GT images for scene clustering only; no evaluation",
+}
+
+
 def allow_test_split(reason):
-    """Only auto-research/final_eval_test.py calls this, once, and logs the reason."""
+    """Only the whitelisted scripts may call this, once; the permit is written into their JSON."""
     global _TEST_ALLOWED
-    require(Path(sys.argv[0]).name == "final_eval_test.py",
-            "The test split may only be read by final_eval_test.py")
+    script = Path(sys.argv[0]).name
+    require(script in _TEST_ALLOWED_SCRIPTS,
+            f"The test split may only be accessed by {sorted(_TEST_ALLOWED_SCRIPTS)}")
     _TEST_ALLOWED = True
-    return {"test_split_read": True, "reason": reason, "script": sys.argv[0]}
+    return {"test_split_accessed": True, "scope": _TEST_ALLOWED_SCRIPTS[script],
+            "reason": reason, "script": sys.argv[0]}
 
 
 def _guard(path):

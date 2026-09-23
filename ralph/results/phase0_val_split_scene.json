@@ -1,0 +1,197 @@
+{
+  "written_at": "2026-09-23T19:06:12",
+  "test_split_access": {
+    "test_split_accessed": true,
+    "scope": "list + embed eval15 GT images for scene clustering only; no evaluation",
+    "reason": "scene clustering of GT images; no evaluation",
+    "script": "auto-research/scene_split.py"
+  },
+  "embedding_model": "facebook/dinov2-small",
+  "edges": {
+    "cos": 0.85,
+    "hamming": 10
+  },
+  "n_images": 500,
+  "n_clusters": 217,
+  "cluster_sizes_top10": [
+    13,
+    8,
+    6,
+    6,
+    6,
+    5,
+    4,
+    4,
+    4,
+    4
+  ],
+  "n_singletons": 40,
+  "clusters_with_eval15": 14,
+  "train_images_sharing_a_cluster_with_eval15": 24,
+  "eval15_with_train_near_duplicate": {
+    "cos>0.8": 14,
+    "cos>0.85": 14,
+    "cos>0.9": 14,
+    "cos>0.95": 13
+  },
+  "eval15_nearest_train": [
+    {
+      "test": "1.png",
+      "nearest_train": "2.png",
+      "cos": 0.9908027052879333,
+      "hamming": 4,
+      "same_cluster": true
+    },
+    {
+      "test": "111.png",
+      "nearest_train": "113.png",
+      "cos": 0.9965304136276245,
+      "hamming": 2,
+      "same_cluster": true
+    },
+    {
+      "test": "146.png",
+      "nearest_train": "144.png",
+      "cos": 0.9907134771347046,
+      "hamming": 4,
+      "same_cluster": true
+    },
+    {
+      "test": "179.png",
+      "nearest_train": "258.png",
+      "cos": 0.5354306101799011,
+      "hamming": 42,
+      "same_cluster": false
+    },
+    {
+      "test": "22.png",
+      "nearest_train": "21.png",
+      "cos": 0.9946713447570801,
+      "hamming": 2,
+      "same_cluster": true
+    },
+    {
+      "test": "23.png",
+      "nearest_train": "21.png",
+      "cos": 0.9953606724739075,
+      "hamming": 2,
+      "same_cluster": true
+    },
+    {
+      "test": "493.png",
+      "nearest_train": "494.png",
+      "cos": 0.9478967189788818,
+      "hamming": 2,
+      "same_cluster": true
+    },
+    {
+      "test": "547.png",
+      "nearest_train": "546.png",
+      "cos": 0.9898040294647217,
+      "hamming": 2,
+      "same_cluster": true
+    },
+    {
+      "test": "55.png",
+      "nearest_train": "54.png",
+      "cos": 0.9964277744293213,
+      "hamming": 0,
+      "same_cluster": true
+    },
+    {
+      "test": "665.png",
+      "nearest_train": "664.png",
+      "cos": 0.9956737756729126,
+      "hamming": 2,
+      "same_cluster": true
+    },
+    {
+      "test": "669.png",
+      "nearest_train": "668.png",
+      "cos": 0.9949233531951904,
+      "hamming": 0,
+      "same_cluster": true
+    },
+    {
+      "test": "748.png",
+      "nearest_train": "747.png",
+      "cos": 0.9971356391906738,
+      "hamming": 2,
+      "same_cluster": true
+    },
+    {
+      "test": "778.png",
+      "nearest_train": "775.png",
+      "cos": 0.9964160919189453,
+      "hamming": 2,
+      "same_cluster": true
+    },
+    {
+      "test": "780.png",
+      "nearest_train": "779.png",
+      "cos": 0.9934166073799133,
+      "hamming": 0,
+      "same_cluster": true
+    },
+    {
+      "test": "79.png",
+      "nearest_train": "80.png",
+      "cos": 0.9963223934173584,
+      "hamming": 2,
+      "same_cluster": true
+    }
+  ],
+  "val": {
+    "n": 40,
+    "n_clusters": 18,
+    "names": [
+      "101.png",
+      "102.png",
+      "103.png",
+      "104.png",
+      "115.png",
+      "116.png",
+      "137.png",
+      "138.png",
+      "191.png",
+      "210.png",
+      "211.png",
+      "212.png",
+      "251.png",
+      "252.png",
+      "253.png",
+      "342.png",
+      "344.png",
+      "464.png",
+      "491.png",
+      "550.png",
+      "551.png",
+      "594.png",
+      "595.png",
+      "596.png",
+      "597.png",
+      "682.png",
+      "683.png",
+      "692.png",
+      "693.png",
+      "739.png",
+      "740.png",
+      "765.png",
+      "766.png",
+      "769.png",
+      "770.png",
+      "771.png",
+      "772.png",
+      "83.png",
+      "84.png",
+      "86.png"
+    ]
+  },
+  "n_train": 445,
+  "split_file": "auto-research/split_scene_v1.json",
+  "split_sha256": "b0dde62736e3f59148fda31dd9dfa56a1b76af8b2be6637a57b5119b35428909",
+  "cos_stats_train_train": {
+    "p50": 0.07370486110448837,
+    "p99": 0.6359012889862063
+  }
+}
