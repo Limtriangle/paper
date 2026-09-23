@@ -65,14 +65,18 @@ loss     = loss_rgb + HVI_weight * loss_hvi
 | L1 | `L1Loss` | `L1_weight = 1.0` | mean absolute error |
 | D | `SSIM` | `D_weight = 0.5` | structure term |
 | E | `EdgeLoss` | `E_weight = 50.0` | MSE of Laplacian-pyramid residuals (Gaussian 5-tap) |
-| P | `PerceptualLoss` (VGG19 conv1_2, conv2_2, conv3_4, conv4_4, MSE) | `P_weight = 1e-2` | applied identically to the 3-channel HVI tensor, whose `H, V` lie in `[-1,1]` |
+| P | `PerceptualLoss` (VGG19 conv1_2, conv2_2, conv3_4, conv4_4, MSE, `range_norm=True`) | `P_weight = 1e-2` | applied to both the RGB and the HVI tensor; input range shifted, see below |
 | HVI | scalar | `HVI_weight = 1.0` | weight of the whole HVI-space sum |
 
 - The released LOL-v1 weights come in two flavours, `w_perc.pth` and `wo_perc.pth` (README
   table); the README reports PSNR/SSIM/LPIPS for each with and without GT-mean rescaling.
-- The **VGG perceptual term is computed on HVI tensors as if they were images**: VGG input
-  normalisation is applied to `H, V` in `[-1,1]`. This is what the code does; the paper's
-  description is checked in §2.
+- **Perceptual-loss input range** (`loss/vgg_arch.py` lines 228-231; confirmed in
+  `phase0_codebase.json` facts.losses.Perceptual): the extractor is built with
+  `range_norm=True`, so every input is mapped `x -> (x+1)/2` **before** ImageNet mean/std
+  normalisation. For the HVI tensor (`H, V` in `[-1,1]`) this lands `H, V` in `[0,1]`, a
+  valid image range. For the **RGB** tensor, already in `[0,1]`, it lands in `[0.5, 1]`: the
+  RGB-side perceptual term sees a systematically brightened, contrast-halved image. The
+  oddity is on the RGB side, not the HVI side. The paper does not mention `range_norm`.
 
 ### 1.4 Training protocol (code defaults, `data/options.py`, `train.py`)
 
@@ -111,15 +115,20 @@ loss     = loss_rgb + HVI_weight * loss_hvi
   LOL-Blur, SICE, SID, FiveK. Hosted on Hugging Face (`fediory/HVI-CIDNet-*`).
 - README LOL-v1 rows (as printed, not our measurements): `w_perc` 23.8091 / 0.8574 / 0.0856
   (no GT mean) and 27.7146 / 0.8760 / 0.0791 (GT mean); `wo_perc` 23.5000 / 0.8703 / 0.1053
-  and 28.1405 / 0.8887 / 0.0988. A peer-trained LOL-v1 checkpoint reaches 24.7401 PSNR on an
-  RTX 4070. These are **the authors' numbers**; they never enter the paper as ours.
+  and 28.1405 / 0.8887 / 0.0988. A peer-trained LOL-v1 checkpoint is listed at 24.7401 PSNR
+  on an RTX 4070 (third-party README claim, **unverified**, no paper). These are **the
+  authors' numbers**; they never enter the paper as ours.
 - The authors state that "some of the training parameters we are no longer able to provide"
   and that the weights are reproducible "by parameter tuning". Exact reproduction of the
   README numbers is therefore not guaranteed by the released config.
 - Random gamma augmentation (added 2025-01) is claimed to improve cross-dataset
-  generalisation (NIQE/BRISQUE on DICM/LIME/MEF/NPE/VV).
-- Follow-up: HVI-CIDNet+ (arXiv 2507.06814, "Beyond Extreme Darkness"), separate repo.
-  FusionNet (NTIRE 2025 LLIE winner) fuses HVI-CIDNet with other models.
+  generalisation, measured by NIQE (`mittal2013niqe`) and BRISQUE [**unverified**, no bib
+  entry] on the five unpaired sets DICM/LIME/MEF/NPE/VV [their dataset papers are
+  **unverified**, no bib entries; the sets are named as the upstream README names them].
+- Follow-up: HVI-CIDNet+ (`yan2025hvicidnetplus`, arXiv 2507.06814), separate repo. The
+  README also names FusionNet (arXiv 2504.19295) as the authors' NTIRE 2025 LLIE challenge
+  entry that fuses HVI-CIDNet with other models (README claim, **unverified** until its bib
+  entry lands; see §5).
 
 ---
 
@@ -171,8 +180,9 @@ LOL-Blur 26.572/0.890/0.120 (Table 10); SICE Mix+Grad pooled 13.435/0.642 (Table
 unpaired NIQE 3.523 average, from a separately trained "LOLv2+" model with random gamma
 (§10.8, the paper itself says it "avoid[s] direct comparisons" there).
 Plug-in claim (Table 3, LOL-v2-real): wrapping six other networks in HVIT/PHVIT raises PSNR
-for all six (+0.381 to +3.562 dB); SSIM drops for SNR-Aware (-0.009) and LPIPS worsens for
-FourLLIE (+0.011), so "improves across metrics" is not uniformly true in its own table.
+for all six (+0.381 to +3.562 dB); SSIM drops for SNR-Aware (`xu2022snr`, -0.009) and LPIPS
+worsens for FourLLIE [bib key pending, see §5] (+0.011), so "improves across metrics" is not
+uniformly true in its own table.
 Cross-dataset (Table 5, train LOL-v1 -> test LOL-v2-syn): CIDNet 19.457/0.817/0.193, but
 only with the extra hue-bias mechanism (Eqs. 12-13) that the main model does not use;
 without it 17.545 (Table 6).
@@ -217,10 +227,15 @@ only 18.458; both 19.457.
 HSV+LCA 13.237 PSNR on the same dataset; the final version prints 20.062 and 21.349. The
 old loss ablation had HVI-only 22.113 vs the final 23.221. The old text explains the weak
 HVI-only loss: "using only the HVI loss does not allow k to converge" because k sits in the
-inverse transform between the two losses.
+inverse transform between the two losses. **This contradicts the code** (§1.1): `PHVIT` uses
+`self.this_k`, a Python float captured by `k.item()` in the last forward call, so no gradient
+reaches k through the inverse at all. In the released code k is trained only through the
+forward `HVIT` calls (the HVI-space loss on `HVIT(output_rgb)` vs `HVIT(gt_rgb)`, and the
+residual add); the RGB-space loss cannot move k. Whichever explanation is right, the paper's
+stated mechanism is not the shipped one.
 
 **Never ablated, in any version:** YCbCr / LAB / HSL / YUV under the same network (YCbCr
-appears only through the Bread baseline); the value of k (fixed vs trainable, a sweep, or
+appears only through the Bread baseline [bib key pending, see §5]); the value of k (fixed vs trainable, a sweep, or
 the learned value per dataset); the choice of the collapse function F (sine vs linear vs
 log, Eqs. 9-11, justified only by a gradient-stability argument); the HVI-loss weight
 lambda_c; the edge and SSIM terms individually; alpha_S / alpha_I; depth, width or number
@@ -235,11 +250,14 @@ of LCA stages; epsilon; any seed.
 - Whether a better collapse function than Eq. 9 exists.
 - Only supervised training; unsupervised, semi-supervised and zero-shot untested.
 - HVI and CIDNet cannot be trained separately (no ground truth exists in HVI).
-- Other tasks: one SwinIR x2 super-resolution try gave +0.14 dB; nothing else.
-- Replacing the Transformer with Mamba; use inside large vision models.
+- Other tasks: one SwinIR x2 super-resolution try gave +0.14 dB [SwinIR **unverified**, no
+  bib entry]; nothing else.
+- Replacing the Transformer with Mamba [**unverified**, no bib entry]; use inside large
+  vision models.
 - The hue-bias parameters gamma_G, gamma_B cannot be set for an unknown camera.
-- LPIPS is worse than GLARE on LOL-v2-real and worse than ZeroDCE cross-dataset; BRISQUE
-  does not beat RetinexNet.
+- LPIPS is worse than GLARE [bib key pending, see §5] on LOL-v2-real and worse than Zero-DCE
+  (`guo2020zerodce`) cross-dataset; BRISQUE [**unverified**] does not beat RetinexNet
+  (`wei2018retinex`).
 
 ### 4.2 Our observations (gaps a careful reader sees; not claims)
 
@@ -261,8 +279,9 @@ of LCA stages; epsilon; any seed.
    value is reported. Supplement figures show k in {1, 3, 10, 50} qualitatively only.
 5. **Loss weights are unreported and partly unablated.** Five lambdas, none printed; the
    SSIM term appears only in the supplement; edge (weight 50 in code) and SSIM terms are
-   never removed; lambda_c never swept. The VGG perceptual term is applied to HVI tensors
-   with `H,V` in `[-1,1]` (code), which the paper does not discuss.
+   never removed; lambda_c never swept. The VGG perceptual term's `range_norm` shifts the
+   **RGB** input to `[0.5, 1]` before ImageNet normalisation (code, §1.3), which the paper
+   does not discuss; the HVI input is the one that lands in a valid range.
 6. **The headline row mixes checkpoints** (perceptual on/off per column; §2.3). The old
    version disclosed this, the final one does not.
 7. **Checkpoint selection on the test split** (code §1.4; README ships `best_PSNR`,
