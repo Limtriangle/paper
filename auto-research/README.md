@@ -15,6 +15,16 @@ Layout:
   bitwise checks), `--launch --run R --gpu N [--smoke]` (spawns one detached worker on one
   GPU), `--status`. `--smoke` trains the first 2 epochs of the 1000-epoch schedule (epoch 1
   is lr=0 under the upstream warmup) on the full train/val sets: real cost numbers.
+  Flags: `--arm` (default U = upstream model + loss), `--k0`, `--val-every` (default 5),
+  `--snapshot-every` (default 10), `--split` (default scene_v1), `--eval-gated` (off: identity
+  test-time knobs), `--strict`.
+- `c1_arms.py` — C1 ladder: `ArmNet` (CIDNet body transcribed between encode/decode; arms
+  A0, A2, A3, A4, L1, R, U), `FrozenLoss` (L_rgb + L_hvi at constant detached k0, no VGG on
+  the HVI side), `--preflight` (CPU, one fwd/bwd per arm, parameter-count assertion) ->
+  `ralph/results/phase0_arms_preflight.json`. `hvi_baseline.py --arm X` trains an arm.
+- `scene_split.py` / `split_scene_v1.json` — scene-disjoint validation split (DINOv2 + pHash
+  clusters, 40 val / 445 train); the only script besides final_eval_test.py permitted to touch
+  eval15 (listing + GT embedding for clustering, recorded in its JSON).
 - `phase0_codebase.py` — writes `ralph/results/phase0_codebase.json` (upstream facts with
   file:line pointers, parameter/MAC counts, latency, the smoke run's cost block).
 - `final_eval_test.py` — the ONLY script allowed to read the test split (eval15); run once per

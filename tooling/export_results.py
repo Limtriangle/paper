@@ -85,7 +85,8 @@ def export_job(jobdir, sources, rel):
     if mt.exists():
         rows = read_csv(mt)
         if rows:
-            best = max(rows, key=lambda r: r.get("val_psnr", float("-inf")))
+            vrows = [r for r in rows if isinstance(r.get("val_psnr"), (int, float))] or rows
+            best = max(vrows, key=lambda r: r.get("val_psnr") if isinstance(r.get("val_psnr"), (int, float)) else float("-inf"))
             job["curve"] = {"n_epochs": len(rows),
                             "final_train_loss": rows[-1].get("loss"),
                             "final_val_psnr": rows[-1].get("val_psnr"),

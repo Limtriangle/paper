@@ -1,0 +1,184 @@
+{
+  "written_at": "2026-09-23T22:46:26",
+  "k0": 0.2,
+  "arms": {
+    "A0": {
+      "representation": "hvi",
+      "loss": "frozen",
+      "parameters": 1975569,
+      "parameters_trainable": 1975569,
+      "model_k": {
+        "value": 0.20000000298023224,
+        "learnable": true,
+        "grad": -2.1912143230438232
+      },
+      "loss_terms": {
+        "rgb_l1": 0.33418992161750793,
+        "rgb_ssim": 0.4422830045223236,
+        "rgb_edge": 7.338963985443115,
+        "rgb_perc": 1.168988823890686,
+        "hvi_l1": 0.43781778216362,
+        "hvi_ssim": 0.4599705636501312,
+        "hvi_edge": 14.356104850769043
+      },
+      "loss_total": 24.538318634033203,
+      "encode_decode_roundtrip_max_abs_err": 5.960464477539062e-07,
+      "output_dtype": "torch.float32",
+      "n_param_tensors_without_grad": 13
+    },
+    "A2": {
+      "representation": "hvi_k0",
+      "loss": "frozen",
+      "parameters": 1975569,
+      "parameters_trainable": 1975568,
+      "model_k": {
+        "value": 0.0,
+        "learnable": false,
+        "grad": null
+      },
+      "loss_terms": {
+        "rgb_l1": 0.3345947861671448,
+        "rgb_ssim": 0.4423767924308777,
+        "rgb_edge": 7.358009338378906,
+        "rgb_perc": 1.1710883378982544,
+        "hvi_l1": 0.4384741187095642,
+        "hvi_ssim": 0.4599377512931824,
+        "hvi_edge": 14.403404235839844
+      },
+      "loss_total": 24.607885360717773,
+      "encode_decode_roundtrip_max_abs_err": 5.960464477539062e-07,
+      "output_dtype": "torch.float32",
+      "n_param_tensors_without_grad": 13
+    },
+    "A3": {
+      "representation": "max_cbcr",
+      "loss": "frozen",
+      "parameters": 1975569,
+      "parameters_trainable": 1975569,
+      "model_k": {
+        "value": 0.20000000298023224,
+        "learnable": true,
+        "grad": null
+      },
+      "loss_terms": {
+        "rgb_l1": 0.33466148376464844,
+        "rgb_ssim": 0.443564236164093,
+        "rgb_edge": 7.217360496520996,
+        "rgb_perc": 1.167423129081726,
+        "hvi_l1": 0.4364202320575714,
+        "hvi_ssim": 0.46018898487091064,
+        "hvi_edge": 13.982380867004395
+      },
+      "loss_total": 24.04199981689453,
+      "encode_decode_roundtrip_max_abs_err": 1.341104507446289e-07,
+      "output_dtype": "torch.float32",
+      "n_param_tensors_without_grad": 14
+    },
+    "A4": {
+      "representation": "ycbcr",
+      "loss": "frozen",
+      "parameters": 1975569,
+      "parameters_trainable": 1975569,
+      "model_k": {
+        "value": 0.20000000298023224,
+        "learnable": true,
+        "grad": null
+      },
+      "loss_terms": {
+        "rgb_l1": 0.33264654874801636,
+        "rgb_ssim": 0.4423629641532898,
+        "rgb_edge": 7.145735740661621,
+        "rgb_perc": 1.1646226644515991,
+        "hvi_l1": 0.43340179324150085,
+        "hvi_ssim": 0.4590824246406555,
+        "hvi_edge": 13.907064437866211
+      },
+      "loss_total": 23.884918212890625,
+      "encode_decode_roundtrip_max_abs_err": 1.7881393432617188e-07,
+      "output_dtype": "torch.float32",
+      "n_param_tensors_without_grad": 14
+    },
+    "L1": {
+      "representation": "hvi",
+      "loss": "rgb_only",
+      "parameters": 1975569,
+      "parameters_trainable": 1975569,
+      "model_k": {
+        "value": 0.20000000298023224,
+        "learnable": true,
+        "grad": -0.6891451478004456
+      },
+      "loss_terms": {
+        "rgb_l1": 0.33418992161750793,
+        "rgb_ssim": 0.4422830045223236,
+        "rgb_edge": 7.338963985443115,
+        "rgb_perc": 1.168988823890686
+      },
+      "loss_total": 9.284425735473633,
+      "encode_decode_roundtrip_max_abs_err": 5.960464477539062e-07,
+      "output_dtype": "torch.float32",
+      "n_param_tensors_without_grad": 13
+    },
+    "R": {
+      "representation": "rgb_residual",
+      "loss": "frozen",
+      "parameters": 1975893,
+      "parameters_trainable": 1975893,
+      "model_k": {
+        "value": 0.20000000298023224,
+        "learnable": true,
+        "grad": null
+      },
+      "loss_terms": {
+        "rgb_l1": 0.33680298924446106,
+        "rgb_ssim": 0.4419102668762207,
+        "rgb_edge": 7.335100173950195,
+        "rgb_perc": 1.2022243738174438,
+        "hvi_l1": 0.43343305587768555,
+        "hvi_ssim": 0.45887136459350586,
+        "hvi_edge": 13.913400650024414
+      },
+      "loss_total": 24.121742248535156,
+      "encode_decode_roundtrip_max_abs_err": 0.0,
+      "output_dtype": "torch.float32",
+      "n_param_tensors_without_grad": 14
+    },
+    "U": {
+      "representation": "hvi",
+      "loss": "upstream",
+      "parameters": 1975569,
+      "parameters_trainable": 1975569,
+      "model_k": {
+        "value": 0.20000000298023224,
+        "learnable": true,
+        "grad": -5.658759117126465
+      },
+      "loss_terms": {
+        "rgb_l1": 0.33418992161750793,
+        "rgb_ssim": 0.4422830045223236,
+        "rgb_edge": 7.338963985443115,
+        "rgb_perc": 1.168988823890686,
+        "hvi_l1": 0.43781778216362,
+        "hvi_ssim": 0.4599705636501312,
+        "hvi_edge": 14.356104850769043,
+        "hvi_perc": 1.6985546350479126
+      },
+      "loss_total": 26.236873626708984,
+      "encode_decode_roundtrip_max_abs_err": 5.960464477539062e-07,
+      "output_dtype": "torch.float32",
+      "n_param_tensors_without_grad": 13
+    }
+  },
+  "A0_equals_upstream_forward": "BITWISE",
+  "ladder_parameter_count": 1975569,
+  "R_parameter_count": 1975893,
+  "R_minus_ladder": 324,
+  "test_time_knobs": {
+    "gated": false,
+    "gated2": false,
+    "alpha": 1.0,
+    "gamma": 1.0
+  },
+  "note": "CPU synthetic preflight, one forward/backward per arm; not a training result. n_param_tensors_without_grad counts I_LCA5's 13 dead tensors (upstream) in every arm.",
+  "preflight": "PASS"
+}

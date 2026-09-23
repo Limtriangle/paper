@@ -282,6 +282,23 @@ def split_sha(split):
     return sha256_json({k: split[k] for k in ("split_seed", "train", "val")})
 
 
+SPLITS = {"random42": "seeded random 50-image hold-out (make_split)",
+          "scene_v1": "scene-disjoint 40-image hold-out, auto-research/split_scene_v1.json"}
+
+
+def load_split(name="scene_v1"):
+    """Named split -> dict. scene_v1 is verified against the sha256 stored in its file."""
+    require(name in SPLITS, f"unknown split {name}")
+    if name == "random42":
+        s = make_split()
+    else:
+        s = json_load(Path(__file__).resolve().parent / f"split_{name}.json")
+        require(s["sha256"] == split_sha(s), "split file sha256 mismatch")
+    require(not set(s["train"]) & set(s["val"]) and len(s["train"]) + len(s["val"]) == 485, "bad split")
+    s["name"] = name
+    return s
+
+
 def dataset_fingerprint(force=False):
     """sha256 over (name, file sha256) of every our485 image; cached. eval15 excluded."""
     cache = OUTPUTS / "lolv1_our485_fingerprint.json"
@@ -547,12 +564,13 @@ def infer(model, x, gated=False):
     import torch
     h, w = x.shape[-2:]
     xp = torch.nn.functional.pad(x, (0, (-w) % 8, 0, (-h) % 8), mode="replicate")
-    model.trans.gated = bool(gated)
+    tr = model.trans
+    tr.gated, tr.gated2, tr.alpha = bool(gated), False, 1.0                # gamma: never applied (=1)
     try:
         with torch.no_grad():
             y = model(xp)[..., :h, :w]
     finally:
-        model.trans.gated = False
+        tr.gated = False
     return y.clamp(0, 1)                                                    # eval.py:39
 
 
@@ -564,24 +582,24 @@ def load_val_pair(name, data_dir=TRAIN_DIR):
     return to_tensor(low), to_tensor(high), np.array(high)
 
 
-def validate_psnr(model, names, device="cuda"):
-    """Per-epoch selection metric: mean upstream PSNR (uint8) over the val split, both
-    ungated and gated. No GT-mean. Returns (psnr_ungated, psnr_gated)."""
+def validate_psnr(model, names, device="cuda", eval_gated=True):
+    """Per-epoch selection metric: mean upstream PSNR (uint8) over the val split, ungated
+    (identity knobs) and, if eval_gated, also gated. No GT-mean. Returns (psnr, psnr_gated|None)."""
     import torch
     model.eval()
     acc = {False: 0.0, True: 0.0}
     for name in names:
         x, _, gt_u8 = load_val_pair(name)
         x = x.unsqueeze(0).to(device)
-        for gated in (False, True):
+        for gated in ((False, True) if eval_gated else (False,)):
             pred = infer(model, x, gated=gated)[0]
             acc[gated] += float(calculate_psnr(to_uint8_hwc(pred), gt_u8))
     model.train()
-    return acc[False] / len(names), acc[True] / len(names)
+    return acc[False] / len(names), (acc[True] / len(names) if eval_gated else None)
 
 
 def detailed_evaluation(model, names, folder, checkpoints=("last", "best"), device="cuda",
-                        n_images=4, data_dir=TRAIN_DIR, split_label="validation"):
+                        n_images=4, data_dir=TRAIN_DIR, split_label="validation", eval_gated=True):
     """Full metric set for each checkpoint file <folder>/<ckpt>.pt on the given names.
     Writes <ckpt>_per_image.csv, <ckpt>_<split_label>_images/, and validation_summary.csv."""
     import torch
@@ -605,8 +623,8 @@ def detailed_evaluation(model, names, folder, checkpoints=("last", "best"), devi
             x = x.unsqueeze(0).to(device)
             gt = gt.unsqueeze(0).to(device)
             pred = infer(model, x, gated=False)
-            pred_g = infer(model, x, gated=True)
-            u8, u8g = to_uint8_hwc(pred[0]), to_uint8_hwc(pred_g[0])
+            u8 = to_uint8_hwc(pred[0])
+            u8g = to_uint8_hwc(infer(model, x, gated=True)[0]) if eval_gated else None
             adj = gt_mean_adjust(u8, gt_u8)
             r = {"image": name,
                  "psnr": float(calculate_psnr(u8, gt_u8)),
@@ -615,9 +633,9 @@ def detailed_evaluation(model, names, folder, checkpoints=("last", "best"), devi
                  "psnr_gtmean": float(calculate_psnr(adj, gt_u8)),
                  "ssim_gtmean": float(calculate_ssim(adj, gt_u8)),
                  "lpips_gtmean": lp(adj, gt_u8),
-                 "psnr_gated": float(calculate_psnr(u8g, gt_u8)),
-                 "ssim_gated": float(calculate_ssim(u8g, gt_u8)),
-                 "lpips_gated": lp(u8g, gt_u8),
+                 **({"psnr_gated": float(calculate_psnr(u8g, gt_u8)),
+                     "ssim_gated": float(calculate_ssim(u8g, gt_u8)),
+                     "lpips_gated": lp(u8g, gt_u8)} if eval_gated else {}),
                  **colour_scores(pred[0], gt[0])}
             require(all(math.isfinite(r[k]) for k in ("psnr", "ssim", "lpips")),
                     f"non-finite metric on {name}")
@@ -630,6 +648,8 @@ def detailed_evaluation(model, names, folder, checkpoints=("last", "best"), devi
         csv_save(Path(folder) / f"{label}_per_image.csv", rows)
         means = {}
         for k in metric_keys:
+            if k not in rows[0]:
+                continue
             valid = [r[k] for r in rows if math.isfinite(r[k])]
             means[k] = sum(valid) / len(valid) if valid else None
             means[f"{k}_n"] = len(valid)

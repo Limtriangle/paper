@@ -27,6 +27,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 import hvilib as H  # noqa: E402
+import c1_arms as C  # noqa: E402
 
 STUDY = "baseline"
 SCRIPT = Path(__file__).resolve()
@@ -145,14 +146,18 @@ def preflight(verbose=True):
 # ------------------------------------------------------------------ launch
 def make_protocol(args, split):
     p = dict(H.UPSTREAM_PROTOCOL)
-    p.update({"mode": "smoke" if args.smoke else "full", "seed": args.seed,
+    p.update({"arm": args.arm, "representation": C.ARMS[args.arm][0], "loss": C.ARMS[args.arm][1],
+              "k0": args.k0, "val_every": args.val_every, "split": args.split,
+              "eval_gated": bool(args.eval_gated),
+              "inverse_knobs": {"gated": False, "gated2": False, "alpha": 1.0, "gamma": 1.0},
+              "mode": "smoke" if args.smoke else "full", "seed": args.seed,
               "epochs_schedule": args.epochs,
               "epochs_trained": (args.smoke_epochs if args.smoke else args.epochs),
               "step_limit": 0, "val_limit": 0, "commit": H.COMMIT,
               "split_sha256": H.split_sha(split), "workers": args.workers,
               "snapshot_every": args.snapshot_every,   # upstream options.py:18 snapshots=10; 0 = off
               "strict_deterministic": bool(args.strict),
-              "condition": "upstream"})
+              "condition": args.arm})
     return p
 
 
@@ -167,7 +172,8 @@ def launch(args):
     free = H.free_gpus()
     H.require(args.gpu in free, f"GPU {args.gpu} is not free (free: {free}); nothing was stopped")
     report = preflight(verbose=False)
-    split = H.make_split()
+    report["arms"] = C.preflight(verbose=False)
+    split = H.load_split(args.split)
     fp = H.dataset_fingerprint()
     out.mkdir(exist_ok=False)
     H.json_save(out / "split_snapshot.json", split)
@@ -218,12 +224,14 @@ def worker(args):
                   "worker must see exactly one GPU")
         H.set_determinism(3, strict=p.get("strict_deterministic", False))
         split = H.json_load(out / "split_snapshot.json")
-        H.require(H.split_sha(split) == p["split_sha256"] == H.split_sha(H.make_split()),
+        H.require(H.split_sha(split) == p["split_sha256"] == H.split_sha(H.load_split(p["split"])),
                   "split changed")
         seed = args.seed
-        H.seed_all(seed)
-        model = H.build_model(p["channels"], p["heads"])
+        model = C.build_arm(p["arm"], seed, p["channels"], p["heads"])
         config = {"variant": p["condition"], "condition": p["condition"], "seed": seed,
+                  "arm": p["arm"], "representation": p["representation"], "loss": p["loss"],
+                  "k0": p["k0"], "val_every": p["val_every"], "split": p["split"],
+                  "inverse_knobs": p["inverse_knobs"],
                   "width": p["channels"][0], "channels": p["channels"], "heads": p["heads"],
                   "parameters": H.count_parameters(model),
                   "initial_model_sha256": H.state_digest(model),
@@ -242,7 +250,7 @@ def worker(args):
             subprocess.run([sys.executable, "-m", "pip", "freeze"], text=True,
                            capture_output=True).stdout, encoding="utf-8")
         model.cuda().train()
-        loss_fn = H.UpstreamLoss(p["weights"])
+        loss_fn = C.make_loss(p["loss"], p["k0"], p["weights"])
         optimizer, scheduler = H.make_optimizer_and_scheduler(
             model, p["epochs_schedule"], p["lr"], p["warmup_epochs"], p["lr_min"])
         train_names = split["train"]
@@ -282,18 +290,23 @@ def worker(args):
             torch.cuda.synchronize()
             train_seconds = time.time() - tick
             scheduler.step()                                               # train.py:219
-            job.status("running", phase="validating", epoch=epoch + 1)
-            v0 = time.time()
-            psnr, psnr_gated = H.validate_psnr(model, val_names)
-            val_seconds = time.time() - v0
+            do_val = (epoch + 1) % p["val_every"] == 0 or epoch + 1 == p["epochs_trained"]
+            if do_val:
+                job.status("running", phase="validating", epoch=epoch + 1)
+                v0 = time.time()
+                psnr, psnr_gated = H.validate_psnr(model, val_names, eval_gated=p["eval_gated"])
+                val_seconds = time.time() - v0
+            else:
+                psnr, psnr_gated, val_seconds = None, None, 0.0
             row = {"epoch": epoch + 1, "steps": steps, "images": n_images, "loss": total / steps,
-                   "val_psnr": psnr, "val_psnr_gated": psnr_gated,
+                   "val_psnr": "" if psnr is None else psnr,
+                   "val_psnr_gated": "" if psnr_gated is None else psnr_gated,
                    "train_seconds": train_seconds, "val_seconds": val_seconds, "lr": lr,
                    "k": model.trans.density_k.detach().item(),
                    "peak_mem_alloc_mib": torch.cuda.max_memory_allocated() / 2**20,
                    "peak_mem_reserved_mib": torch.cuda.max_memory_reserved() / 2**20}
             row.update({f"term_{k}": v / steps for k, v in term_sum.items()})
-            if psnr > best_psnr:
+            if psnr is not None and psnr > best_psnr:
                 best_psnr = psnr
                 job.save({"epoch": epoch + 1, "model": model.state_dict(), "val_psnr": psnr,
                           "config": config}, "best.pt")
@@ -309,13 +322,13 @@ def worker(args):
                       "numpy_rng": np.random.get_state(), "config": config}, "last.pt")
             H.csv_save(job.dir / "metrics.csv", history)
             print(f"{job.name}: epoch {epoch+1}/{p['epochs_trained']} loss={row['loss']:.5f} "
-                  f"val_psnr={psnr:.4f} (gated {psnr_gated:.4f}) lr={lr:.3g} "
+                  f"val_psnr={psnr} (gated {psnr_gated}) lr={lr:.3g} "
                   f"train_s={train_seconds:.1f} val_s={val_seconds:.1f} "
                   f"peak_alloc={row['peak_mem_alloc_mib']:.0f}MiB", flush=True)
         del optimizer, loss_fn
         torch.cuda.empty_cache()
         job.status("running", phase="evaluating")
-        H.detailed_evaluation(model, val_names, job.dir)
+        H.detailed_evaluation(model, val_names, job.dir, eval_gated=p["eval_gated"])
         cfg = H.json_load(job.dir / "config.json")
         cfg["epochs_trained"] = len(history)
         cfg["gpu_info"] = H.gpu_info()
@@ -369,8 +382,15 @@ def parse_args():
     ap.add_argument("--workers", type=int, default=3, help="DataLoader workers (15 cores / 4 GPUs)")
     ap.add_argument("--strict", action="store_true",
                     help="torch.use_deterministic_algorithms(True): bitwise-reproducible, ~1.7x slower")
-    ap.add_argument("--snapshot-every", type=int, default=0,
+    ap.add_argument("--snapshot-every", type=int, default=10,
                     help="also keep snapshots/epoch_N.pt every N epochs (upstream: 10); 0 = off")
+    ap.add_argument("--arm", default="U", choices=tuple(C.ARMS),
+                    help="C1 arm (c1_arms.py); U = upstream model + upstream loss")
+    ap.add_argument("--k0", type=float, default=C.K0_DEFAULT, help="frozen k in the loss-side HVI transform")
+    ap.add_argument("--val-every", type=int, default=5, help="validate every N epochs (and the last)")
+    ap.add_argument("--split", default="scene_v1", choices=tuple(H.SPLITS))
+    ap.add_argument("--eval-gated", action="store_true",
+                    help="also record upstream's gated (x1.3 saturation) columns; default: identity knobs only")
     a = ap.parse_args()
     H.require(Path(a.run).name == a.run and a.run not in ("", ".", ".."), "unsafe run name")
     return a
