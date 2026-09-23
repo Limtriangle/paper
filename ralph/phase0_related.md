@@ -296,6 +296,51 @@ published LOL-v1 number is X dB above what validation-based selection yields". G
 a color-fidelity metric and possibly data we do not have. Gap 9 needs extra datasets and
 their checksums.
 
-## 5. Closest related work (one line each; every entry verified in `custom.bib`)
+## 5. Closest related work (one line each; every key exists in `custom.bib` and was verified)
 
-*(filled after the citation-verification pass)*
+Verification 2026-09-23 against Crossref, CVF open access, arXiv and OpenAlex (DBLP and
+Semantic Scholar were blocked from this host). Keys in `writing/icml2024/custom.bib`.
+
+**The HVI line itself**
+- `yan2025hvi` (CVPR 2025, pp. 5678-5687): the paper under study; see §2-§4.
+- `yan2024onecolorspace` (arXiv 2402.05809): earlier version; prints wP/oP and normal/GT-mean
+  numbers separately and the numeric loss ablation the final version turned into a figure.
+- `yan2025hvicidnetplus` (arXiv 2507.06814): follow-up for extreme darkness; separate repo,
+  not the code we run. Cite only as "there is a successor".
+
+**Color-space and decomposition approaches (the family HVI belongs to)**
+- `land1977retinex`: the Retinex decomposition every Retinex-family method invokes.
+- `wei2018retinex` (BMVC 2018): RetinexNet and the LOL-v1 dataset (485 train / 15 test).
+- `yang2021lolv2` (TIP 2021): the LOL-v2 real and synthetic datasets.
+- `zhang2019kind` (ACM MM 2019): KinD, Retinex decomposition with separate illumination and
+  reflectance branches, the closest structural ancestor of a two-branch design.
+- `wu2022uretinex` (CVPR 2022): URetinex-Net, Retinex unfolding.
+- `liu2021ruas` (CVPR 2021): RUAS, Retinex-inspired unrolling with architecture search.
+- `cai2023retinexformer` (ICCV 2023): Retinexformer, the strongest published Retinex-style
+  transformer and the baseline HVI-CIDNet is closest to in size (1.53M vs 1.88M params).
+- `brateanu2025lytnet` (SPL 2025): LYT-Net, a YUV-space transformer; the nearest published
+  "other luminance/chroma space" competitor.
+- `xu2022snr` (CVPR 2022): SNR-Aware, spatially varying SNR to route between local and
+  global processing; used by HVI-CIDNet as a plug-in host.
+
+**Other supervised enhancers in the comparison tables**
+- `wang2022llflow` (AAAI 2022): LLFlow, normalising flow; a strong GT-mean baseline.
+- `wang2023llformer` (AAAI 2023): LLFormer, UHD transformer.
+- `hou2023gsad` (NeurIPS 2023): GSAD, diffusion with global structure; the LPIPS competitor.
+- `yi2023diffretinex` (ICCV 2023): Diff-Retinex, generative diffusion in Retinex form.
+- `zamir2022restormer` (CVPR 2022): Restormer, whose channel-attention design the CAB in
+  LCA follows (query/key/value with depthwise convs, attention over channels).
+
+**Unsupervised / zero-reference**
+- `guo2020zerodce` (CVPR 2020): Zero-DCE, curve estimation without pairs.
+- `jiang2021enlightengan` (TIP 2021): EnlightenGAN, unpaired adversarial training.
+- `ma2022sci` (CVPR 2022): SCI, self-calibrated illumination, very small model.
+
+**Datasets and metrics**
+- `chen2018sid` (CVPR 2018): SID; Sony-Total-Dark is the authors' re-rendering of it.
+- `zhou2022lolblur` (ECCV 2022): LEDNet and the LOL-Blur dataset.
+- `cai2018sice` (TIP 2018): SICE multi-exposure dataset (Mix / Grad test protocols).
+- `wang2004ssim`, `zhang2018lpips`, `mittal2013niqe`: SSIM, LPIPS, NIQE.
+- `johnson2016perceptual`: the VGG perceptual loss used as the P term.
+- `sharma2005ciede2000`: CIEDE2000, the color-difference metric the paper does not report
+  and any color-fidelity study would need.

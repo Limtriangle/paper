@@ -1,31 +1,41 @@
-% Every entry here must be verified against DBLP / Semantic Scholar / arXiv before a
-% milestone push (harness/writing.md §4c: one subagent per entry). Entries below were
-% written from memory by the scaffold and are UNVERIFIED until that pass runs.
+% custom.bib — every entry below was verified by a read-only subagent against a fetched
+% page (CVF open access, Crossref DOI registry, arXiv, publisher, or Semantic Scholar);
+% DBLP was unreachable from this host on 2026-09-23. The "verified:" comment on each entry
+% names the source. Integrity floor rule 5: an entry that cannot be verified is cut, never
+% kept. Re-run the verification pass (harness/writing.md §4c) before every milestone push.
+%
+% Section A — core references already used by the skeleton (verified 2026-09-23).
 
+% verified: openaccess.thecvf.com CVPR2025 + Crossref 10.1109/CVPR52734.2025.00533 + arXiv 2502.20272
 @inproceedings{yan2025hvi,
-  title     = {{HVI}: A New Color Space for Low-light Image Enhancement},
   author    = {Yan, Qingsen and Feng, Yixu and Zhang, Cheng and Pang, Guansong and Shi, Kangbiao and Wu, Peng and Dong, Wei and Sun, Jinqiu and Zhang, Yanning},
+  title     = {{HVI}: A New Color Space for Low-light Image Enhancement},
   booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
-  year      = {2025}
+  year      = {2025},
+  pages     = {5678--5687}
 }
 
+% verified: bmvc2018.org programme (paper 155, proceedings PDF 0451) + arXiv 1808.04560
 @inproceedings{wei2018retinex,
-  title     = {Deep Retinex Decomposition for Low-Light Enhancement},
   author    = {Wei, Chen and Wang, Wenjing and Yang, Wenhan and Liu, Jiaying},
+  title     = {Deep Retinex Decomposition for Low-Light Enhancement},
   booktitle = {British Machine Vision Conference (BMVC)},
   year      = {2018}
 }
 
+% verified: openaccess.thecvf.com CVPR2018 + Crossref 10.1109/CVPR.2018.00068
 @inproceedings{zhang2018lpips,
-  title     = {The Unreasonable Effectiveness of Deep Features as a Perceptual Metric},
   author    = {Zhang, Richard and Isola, Phillip and Efros, Alexei A. and Shechtman, Eli and Wang, Oliver},
+  title     = {The Unreasonable Effectiveness of Deep Features as a Perceptual Metric},
   booktitle = {Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
-  year      = {2018}
+  year      = {2018},
+  pages     = {586--595}
 }
 
+% verified: Crossref 10.1109/TIP.2003.819861
 @article{wang2004ssim,
-  title   = {Image Quality Assessment: From Error Visibility to Structural Similarity},
   author  = {Wang, Zhou and Bovik, Alan C. and Sheikh, Hamid R. and Simoncelli, Eero P.},
+  title   = {Image Quality Assessment: From Error Visibility to Structural Similarity},
   journal = {IEEE Transactions on Image Processing},
   volume  = {13},
   number  = {4},
@@ -33,33 +43,237 @@
   year    = {2004}
 }
 
+% verified: Crossref 10.1007/978-3-319-46475-6_43
 @inproceedings{johnson2016perceptual,
-  title     = {Perceptual Losses for Real-Time Style Transfer and Super-Resolution},
   author    = {Johnson, Justin and Alahi, Alexandre and Fei-Fei, Li},
-  booktitle = {European Conference on Computer Vision (ECCV)},
-  year      = {2016}
+  title     = {Perceptual Losses for Real-Time Style Transfer and Super-Resolution},
+  booktitle = {Computer Vision -- ECCV 2016},
+  publisher = {Springer},
+  year      = {2016},
+  pages     = {694--711}
 }
 
+% verified: openaccess.thecvf.com ICCV2023 + Crossref 10.1109/ICCV51070.2023.01149 (CVF pagination)
 @inproceedings{cai2023retinexformer,
-  title     = {Retinexformer: One-stage Retinex-based Transformer for Low-light Image Enhancement},
   author    = {Cai, Yuanhao and Bian, Hao and Lin, Jing and Wang, Haoqian and Timofte, Radu and Zhang, Yulun},
+  title     = {Retinexformer: One-stage Retinex-based Transformer for Low-light Image Enhancement},
   booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
-  year      = {2023}
+  year      = {2023},
+  pages     = {12504--12513}
 }
 
+% verified: openaccess.thecvf.com CVPR2020 + Crossref 10.1109/CVPR42600.2020.00185 (CVF pagination)
 @inproceedings{guo2020zerodce,
-  title     = {Zero-Reference Deep Curve Estimation for Low-Light Image Enhancement},
   author    = {Guo, Chunle and Li, Chongyi and Guo, Jichang and Loy, Chen Change and Hou, Junhui and Kwong, Sam and Cong, Runmin},
+  title     = {Zero-Reference Deep Curve Estimation for Low-Light Image Enhancement},
   booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
-  year      = {2020}
+  year      = {2020},
+  pages     = {1780--1789}
 }
 
+% verified: Crossref 10.1002/col.20070
 @article{sharma2005ciede2000,
-  title   = {The {CIEDE2000} Color-Difference Formula: Implementation Notes, Supplementary Test Data, and Mathematical Observations},
   author  = {Sharma, Gaurav and Wu, Wencheng and Dalal, Edul N.},
+  title   = {The {CIEDE2000} Color-Difference Formula: Implementation Notes, Supplementary Test Data, and Mathematical Observations},
   journal = {Color Research \& Application},
   volume  = {30},
   number  = {1},
   pages   = {21--30},
   year    = {2005}
+}
+
+% Section B — closest related work (verified 2026-09-23 against Crossref / arXiv / OpenAlex;
+% DBLP and Semantic Scholar were blocked from this host).
+
+% verified: arXiv 2402.05809 (v3, 2024-06-17); first author is Yan, not Feng
+@article{yan2024onecolorspace,
+  author  = {Yan, Qingsen and Feng, Yixu and Zhang, Cheng and Wang, Pei and Wu, Peng and Dong, Wei and Sun, Jinqiu and Zhang, Yanning},
+  title   = {You Only Need One Color Space: An Efficient Network for Low-light Image Enhancement},
+  journal = {arXiv preprint arXiv:2402.05809},
+  year    = {2024}
+}
+
+% verified: arXiv 2507.06814 (v1, 2025-07-09). A journal version (IEEE TCSVT 36(8), 2026,
+% doi 10.1109/TCSVT.2026.3710237) was found on Crossref with a different author list;
+% we cite the arXiv version the upstream README links to. Re-check at the milestone pass.
+@article{yan2025hvicidnetplus,
+  author  = {Yan, Qingsen and Shi, Kangbiao and Feng, Yixu and Hu, Tao and Wu, Peng and Pang, Guansong and Zhang, Yanning},
+  title   = {{HVI-CIDNet+}: Beyond Extreme Darkness for Low-Light Image Enhancement},
+  journal = {arXiv preprint arXiv:2507.06814},
+  year    = {2025}
+}
+
+% verified: Crossref 10.1145/3343031.3350926
+@inproceedings{zhang2019kind,
+  author    = {Zhang, Yonghua and Zhang, Jiawan and Guo, Xiaojie},
+  title     = {Kindling the Darkness: A Practical Low-light Image Enhancer},
+  booktitle = {Proceedings of the 27th ACM International Conference on Multimedia (MM)},
+  pages     = {1632--1640},
+  year      = {2019}
+}
+
+% verified: Crossref 10.1609/aaai.v36i3.20162
+@inproceedings{wang2022llflow,
+  author    = {Wang, Yufei and Wan, Renjie and Yang, Wenhan and Li, Haoliang and Chau, Lap-Pui and Kot, Alex},
+  title     = {Low-Light Image Enhancement with Normalizing Flow},
+  booktitle = {Proceedings of the AAAI Conference on Artificial Intelligence},
+  volume    = {36},
+  pages     = {2604--2612},
+  year      = {2022}
+}
+
+% verified: Crossref 10.1109/CVPR52688.2022.01719
+@inproceedings{xu2022snr,
+  author    = {Xu, Xiaogang and Wang, Ruixing and Fu, Chi-Wing and Jia, Jiaya},
+  title     = {{SNR}-Aware Low-light Image Enhancement},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  pages     = {17693--17703},
+  year      = {2022}
+}
+
+% verified: Crossref 10.1109/TIP.2021.3050850
+@article{yang2021lolv2,
+  author  = {Yang, Wenhan and Wang, Wenjing and Huang, Haofeng and Wang, Shiqi and Liu, Jiaying},
+  title   = {Sparse Gradient Regularized Deep Retinex Network for Robust Low-Light Image Enhancement},
+  journal = {IEEE Transactions on Image Processing},
+  volume  = {30},
+  pages   = {2072--2086},
+  year    = {2021}
+}
+
+% verified: Crossref 10.1109/CVPR.2018.00347
+@inproceedings{chen2018sid,
+  author    = {Chen, Chen and Chen, Qifeng and Xu, Jia and Koltun, Vladlen},
+  title     = {Learning to See in the Dark},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  pages     = {3291--3300},
+  year      = {2018}
+}
+
+% verified: Crossref 10.1109/TIP.2021.3051462
+@article{jiang2021enlightengan,
+  author  = {Jiang, Yifan and Gong, Xinyu and Liu, Ding and Cheng, Yu and Fang, Chen and Shen, Xiaohui and Yang, Jianchao and Zhou, Pan and Wang, Zhangyang},
+  title   = {{EnlightenGAN}: Deep Light Enhancement Without Paired Supervision},
+  journal = {IEEE Transactions on Image Processing},
+  volume  = {30},
+  pages   = {2340--2349},
+  year    = {2021}
+}
+
+% verified: Crossref 10.1109/CVPR52688.2022.00581
+@inproceedings{wu2022uretinex,
+  author    = {Wu, Wenhui and Weng, Jian and Zhang, Pingping and Wang, Xu and Yang, Wenhan and Jiang, Jianmin},
+  title     = {{URetinex-Net}: Retinex-based Deep Unfolding Network for Low-light Image Enhancement},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  pages     = {5891--5900},
+  year      = {2022}
+}
+
+% verified: Crossref 10.1109/CVPR52688.2022.00555
+@inproceedings{ma2022sci,
+  author    = {Ma, Long and Ma, Tengyu and Liu, Risheng and Fan, Xin and Luo, Zhongxuan},
+  title     = {Toward Fast, Flexible, and Robust Low-Light Image Enhancement},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  pages     = {5627--5636},
+  year      = {2022}
+}
+
+% verified: Crossref 10.1609/aaai.v37i3.25364
+@inproceedings{wang2023llformer,
+  author    = {Wang, Tao and Zhang, Kaihao and Shen, Tianrun and Luo, Wenhan and Stenger, Bj{\"o}rn and Lu, Tong},
+  title     = {Ultra-High-Definition Low-Light Image Enhancement: A Benchmark and Transformer-Based Method},
+  booktitle = {Proceedings of the AAAI Conference on Artificial Intelligence},
+  volume    = {37},
+  pages     = {2654--2662},
+  year      = {2023}
+}
+
+% verified: Crossref 10.1109/CVPR52688.2022.00564
+@inproceedings{zamir2022restormer,
+  author    = {Zamir, Syed Waqas and Arora, Aditya and Khan, Salman and Hayat, Munawar and Khan, Fahad Shahbaz and Yang, Ming-Hsuan},
+  title     = {Restormer: Efficient Transformer for High-Resolution Image Restoration},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  pages     = {5718--5729},
+  year      = {2022}
+}
+
+% verified: Crossref 10.1007/978-3-031-20068-7_33
+@inproceedings{zhou2022lolblur,
+  author    = {Zhou, Shangchen and Li, Chongyi and Loy, Chen Change},
+  title     = {{LEDNet}: Joint Low-Light Enhancement and Deblurring in the Dark},
+  booktitle = {Computer Vision -- ECCV 2022},
+  publisher = {Springer},
+  pages     = {573--589},
+  year      = {2022}
+}
+
+% verified: Crossref 10.1109/TIP.2018.2794218
+@article{cai2018sice,
+  author  = {Cai, Jianrui and Gu, Shuhang and Zhang, Lei},
+  title   = {Learning a Deep Single Image Contrast Enhancer from Multi-Exposure Images},
+  journal = {IEEE Transactions on Image Processing},
+  volume  = {27},
+  number  = {4},
+  pages   = {2049--2062},
+  year    = {2018}
+}
+
+% verified: Crossref 10.1109/LSP.2012.2227726 (issue dated 2013)
+@article{mittal2013niqe,
+  author  = {Mittal, Anish and Soundararajan, Rajiv and Bovik, Alan C.},
+  title   = {Making a ``Completely Blind'' Image Quality Analyzer},
+  journal = {IEEE Signal Processing Letters},
+  volume  = {20},
+  number  = {3},
+  pages   = {209--212},
+  year    = {2013}
+}
+
+% verified: Crossref 10.1109/LSP.2025.3563125 + arXiv 2401.15204
+@article{brateanu2025lytnet,
+  author  = {Brateanu, Alexandru and Balmez, Raul and Avram, Adrian and Orhei, Ciprian and Ancuti, Cosmin},
+  title   = {{LYT-Net}: Lightweight {YUV} Transformer-Based Network for Low-Light Image Enhancement},
+  journal = {IEEE Signal Processing Letters},
+  volume  = {32},
+  pages   = {2065--2069},
+  year    = {2025}
+}
+
+% verified: Crossref 10.52202/075280-3490 + arXiv 2310.17577 (NeurIPS 2023, not 2024)
+@inproceedings{hou2023gsad,
+  author    = {Hou, Jinhui and Zhu, Zhiyu and Hou, Junhui and Liu, Hui and Zeng, Huanqiang and Yuan, Hui},
+  title     = {Global Structure-Aware Diffusion Process for Low-light Image Enhancement},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  volume    = {36},
+  pages     = {79734--79747},
+  year      = {2023}
+}
+
+% verified: Crossref 10.1109/ICCV51070.2023.01130
+@inproceedings{yi2023diffretinex,
+  author    = {Yi, Xunpeng and Xu, Han and Zhang, Hao and Tang, Linfeng and Ma, Jiayi},
+  title     = {Diff-Retinex: Rethinking Low-light Image Enhancement with a Generative Diffusion Model},
+  booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
+  pages     = {12268--12277},
+  year      = {2023}
+}
+
+% verified: Crossref 10.1109/CVPR46437.2021.01042
+@inproceedings{liu2021ruas,
+  author    = {Liu, Risheng and Ma, Long and Zhang, Jiaao and Fan, Xin and Luo, Zhongxuan},
+  title     = {Retinex-inspired Unrolling with Cooperative Prior Architecture Search for Low-light Image Enhancement},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  pages     = {10556--10565},
+  year      = {2021}
+}
+
+% verified: Crossref 10.1038/scientificamerican1277-108
+@article{land1977retinex,
+  author  = {Land, Edwin H.},
+  title   = {The Retinex Theory of Color Vision},
+  journal = {Scientific American},
+  volume  = {237},
+  number  = {6},
+  pages   = {108--128},
+  year    = {1977}
 }
