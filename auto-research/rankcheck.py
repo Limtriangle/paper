@@ -64,7 +64,17 @@ def main():
     a = ap.parse_args()
     R = H.PAPER / "ralph" / "results"
     res = {"written_at": time.strftime("%Y-%m-%dT%H:%M:%S"), "pair": PAIR, "split": "scene_v1 validation (40 images)",
-           "test15": "NEVER READ", "sources": {}, "loops": {}}
+           "test15": "NEVER READ", "sources": {}, "loops": {},
+           "labels": {"finetune": "50-epoch fine-tune from released w_perc (lr 3e-5), one seed",
+                      "scratch": "LADDER SEED 1: from-scratch 1000-epoch frozen protocol, the true A0 - A2 gap (one seed, not citable)"},
+           "notes": ["DATA (2026-09-24): the released w_perc weights were trained with k = 1.1255; arm A2 replaces the "
+                     "transform by k = 0, so its fine-tune starts from a representation mismatch: A0 - A2 = +15.8 dB "
+                     "after epoch 1, +7.7 dB after epoch 50, A2 peaking at epoch 7 then declining. The fine-tune loop "
+                     "therefore does not test the arms; it measures recovery from the mismatch.",
+                     "RULE (DECISIONS 2026-09-24, master): the fast loop is valid only for components whose init "
+                     "reproduces the released output; hvi_baseline.py --preflight-release enforces it (tol 1e-5).",
+                     "The 'sign_and_magnitude_comparison' block below is descriptive only; it is NOT a loop-validity "
+                     "verdict for this pair because of the mismatch above."]}
     for name, fn in (("finetune", a.finetune), ("scratch", a.scratch)):
         p = R / fn
         if not p.is_file():
@@ -86,12 +96,12 @@ def main():
                     agree[ck][m] = {"finetune_delta": df, "scratch_delta": ds, "same_sign": (df > 0) == (ds > 0),
                                     "ratio_finetune_over_scratch": ratio,
                                     "rough_magnitude_agree": (ratio is not None and 0.33 <= ratio <= 3.0)}
-    res["agreement"] = agree
+    res["sign_and_magnitude_comparison"] = agree
     res["summary"] = ("both loops complete" if all(res["loops"].get(k, {}).get("status", {}) and
                       all(v == "complete" for v in res["loops"][k]["status"].values()) for k in ("finetune", "scratch"))
                       else "partial: see loops.*.status")
-    res["caveat"] = ("one seed per arm; a sign agreement here is a necessary condition for the fast loop, not evidence "
-                     "about the arms themselves; the frozen protocol's seed spread is unknown until the 5-seed A0 gate")
+    res["caveat"] = ("one seed per arm; the frozen protocol's seed spread is unknown until the 5-seed A0 gate; "
+                     "the scratch pair is ladder seed 1 of the A0 vs A2 contrast, not a loop test")
     dest = R / "phase0_finetune_rankcheck.json"
     H.json_save(dest, res)
     print(res["summary"]); print({ck: {m: (round(v["finetune_delta"], 4), round(v["scratch_delta"], 4), v["same_sign"])

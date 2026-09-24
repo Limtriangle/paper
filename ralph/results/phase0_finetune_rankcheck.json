@@ -1,5 +1,5 @@
 {
-  "written_at": "2026-09-24T02:56:48",
+  "written_at": "2026-09-24T02:59:18",
   "pair": [
     "A0_seed42",
     "A2_seed42"
@@ -11,8 +11,8 @@
     "finetune__rankcheck_v2/A0_seed42/metrics.csv": "0600e10f398a6e73fc957f372930aef18eb9e4e4f871897c49ea93e3d0ca4ccf",
     "finetune__rankcheck_v2/A2_seed42/metrics.csv": "ffb118813a9be5994759fb5fe44a3475fa2a5f2e8753352d9405647e54838cb4",
     "baseline__rankcheck_v2.json": "df6e24a2528ff26aa20228cb5f1626a6214eb444535553c8af952a378f9e6726",
-    "baseline__rankcheck_v2/A0_seed42/metrics.csv": "06fb3fd71f6c73144dd9137ca8b0fef759d5bdd8e2185872d9ec6685d29178ad",
-    "baseline__rankcheck_v2/A2_seed42/metrics.csv": "dd112dfdb8883500e7c3f0824de6b9dddff86c82585b46c93fa18899e43ffb63"
+    "baseline__rankcheck_v2/A0_seed42/metrics.csv": "1b3d04aa092fbe45d5e98b8c79e4813b968080d8e089a7742ffd76cc565772a1",
+    "baseline__rankcheck_v2/A2_seed42/metrics.csv": "06466392ac2d8701d6211a547f73ffff8f056d97f859f35ebef8eb5f2d5156e3"
   },
   "loops": {
     "finetune": {
@@ -217,13 +217,14 @@
             "45": 20.573787574932776,
             "50": 21.0957857988568,
             "55": 21.74350400194455,
-            "60": 22.10745511844181
+            "60": 22.10745511844181,
+            "65": 21.81737128859598
           },
           "best_epoch": 60,
           "best_val_psnr": 22.10745511844181,
-          "last_epoch": 60,
-          "last_val_psnr": 22.10745511844181,
-          "n_validated_epochs": 12
+          "last_epoch": 65,
+          "last_val_psnr": 21.81737128859598,
+          "n_validated_epochs": 13
         },
         "A2_seed42": {
           "val_psnr_by_epoch": {
@@ -237,13 +238,15 @@
             "40": 21.086215421529406,
             "45": 21.754451191487064,
             "50": 21.25203657339792,
-            "55": 21.91844742895776
+            "55": 21.91844742895776,
+            "60": 21.93204923387121,
+            "65": 22.49654216093077
           },
-          "best_epoch": 55,
-          "best_val_psnr": 21.91844742895776,
-          "last_epoch": 55,
-          "last_val_psnr": 21.91844742895776,
-          "n_validated_epochs": 11
+          "best_epoch": 65,
+          "best_val_psnr": 22.49654216093077,
+          "last_epoch": 65,
+          "last_val_psnr": 22.49654216093077,
+          "n_validated_epochs": 13
         },
         "A0_minus_A2_by_epoch": {
           "5": 3.1449320297973617,
@@ -256,12 +259,23 @@
           "40": -0.4379549445565054,
           "45": -1.1806636165542876,
           "50": -0.15625077454112102,
-          "55": -0.17494342701320775
+          "55": -0.17494342701320775,
+          "60": 0.1754058845705977,
+          "65": -0.6791708723347902
         }
       }
     }
   },
-  "agreement": {},
+  "labels": {
+    "finetune": "50-epoch fine-tune from released w_perc (lr 3e-5), one seed",
+    "scratch": "LADDER SEED 1: from-scratch 1000-epoch frozen protocol, the true A0 - A2 gap (one seed, not citable)"
+  },
+  "notes": [
+    "DATA (2026-09-24): the released w_perc weights were trained with k = 1.1255; arm A2 replaces the transform by k = 0, so its fine-tune starts from a representation mismatch: A0 - A2 = +15.8 dB after epoch 1, +7.7 dB after epoch 50, A2 peaking at epoch 7 then declining. The fine-tune loop therefore does not test the arms; it measures recovery from the mismatch.",
+    "RULE (DECISIONS 2026-09-24, master): the fast loop is valid only for components whose init reproduces the released output; hvi_baseline.py --preflight-release enforces it (tol 1e-5).",
+    "The 'sign_and_magnitude_comparison' block below is descriptive only; it is NOT a loop-validity verdict for this pair because of the mismatch above."
+  ],
+  "sign_and_magnitude_comparison": {},
   "summary": "partial: see loops.*.status",
-  "caveat": "one seed per arm; a sign agreement here is a necessary condition for the fast loop, not evidence about the arms themselves; the frozen protocol's seed spread is unknown until the 5-seed A0 gate"
+  "caveat": "one seed per arm; the frozen protocol's seed spread is unknown until the 5-seed A0 gate; the scratch pair is ladder seed 1 of the A0 vs A2 contrast, not a loop test"
 }

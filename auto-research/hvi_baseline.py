@@ -142,6 +142,46 @@ def preflight(verbose=True):
     return report
 
 
+# ------------------------------------------------------------------ release-equivalence check
+RELEASE_TOL = 1e-5
+
+
+def preflight_release(arm, weights, n_images=5, tol=RELEASE_TOL, verbose=True):
+    """Rule (DECISIONS 2026-09-24): the fast fine-tune loop is valid only for a component whose
+    init reproduces the released model's output. Loads w_perc into the plain upstream CIDNet and
+    into ArmNet(arm) at its init, runs both on n validation images (CPU, identity knobs) and
+    reports max |diff|; PASS iff <= tol. Never touches eval15."""
+    import torch
+    import safetensors.torch as sf
+    H.import_repo()
+    H.set_determinism(2)
+    weights = Path(weights)
+    sd = sf.load_file(str(weights)) if weights.suffix == ".safetensors" else torch.load(weights, map_location="cpu", weights_only=False)["model"]
+    ref = H.build_model()
+    miss, unexp = ref.load_state_dict({k[4:] if k.startswith("net.") else k: v for k, v in sd.items() if not k.startswith("trans.") or k.startswith("trans.density_k")}, strict=False)
+    H.require(not miss and not unexp, f"released weights do not fit CIDNet: {miss} {unexp}")
+    ref.eval()
+    ref.trans.gated = ref.trans.gated2 = False
+    arm_net = C.build_arm(arm, 0)
+    info = arm_net.load_pretrained(sd)
+    arm_net.eval()
+    names = H.load_split("scene_v1")["val"][:n_images]
+    worst, per = 0.0, {}
+    for n in names:
+        x, _, _ = H.load_val_pair(n)
+        x = x.unsqueeze(0)
+        with torch.no_grad():
+            d = (H.infer(arm_net, x) - H.infer(ref, x)).abs().max().item()
+        per[n] = d
+        worst = max(worst, d)
+    result = {"arm": arm, "weights": str(weights), "weights_sha256": H.sha256_file(weights), "tolerance": tol,
+              "n_images": len(names), "max_abs_diff": worst, "per_image": per, "released_k": info["released_k"],
+              "arm_k_after_load": info["k_after_load"], "pass": worst <= tol, "split": "scene_v1 validation; eval15 untouched"}
+    if verbose:
+        print(f"RELEASE_CHECK {arm}: max|diff|={worst:.3e} tol={tol:g} -> {'PASS' if result['pass'] else 'FAIL'}")
+    return result
+
+
 # ------------------------------------------------------------------ launch
 def make_protocol(args, split):
     p = dict(H.UPSTREAM_PROTOCOL)
@@ -172,6 +212,14 @@ def launch(args):
     H.require(args.gpu in free, f"GPU {args.gpu} is not free (free: {free}); nothing was stopped")
     name = job_name(args.arm, args.seed)
     split = H.load_split(args.split)
+    release_check = None
+    if args.finetune:
+        release_check = preflight_release(args.arm, args.finetune)
+        H.require(release_check["pass"] or args.allow_mismatch,
+                  f"arm {args.arm} at init does not reproduce the released output (max|diff| "
+                  f"{release_check['max_abs_diff']:.3e} > {RELEASE_TOL:g}); the fast loop is invalid for it. "
+                  "Pass --allow-mismatch only for a deliberate diagnostic.")
+        release_check["allow_mismatch"] = bool(args.allow_mismatch)
     if out.exists():   # add a job to an existing run: same protocol, same code, new (arm, seed)
         manifest = H.json_load(out / "manifest.json")
         H.require(manifest["protocol"] == make_protocol(args, split), "protocol differs from the existing run: use a new run name")
@@ -201,7 +249,7 @@ def launch(args):
             proc = subprocess.Popen(cmd, env=env, stdout=log, stderr=subprocess.STDOUT,
                                     start_new_session=True, cwd=str(HERE))
         manifest["jobs"].append({"job": name, "arm": args.arm, "seed": args.seed, "gpu_index": args.gpu,
-                                 "pid": proc.pid, "launched_at": time.time()})
+                                 "pid": proc.pid, "launched_at": time.time(), "release_check": release_check})
         H.json_save(out / "manifest.json", manifest)
     except Exception:
         manifest["launch_error"] = traceback.format_exc()
@@ -398,6 +446,9 @@ def parse_args():
     mode.add_argument("--launch", action="store_true")
     mode.add_argument("--worker", action="store_true", help=argparse.SUPPRESS)
     mode.add_argument("--status", action="store_true")
+    mode.add_argument("--preflight-release", action="store_true",
+                      help="check that --arm at its init reproduces the released model (--finetune weights) on 5 val images")
+    ap.add_argument("--allow-mismatch", action="store_true", help="launch a fine-tune even if the release check fails (diagnostic)")
     ap.add_argument("--run", default="smoke_v1")
     ap.add_argument("--study", default="baseline", help="outputs/<study>/<run>/")
     ap.add_argument("--finetune", help="init weights (.safetensors or a job .pt); enables schedule=finetune unless overridden")
@@ -437,6 +488,11 @@ def main():
     a = parse_args()
     if a.preflight:
         preflight()
+    elif a.preflight_release:
+        H.require(a.finetune, "--preflight-release needs --finetune <weights>")
+        r = preflight_release(a.arm, a.finetune)
+        print(json.dumps(r, indent=1))
+        sys.exit(0 if r["pass"] else 1)
     elif a.launch:
         launch(a)
     elif a.worker:
