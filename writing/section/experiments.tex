@@ -7,12 +7,13 @@ interval, and the verdict in the vocabulary of \Cref{sec:method}.
 
 \paragraph{Reproduction under the frozen protocol.} The \phm{4} completed L0 runs of the
 released recipe (of five) reach a raw test PSNR between \phm{22.78} and \phm{23.97}~dB at
-the final checkpoint, mean \ph{23.3}~dB with a seed SD of \ph{0.5}~dB, and between
-\phm{26.52} and \phm{26.90}~dB after the GT-mean gain, mean \ph{26.6}~dB with a seed SD of
-\ph{0.2}~dB (per seed in \Cref{tab:app-gatea}). With the upstream test-time saturation
-gate and the GT-mean gain the same checkpoints score \phm{27.55} to \phm{28.05}~dB,
-bracketing the \ph{27.71}~dB the authors report for their released checkpoint under that
-evaluation. The raw mean lies inside the pre-registered window \ph{23.3}--\ph{24.3}~dB, so
+the final checkpoint, mean \phm{23.34}~dB with a seed SD of \phm{0.49}~dB, and between
+\phm{26.52} and \phm{26.90}~dB after the GT-mean gain, mean \phm{26.63}~dB with a seed SD
+of \phm{0.18}~dB (per seed in \Cref{tab:app-gatea}). With the upstream test-time
+saturation gate and the GT-mean gain the same checkpoints score \phm{27.55} to
+\phm{28.05}~dB, mean \phm{27.73}~dB, matching the \ph{27.71}~dB the authors report for
+their released checkpoint under that evaluation. The learned $k$ ends at a median of
+\phm{0.85} over the four seeds. The raw mean lies inside the pre-registered window \ph{23.3}--\ph{24.3}~dB, so
 the protocol reproduces the published model, and the seed SD sets the paired minimum
 detectable effect at \ph{0.5}~dB for every contrast below.
 
@@ -22,7 +23,8 @@ detectable effect at \ph{0.5}~dB for every contrast below.
 term from the \hvi-space loss changes GT-mean PSNR by \ph{0.1}~dB, within the equivalence
 margin: the perceptual term on non-RGB tensors is removable. Detaching $k$ from the loss
 transform changes quality by \ph{0.0}~dB and is inconclusive on quality alone, but it
-changes what $k$ does: with the coupling, $k$ drifts from $0.2$ to \ph{1.1} over training,
+changes what $k$ does: with the coupling, $k$ drifts from $0.2$ to a median of \phm{0.85}
+over training,
 and without it $k$ moves only through the residual path. Removing \hvi-space supervision
 entirely costs \ph{0.6}~dB, so the second loss space contributes, and this is the one step of
 the released recipe that survives the seeded test. Weighting the \hvi chroma terms by the

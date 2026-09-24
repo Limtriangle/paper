@@ -200,6 +200,63 @@
    "only_in": [
     "app_gatea_seeds.tex"
    ]
+  },
+  {
+   "written": "23.34",
+   "src": "gateA__summary_v1.json",
+   "key": "summary.gateA_L0.final.raw_psnr.mean",
+   "only_in": [
+    "experiments.tex",
+    "introduction.tex"
+   ]
+  },
+  {
+   "written": "0.49",
+   "src": "gateA__summary_v1.json",
+   "key": "summary.gateA_L0.final.raw_psnr.sd",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "26.63",
+   "src": "gateA__summary_v1.json",
+   "key": "summary.gateA_L0.final.gtmean_psnr.mean",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "0.18",
+   "src": "gateA__summary_v1.json",
+   "key": "summary.gateA_L0.final.gtmean_psnr.sd",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "27.73",
+   "src": "gateA__summary_v1.json",
+   "key": "summary.gateA_L0.gated.gtmean_psnr.mean",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "0.85",
+   "src": "gateA__summary_v1.json",
+   "key": "summary.gateA_L0.k_final.median",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "4",
+   "src": "gateA__summary_v1.json",
+   "key": "summary.gateA_L0.final.raw_psnr.n",
+   "only_in": [
+    "experiments.tex"
+   ]
   }
  ]
 }
