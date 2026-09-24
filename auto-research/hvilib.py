@@ -429,6 +429,20 @@ def make_optimizer_and_scheduler(model, epochs, lr=None, warmup=None, lr_min=Non
     return optimizer, sched
 
 
+def finetune_lr_schedule(epochs, lr, warmup, lr_min=1e-7):
+    """Per-epoch LR (1-based) for the fine-tune loop: linear warmup lr*e/warmup for e<=warmup, then
+    cosine from lr to lr_min over the remaining epochs, both endpoints included (re-annealed to the end)."""
+    import math
+    out = []
+    for e in range(1, epochs + 1):
+        if e <= warmup:
+            out.append(lr * e / warmup)
+        else:
+            frac = (e - warmup - 1) / max(1, epochs - warmup - 1)
+            out.append(lr_min + (lr - lr_min) * (1 + math.cos(math.pi * frac)) / 2)
+    return out
+
+
 def simulate_schedule(epochs, lr=None, warmup=None, lr_min=None):
     """LR actually used in each epoch (1-based) under the upstream loop, no model needed."""
     import torch

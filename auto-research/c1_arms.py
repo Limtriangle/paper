@@ -85,6 +85,21 @@ class ArmNet(nn.Module):
                     -1, 1, generator=g) * (1 / (ch1 * 9)) ** 0.5)          # kaiming-uniform bound
             self.net.HVD_block0[1] = conv
 
+    def load_pretrained(self, state_dict):
+        """Init from released/other CIDNet weights (plain CIDNet keys). Re-applies the arm's
+        constraints (A2: k=0 frozen; R: its 3-ch output conv keeps its own init). Returns info."""
+        sd = {k[4:] if k.startswith("net.") else k: v for k, v in state_dict.items() if not k.startswith("trans.") or k.startswith("trans.density_k")}
+        released_k = float(sd["trans.density_k"].item()) if "trans.density_k" in sd else None
+        skip = {"HVD_block0.1.weight"} if self.rep == "rgb_residual" else set()
+        sd = {k: v for k, v in sd.items() if k not in skip}
+        missing, unexpected = self.net.load_state_dict(sd, strict=False)
+        H.require(not unexpected and set(missing) <= skip, f"pretrained mismatch: missing={missing} unexpected={unexpected}")
+        if self.rep == "hvi_k0":
+            with torch.no_grad():
+                self.trans.density_k.fill_(0.0)
+            self.trans.density_k.requires_grad_(False)
+        return {"released_k": released_k, "skipped": sorted(skip), "k_after_load": float(self.trans.density_k.item())}
+
     # ---- representation -------------------------------------------------------------
     def encode(self, rgb):
         """rgb [0,1] -> (x3 working tensor, i1 I-branch input), FP32."""
@@ -177,7 +192,7 @@ class FrozenLoss:
         self.L1, self.D, self.E, self.P = up.L1, up.D, up.E, up.P
         self.P_weight, self.HVI_weight, self.weights = up.P_weight, up.HVI_weight, up.weights
         self.rgb_only, self.k0 = rgb_only, k0
-        self.hvi_k0 = RGB_HVI()
+        self.hvi_k0 = RGB_HVI().cuda()               # no-op under the CPU preflight shim
         with torch.no_grad():
             self.hvi_k0.density_k.fill_(k0)
         self.hvi_k0.density_k.requires_grad_(False)

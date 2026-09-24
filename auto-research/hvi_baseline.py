@@ -29,13 +29,12 @@ sys.path.insert(0, str(HERE))
 import hvilib as H  # noqa: E402
 import c1_arms as C  # noqa: E402
 
-STUDY = "baseline"
 SCRIPT = Path(__file__).resolve()
 LIB = HERE / "hvilib.py"
 
 
-def run_dir(run):
-    return H.OUTPUTS / STUDY / run
+def run_dir(run, study="baseline"):
+    return H.OUTPUTS / study / run
 
 
 def job_name(condition, seed):
@@ -146,64 +145,72 @@ def preflight(verbose=True):
 # ------------------------------------------------------------------ launch
 def make_protocol(args, split):
     p = dict(H.UPSTREAM_PROTOCOL)
-    p.update({"arm": args.arm, "representation": C.ARMS[args.arm][0], "loss": C.ARMS[args.arm][1],
-              "k0": args.k0, "val_every": args.val_every, "split": args.split,
+    p.update({"k0": args.k0, "val_every": args.val_every, "split": args.split,
+              "schedule_kind": args.schedule, "warmup_epochs": args.warmup, "lr": args.lr,
+              "finetune_from": (str(Path(args.finetune).resolve()) if args.finetune else None),
+              "finetune_from_sha256": (H.sha256_file(args.finetune) if args.finetune else None),
               "eval_gated": bool(args.eval_gated),
               "inverse_knobs": {"gated": False, "gated2": False, "alpha": 1.0, "gamma": 1.0},
-              "mode": "smoke" if args.smoke else "full", "seed": args.seed,
+              "mode": "smoke" if args.smoke else "full", "study": args.study,
               "epochs_schedule": args.epochs,
               "epochs_trained": (args.smoke_epochs if args.smoke else args.epochs),
               "step_limit": 0, "val_limit": 0, "commit": H.COMMIT,
               "split_sha256": H.split_sha(split), "workers": args.workers,
               "snapshot_every": args.snapshot_every,   # upstream options.py:18 snapshots=10; 0 = off
-              "strict_deterministic": bool(args.strict),
-              "condition": args.arm})
+              "strict_deterministic": bool(args.strict)})
     return p
 
 
 def launch(args):
     import fcntl
     import torch
-    out = run_dir(args.run)
+    out = run_dir(args.run, args.study)
     out.parent.mkdir(parents=True, exist_ok=True)
     lock = (out.parent / ".launch.lock").open("a")
     fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
-    H.require(not out.exists(), f"run exists: {out} (no overwrite, no restart)")
     free = H.free_gpus()
     H.require(args.gpu in free, f"GPU {args.gpu} is not free (free: {free}); nothing was stopped")
-    report = preflight(verbose=False)
-    report["arms"] = C.preflight(verbose=False)
+    name = job_name(args.arm, args.seed)
     split = H.load_split(args.split)
-    fp = H.dataset_fingerprint()
-    out.mkdir(exist_ok=False)
-    H.json_save(out / "split_snapshot.json", split)
-    manifest = {"study": STUDY, "run": args.run, "created_at": time.time(),
-                "script": str(SCRIPT), "script_sha256": H.sha256_file(SCRIPT),
-                "lib_sha256": H.sha256_file(LIB), "commit": H.COMMIT,
-                "split_sha256": H.split_sha(split), "dataset_fingerprint": fp,
-                "protocol": make_protocol(args, split), "preflight": report,
-                "jobs": [], "launch_error": None}
-    H.json_save(out / "manifest.json", manifest)
-    name = job_name("upstream", args.seed)
+    if out.exists():   # add a job to an existing run: same protocol, same code, new (arm, seed)
+        manifest = H.json_load(out / "manifest.json")
+        H.require(manifest["protocol"] == make_protocol(args, split), "protocol differs from the existing run: use a new run name")
+        H.require(manifest["script_sha256"] == H.sha256_file(SCRIPT) and manifest["lib_sha256"] == H.sha256_file(LIB)
+                  and manifest["arms_sha256"] == H.sha256_file(HERE / "c1_arms.py"), "code changed since the run was created")
+        H.require(not (out / name).exists() and name not in [j["job"] for j in manifest["jobs"]], f"job {name} already exists")
+    else:
+        report = preflight(verbose=False)
+        report["arms"] = C.preflight(verbose=False)
+        fp = H.dataset_fingerprint()
+        out.mkdir(exist_ok=False)
+        H.json_save(out / "split_snapshot.json", split)
+        manifest = {"study": args.study, "run": args.run, "created_at": time.time(),
+                    "script": str(SCRIPT), "script_sha256": H.sha256_file(SCRIPT),
+                    "lib_sha256": H.sha256_file(LIB), "arms_sha256": H.sha256_file(HERE / "c1_arms.py"),
+                    "commit": H.COMMIT, "split_sha256": H.split_sha(split), "dataset_fingerprint": fp,
+                    "protocol": make_protocol(args, split), "preflight": report,
+                    "jobs": [], "launch_error": None}
+        H.json_save(out / "manifest.json", manifest)
     env = os.environ.copy()
     env.update(CUDA_VISIBLE_DEVICES=str(args.gpu), OMP_NUM_THREADS="3", MKL_NUM_THREADS="3",
                PYTHONUNBUFFERED="1", TORCH_HOME=str(H.HUB), CUBLAS_WORKSPACE_CONFIG=":4096:8")
-    cmd = [sys.executable, "-u", str(SCRIPT), "--worker", "--run", args.run, "--seed", str(args.seed)]
+    cmd = [sys.executable, "-u", str(SCRIPT), "--worker", "--run", args.run, "--study", args.study,
+           "--arm", args.arm, "--seed", str(args.seed)]
     try:
         with (out / f"{name}.log").open("x") as log:
             proc = subprocess.Popen(cmd, env=env, stdout=log, stderr=subprocess.STDOUT,
                                     start_new_session=True, cwd=str(HERE))
-        manifest["jobs"].append({"job": name, "gpu_index": args.gpu, "pid": proc.pid,
-                                 "launched_at": time.time()})
+        manifest["jobs"].append({"job": name, "arm": args.arm, "seed": args.seed, "gpu_index": args.gpu,
+                                 "pid": proc.pid, "launched_at": time.time()})
         H.json_save(out / "manifest.json", manifest)
     except Exception:
         manifest["launch_error"] = traceback.format_exc()
         H.json_save(out / "manifest.json", manifest)
         raise
-    print(f"LAUNCHED {STUDY}/{args.run}/{name} on GPU {args.gpu} pid={proc.pid} "
+    print(f"LAUNCHED {args.study}/{args.run}/{name} on GPU {args.gpu} pid={proc.pid} "
           f"mode={manifest['protocol']['mode']} epochs_trained={manifest['protocol']['epochs_trained']}")
     print(f"  log: {out / (name + '.log')}")
-    print(f"  export: python3 tooling/export_results.py --run {STUDY}/{args.run}")
+    print(f"  export: python3 tooling/export_results.py --run {args.study}/{args.run}")
 
 
 # ------------------------------------------------------------------ worker (one GPU)
@@ -211,12 +218,13 @@ def worker(args):
     import numpy as np
     import random
     import torch
-    out = run_dir(args.run)
+    out = run_dir(args.run, args.study)
     manifest = H.json_load(out / "manifest.json")
     H.require(H.sha256_file(SCRIPT) == manifest["script_sha256"], "script changed since launch")
     H.require(H.sha256_file(LIB) == manifest["lib_sha256"], "hvilib changed since launch")
-    p = manifest["protocol"]
-    job = H.Job(out, job_name(p["condition"], args.seed))
+    p = dict(manifest["protocol"], arm=args.arm, condition=args.arm,
+             representation=C.ARMS[args.arm][0], loss=C.ARMS[args.arm][1])
+    job = H.Job(out, job_name(args.arm, args.seed))
     job.status("running", phase="initializing")
     try:
         H.import_repo()
@@ -228,7 +236,15 @@ def worker(args):
                   "split changed")
         seed = args.seed
         model = C.build_arm(p["arm"], seed, p["channels"], p["heads"])
-        config = {"variant": p["condition"], "condition": p["condition"], "seed": seed,
+        init_info = {"init": "scratch (seeded)"}
+        if p.get("finetune_from"):
+            import safetensors.torch as sf
+            src = Path(p["finetune_from"])
+            H.require(H.sha256_file(src) == p["finetune_from_sha256"], "fine-tune init file changed")
+            sd = sf.load_file(str(src)) if src.suffix == ".safetensors" else torch.load(src, map_location="cpu", weights_only=False)["model"]
+            init_info = {"init": "finetune", "from": str(src), "from_sha256": p["finetune_from_sha256"], **model.load_pretrained(sd)}
+        config = {"variant": p["condition"], "condition": p["condition"], "seed": seed, **init_info,
+                  "schedule_kind": p["schedule_kind"], "warmup_epochs": p["warmup_epochs"],
                   "arm": p["arm"], "representation": p["representation"], "loss": p["loss"],
                   "k0": p["k0"], "val_every": p["val_every"], "split": p["split"],
                   "inverse_knobs": p["inverse_knobs"],
@@ -251,8 +267,13 @@ def worker(args):
                            capture_output=True).stdout, encoding="utf-8")
         model.cuda().train()
         loss_fn = C.make_loss(p["loss"], p["k0"], p["weights"])
-        optimizer, scheduler = H.make_optimizer_and_scheduler(
-            model, p["epochs_schedule"], p["lr"], p["warmup_epochs"], p["lr_min"])
+        if p["schedule_kind"] == "finetune":
+            lrs = H.finetune_lr_schedule(p["epochs_schedule"], p["lr"], p["warmup_epochs"], p["lr_min"])
+            optimizer = torch.optim.Adam(model.parameters(), lr=lrs[0])
+            scheduler = None
+        else:
+            optimizer, scheduler = H.make_optimizer_and_scheduler(
+                model, p["epochs_schedule"], p["lr"], p["warmup_epochs"], p["lr_min"])
         train_names = split["train"]
         val_names = split["val"][:p["val_limit"]] if p["val_limit"] else split["val"]
         dataset = H.Pairs(train_names, p["crop"], seed)
@@ -261,6 +282,9 @@ def worker(args):
               f"epochs_trained={p['epochs_trained']}/{p['epochs_schedule']} "
               f"batch={p['batch_size']} crop={p['crop']}", flush=True)
         for epoch in range(p["epochs_trained"]):
+            if scheduler is None:
+                for g in optimizer.param_groups:
+                    g["lr"] = lrs[epoch]
             lr = optimizer.param_groups[0]["lr"]
             dataset.epoch = epoch
             loader = H.make_loader(dataset, p["batch_size"], seed, epoch, workers=p["workers"],
@@ -289,7 +313,8 @@ def worker(args):
                     term_sum[k] = term_sum.get(k, 0.0) + v.item()
             torch.cuda.synchronize()
             train_seconds = time.time() - tick
-            scheduler.step()                                               # train.py:219
+            if scheduler is not None:
+                scheduler.step()                                           # train.py:219
             do_val = (epoch + 1) % p["val_every"] == 0 or epoch + 1 == p["epochs_trained"]
             if do_val:
                 job.status("running", phase="validating", epoch=epoch + 1)
@@ -316,7 +341,7 @@ def worker(args):
                 job.save({"epoch": epoch + 1, "model": model.state_dict(), "val_psnr": psnr,
                           "config": config}, f"snapshots/epoch_{epoch + 1:04d}.pt")
             job.save({"epoch": epoch + 1, "model": model.state_dict(),
-                      "optimizer": optimizer.state_dict(), "scheduler": scheduler.state_dict(),
+                      "optimizer": optimizer.state_dict(), "scheduler": (scheduler.state_dict() if scheduler else None),
                       "history": history, "torch_rng": torch.get_rng_state(),
                       "cuda_rng": torch.cuda.get_rng_state_all(), "python_rng": random.getstate(),
                       "numpy_rng": np.random.get_state(), "config": config}, "last.pt")
@@ -342,13 +367,13 @@ def worker(args):
 
 # ------------------------------------------------------------------ status
 def status(args):
-    out = run_dir(args.run)
+    out = run_dir(args.run, args.study)
     if not (out / "manifest.json").exists():
         print("no manifest")
         return
     m = H.json_load(out / "manifest.json")
     p = m["protocol"]
-    print(f"{STUDY}/{args.run}: mode={p['mode']} seed={p['seed']} "
+    print(f"{args.study}/{args.run}: mode={p['mode']} schedule={p['schedule_kind']} lr={p['lr']} "
           f"epochs={p['epochs_trained']}/{p['epochs_schedule']}")
     for j in m["jobs"]:
         d = out / j["job"]
@@ -374,6 +399,11 @@ def parse_args():
     mode.add_argument("--worker", action="store_true", help=argparse.SUPPRESS)
     mode.add_argument("--status", action="store_true")
     ap.add_argument("--run", default="smoke_v1")
+    ap.add_argument("--study", default="baseline", help="outputs/<study>/<run>/")
+    ap.add_argument("--finetune", help="init weights (.safetensors or a job .pt); enables schedule=finetune unless overridden")
+    ap.add_argument("--schedule", choices=("upstream", "finetune"), default=None)
+    ap.add_argument("--warmup", type=int, default=None, help="warmup epochs (upstream 3; finetune default 2)")
+    ap.add_argument("--lr", type=float, default=None, help="peak lr (upstream 1e-4; finetune default 3e-5)")
     ap.add_argument("--gpu", type=int, default=0)
     ap.add_argument("--seed", type=int, default=42)
     ap.add_argument("--epochs", type=int, default=H.UPSTREAM_PROTOCOL["epochs"], help="schedule length")
@@ -393,6 +423,13 @@ def parse_args():
                     help="also record upstream's gated (x1.3 saturation) columns; default: identity knobs only")
     a = ap.parse_args()
     H.require(Path(a.run).name == a.run and a.run not in ("", ".", ".."), "unsafe run name")
+    H.require(Path(a.study).name == a.study and a.study not in ("", ".", ".."), "unsafe study name")
+    if a.schedule is None:
+        a.schedule = "finetune" if a.finetune else "upstream"
+    if a.warmup is None:
+        a.warmup = 2 if a.schedule == "finetune" else H.UPSTREAM_PROTOCOL["warmup_epochs"]
+    if a.lr is None:
+        a.lr = 3e-5 if a.schedule == "finetune" else H.UPSTREAM_PROTOCOL["lr"]
     return a
 
 
