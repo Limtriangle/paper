@@ -20,12 +20,21 @@ must beat, and the check's own "cheapest deciding experiment" mapped onto our 25
   scene-disjoint val (40 pairs, split `scene_v1`) every epoch; **≈ 25 min on one 2080 Ti, 4 variants per wave**
   (≈ 10 waves/day ≈ 40 variants/day). eval15 never read. Selection = the candidate's **locus metric on val** plus
   val GT-mean PSNR (scalar gain) as the guard that the global number did not regress.
-- **Validity guard:** the loop is trusted only if the A0-vs-A2 ranking after 50 fine-tune epochs agrees in sign and
-  rough size with the 1000-epoch from-scratch pair (`phase0_finetune_rankcheck.json`, due ≈ 8 h after dispatch).
-  If it disagrees, iteration runs move to 150-epoch fine-tunes (≈ 75 min) and the check is repeated.
+- **Validity rule (measured 2026-09-24, `finetune__rankcheck_v2.json`):** fine-tuning A2 (k = 0) from weights trained
+  at k = 1.13 gives A0 − A2 = +7.7 dB on val with A2 peaking at epoch 7 and declining — the loop measures *recovery from
+  a representation mismatch*, not the component. **Therefore the loop is valid only for components that reproduce the
+  released representation at initialisation** ("release-compatible init"): M1/M2's predicted k, gain, gamma start at
+  the released constants (k = 1.1255, gain/gamma = 1); T1's equivariant lifting layer is initialised so that the
+  identity group element reproduces the released first block exactly; T3 changes nothing; M4/T4 are loss-only.
+  Every component gets a **wave-0 preflight**: with the component at its init, the output must equal the released
+  model's output to float tolerance. A **null check** (upstream control vs a no-op component, both fine-tuned 50
+  epochs) is wave 0 of the study after Gate 0 and must give |Δ| within run-to-run noise.
+  **Consequence for the ablation chapter:** the C1 ladder arms A2/A3/A4 change the representation, so the ladder
+  **cannot** run in fine-tune mode; default = from scratch, 3 seeds, arms A0/A2/A3 (9 runs ≈ 70 GPU-h ≈ 18 h
+  wall-clock), A4 and L1 only if budget remains. The from-scratch A0/A2 pair now running is the first seed of that.
 - **Final table only:** best component + upstream baseline + the strongest re-implementable baseline × **3 seeds from
   scratch**, 1000 epochs (≈ 7.7 GPU-h each); test read once by `final_eval_test.py`; the C1 ladder is run as the
-  ablation chapter (fine-tune mode by default, ≈ 2 GPU-h for 5 arms). Analysis by the frozen `analysis_c1.py` rules
+  ablation chapter **from scratch** (see the validity rule). Analysis by the frozen `analysis_c1.py` rules
   (paired-by-seed, Holm, TOST ± 0.3 dB, decile mechanism rule).
 - **Data:** LOL-v1 on disk; LOL-v2-Real (deduplicated against LOL-v1 train) and MILL's benchmark / SICE are downloads
   with logged checksums — needed by M1's locus and by every final table's generalisation column.
@@ -222,9 +231,9 @@ thesis, weak tie to a failure locus → low.
 photometric shift: equivariant chroma under hue casts, adapted intensity knobs under brightness shift", two loci that
 are both measurable on the validation split with no new data. **Pivot: M2** if T1's wave 1 shows augmentation alone
 closes the hue-error spread (the stated go/no-go), since M2 shares the fine-tune loop and the decile protocol. M4/T4
-loss work is wave 1 of either. The C1 ladder (fine-tune mode) is the ablation chapter. Budget after Gate 0 unchanged:
-≈ 3 loop rounds (≈ 6 h wall-clock), T3 zero-run sweeps on saved fine-tunes, then 9 from-scratch runs for the final table
-(≈ 18 h wall-clock) + the ladder in fine-tune mode.
+loss work is wave 1 of either. The C1 ladder is the ablation chapter, from scratch (A0/A2/A3 × 3 seeds). Budget after Gate 0:
+≈ 3 loop rounds (≈ 6 h wall-clock), T3 zero-run sweeps on saved fine-tunes, 9 from-scratch runs for the final table
+(≈ 18 h wall-clock) + 9 from-scratch ladder runs (≈ 18 h wall-clock, 2 already running as seed 1 of A0/A2).
 
 ---
 

@@ -10,6 +10,8 @@ default until one arrives. **Exception: Gate 0 (the topic) waits for the author.
 
 - [ ] (Protocol, default applied) LOL-v1 test overlaps train: 14/15 eval15 images have a train near-duplicate (cos > 0.9); 24 train images share a scene with the test set. **Default: keep them in training** (comparability with upstream; matched across arms) and report the caveat + a deduplicated LOL-v2-Real check. Say `[human] drop overlapping train images` to flip it before launch.
 
+- [ ] (Loop validity, default applied) Fine-tuning from the released weights is valid only for release-compatible components (measured: A2 from k=1.13 weights gives a meaningless +7.7 dB). Defaults: every component initialises to reproduce the released output (wave-0 preflight); a 50-min null check (control vs no-op) runs as wave 0 after Gate 0; the C1 ablation ladder runs from scratch, 3 seeds, A0/A2/A3 (≈ 18 h wall-clock). Say `[human] null check now` if you want the 2 fine-tune runs before Gate 0.
+
 ## Answers / notes from the author
 - 2026-09-24 ~02:20 UTC [human-pane] "Six more candidates T1-T6 with novelty verdicts in ralph/related/novelty/. Fold into candidates v5; author leaning T1 (+T3). No runs." → done as v8 (INBOX line 21 confirms).
 - 2026-09-24 ~01:55 UTC [human-pane] "Novelty checks for M1-M3 are in ralph/related/novelty/. Fold them into candidates v5." → done as v7 (INBOX line 19 confirms).
