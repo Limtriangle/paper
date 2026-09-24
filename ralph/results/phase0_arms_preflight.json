@@ -1,7 +1,125 @@
 {
-  "written_at": "2026-09-24T04:57:53",
+  "written_at": "2026-09-24T20:25:46",
   "k0": 1.1255,
   "arms": {
+    "L0": {
+      "representation": "hvi",
+      "loss": "upstream",
+      "parameters": 1975569,
+      "parameters_trainable": 1975569,
+      "model_k": {
+        "value": 0.20000000298023224,
+        "learnable": true,
+        "grad": -5.931136131286621
+      },
+      "loss_terms": {
+        "rgb_l1": 0.33666953444480896,
+        "rgb_ssim": 0.44593262672424316,
+        "rgb_edge": 7.329616069793701,
+        "rgb_perc": 1.1034220457077026,
+        "hvi_l1": 0.4444555342197418,
+        "hvi_ssim": 0.4580604135990143,
+        "hvi_edge": 14.760175704956055,
+        "hvi_perc": 1.840577244758606
+      },
+      "loss_total": 26.718910217285156,
+      "encode_decode_roundtrip_max_abs_err": 6.426125764846802e-07,
+      "output_dtype": "torch.float32",
+      "n_param_tensors_without_grad": 13
+    },
+    "L1": {
+      "representation": "hvi",
+      "loss": "coupled_novgg",
+      "parameters": 1975569,
+      "parameters_trainable": 1975569,
+      "model_k": {
+        "value": 0.20000000298023224,
+        "learnable": true,
+        "grad": -5.6068830490112305
+      },
+      "loss_terms": {
+        "rgb_l1": 0.33666953444480896,
+        "rgb_ssim": 0.44593262672424316,
+        "rgb_edge": 7.329616069793701,
+        "rgb_perc": 1.1034220457077026,
+        "hvi_l1": 0.4444555342197418,
+        "hvi_ssim": 0.4580604135990143,
+        "hvi_edge": 14.760175704956055
+      },
+      "loss_total": 24.878332138061523,
+      "encode_decode_roundtrip_max_abs_err": 6.426125764846802e-07,
+      "output_dtype": "torch.float32",
+      "n_param_tensors_without_grad": 13
+    },
+    "L2": {
+      "representation": "hvi",
+      "loss": "frozen",
+      "parameters": 1975569,
+      "parameters_trainable": 1975569,
+      "model_k": {
+        "value": 0.20000000298023224,
+        "learnable": true,
+        "grad": -1.6915373802185059
+      },
+      "loss_terms": {
+        "rgb_l1": 0.33666953444480896,
+        "rgb_ssim": 0.44593262672424316,
+        "rgb_edge": 7.329616069793701,
+        "rgb_perc": 1.1034220457077026,
+        "hvi_l1": 0.4135596454143524,
+        "hvi_ssim": 0.45889556407928467,
+        "hvi_edge": 12.646711349487305
+      },
+      "loss_total": 22.734806060791016,
+      "encode_decode_roundtrip_max_abs_err": 6.426125764846802e-07,
+      "output_dtype": "torch.float32",
+      "n_param_tensors_without_grad": 13
+    },
+    "L3": {
+      "representation": "hvi",
+      "loss": "rgb_only",
+      "parameters": 1975569,
+      "parameters_trainable": 1975569,
+      "model_k": {
+        "value": 0.20000000298023224,
+        "learnable": true,
+        "grad": -0.7313453555107117
+      },
+      "loss_terms": {
+        "rgb_l1": 0.33666953444480896,
+        "rgb_ssim": 0.44593262672424316,
+        "rgb_edge": 7.329616069793701,
+        "rgb_perc": 1.1034220457077026
+      },
+      "loss_total": 9.2156400680542,
+      "encode_decode_roundtrip_max_abs_err": 6.426125764846802e-07,
+      "output_dtype": "torch.float32",
+      "n_param_tensors_without_grad": 13
+    },
+    "L4": {
+      "representation": "hvi",
+      "loss": "frozen_ckw",
+      "parameters": 1975569,
+      "parameters_trainable": 1975569,
+      "model_k": {
+        "value": 0.20000000298023224,
+        "learnable": true,
+        "grad": -1.4998993873596191
+      },
+      "loss_terms": {
+        "rgb_l1": 0.33666953444480896,
+        "rgb_ssim": 0.44593262672424316,
+        "rgb_edge": 7.329616069793701,
+        "rgb_perc": 1.1034220457077026,
+        "hvi_l1": 0.37550273537635803,
+        "hvi_ssim": 0.45824432373046875,
+        "hvi_edge": 10.66215991973877
+      },
+      "loss_total": 20.7115478515625,
+      "encode_decode_roundtrip_max_abs_err": 6.426125764846802e-07,
+      "output_dtype": "torch.float32",
+      "n_param_tensors_without_grad": 13
+    },
     "A0": {
       "representation": "hvi",
       "loss": "frozen",
@@ -22,6 +140,30 @@
         "hvi_edge": 12.646711349487305
       },
       "loss_total": 22.734806060791016,
+      "encode_decode_roundtrip_max_abs_err": 6.426125764846802e-07,
+      "output_dtype": "torch.float32",
+      "n_param_tensors_without_grad": 13
+    },
+    "A1": {
+      "representation": "hvi_kfixed",
+      "loss": "frozen",
+      "parameters": 1975569,
+      "parameters_trainable": 1975568,
+      "model_k": {
+        "value": 0.8500000238418579,
+        "learnable": false,
+        "grad": null
+      },
+      "loss_terms": {
+        "rgb_l1": 0.3354087173938751,
+        "rgb_ssim": 0.4454349875450134,
+        "rgb_edge": 7.270442008972168,
+        "rgb_perc": 1.0967373847961426,
+        "hvi_l1": 0.41213691234588623,
+        "hvi_ssim": 0.4590182900428772,
+        "hvi_edge": 12.549283027648926
+      },
+      "loss_total": 22.568462371826172,
       "encode_decode_roundtrip_max_abs_err": 6.426125764846802e-07,
       "output_dtype": "torch.float32",
       "n_param_tensors_without_grad": 13
@@ -98,27 +240,6 @@
       "output_dtype": "torch.float32",
       "n_param_tensors_without_grad": 14
     },
-    "L1": {
-      "representation": "hvi",
-      "loss": "rgb_only",
-      "parameters": 1975569,
-      "parameters_trainable": 1975569,
-      "model_k": {
-        "value": 0.20000000298023224,
-        "learnable": true,
-        "grad": -0.7313453555107117
-      },
-      "loss_terms": {
-        "rgb_l1": 0.33666953444480896,
-        "rgb_ssim": 0.44593262672424316,
-        "rgb_edge": 7.329616069793701,
-        "rgb_perc": 1.1034220457077026
-      },
-      "loss_total": 9.2156400680542,
-      "encode_decode_roundtrip_max_abs_err": 6.426125764846802e-07,
-      "output_dtype": "torch.float32",
-      "n_param_tensors_without_grad": 13
-    },
     "R": {
       "representation": "rgb_residual",
       "loss": "frozen",
@@ -144,31 +265,6 @@
       "n_param_tensors_without_grad": 14
     },
     "U": {
-      "representation": "hvi",
-      "loss": "upstream",
-      "parameters": 1975569,
-      "parameters_trainable": 1975569,
-      "model_k": {
-        "value": 0.20000000298023224,
-        "learnable": true,
-        "grad": -5.931136131286621
-      },
-      "loss_terms": {
-        "rgb_l1": 0.33666953444480896,
-        "rgb_ssim": 0.44593262672424316,
-        "rgb_edge": 7.329616069793701,
-        "rgb_perc": 1.1034220457077026,
-        "hvi_l1": 0.4444555342197418,
-        "hvi_ssim": 0.4580604135990143,
-        "hvi_edge": 14.760175704956055,
-        "hvi_perc": 1.840577244758606
-      },
-      "loss_total": 26.718910217285156,
-      "encode_decode_roundtrip_max_abs_err": 6.426125764846802e-07,
-      "output_dtype": "torch.float32",
-      "n_param_tensors_without_grad": 13
-    },
-    "L0": {
       "representation": "hvi",
       "loss": "upstream",
       "parameters": 1975569,

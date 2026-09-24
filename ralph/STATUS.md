@@ -6,7 +6,7 @@
 | Gate | State | Evidence |
 |---|---|---|
 | 0 — topic | **PASS** 2026-09-24 04:51 UTC | INBOX line 29 |
-| A — instrument + reproduction | **PASS (provisional n=4)** 12:58 UTC: raw 23.34 ± 0.49 in window; re-stamp at n=5 | ralph/results/final_eval__test.json |
+| A — instrument + reproduction | **PASS-with-P-A (final, n=5)** 20:30 UTC: raw final 23.25 ± 0.47 (0.05 below window); under upstream reporting conditions 23.79 raw / 27.74 GT-mean, inside. Seeds 47–49 queued | ralph/results/final_eval__test.json |
 | B — loss ladder S1 (25 runs) | running (queue launched 13:00 UTC) | HVI-PLAN.md §4–§5 |
 | C — representation ladder S2 (20 + 6 extra-seed runs) | queued after S1's L2 arm | HVI-PLAN.md §4–§5 |
 | D — final | pending | |
@@ -23,6 +23,7 @@
 - writing: bind keys as they appear; never compute a number; storyline move 2 now has its first measured sentence (reproduction under upstream's reporting conditions).
 
 ## Log
+- 2026-09-24 20:30 UTC GATE A final at n=5: PASS-with-P-A (23.25 ± 0.47 raw final; 27.74 GT-mean gated reproduces README 27.71). Ladders running (L2 ×3 done).
 - 2026-09-24 12:58 UTC GATE A PASS (provisional n=4): 23.34 ± 0.49 raw; gated+GT-mean 27.76 reproduces README 27.71. Ladders launched.
 - 2026-09-24 04:51 UTC GATE 0 PASS (author). 05:05 plan filled, Gate A launched, workers dispatched.
 - 2026-09-23 22:45 UTC reset wake-up: no Gate 0 answer; author's survey (ralph/related/) + red-team confirmation in INBOX; workers resumed on Next actions.
