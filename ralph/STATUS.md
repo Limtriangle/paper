@@ -18,9 +18,9 @@
 | writing | ALL Phase 0 work done (ff56879: check/audit fail on missing src, custom.bib 112 verified, related.md §5, appendix). **Holding for Gate 0.** Build + audit green | 2026-09-23 23:35 UTC |
 
 ## Next actions
-- master: sweep every 30 min; call Gate A when the five A0-L0 final-eval JSONs exist; then dispatch S1/S2 waves of 4 (order: L1, L2, L3, L4 seeds first, then A1–A4); audit writing's draft before the first milestone push.
-- experiment: Gate A runs; keep GPUs full (one job each); export on completion; never read eval15 outside final_eval_test.py.
-- writing: draft → build green → commit → push; then the gen-table specs for S1/S2/S3 tables pointing at the not-yet-existing keys.
+- master: sweep every 30 min; re-stamp Gate A at n=5 (seed 46, ≈ 21:40 UTC); Gate B when S1's 25 runs are exported (≈ 2026-09-26); milestone audit before any push the author reads.
+- experiment: keep the daemon healthy; on a second failure of a cell, drop it and note it; summary/decomposition keys regenerated after each seed; no test read outside final_eval_test.py.
+- writing: bind keys as they appear; never compute a number; storyline move 2 now has its first measured sentence (reproduction under upstream's reporting conditions).
 
 ## Log
 - 2026-09-24 12:58 UTC GATE A PASS (provisional n=4): 23.34 ± 0.49 raw; gated+GT-mean 27.76 reproduces README 27.71. Ladders launched.
