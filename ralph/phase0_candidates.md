@@ -1,6 +1,6 @@
 # phase0_candidates.md — thesis candidates (master)
 
-Status: **v8** (2026-09-24 02:35 UTC): v6 = the author's requested "v5 method candidates"; v7 folded in the author's novelty checks M1–M3 (their numbering); **v8 adds the six transfer-style candidates T1–T6 with the author's verdicts and re-ranks: T1 (+T3) recommended, M2 pivot.** Part I below is new: five
+Status: **v9** (2026-09-24 03:30 UTC; T1 REJECTED by the author's R3, T3 under review, recommendation back to M2). v8 (02:35 UTC): v6 = the author's requested "v5 method candidates"; v7 folded in the author's novelty checks M1–M3 (their numbering); **v8 adds the six transfer-style candidates T1–T6 with the author's verdicts and re-ranks: T1 (+T3) recommended, M2 pivot.** Part I below is new: five
 method candidates M1–M5 under the author's new Gate 0 criteria (INBOX line 18). Part II is the earlier C-series
 (v5, survey-reconciled); **C1, the R2 nested ladder, is now the ablation chapter of whichever method wins**, and C3–C6
 are kept for the record. Evidence keys are in `ralph/related/survey.bib` unless noted; file pointers use
@@ -147,7 +147,27 @@ measured size of the defects is the safe finding.
 Verdicts as written: **NOVEL-IN-HVI: T1, T3, T4, T6 (thin). INCREMENTAL: T2, T5.** None of the six checks states a
 numeric go/no-go; the thresholds below are master's proposals and are marked as such.
 
-### T1 — Hue-rotation-equivariant HV branch (+ hue augmentation + circular hue loss)  *(author's lean: primary)*
+### T1 — Hue-rotation-equivariant HV branch — **REJECTED AS PROPOSED (author's red-team R3, 2026-09-24)**
+**R3 verdict (`ralph/related/redteam/R3_T1_design_redteam.md`).** (1) A hue-rotation-equivariant model passes any hue
+cast straight through: output hue error equals the cast angle. (2) Real white-balance and low-light casts are not
+rotations: near gray they are *translations plus scaling* of the chroma plane (diagonal von Kries gains; an
+I-dependent translation field plus heteroscedastic noise for low light); saturated primaries are fixed points. (3) A
+strictly SO(2)/C_n-equivariant network cannot output any fixed non-zero chroma vector, so it *cannot learn* a constant
+bias correction — pure T1 loses on LOL-v1 by construction if the low→GT mapping has a systematic chroma offset. The
+locus, the protocol and the go/no-go below all tested the wrong property. **Not the topic.**
+**What R3 allows instead (recorded, not recommended):** the narrower question "does built-in hue equivariance beat hue
+augmentation for hue-faithful enhancement with little data?", with an I-conditioned bias head that breaks the symmetry,
+all arms from scratch, scene-disjoint selection, a one-day no-training pre-flight that can kill it, and the honest prior
+(≈ 70 %) that augmentation ties — pre-registered as a likely negative result. Cast robustness belongs to a separate
+canonicalisation front end (gray-world or CAGE, which models translation + scaling per lightness vertex), evaluated
+with von Kries casts on the input and fixed ground truth.
+**R3 fact-checks to carry into the bib:** arXiv 2406.09588 is Yang, O'Mahony & Allen-Blanchette (not Lengyel); CEConv is
+Lengyel et al., NeurIPS 2023; "Illuminant Equivariant Networks" is CCIW 2024 (LNCS), not ECCV; CAGE works in AdaLAB
+(image-adaptive cylindrical CIELab) from a 128×128 thumbnail, reports 26.03 → 27.25 dB on HVI-CIDNet/LOL-v1 under an
+unknown protocol (no ΔE, no seeds) — only a retrain counts; code linked from its project page.
+*The original T1 entry follows for the record.*
+
+#### T1 (original entry, superseded)
 **Verdict:** NOVEL-IN-HVI. No paper combines rotation/steerable-equivariant convs with the HVI chroma branch; the
 mechanism exists (CEConv, NeurIPS 2023, arXiv 2310.19368; "Learning Color Equivariant Representations", arXiv
 2406.09588, which already identifies hue as the 2D rotation group in HSL; hypertoroidal covering, arXiv 2603.04256;
@@ -175,7 +195,7 @@ to the augmented control at equal global PSNR (± 0.1 dB) and lowers hue error u
 **Novelty risk (one line).** Low–medium on mechanism (unclaimed in HVI), medium on outcome: hue augmentation alone is
 the threat, and real casts are not pure rotations (they change S and I per channel), which bounds the exactness.
 
-### T3 — Test-time adaptation of HVI-CIDNet's own knobs (k, α_s, α_i, γ, I-branch norm)  *(author's lean: extension)*
+### T3 — Test-time adaptation of HVI-CIDNet's own knobs (k, α_s, α_i, γ, I-branch norm)  *(UNDER THE AUTHOR'S REVIEW, 2026-09-24)*
 **Verdict:** NOVEL-IN-HVI as a component-wise assembly. Every block is taken (Zero-DCE non-reference losses;
 Retinex-unrolling test-time fine-tuning, arXiv 2202.05972 — the closest mechanism; SALVE, arXiv 2212.11484; genetic
 per-image gamma search, arXiv 2505.11246; few-parameter TTA for SR/open-set restoration, arXiv 2310.19011, 2312.02197),
@@ -219,21 +239,23 @@ thesis, weak tie to a failure locus → low.
 
 | # | Candidate | Locus metric instrumented? | Loop fit | Novelty verdict (author's checks) | Score |
 |---|---|---|---|---|---|
-| 1 | **T1 hue-equivariant HV branch + invariant cast estimator** (+ T3 as the brightness-shift extension) | yes, zero new data (synthetic rotations / WB gains on val) | very good (lifting layer new, rest loads w_perc) | NOVEL-IN-HVI | ★★★★★ |
-| 2 | **M2 noise-calibrated per-pixel k(x) with bound** (+ M3 hue loss, decile protocol) | yes | excellent | INCREMENTAL, unclaimed slice with a provable bound | ★★★★ |
-| 3 | T3 test-time knob adaptation | partly (blends/gains on val; MILL data optional) | zero training | NOVEL-IN-HVI (assembly) | ★★★★ (as extension) |
+| 1 | **M2 noise-calibrated per-pixel k(x) with bound** (+ M3 hue loss, decile protocol) | yes | excellent (release-compatible init at k = 1.1255) | INCREMENTAL, unclaimed slice with a provable bound | ★★★★★ |
+| 2 | T3 test-time knob adaptation — **under the author's review** | partly (blends/gains on val; MILL data optional) | zero training | NOVEL-IN-HVI (assembly) | ★★★★ (as extension, pending R-review) |
+| — | ~~T1 hue-equivariant HV branch~~ | — | — | **REJECTED by R3** (wrong group; cannot represent a bias correction) | — |
 | 4 | M1 exposure-conditioned HVI parameters | partly | very good | INCREMENTAL | ★★★ |
 | 5 | T4 learned loss weights / M4 HVI-aware supervision | yes | perfect (loss-only) | NOVEL-IN-HVI (transplant) / — | ★★★ (chapter) |
 | 6 | M3, T2, T5 (chroma gating / uncertainty / gated LCA) | yes | good | INCREMENTAL, crowded | ★★ |
 | 7 | T6 distillation, M5 repaired LCA | partly | mixed | thin / low | ★★ |
 
-**Recommendation (v8): T1 as the thesis method, T3 as its zero-training extension** — together "HVI-CIDNet robust to
-photometric shift: equivariant chroma under hue casts, adapted intensity knobs under brightness shift", two loci that
-are both measurable on the validation split with no new data. **Pivot: M2** if T1's wave 1 shows augmentation alone
-closes the hue-error spread (the stated go/no-go), since M2 shares the fine-tune loop and the decile protocol. M4/T4
-loss work is wave 1 of either. The C1 ladder is the ablation chapter, from scratch (A0/A2/A3 × 3 seeds). Budget after Gate 0:
-≈ 3 loop rounds (≈ 6 h wall-clock), T3 zero-run sweeps on saved fine-tunes, 9 from-scratch runs for the final table
-(≈ 18 h wall-clock) + 9 from-scratch ladder runs (≈ 18 h wall-clock, 2 already running as seed 1 of A0/A2).
+**Recommendation (v9, after R3): M2 as the thesis method** — per-pixel, noise-calibrated density k(x) with a
+per-pixel conditioning bound, release-compatible at init (k(x) ≡ 1.1255), with M3's confidence-weighted hue loss and
+the dark-decile hue/ΔE00 protocol folded in and M4's loss fix as wave 1; go/no-go from the author's M2 check (beat
+RHVI-style I-refinement and the ISP chroma-suppression LUT by ≥ 0.5 ΔE00 or ≥ 2° hue in deciles 1–2 at equal PSNR).
+**T3 joins as the zero-training extension only if it survives the author's review** (its locus, brightness shift, is
+orthogonal to M2's). **Pivot: M1** (exposure-conditioned HVI parameters; shares the transform-parametrisation code).
+T1 is out. The C1 ladder is the ablation chapter, from scratch (A0/A2/A3 × 3 seeds; the running pair is seed 1).
+Budget after Gate 0: ≈ 3 loop rounds (≈ 6 h wall-clock), 9 from-scratch runs for the final table (≈ 18 h) + 9
+from-scratch ladder runs (≈ 18 h, 2 already running).
 
 ---
 
