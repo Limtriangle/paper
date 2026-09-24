@@ -35,7 +35,7 @@ import hvilib as H  # noqa: E402
 SCRIPT = Path(__file__).resolve()
 CONTRASTS = (("A0", "A1"), ("A0", "A2"), ("A2", "A3"), ("A3", "A4"))
 MARGIN, SESOI, ALPHA = 0.3, 0.3, 0.05
-LABEL_RE = re.compile(r"^(?P<arm>[A-Z]\d?|L1|R|U)_seed(?P<seed>\d+)$")
+LABEL_RE = re.compile(r"^(?:gate[A-D]_)?(?P<arm>[A-Z]\d?|R|U)_seed(?P<seed>\d+)$")
 
 
 def load_entries(path):

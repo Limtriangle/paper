@@ -97,6 +97,21 @@ def main():
                                     "ratio_finetune_over_scratch": ratio,
                                     "rough_magnitude_agree": (ratio is not None and 0.33 <= ratio <= 3.0)}
     res["sign_and_magnitude_comparison"] = agree
+    # HVI-PLAN §3: on-disk runs may be reused as seed 42 of an arm only if their manifest hashes equal the frozen ones
+    frozen = H.OUTPUTS / "gateA" / "a0_l0_v1" / "manifest.json"
+    rc = H.OUTPUTS / "baseline" / "rankcheck_v2" / "manifest.json"
+    if frozen.is_file() and rc.is_file():
+        fm, rm = H.json_load(frozen), H.json_load(rc)
+        cmp = {k: {"frozen": fm.get(k), "rankcheck_v2": rm.get(k), "equal": fm.get(k) == rm.get(k)}
+               for k in ("script_sha256", "lib_sha256", "arms_sha256", "split_sha256")}
+        cmp["k0"] = {"frozen": fm["protocol"]["k0"], "rankcheck_v2": rm["protocol"]["k0"],
+                     "equal": fm["protocol"]["k0"] == rm["protocol"]["k0"]}
+        reusable = all(v["equal"] for v in cmp.values())
+        res["frozen_hash_check"] = {"comparison": cmp, "reusable_as_L2_seed42": reusable,
+                                    "verdict": ("rankcheck_v2 may be reused as L2-A0/L2-A2 seed 42" if reusable else
+                                                "NOT reusable: code hashes and/or k0 differ from the frozen protocol "
+                                                "(rankcheck_v2 used k0 = 0.2; frozen k0 = 1.1255) -> S2 seed 42 must be re-run")}
+        res["notes"].append(res["frozen_hash_check"]["verdict"])
     res["summary"] = ("both loops complete" if all(res["loops"].get(k, {}).get("status", {}) and
                       all(v == "complete" for v in res["loops"][k]["status"].values()) for k in ("finetune", "scratch"))
                       else "partial: see loops.*.status")

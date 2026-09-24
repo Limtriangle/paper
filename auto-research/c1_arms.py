@@ -39,11 +39,11 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 import hvilib as H  # noqa: E402
 
-LADDER = ("A0", "A2", "A3", "A4", "L1", "U")   # identical parameter counts by construction
+LADDER = ("A0", "A2", "A3", "A4", "L1", "U", "L0")   # identical parameter counts by construction
 ARMS = {"A0": ("hvi", "frozen"), "A2": ("hvi_k0", "frozen"), "A3": ("max_cbcr", "frozen"),
         "A4": ("ycbcr", "frozen"), "L1": ("hvi", "rgb_only"), "R": ("rgb_residual", "frozen"),
-        "U": ("hvi", "upstream")}
-K0_DEFAULT = 0.2          # upstream init value; frozen in the loss transform
+        "U": ("hvi", "upstream"), "L0": ("hvi", "upstream")}   # L0 = plan §4 name of the Gate A arm (= U)
+K0_DEFAULT = 1.1255       # HVI-PLAN §3: released converged k, constant and detached in the loss transform
 BT601 = torch.tensor([[.299, .587, .114], [-.299 * .564, -.587 * .564, (1 - .114) * .564],
                       [(1 - .299) * .713, -.587 * .713, -.114 * .713]])
 
