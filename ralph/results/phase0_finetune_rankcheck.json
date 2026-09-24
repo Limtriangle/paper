@@ -1,5 +1,5 @@
 {
-  "written_at": "2026-09-24T04:58:45",
+  "written_at": "2026-09-24T05:00:23",
   "pair": [
     "A0_seed42",
     "A2_seed42"
@@ -10,9 +10,9 @@
     "finetune__rankcheck_v2.json": "81cd4053736683285b64191f7a5c8afafdfe7c088109b7808479da880766a11c",
     "finetune__rankcheck_v2/A0_seed42/metrics.csv": "0600e10f398a6e73fc957f372930aef18eb9e4e4f871897c49ea93e3d0ca4ccf",
     "finetune__rankcheck_v2/A2_seed42/metrics.csv": "ffb118813a9be5994759fb5fe44a3475fa2a5f2e8753352d9405647e54838cb4",
-    "baseline__rankcheck_v2.json": "df6e24a2528ff26aa20228cb5f1626a6214eb444535553c8af952a378f9e6726",
-    "baseline__rankcheck_v2/A0_seed42/metrics.csv": "e989a87a7b3f64b5f69f29f1552fddf3876676376a1ba9cc45ee34704b99c26c",
-    "baseline__rankcheck_v2/A2_seed42/metrics.csv": "121e15e2a2e8fd29b60ced87d482d84824c7372891c3e2c16d1886f96abfa06c"
+    "baseline__rankcheck_v2.json": "301b3e16e23b6273645efa8fdb5b0a8d4ec1e0f9d0ac21975ef7122d303ebc25",
+    "baseline__rankcheck_v2/A0_seed42/metrics.csv": "9ae471a47679598d86a9bca54e30577bfd411e9f00cbc3727697e424f790845b",
+    "baseline__rankcheck_v2/A2_seed42/metrics.csv": "733b6d0a91add6b8ff8a7860fd6ee55465838ddbcfa5417695b3eb5a93c961c7"
   },
   "loops": {
     "finetune": {
@@ -182,25 +182,25 @@
     },
     "scratch": {
       "status": {
-        "A0_seed42": "running",
-        "A2_seed42": "running"
+        "A0_seed42": "partial",
+        "A2_seed42": "partial"
       },
       "curve": {
         "A0_seed42": {
-          "best_val_psnr": 21.74350400194455,
-          "best_val_psnr_epoch": 55,
-          "final_train_loss": 0.7943163269332477,
-          "final_val_psnr": "",
-          "n_epochs": 57,
-          "train_seconds_total": 1269.2644546031952
+          "best_val_psnr": 22.971183336097734,
+          "best_val_psnr_epoch": 205,
+          "final_train_loss": 0.5229918956756592,
+          "final_val_psnr": 22.02379354394919,
+          "n_epochs": 380,
+          "train_seconds_total": 8427.859381437302
         },
         "A2_seed42": {
-          "best_val_psnr": 21.91844742895776,
-          "best_val_psnr_epoch": 55,
-          "final_train_loss": 0.815711929329804,
+          "best_val_psnr": 23.56138391261389,
+          "best_val_psnr_epoch": 120,
+          "final_train_loss": 0.5247466186327594,
           "final_val_psnr": "",
-          "n_epochs": 57,
-          "train_seconds_total": 1270.0159966945648
+          "n_epochs": 378,
+          "train_seconds_total": 8424.399141788483
         }
       },
       "curve_summary": {
@@ -280,13 +280,14 @@
             "360": 22.078803417639715,
             "365": 22.38473387635494,
             "370": 22.154977990694317,
-            "375": 22.097540039725494
+            "375": 22.097540039725494,
+            "380": 22.02379354394919
           },
           "best_epoch": 205,
           "best_val_psnr": 22.971183336097734,
-          "last_epoch": 375,
-          "last_val_psnr": 22.097540039725494,
-          "n_validated_epochs": 75
+          "last_epoch": 380,
+          "last_val_psnr": 22.02379354394919,
+          "n_validated_epochs": 76
         },
         "A2_seed42": {
           "val_psnr_by_epoch": {
