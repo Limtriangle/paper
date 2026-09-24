@@ -1,5 +1,5 @@
 {
- "exported_at": "2026-09-24T12:45:32",
+ "exported_at": "2026-09-24T12:50:50",
  "jobs": {
   "L0_seed42": {
    "best": {
@@ -85,6 +85,22 @@
    "status": "complete"
   },
   "L0_seed43": {
+   "best": {
+    "ab_error": 4.561099133187537,
+    "delta_e00": 8.611435334969173,
+    "edge_ab_error": 5.5891304687441155,
+    "edge_delta_e00": 9.144327915224569,
+    "edge_psnr": 21.76165158351042,
+    "epoch": 215,
+    "lpips": 0.15936553431674838,
+    "lpips_gtmean": 0.14743816060945392,
+    "n": 40,
+    "n_images": 40,
+    "psnr": 22.660613166630803,
+    "psnr_gtmean": 27.985090630941368,
+    "ssim": 0.8594188385264188,
+    "ssim_gtmean": 0.8832543119914871
+   },
    "config": {
     "CUDA_VISIBLE_DEVICES": "1",
     "amp": false,
@@ -133,7 +149,23 @@
     "train_seconds_total": 27143.664919614792
    },
    "epochs_trained": 1000,
-   "status": "running"
+   "last": {
+    "ab_error": 4.07627139848626,
+    "delta_e00": 9.35154296482045,
+    "edge_ab_error": 5.100215208160014,
+    "edge_delta_e00": 9.880193671981694,
+    "edge_psnr": 20.62491237521038,
+    "epoch": 1000,
+    "lpips": 0.13531294926069676,
+    "lpips_gtmean": 0.12046629609540105,
+    "n": 40,
+    "n_images": 40,
+    "psnr": 21.292792527068432,
+    "psnr_gtmean": 27.666547496880025,
+    "ssim": 0.85927910300832,
+    "ssim_gtmean": 0.8925609651017407
+   },
+   "status": "complete"
   },
   "L0_seed44": {
    "best": {
@@ -219,6 +251,22 @@
    "status": "complete"
   },
   "L0_seed45": {
+   "best": {
+    "ab_error": 4.320588701227038,
+    "delta_e00": 7.974473653113638,
+    "edge_ab_error": 5.2992640714232415,
+    "edge_delta_e00": 8.537767840967346,
+    "edge_psnr": 22.281603341829594,
+    "epoch": 205,
+    "lpips": 0.14341229144483805,
+    "lpips_gtmean": 0.1316638327203691,
+    "n": 40,
+    "n_images": 40,
+    "psnr": 23.205987878397046,
+    "psnr_gtmean": 28.074171403650997,
+    "ssim": 0.8633611220882731,
+    "ssim_gtmean": 0.8877944452391704
+   },
    "config": {
     "CUDA_VISIBLE_DEVICES": "3",
     "amp": false,
@@ -261,13 +309,29 @@
    "curve": {
     "best_val_psnr": 23.205987878397043,
     "best_val_psnr_epoch": 205,
-    "final_train_loss": 0.5065127494079726,
-    "final_val_psnr": "",
-    "n_epochs": 996,
-    "train_seconds_total": 27004.631818056107
+    "final_train_loss": 0.4995244022990976,
+    "final_val_psnr": 22.34970547733729,
+    "n_epochs": 1000,
+    "train_seconds_total": 27113.11670088768
    },
    "epochs_trained": 1000,
-   "status": "running"
+   "last": {
+    "ab_error": 4.093178028803374,
+    "delta_e00": 8.532860751742126,
+    "edge_ab_error": 5.06316895419681,
+    "edge_delta_e00": 9.04190710436446,
+    "edge_psnr": 21.583335682965572,
+    "epoch": 1000,
+    "lpips": 0.12892347685992717,
+    "lpips_gtmean": 0.1159908754285425,
+    "n": 40,
+    "n_images": 40,
+    "psnr": 22.34970547733729,
+    "psnr_gtmean": 28.637311985444796,
+    "ssim": 0.8676286071350022,
+    "ssim_gtmean": 0.895848558273171
+   },
+   "status": "complete"
   },
   "L0_seed46": {
    "config": {
@@ -310,12 +374,12 @@
     "width": 36
    },
    "curve": {
-    "best_val_psnr": 17.90115782661255,
-    "best_val_psnr_epoch": 5,
-    "final_train_loss": 1.5248554583106722,
+    "best_val_psnr": 20.51830076885053,
+    "best_val_psnr_epoch": 15,
+    "final_train_loss": 1.1732792279550008,
     "final_val_psnr": "",
-    "n_epochs": 7,
-    "train_seconds_total": 187.8765127658844
+    "n_epochs": 19,
+    "train_seconds_total": 512.235454082489
    },
    "epochs_trained": 1000,
    "status": "running"
@@ -326,7 +390,7 @@
   "split_sha256": "b0dde62736e3f59148fda31dd9dfa56a1b76af8b2be6637a57b5119b35428909"
  },
  "n_jobs": {
-  "complete": 2,
+  "complete": 4,
   "total": 5
  },
  "protocol": {
@@ -419,19 +483,21 @@
   "L0_seed42/metrics.csv": "43dca6b6929fbad341f643954c02199c5687f221f25c6c67f5992ad96dfd98f5",
   "L0_seed42/status.json": "5fd68b68fbdc862f2b780be2ebccc73a6ba9dcac1db306afa7e35a1a41e2efd2",
   "L0_seed42/validation_summary.csv": "d1903630d2fe01c3d336778c4ad5a1770d9a27d3843a9173f2dc4466e48dbc98",
-  "L0_seed43/config.json": "20ed984e54a72de85589ea38f7be8d2975151ed006aeb863525fe4ac61263c1d",
+  "L0_seed43/config.json": "6b996c136a39b5167dc8c8312c90164506a27e1efc9168c0bb50456bde86f4e5",
   "L0_seed43/metrics.csv": "1c0427320f308ac2cfee5c3b29e487c7de01195cdaae61163e1728ef413abe73",
-  "L0_seed43/status.json": "a38c4533b2ff39599fd8a23678d565c2ffeb03c2cc5b503f0cea7c12b1549153",
+  "L0_seed43/status.json": "ac981e0ecfec09ae69847b60b772ff5e871b2626e27f75a2cddf8119acd1a96d",
+  "L0_seed43/validation_summary.csv": "14c1ebea9c542d433d06831ce41c3d353657796107a38ca432317e42987ddb5d",
   "L0_seed44/config.json": "b21ebe2c500981b75dfb09424a74378361168aa9fb2142d9653390cbe8a98d1a",
   "L0_seed44/metrics.csv": "d6ba6c80a6f6aa96421e040244d0a5e78abfd4ba04acac55b3d0624824f33236",
   "L0_seed44/status.json": "7297f2a2eec6536903b0d8910c5f99d1ec421d627b75a2dfea04c9affdf144fa",
   "L0_seed44/validation_summary.csv": "a198f5a23b50a6fc3ed4fcfcdc3b3dbf05c5e3757199db676d48aff89edafb13",
-  "L0_seed45/config.json": "7acbedbbdfa6f1cec52202a4cdc61d2435aca2d9e31b5d9180e5abbb82becfb2",
-  "L0_seed45/metrics.csv": "ddc0ca972f62cf7941c1662043081e966648a084fe009e5b1aed3e680ada1700",
-  "L0_seed45/status.json": "8cd8e81169e56631db9fa331a01688bdeb0d85732b1ca82fa4e3c21cc1af6d36",
+  "L0_seed45/config.json": "acbb81934bd04428cdfd7bb77ca7ad413ba4e3af317dfce9dbe4e082b97ceb11",
+  "L0_seed45/metrics.csv": "48f3dfce66c5b28126e14bb528b21fb4d35a082bdfee19e2587abe86aa48b43d",
+  "L0_seed45/status.json": "1aa15fce90a347cc48e89fb24bd15e2606be24063e13bc4ccf343a60c5eca48c",
+  "L0_seed45/validation_summary.csv": "b6880664c3957449a3e15c66b63e862ad48dfcd3d9fd253eb3de3fcc1c40e7c5",
   "L0_seed46/config.json": "f8b677317b2e41e2c0fb9eadedb2f1c46fbc6debf640cfff251bd16687b3927c",
-  "L0_seed46/metrics.csv": "96dff4455a276dc9fe83af32da838ad32ac74c348196a954b0ae7eb41ccccf1b",
-  "L0_seed46/status.json": "89e75bfec9cf111de2a2b21acc669604c3f2297d0d8943fb6e57ce1387b0c3c6",
+  "L0_seed46/metrics.csv": "bf955363e1f1651d48ba5a733f653d25661ea3b727cbe9b51fb3a309b65c14ea",
+  "L0_seed46/status.json": "f03e888455c0efd43cbb9a8a390522eb4d19ddbb32597afea648f79085f8d1b9",
   "manifest.json": "6a1e1ee52edde77e1113d7f952c2660ad29e5dd53f9306ac0dc279d1dd4fc11f"
  },
  "status": "partial",
