@@ -33,7 +33,13 @@ sys.path.insert(0, str(HERE))
 import hvilib as H  # noqa: E402
 
 SCRIPT = Path(__file__).resolve()
-CONTRASTS = (("A0", "A1"), ("A0", "A2"), ("A2", "A3"), ("A3", "A4"))
+LADDERS = {  # HVI-PLAN.md §4; verdict vocabulary: contributes | removable | inconclusive
+    "s1": {"contrasts": (("L0", "L1"), ("L1", "L2"), ("L2", "L3"), ("L2", "L4")), "arms": ("L0", "L1", "L2", "L3", "L4"),
+           "alias": {}, "src": "s1__loss_ladder_v1.json", "mechanism": None},
+    "s2": {"contrasts": (("A0", "A1"), ("A0", "A2"), ("A2", "A3"), ("A3", "A4")), "arms": ("A0", "A1", "A2", "A3", "A4"),
+           "alias": {"A0": "L2"}, "src": "s2__rep_ladder_v1.json", "mechanism": ("A0", "A2")},   # A0 under L2 == S1's L2 runs
+}
+CONTRASTS = LADDERS["s2"]["contrasts"]
 MARGIN, SESOI, ALPHA = 0.3, 0.3, 0.05
 LABEL_RE = re.compile(r"^(?:gate[A-D]_)?(?P<arm>[A-Z]\d?|R|U)_seed(?P<seed>\d+)$")
 
@@ -113,10 +119,37 @@ def decile_seed_means(entry, key):
     return out
 
 
-def analyse(runs):
-    res = {"n_runs": {a: len(v) for a, v in runs.items()}, "contrasts": {}, "decision_rules": {}}
+def arm_summary(runs, metrics=("psnr", "psnr_gtmean", "ssim", "lpips", "delta_e00", "delta_e00_gtmean", "log_exposure")):
+    """Per arm: mean and SD over seeds of the per-run image means (final-checkpoint test reads)."""
+    out = {}
+    for arm, seeds in runs.items():
+        out[arm] = {"n_seeds": len(seeds), "seeds": sorted(seeds)}
+        for m in metrics:
+            vals = [float(np.mean([r[m] for r in e["per_image"]])) for e in seeds.values() if all(m in r for r in e["per_image"])]
+            if vals:
+                out[arm][m] = {"mean": float(np.mean(vals)), "sd": float(np.std(vals, ddof=1)) if len(vals) > 1 else None,
+                               "per_seed": vals}
+    return out
+
+
+def mde(sd, n=5, alpha=ALPHA, power=0.8):
+    """Paired minimum detectable effect (dB) for a one-sample t with df=n-1 at the given SD of the seed deltas."""
+    if sd is None or not math.isfinite(sd):
+        return None
+    return float((stats.t.ppf(1 - alpha / 2, n - 1) + stats.t.ppf(power, n - 1)) * sd / math.sqrt(n))
+
+
+def analyse(runs, ladder="s2"):
+    L = LADDERS[ladder]
+    runs = dict(runs)
+    for arm, src in L["alias"].items():          # e.g. S2's A0 = S1's L2 runs
+        if arm not in runs and src in runs:
+            runs[arm] = runs[src]
+    contrasts = L["contrasts"]
+    res = {"ladder": ladder, "n_runs": {a: len(v) for a, v in runs.items()}, "contrasts": {}, "decision_rules": {},
+           "arm_summary": arm_summary({a: runs[a] for a in L["arms"] if a in runs})}
     pvals, keys = [], []
-    for a, b in CONTRASTS:
+    for a, b in contrasts:
         if a not in runs or b not in runs:
             res["contrasts"][f"{a}-{b}"] = {"status": "missing arm"}
             continue
@@ -126,6 +159,9 @@ def analyse(runs):
         c["seeds"] = seeds
         c["mixed_model"] = mixed_model([(s, r["image"], r["psnr_gtmean"]) for s in seeds for r in runs[a][s]["per_image"]],
                                        [(s, r["image"], r["psnr_gtmean"]) for s in seeds for r in runs[b][s]["per_image"]], a, b)
+        c["mde_db"] = mde(c["sd"], c["n"])
+        ra, rb = seed_means(runs, a, "psnr"), seed_means(runs, b, "psnr")
+        c["raw_psnr"] = paired([ra[s] - rb[s] for s in seeds])          # secondary: raw-PSNR contrast (exposure)
         res["contrasts"][f"{a}-{b}"] = c
         pvals.append(c["p"]); keys.append(f"{a}-{b}")
     for k, p_adj in zip(keys, holm(pvals)):
@@ -144,10 +180,10 @@ def analyse(runs):
                                  "b_effect_ge_sesoi_and_gt_2sd": bool(abs(mean) >= SESOI and abs(mean) > 2 * sd),
                                  "c_sign_agreement_ge_4of5": bool(c["sign_agreement"] >= math.ceil(0.8 * n)),
                                  "d_mixed_model_agrees": bool(mm_agrees)}
-        c["verdict"] = ("difference" if all(c["rule3_difference"].values()) else
-                        "equivalent" if c["tost"]["equivalent"] else "inconclusive")
-    # mechanism: A0 vs A2 deciles and stress
-    if "A0" in runs and "A2" in runs:
+        c["verdict"] = ("contributes" if all(c["rule3_difference"].values()) else
+                        "removable" if c["tost"]["equivalent"] else "inconclusive")
+    # mechanism: A0 vs A2 deciles and stress (S2 only)
+    if L["mechanism"] and all(x in runs for x in L["mechanism"]):
         seeds = sorted(set(runs["A0"]) & set(runs["A2"]))
         mech = {}
         for key in ("hue_err", "delta_e00"):
@@ -230,7 +266,7 @@ def selftest():
     runs = {}
     for label, e in data["entries"].items():
         m = LABEL_RE.match(label); runs.setdefault(m["arm"], {})[int(m["seed"])] = e
-    res = analyse(runs)
+    res = analyse(runs, "s2")
     planted = {"A0-A1": 0.0, "A0-A2": 0.6, "A2-A3": 0.0, "A3-A4": 0.15}
     out = {"written_at": time.strftime("%Y-%m-%dT%H:%M:%S"), "script_sha256": H.sha256_file(SCRIPT),
            "synthetic_model": "psnr = arm_mean + seed(0.15) + image(1.5) + eps(0.08); 5 seeds x 15 images; hue_err/dE00 planted in deciles 0-2 of A2/A3/A4; stress slope planted in A2",
@@ -243,10 +279,13 @@ def selftest():
                          "delta_e00_rule5": res["mechanism_A0_vs_A2"]["delta_e00"]["rule5"],
                          "stress_monotone": res["mechanism_A0_vs_A2"]["stress"]["monotone_increasing_with_darkening"],
                          "stress_delta": res["mechanism_A0_vs_A2"]["stress"]["delta_hue_err_A0_minus_A2"]}}
-    exp = {"A0-A1": "equivalent", "A0-A2": "difference", "A2-A3": "equivalent", "A3-A4": "equivalent"}
+    exp = {"A0-A1": "removable", "A0-A2": "contributes", "A2-A3": "removable", "A3-A4": "removable"}
     out["expected_verdicts"] = exp
     out["expected_note"] = ("A3-A4 plants +0.15 dB: below the 0.3 dB SESOI (rule 3b fails) and inside the +-0.3 dB TOST "
-                            "margin with the small synthetic seed SD, so 'equivalent' is the correct verdict")
+                            "margin with the small synthetic seed SD, so 'removable' is the correct verdict; vocabulary = "
+                            "HVI-PLAN §4 (contributes / removable / inconclusive)")
+    out["arm_summary_keys_present"] = all(k in res["arm_summary"].get("A0", {}) for k in ("psnr", "psnr_gtmean"))
+    out["mde_db_A0-A2"] = res["contrasts"]["A0-A2"]["mde_db"]
     out["all_as_expected"] = all(out["outcomes"][k]["verdict"] == v for k, v in exp.items()) and \
         out["mechanism"]["hue_err_rule5"] and out["mechanism"]["stress_monotone"]
     dest = H.PAPER / "ralph" / "results" / "phase0_analysis_selftest.json"
@@ -265,13 +304,21 @@ def main():
     if a.selftest:
         selftest(); return
     runs, data = load_entries(a.input)
-    res = analyse(runs)
-    res["selection_bias"] = selection_bias(runs, a.oracle)
-    res.update(run_id="c1__analysis", written_at=time.strftime("%Y-%m-%dT%H:%M:%S"),
-               script_sha256=H.sha256_file(SCRIPT), sources={Path(a.input).name: H.sha256_file(a.input)})
-    dest = H.PAPER / "ralph" / "results" / "c1__analysis.json"
-    H.json_save(dest, res)
-    print("wrote", dest)
+    R = H.PAPER / "ralph" / "results"
+    sources = {Path(a.input).name: H.sha256_file(a.input)}
+    if Path(a.oracle).is_file():
+        sources[Path(a.oracle).name] = H.sha256_file(a.oracle)
+    stamp = {"written_at": time.strftime("%Y-%m-%dT%H:%M:%S"), "script_sha256": H.sha256_file(SCRIPT), "sources": sources,
+             "status": "complete", "test15": "read once per label by final_eval_test.py; these are those reads"}
+    # writing's contract (DECISIONS 2026-09-24 06:10): <src>.analysis.analysis_s{1,2,3}.decision.*
+    for ladder in ("s1", "s2"):
+        dec = analyse(runs, ladder)
+        out = {"run_id": LADDERS[ladder]["src"][:-5], "analysis": {f"analysis_{ladder}": {"decision": dec}}, **stamp}
+        H.json_save(R / LADDERS[ladder]["src"], out)
+        print("wrote", R / LADDERS[ladder]["src"], {k: v.get("verdict") for k, v in dec["contrasts"].items()})
+    s3 = {"run_id": "s3__selection_bias_v1", "analysis": {"analysis_s3": {"decision": selection_bias(runs, a.oracle)}}, **stamp}
+    H.json_save(R / "s3__selection_bias_v1.json", s3)
+    print("wrote", R / "s3__selection_bias_v1.json")
 
 
 if __name__ == "__main__":

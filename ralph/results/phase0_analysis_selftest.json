@@ -1,6 +1,6 @@
 {
-  "written_at": "2026-09-23T22:54:10",
-  "script_sha256": "1f93ea819de5db5b7c597c67bd74f1cba676505da747c9500898c8c995c520ba",
+  "written_at": "2026-09-24T05:07:56",
+  "script_sha256": "a02e244229420fcf74a6b1a1af2c6df4553ef3f70a94d6d727d0e4231ccaf5b3",
   "synthetic_model": "psnr = arm_mean + seed(0.15) + image(1.5) + eps(0.08); 5 seeds x 15 images; hue_err/dE00 planted in deciles 0-2 of A2/A3/A4; stress slope planted in A2",
   "planted_delta_db": {
     "A0-A1": 0.0,
@@ -30,7 +30,7 @@
         "residual_var": 0.006866522640389996,
         "converged": true
       },
-      "verdict": "equivalent"
+      "verdict": "removable"
     },
     "A0-A2": {
       "planted": 0.6,
@@ -53,7 +53,7 @@
         "residual_var": 0.008836108427979996,
         "converged": true
       },
-      "verdict": "difference"
+      "verdict": "contributes"
     },
     "A2-A3": {
       "planted": 0.0,
@@ -76,7 +76,7 @@
         "residual_var": 0.008761041365092547,
         "converged": true
       },
-      "verdict": "equivalent"
+      "verdict": "removable"
     },
     "A3-A4": {
       "planted": 0.15,
@@ -99,7 +99,7 @@
         "residual_var": 0.007291049501269955,
         "converged": true
       },
-      "verdict": "equivalent"
+      "verdict": "removable"
     }
   },
   "mechanism": {
@@ -113,11 +113,13 @@
     }
   },
   "expected_verdicts": {
-    "A0-A1": "equivalent",
-    "A0-A2": "difference",
-    "A2-A3": "equivalent",
-    "A3-A4": "equivalent"
+    "A0-A1": "removable",
+    "A0-A2": "contributes",
+    "A2-A3": "removable",
+    "A3-A4": "removable"
   },
-  "expected_note": "A3-A4 plants +0.15 dB: below the 0.3 dB SESOI (rule 3b fails) and inside the +-0.3 dB TOST margin with the small synthetic seed SD, so 'equivalent' is the correct verdict",
+  "expected_note": "A3-A4 plants +0.15 dB: below the 0.3 dB SESOI (rule 3b fails) and inside the +-0.3 dB TOST margin with the small synthetic seed SD, so 'removable' is the correct verdict; vocabulary = HVI-PLAN \u00a74 (contributes / removable / inconclusive)",
+  "arm_summary_keys_present": true,
+  "mde_db_A0-A2": 0.038788463929717625,
   "all_as_expected": true
 }
