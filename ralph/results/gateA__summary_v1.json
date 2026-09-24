@@ -1,0 +1,115 @@
+{
+  "run_id": "gateA__summary_v1",
+  "written_at": "2026-09-24T13:01:48",
+  "script_sha256": "6fc5f66b36a9644165b5776116533174f599ec332fbd81418d7cabfcb674deb2",
+  "summary": {
+    "gateA_L0": {
+      "final": {
+        "raw_psnr": {
+          "mean": 23.344072420304748,
+          "sd": 0.49000238775348953,
+          "n": 4
+        },
+        "gtmean_psnr": {
+          "mean": 26.634351012777987,
+          "sd": 0.18274356542884923,
+          "n": 4
+        },
+        "ssim": {
+          "mean": 0.8422974484098695,
+          "sd": 0.004665534303435809,
+          "n": 4
+        },
+        "lpips": {
+          "mean": 0.10836950155595938,
+          "sd": 0.003047227422151654,
+          "n": 4
+        },
+        "seeds": [
+          42,
+          43,
+          44,
+          45
+        ]
+      },
+      "gated": {
+        "raw_psnr": {
+          "mean": 23.794260970014996,
+          "sd": 0.46395760140126313,
+          "n": 4
+        },
+        "gtmean_psnr": {
+          "mean": 27.734680920635995,
+          "sd": 0.2146501834616392,
+          "n": 4
+        },
+        "ssim": {
+          "mean": 0.8573022331891142,
+          "sd": 0.00397775352259152,
+          "n": 4
+        },
+        "lpips": {
+          "mean": 0.0923664695272843,
+          "sd": 0.002649768018382371,
+          "n": 4
+        },
+        "seeds": [
+          42,
+          43,
+          44,
+          45
+        ]
+      },
+      "valsel": {
+        "raw_psnr": {
+          "mean": 22.612790441226114,
+          "sd": 1.0850815111277672,
+          "n": 4
+        },
+        "gtmean_psnr": {
+          "mean": 26.245080384589077,
+          "sd": 0.31726912547868125,
+          "n": 4
+        },
+        "ssim": {
+          "mean": 0.8342099116350469,
+          "sd": 0.006331128090829675,
+          "n": 4
+        },
+        "lpips": {
+          "mean": 0.12506523169577122,
+          "sd": 0.009741285754419318,
+          "n": 4
+        },
+        "seeds": [
+          42,
+          43,
+          44,
+          45
+        ]
+      },
+      "k_final": {
+        "median": 0.8471305668354034,
+        "min": 0.8095167875289917,
+        "max": 0.8701199889183044,
+        "per_seed": {
+          "42": 0.8498159050941467,
+          "43": 0.8095167875289917,
+          "44": 0.8444452285766602,
+          "45": 0.8701199889183044
+        },
+        "n": 4
+      }
+    }
+  },
+  "sources": {
+    "final_eval__test.json": "46ef4a9045df0f360259ccf9efdad1ac5305d0619ca54e050469641441d408a0",
+    "gateA__a0_l0_v1.json": "03d9015656c5cf8e1f5f9e081c134d93abe4365a69a6da4a746531ade383e9fe",
+    "a0_l0_v1/L0_seed42/metrics.csv": "43dca6b6929fbad341f643954c02199c5687f221f25c6c67f5992ad96dfd98f5",
+    "a0_l0_v1/L0_seed43/metrics.csv": "1c0427320f308ac2cfee5c3b29e487c7de01195cdaae61163e1728ef413abe73",
+    "a0_l0_v1/L0_seed44/metrics.csv": "d6ba6c80a6f6aa96421e040244d0a5e78abfd4ba04acac55b3d0624824f33236",
+    "a0_l0_v1/L0_seed45/metrics.csv": "48f3dfce66c5b28126e14bb528b21fb4d35a082bdfee19e2587abe86aa48b43d"
+  },
+  "status": "partial",
+  "notes": "derived by script from final_eval__test.json / gateA exports / final_eval__oracle.json; gated, valsel and oracle are Gate A decomposition columns, not selection"
+}
