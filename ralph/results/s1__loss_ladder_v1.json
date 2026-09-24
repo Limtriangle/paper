@@ -1,5 +1,5 @@
 {
- "exported_at": "2026-09-24T19:31:48",
+ "exported_at": "2026-09-24T19:55:46",
  "jobs": {
   "L2_seed42": {
    "best": {
@@ -85,6 +85,22 @@
    "status": "complete"
   },
   "L2_seed43": {
+   "best": {
+    "ab_error": 4.61688486425515,
+    "delta_e00": 8.308168783083207,
+    "edge_ab_error": 5.770308385467237,
+    "edge_delta_e00": 8.976858588137429,
+    "edge_psnr": 21.917806348307185,
+    "epoch": 95,
+    "lpips": 0.18010637471452356,
+    "lpips_gtmean": 0.16835734015330672,
+    "n": 40,
+    "n_images": 40,
+    "psnr": 22.923698548212975,
+    "psnr_gtmean": 27.620005819113533,
+    "ssim": 0.8528084071052415,
+    "ssim_gtmean": 0.8748737942510525
+   },
    "config": {
     "CUDA_VISIBLE_DEVICES": "1",
     "amp": false,
@@ -127,13 +143,29 @@
    "curve": {
     "best_val_psnr": 22.923698548212972,
     "best_val_psnr_epoch": 95,
-    "final_train_loss": 0.3784388527274132,
-    "final_val_psnr": "",
-    "n_epochs": 941,
-    "train_seconds_total": 21073.14171886444
+    "final_train_loss": 0.3740601201674768,
+    "final_val_psnr": 22.400136422885385,
+    "n_epochs": 1000,
+    "train_seconds_total": 22393.886425495148
    },
    "epochs_trained": 1000,
-   "status": "running"
+   "last": {
+    "ab_error": 4.089842971143718,
+    "delta_e00": 8.789328531422932,
+    "edge_ab_error": 5.135251650640891,
+    "edge_delta_e00": 9.284532120052036,
+    "edge_psnr": 21.678008076116072,
+    "epoch": 1000,
+    "lpips": 0.13013236355036498,
+    "lpips_gtmean": 0.11560405343770981,
+    "n": 40,
+    "n_images": 40,
+    "psnr": 22.400136422885378,
+    "psnr_gtmean": 28.572795067439568,
+    "ssim": 0.8656540793336692,
+    "ssim_gtmean": 0.894800706022307
+   },
+   "status": "complete"
   },
   "L2_seed44": {
    "config": {
@@ -178,10 +210,61 @@
    "curve": {
     "best_val_psnr": 22.82291220459731,
     "best_val_psnr_epoch": 75,
-    "final_train_loss": 0.3798870002584798,
-    "final_val_psnr": 21.70635926701261,
-    "n_epochs": 865,
-    "train_seconds_total": 19269.295870542526
+    "final_train_loss": 0.3779284230300358,
+    "final_val_psnr": "",
+    "n_epochs": 928,
+    "train_seconds_total": 20672.681437015533
+   },
+   "epochs_trained": 1000,
+   "status": "running"
+  },
+  "L2_seed45": {
+   "config": {
+    "CUDA_VISIBLE_DEVICES": "3",
+    "amp": false,
+    "batch_size": 8,
+    "channels": [
+     36,
+     36,
+     72,
+     144
+    ],
+    "condition": "L2",
+    "crop": 256,
+    "epochs_schedule": 1000,
+    "epochs_trained": 1000,
+    "gpu": "NVIDIA GeForce RTX 2080 Ti",
+    "heads": [
+     1,
+     2,
+     4,
+     8
+    ],
+    "lr": 0.0001,
+    "parameters": 1975569,
+    "script_sha256": "138696b4147efc3de9300a636e06e5bfa0bc633b5780a31c0cc390246353fa8e",
+    "seed": 45,
+    "step_limit": 0,
+    "test15": "NEVER READ",
+    "torch": "2.7.0a0+7c8ec84dab.nv25.03",
+    "val_limit": 0,
+    "variant": "L2",
+    "weights": {
+     "HVI": 1.0,
+     "L1": 1.0,
+     "SSIM": 0.5,
+     "edge": 50.0,
+     "perceptual": 0.01
+    },
+    "width": 36
+   },
+   "curve": {
+    "best_val_psnr": 21.6085936287402,
+    "best_val_psnr_epoch": 55,
+    "final_train_loss": 0.6772479659744671,
+    "final_val_psnr": "",
+    "n_epochs": 59,
+    "train_seconds_total": 1321.2665619850159
    },
    "epochs_trained": 1000,
    "status": "running"
@@ -192,8 +275,8 @@
   "split_sha256": "b0dde62736e3f59148fda31dd9dfa56a1b76af8b2be6637a57b5119b35428909"
  },
  "n_jobs": {
-  "complete": 1,
-  "total": 3
+  "complete": 2,
+  "total": 4
  },
  "protocol": {
   "augmentation": "RandomCrop(crop) + RandomHorizontalFlip + RandomVerticalFlip, same crop/flips for low and high (data/data.py:7-13)",
@@ -286,13 +369,17 @@
   "L2_seed42/metrics.csv": "f7af01a353c3aa9f21f3451f1dbefc11f2c91170a7443377b4af8dc962292a22",
   "L2_seed42/status.json": "c5fcf1f4246d1cf7b3dc4a2408f1e475538b99648df4bbe9becbfc2bbe1d71ec",
   "L2_seed42/validation_summary.csv": "b30c1f568e112bb02b1c3c090e17f19c02977871fe45d947ce081bc013cad54c",
-  "L2_seed43/config.json": "cdc44f5bd52719df712589707fc6c42e08be57fe00d37a4d74c5086d39354fa8",
-  "L2_seed43/metrics.csv": "9d5ab932158fc7d5552805bf2cd3cf83d82c500f4ff43cc7b8f39ea577367cb8",
-  "L2_seed43/status.json": "c19287e1f08b96a55e529f3ae128903bd6f41282ec23a4db39943c4eae4afa7c",
+  "L2_seed43/config.json": "8a97644ed60d2c8602e5e583e802b2e00ae9f9f4c9c7c4258f0539ead7e1b78b",
+  "L2_seed43/metrics.csv": "09c77e24448d165c35566c1d8a527d96df22fa0d8fcfd8f423c5e0f25c459def",
+  "L2_seed43/status.json": "f45ada93c0eda8c4e9044988496f9ea2689cd948237f12f054f1eb1ecf0b5c80",
+  "L2_seed43/validation_summary.csv": "de9890d8bc7a55e3a33ad70d0a7b6c93ac378ff075336b7a125ffad6042bf5e2",
   "L2_seed44/config.json": "8d20fb2cc7eb9f27f4492f256ff959c6c75ee2a3ced6f40c2b5b34e86359b83d",
-  "L2_seed44/metrics.csv": "47666d42220f26f6ac10c493829e58957001d3e66e21c8fa128b977dd83d317f",
-  "L2_seed44/status.json": "11d89125343035cec6bc3a4c73e88995ffea4b3ed18a7b4833b5c4acca8d13fb",
-  "manifest.json": "07f51f93b25f0f9ab49152e6f33462a2c40127210856b1f779841ff08da5b38a"
+  "L2_seed44/metrics.csv": "f2a11094ffe85293fc577f5c686e81cbc8498d4f3e9877e9f9321bdcde5e37b4",
+  "L2_seed44/status.json": "117b81c7cde1c7e886405ffc85d6a06a5608e02c83e88945ed96b775810f4514",
+  "L2_seed45/config.json": "30fc2e8bcdb363b8911f98dbad169925d61593264a1dc73e41703530344e7a07",
+  "L2_seed45/metrics.csv": "c5c787bbf1e201f9a3372c871781760bc4e2d8245d59955f3b9d638ffbd6ad23",
+  "L2_seed45/status.json": "275262201acbaf32eead87ae4606b5b6a09926cf9c000a6bfff7bea7a7d5e84b",
+  "manifest.json": "76e14786df6200c431f5d7500afde4ef70069a8b6dd34ee5bdf729c59f63e8ed"
  },
  "status": "partial",
  "study": "s1"
