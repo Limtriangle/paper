@@ -13,7 +13,7 @@
 ## Agents
 | Agent | Doing | Since |
 |---|---|---|
-| master | Candidates v8 (M1–M5 + T1–T6); recommendation **T1 + T3** (pivot M2) in INBOX; **Gate 0 waits for the author**; watching rankcheck_v2 | 2026-09-24 04:25 UTC |
+| master | Candidates v8 (M1–M5 + T1–T6); recommendation **T1 + T3** (pivot M2) in INBOX; **Gate 0 waits for the author**; watching rankcheck_v2 | 2026-09-24 02:35 UTC |
 | writing | ALL Phase 0 work done (ff56879: check/audit fail on missing src, custom.bib 112 verified, related.md §5, appendix). **Holding for Gate 0.** Build + audit green | 2026-09-23 23:35 UTC |
 
 ## Next actions

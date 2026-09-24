@@ -1,6 +1,6 @@
 # phase0_candidates.md — thesis candidates (master)
 
-Status: **v8** (2026-09-24 04:20 UTC): v6 = the author's requested "v5 method candidates"; v7 folded in the author's novelty checks M1–M3 (their numbering); **v8 adds the six transfer-style candidates T1–T6 with the author's verdicts and re-ranks: T1 (+T3) recommended, M2 pivot.** Part I below is new: five
+Status: **v8** (2026-09-24 02:35 UTC): v6 = the author's requested "v5 method candidates"; v7 folded in the author's novelty checks M1–M3 (their numbering); **v8 adds the six transfer-style candidates T1–T6 with the author's verdicts and re-ranks: T1 (+T3) recommended, M2 pivot.** Part I below is new: five
 method candidates M1–M5 under the author's new Gate 0 criteria (INBOX line 18). Part II is the earlier C-series
 (v5, survey-reconciled); **C1, the R2 nested ladder, is now the ablation chapter of whichever method wins**, and C3–C6
 are kept for the record. Evidence keys are in `ralph/related/survey.bib` unless noted; file pointers use

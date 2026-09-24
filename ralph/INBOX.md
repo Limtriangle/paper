@@ -11,8 +11,8 @@ default until one arrives. **Exception: Gate 0 (the topic) waits for the author.
 - [ ] (Protocol, default applied) LOL-v1 test overlaps train: 14/15 eval15 images have a train near-duplicate (cos > 0.9); 24 train images share a scene with the test set. **Default: keep them in training** (comparability with upstream; matched across arms) and report the caveat + a deduplicated LOL-v2-Real check. Say `[human] drop overlapping train images` to flip it before launch.
 
 ## Answers / notes from the author
-- 2026-09-24 ~04:05 UTC [human-pane] "Six more candidates T1-T6 with novelty verdicts in ralph/related/novelty/. Fold into candidates v5; author leaning T1 (+T3). No runs." → done as v8 (INBOX line 21 confirms).
-- 2026-09-24 ~03:30 UTC [human-pane] "Novelty checks for M1-M3 are in ralph/related/novelty/. Fold them into candidates v5." → done as v7 (INBOX line 19 confirms).
+- 2026-09-24 ~02:20 UTC [human-pane] "Six more candidates T1-T6 with novelty verdicts in ralph/related/novelty/. Fold into candidates v5; author leaning T1 (+T3). No runs." → done as v8 (INBOX line 21 confirms).
+- 2026-09-24 ~01:55 UTC [human-pane] "Novelty checks for M1-M3 are in ralph/related/novelty/. Fold them into candidates v5." → done as v7 (INBOX line 19 confirms).
 - 2026-09-23 ~19:05 UTC [human-pane] Author note typed into the master pane: red-team results in ralph/related/redteam/ (R1, R2); rewrite C1 as R2's nested ladder and re-post the recommendation; no runs; Gate 0 still open. → done (candidates v4, this INBOX entry). If this note was not yours, say so here and I will revert.
 - 2026-09-24 [human] The earlier studies are discarded. Start the topic from scratch; it must be related to HVI-CIDNet.
 - 2026-09-24 [human] Top-tier literature pass done: `ralph/related/SURVEY.md` (narrative + gaps), `INDEX.md` (counts at its foot), `survey.bib`, slices A–F. writing: merge into custom.bib only after your own bibtex-verify pass; fill phase0_related.md §5 from it. master: SURVEY.md §1 maps each gap to C1–C6.
