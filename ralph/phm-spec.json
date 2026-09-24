@@ -257,6 +257,17 @@
    "only_in": [
     "experiments.tex"
    ]
+  },
+  {
+   "written": "0.18",
+   "src": "gateA__summary_v1.json",
+   "key": "summary.gateA_L0.final.gtmean_psnr.sd",
+   "only_in": [
+    "abstract.tex",
+    "introduction.tex",
+    "conclusion.tex",
+    "experiments.tex"
+   ]
   }
  ]
 }

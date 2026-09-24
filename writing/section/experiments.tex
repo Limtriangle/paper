@@ -62,14 +62,15 @@ did: one step carries the design, and it is the one the mechanism story is about
 
 \paragraph{Seed variance and selection bias.}
 \label{sec:selection}
-Across arms the seed SD of test GT-mean PSNR is \ph{0.3}~dB. The post-hoc oracle, which
+For the released recipe the seed SD of test GT-mean PSNR is \phm{0.18}~dB (\phm{0.49}~dB on
+raw PSNR); the ladder arms are listed per arm in the appendix. The post-hoc oracle, which
 scores every tenth checkpoint on the test split, exceeds the final checkpoint by
 \ph{0.3}~dB on average; its maximum over seeds, the number a paper would report after
 test-split selection, is listed per arm in \Cref{tab:app-s3}. Together with the
 \ph{3.3}~dB added by the GT-mean gain, these three quantities account for the
 \ph{23.5}--\ph{28.2}~dB spread of published \dataset values for the same model. None of the
 oracle numbers is used to rank arms; they exist to size the practice, and they are why the
-primary read-out is the final checkpoint: a selected one imports this bias into every contrast.
+primary read-out is the final checkpoint.
 
 \paragraph{Transfer to LOL-v2-Real.} Scoring every final checkpoint on the LOL-v2-Real test
 split, deduplicated against the \dataset training set and without retraining, preserves the
@@ -83,6 +84,5 @@ beyond the sign agreement; a verdict that flipped there would be reported as a f
 working space with its collapse and a second loss space, and may drop the VGG term on \hvi
 and the loss-side coupling of $k$ at no measurable cost; the choice between learned and fixed
 $k$, between polar and linear chroma, and between max and luma intensity is a matter of
-convenience at the \ph{0.5}~dB resolution of five seeds. Full per-arm tables, per-decile
-analysis, cross-dataset scores, and the oracle decomposition of the brightness-shift failure
-are in \Cref{sec:app-experiments}.
+convenience at the \ph{0.5}~dB resolution of five seeds. Per-arm tables, per-decile
+analysis, cross-dataset scores, and the oracle decomposition are in \Cref{sec:app-experiments}.
