@@ -1,0 +1,56 @@
+{
+  "written_at": "2026-09-24T02:30:39",
+  "source": {
+    "repo": "https://huggingface.co/fediory/HVI-CIDNet-LOLv1-wperc",
+    "revision": "1fa9b6993413a8fe7df1ba433682ccf525349c88",
+    "readme_name": "LOLv1/w_perc.pth (trained with perceptual loss)",
+    "license": "MIT (upstream)"
+  },
+  "files": {
+    "model.safetensors": {
+      "path": "/home/work/research/weights/LOLv1_wperc/model.safetensors",
+      "sha256": "1163da200c800681dcf5723c92cb9010a0d8e02da32510a10d115d2188104b69",
+      "bytes": 7920332
+    },
+    "config.json": {
+      "path": "/home/work/research/weights/LOLv1_wperc/config.json",
+      "sha256": "ecf573493966bdf89ce8da79295977a2fcea946463e5386e46fe9ad968908b41",
+      "bytes": 69
+    }
+  },
+  "n_tensors": 191,
+  "parameters": 1975569,
+  "density_k_released": 1.1254568099975586,
+  "readme_eval15_numbers_not_checked": {
+    "psnr": 23.8091,
+    "ssim": 0.8574,
+    "lpips": 0.0856,
+    "gated": true,
+    "why": "eval15 is the test split; never read before the final gate"
+  },
+  "validation_split_check": {
+    "split": "scene_v1 (40 images from our485 = the released model's training data)",
+    "split_sha256": "b0dde62736e3f59148fda31dd9dfa56a1b76af8b2be6637a57b5119b35428909",
+    "metrics": {
+      "checkpoint": "best",
+      "epoch": null,
+      "n": 40,
+      "psnr": 28.68401219554091,
+      "ssim": 0.9046213289328344,
+      "lpips": 0.07266169060021639,
+      "psnr_gtmean": 30.860932547546685,
+      "ssim_gtmean": 0.9077684087836388,
+      "lpips_gtmean": 0.07171493228524924,
+      "psnr_gated": 26.737501009322493,
+      "ssim_gated": 0.888938680410899,
+      "lpips_gated": 0.08495713104493915,
+      "delta_e00": 3.7937895295465713,
+      "ab_error": 2.697620839325758,
+      "edge_delta_e00": 4.781413861038786,
+      "edge_ab_error": 3.8765893755156213,
+      "edge_psnr": 26.815371033447526
+    },
+    "note": "ungated = identity knobs; *_gated = upstream eval.py LOLv1 setting (alpha_s 1.3)"
+  },
+  "test15": "NEVER READ"
+}

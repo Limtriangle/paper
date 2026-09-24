@@ -1,7 +1,144 @@
-# phase0_candidates.md — thesis question candidates (master, 2026-09-23)
+# phase0_candidates.md — thesis candidates (master)
 
-Status: **v5** — v3 reconciled cost + literature; v4 rewrote C1 as the author's R2 ladder; v5 (2026-09-23 22:55 UTC)
-reconciles against the author's survey `ralph/related/SURVEY.md` §1 (gap → candidate map). Ranking unchanged.
+Status: **v6 = the author's requested "v5 method candidates"** (2026-09-24 03:10 UTC). Part I below is new: five
+method candidates M1–M5 under the author's new Gate 0 criteria (INBOX line 18). Part II is the earlier C-series
+(v5, survey-reconciled); **C1, the R2 nested ladder, is now the ablation chapter of whichever method wins**, and C3–C6
+are kept for the record. Evidence keys are in `ralph/related/survey.bib` unless noted; file pointers use
+D = related/D_hvi_followups.md, E = related/E_evaluation.md, CJ = results/phase0_codebase.json, R2 = redteam/R2.
+
+---
+
+# Part I — Method candidates (new Gate 0 criteria)
+
+## The fast-iteration loop every M-candidate uses (built by experiment; being validated on one pair now)
+- **Init:** released LOL-v1 `w_perc.pth` (sha256 logged in `ralph/results/phase0_weights.json`).
+- **Iteration run:** 50 epochs from those weights, short warmup then cosine re-annealed to the new end, lr recorded;
+  scene-disjoint val (40 pairs, split `scene_v1`) every epoch; **≈ 25 min on one 2080 Ti, 4 variants per wave**
+  (≈ 10 waves/day ≈ 40 variants/day). eval15 never read. Selection = the candidate's **locus metric on val** plus
+  val GT-mean PSNR (scalar gain) as the guard that the global number did not regress.
+- **Validity guard:** the loop is trusted only if the A0-vs-A2 ranking after 50 fine-tune epochs agrees in sign and
+  rough size with the 1000-epoch from-scratch pair (`phase0_finetune_rankcheck.json`, due ≈ 8 h after dispatch).
+  If it disagrees, iteration runs move to 150-epoch fine-tunes (≈ 75 min) and the check is repeated.
+- **Final table only:** best component + upstream baseline (+ the strongest published baseline we can retrain)
+  × **3 seeds from scratch**, 1000 epochs (≈ 7.7 GPU-h each); test read once by `final_eval_test.py`; the C1 ladder
+  is run as the ablation chapter (in fine-tune mode by default, ≈ 2 GPU-h for 5 arms; from scratch only if the author
+  asks). Analysis by the frozen `analysis_c1.py` rules (paired-by-seed, Holm, TOST ± 0.3 dB, decile mechanism rule).
+
+## M1 — Dark-chroma confidence: fix colour at dark, low-saturation pixels
+**Locus + evidence.** Exact black gives an arbitrary 45° hue (`atan2(V+ε, H+ε)`, CJ hvi_transform) and the inverse
+divides by C_k; the paper itself downgraded HVI from "one-to-one" to "surjective" (phase0_related §4.2.12); BC-IHV
+(`ai2026bcihv`) shows the colour space sets the gradient dynamic range (log-IHV 1001× vs learned Box-Cox 12×) and
+HVI-CIDNet+ (`yan2025hvicidnetplus`) had to add a region-refinement block for extreme darkness; MILL
+(`pilligua2025mill`) measures ΔE76 rising 10.6 → 25 under intensity blends. Our own instrument already exports
+per-intensity-decile ΔE00 and chroma-weighted hue error, and R2 rule 5 predicts A0−A2 differences sit in the bottom 3
+deciles. **Metric:** ΔE00 and |Δh|·S_gt in the bottom 3 GT-intensity deciles on val; darkness stress test (× 0.5,
+× 0.25 + Poisson–Gaussian) as dose–response; global GT-mean PSNR as guard.
+**Component.** *Chroma-confidence gating in the HV branch*: the predicted HV residual is blended, per pixel, between the
+network output and a locally-smoothed chroma prior with weight g = σ(a·C_k(I) + b) (two learned scalars, or a 1×1 conv
+on [C_k, S]), so chroma is trusted where intensity supports it and regularised where it does not; plus a
+**hue-consistency loss on dark pixels** (circular hue error weighted by S_gt, restricted to I_gt below the 30th
+percentile) and the loss-side k **frozen and detached** (R2 §1b) so the model cannot shrink the chroma loss by moving k.
+Adds < 1 k parameters; loads the released weights unchanged.
+**Fast loop.** Wave 1: gate on/off × hue-loss on/off (4 runs, 25 min). Wave 2: gate parametrisation (scalar / 1×1 /
+C_k-only) and the dark-pixel threshold (p20/p30/p40). Wave 3: k frozen vs learned under the new loss. ≈ 3 waves ≈ 1.5 h
+of wall-clock per round.
+**Baselines to beat.** Upstream w_perc (fine-tuned 50 epochs with no component — the fair control), upstream
+`--gamma` augmentation (U[0.6, 1.2], CJ), BC-IHV's learnable intensity law (`ai2026bcihv`; LOL-v2-Real controlled
+22.54 → 24.21 dB, no LOL-v1 number in files), RHVI-FDD's illumination refinement (`yang2026rhvifdd`; 23.92 → 24.82 on
+LOL-v2-Real), HVI-CIDNet+ region refinement (`yan2025hvicidnetplus`; +0.77 dB GT-mean LOL-v1), PAL loss (`li2026pal`;
+23.97 → 24.13 LOL-v1), GT-mean loss (`liao2025gtmean`). Re-implementable in the loop: gamma aug, PAL, GT-mean loss,
+a Box-Cox intensity law; the others are reported from their papers with the dataset/GT-mean status stated.
+**Novelty risk (one line).** Medium: BC-IHV and RHVI-FDD alter the *intensity* law; nobody gates *chroma* by
+intensity confidence inside CIDNet, but a reviewer may call the gate "a learned C_k" — the decile-localised evidence
+and the dose–response curve are what make it a finding rather than a tweak.
+
+## M2 — Exposure-equivariant intensity branch: robustness to brightness-shifted inputs
+**Locus + evidence.** MILL (`pilligua2025mill`, D): CIDNet's luminance PSNR falls 26.38 → 17.72 dB at a 20 % blend
+toward GT and to 14.12 at 50 %, trailing Retinexformer at every intensity level; `du2026atp` reports "significant
+luminance deviations"; NTIRE 2026 zero-shot CIDNet scores 13.85 dB, below plain gamma correction at 14.91
+(`ciubotariu2026ntire`, D/E). Upstream's only answer is random-gamma input augmentation (off by default).
+**Metric:** PSNR / ΔE at MILL-style blend levels {0, 20, 50 %} and at input gains {× 0.5, × 2} on val
+(chroma-preserving jitter of I only), and the log-exposure error log(mean_out/mean_gt); global GT-mean PSNR as guard.
+**Component.** *Exposure-conditioned I-branch*: a FiLM modulation of the I-branch (per-level scale/shift from a
+2-layer MLP on [log mean I, log p10 I, log p90 I] of the input, ≈ 2 k params) plus an **intensity-equivariance
+consistency loss** in HVI space: for a random gain s, ‖f(s·I, HV) − T_s(f(I, HV))‖ where T_s is the expected shift in
+log-I (chroma untouched, which HVI makes possible and RGB does not). Training-time jitter is applied to I only, so this
+is *not* the upstream gamma augmentation (which moves chroma too) and *not* InterLight's sensor-level augmentation.
+**Fast loop.** Wave 1: FiLM on/off × consistency on/off. Wave 2: jitter range and statistics fed to FiLM. Wave 3:
+compare against upstream `--gamma` and PAL under identical fine-tuning.
+**Baselines to beat.** Upstream w_perc + `--gamma` aug (CJ), PAL (`li2026pal`), GT-mean loss (`liao2025gtmean`),
+InterLight's illumination prompts + augmentation (`wang2026interlight`, gain not in files), MILL's own training
+(`pilligua2025mill`), Retinexformer at each MILL level (reported).
+**Novelty risk (one line).** Medium–high: InterLight (2026) already combines augmentation with illumination prompts on
+HVI; ours must stand on HVI-specific chroma-preserving equivariance and on the MILL-protocol numbers, otherwise it
+reads as "augmentation helps".
+
+## M3 — HVI-aware supervision: replace the meaningless VGG-on-HVI term and fix the range shift
+**Locus + evidence.** The perceptual loss uses `range_norm=True` (x → (x+1)/2 before ImageNet normalisation,
+vgg_arch.py:228-231, CJ): RGB is fed as [0.5, 1] (brightened, contrast halved) and (H, V, I) tensors get ImageNet
+VGG features with no perceptual meaning (R2 §1d); the paper never mentions it. README: wo_perc 23.50 / 28.14 (GT-mean)
+vs w_perc 23.81 / 27.71 — the perceptual term *lowers* the GT-mean number. The only non-RGB composite-loss precedent is
+U-Shape Transformer (`peng2023ushape`, RGB + Lab/LCH). **Metric:** LPIPS and ΔE00 on val (global and in low-saturation
+pixels), plus GT-mean PSNR; the locus is *perceptual/colour fidelity*, not PSNR.
+**Component.** *Loss-only*: VGG kept on correctly-ranged RGB only; on the HVI side a **C_k-weighted chroma-structure
+loss** (SSIM on the (H, V) plane weighted by C_k(I_gt), so dark pixels do not dominate) and an explicit hue term.
+Zero new parameters; every iteration is a 25-min fine-tune from w_perc, which is exactly what a loss change needs.
+**Fast loop.** Wave 1: {upstream loss, range fixed, VGG off HVI, both}. Wave 2: chroma-structure weight and the hue
+term. Wave 3: interaction with `--gamma` aug.
+**Baselines to beat.** w_perc and wo_perc released weights (fine-tuned identically), PAL, GT-mean loss, U-Shape's
+Lab/LCH loss (`peng2023ushape`), VCR's colour-distribution alignment (`cheng2026vcr`; 24.11 → 24.76 on LOL-v2-Real).
+**Novelty risk (one line).** Medium: a loss recombination plus the documentation of an undocumented range shift;
+strong as a diagnostic chapter, weak as a headline unless the low-saturation ΔE00 gain is clear.
+
+## M4 — Repaired and symmetric LCA fusion
+**Locus + evidence.** HV_LCA has no FFN residual while I_LCA has both; I_LCA5's output is overwritten (CIDNet.py:105,
+109) so 70,960 parameters never receive a gradient; encoder stage 3 consumes pre-LCA2 features (:94-95) so LCA2 reaches
+the decoder only via skips (CJ, phase0_related §1.2). No follow-up fixes these; TCA-Net (`wu2026tcanet`), HAIMNet
+(`wang2026haimnet`) and WIRNet's gated LCA (`ciubotariu2026ntire`) replace the fusion instead. **Metric:** edge PSNR
+(already exported) and PSNR in high-gradient regions on val; global GT-mean PSNR.
+**Component.** Repair the three wiring defects, then a **gated bidirectional LCA** (one learned gate per block deciding
+how much cross-branch information enters). Loads released weights for every unchanged tensor; the resurrected block
+starts from its (never-trained) initialisation.
+**Fast loop.** Wave 1: {upstream, +residual, +I_LCA5 live, +LCA2 feed}. Wave 2: gate on/off.
+**Baselines to beat.** Upstream; TCA-Net, HAIMNet, WIRNet (reported only; numbers not in files); the C1 ladder for the
+representation side.
+**Novelty risk (one line).** High: bug fixes are not a method, and gated LCA already appeared at NTIRE 2026 — only the
+measured size of the wiring defects (a reproducibility finding) is safely new.
+
+## M5 — Illumination-normalised inference for zero-shot / cross-dataset use
+**Locus + evidence.** NTIRE 2026: zero-shot CIDNet 13.85 dB, below gamma correction 14.91 (`ciubotariu2026ntire`);
+Efficient-LLIE HVI entries ranked 5th/12th/17th (`yan2026ntireellie`); MILL brittleness as in M2. **Metric:**
+deduplicated LOL-v2-Real PSNR/ΔE00 and NTIRE-style min-max PSNR if the challenge data can be downloaded; unpaired
+NIQE/MUSIQ as secondary. Requires new data on disk (checksums logged).
+**Component.** *Exposure normalisation in HVI*: divide I by a robust exposure estimate before the network, predict in
+normalised space, re-apply; **test-time self-ensembling over exposure scales** with a chroma-consistency criterion
+(only HVI allows changing I without touching chroma). Trained with the M2 jitter.
+**Fast loop.** As M2, plus a zero-run TTA sweep on saved fine-tunes.
+**Baselines to beat.** Gamma correction (14.91 dB), upstream `--gamma`, InterLight, FusionNet (`shi2025fusionnet`,
+NTIRE 2025 winner), MB-LPFR/Wave-P (NTIRE 2026 entries, ranks only).
+**Novelty risk (one line).** High on data availability and medium on idea (TTA over exposure is common); the locus is
+the most convincing to an outside reader but the least controllable in a two-week thesis.
+
+## Ranking (locus measurability × fit to the 25-min loop × chance to beat the named baselines × novelty)
+
+| # | Candidate | Locus metric already instrumented? | Loop fit | Novelty risk | Score |
+|---|---|---|---|---|---|
+| 1 | **M1 dark-chroma confidence** | yes (deciles, hue error, stress test) | excellent (< 1 k params, loads w_perc) | medium | ★★★★★ |
+| 2 | **M2 exposure-equivariant I-branch** | partly (log-exposure error; MILL blends to add) | very good | medium–high | ★★★★ |
+| 3 | M3 HVI-aware supervision | yes (LPIPS, ΔE00) | perfect (loss-only) | medium | ★★★★ (as a chapter) |
+| 4 | M4 repaired LCA | yes (edge PSNR) | good | high | ★★ |
+| 5 | M5 illumination-normalised inference | no (needs new data) | good | high (data) | ★★ |
+
+**Recommendation: M1 as the thesis method**, with M3's loss fix as its first loop wave (a loss change costs one
+25-min run and M1's hue loss lives in the same file), and **M2 as the pre-committed pivot** if M1's bottom-decile gain
+does not clear the decision rules after two loop rounds. The C1 ladder (A0/A2/A3/A4 + L1, fine-tune mode) is the
+ablation chapter for either. Budget after Gate 0: ≈ 3 loop rounds (≈ 12 waves ≈ 6 h wall-clock on 4 GPUs), then
+6 from-scratch runs for the final table (≈ 12 h wall-clock) + the ladder in fine-tune mode (≈ 1 h).
+
+---
+
+# Part II — C-series (the earlier question candidates; C1 = ablation chapter)
+
 
 ## Shared facts that constrain every candidate
 - **Baseline protocol = the code, not the paper text**: 1000 epochs, batch 8, crop 256, Adam 1e-4 with 3-epoch warmup
