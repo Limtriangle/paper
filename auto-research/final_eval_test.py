@@ -15,7 +15,11 @@ Modes
                                               used to select or rank anything.
   --oracle --preflight --job J                the same on validation images; writes nothing under ralph/
 
-Label convention: <arm>_seed<s> for the final (last.pt) checkpoint, <arm>_seed<s>_valbest for best.pt.
+Label convention: <arm>_seed<s> for the final (last.pt) checkpoint. Extra labelled reads for master's
+pre-committed Gate A K0 decomposition (DECISIONS 2026-09-24), never for selection:
+  --kind gated   final checkpoint with upstream's x1.3 saturation gate (label <...>_gated)
+  --kind valsel  the val-selected best.pt on eval15 (label <...>_valsel)
+  --oracle       every 10-epoch snapshot (label oracle_<...>)
 """
 from __future__ import annotations
 
@@ -47,7 +51,13 @@ def load_checkpoint(path, device):
     return model.to(device).eval(), cfg, state.get("epoch")
 
 
-def measure(model, names, data_dir, device, lp, full=True):
+KIND_NOTES = {"final": "primary read-out: final epoch-1000 checkpoint, identity test-time knobs",
+              "gated": "Gate A K0 decomposition (DECISIONS 2026-09-24): final checkpoint with upstream's gated x1.3 "
+                       "saturation (eval.py --lol setting); secondary column; NOT for selection",
+              "valsel": "Gate A K0 decomposition: the val-selected best.pt checkpoint read on eval15; NOT for selection"}
+
+
+def measure(model, names, data_dir, device, lp, full=True, gated=False):
     """Per-image rows (+ deciles and stress if full)."""
     import torch
     import c1_metrics as M
@@ -55,14 +65,14 @@ def measure(model, names, data_dir, device, lp, full=True):
     for name in names:
         x, gt, _ = H.load_val_pair(name, data_dir)
         x, gt = x.to(device), gt.to(device)
-        pred = H.infer(model, x.unsqueeze(0), gated=False)[0]
+        pred = H.infer(model, x.unsqueeze(0), gated=gated)[0]
         row = {"image": name, **M.image_metrics(pred, gt, lp)}
         if full:
             row["deciles"] = M.decile_table(pred, gt)
             row["stress"] = {}
             for f in M.STRESS_FACTORS:
                 xs = M.poisson_gaussian(x, f, M.stress_seed(name, f))
-                ps = H.infer(model, xs.unsqueeze(0), gated=False)[0]
+                ps = H.infer(model, xs.unsqueeze(0), gated=gated)[0]
                 dec = M.decile_table(ps, gt)
                 b3 = [d for d in dec[:3] if d["n"]]
                 row["stress"][str(f)] = {**{k: v for k, v in M.image_metrics(ps, gt).items()
@@ -90,6 +100,7 @@ def main():
     ap.add_argument("--run", default="test_v1")
     ap.add_argument("--preflight", action="store_true", help="validation images only; never reads eval15")
     ap.add_argument("--oracle", action="store_true")
+    ap.add_argument("--kind", choices=tuple(KIND_NOTES), default="final")
     a = ap.parse_args()
     if a.gpu >= 0:
         os.environ["CUDA_VISIBLE_DEVICES"] = str(a.gpu)
@@ -122,6 +133,7 @@ def main():
                           **means(rows, ("psnr", "psnr_gtmean", "ssim", "lpips"))})
             print(ck.name, epoch, round(curve[-1]["psnr"], 4), round(curve[-1]["psnr_gtmean"], 4), flush=True)
         entry = {"kind": "oracle", "label": a.label, "job": str(job), "split": split_label,
+                 "notes": "Gate A K0 decomposition (DECISIONS 2026-09-24): paper-style max over saved checkpoints; NOT for selection",
                  "config": {k: cfg.get(k) for k in ("arm", "seed", "split_sha256", "script_sha256", "commit")},
                  "test_split_access": permit, "evaluated_at": time.strftime("%Y-%m-%dT%H:%M:%S"),
                  "curve": curve, "n_checkpoints": len(curve),
@@ -139,7 +151,9 @@ def main():
         return
     ckpt = Path(a.ckpt).resolve()
     model, cfg, epoch = load_checkpoint(ckpt, device)
-    rows = measure(model, names, data_dir, device, lp, full=True)
+    if a.kind == "valsel":
+        H.require(ckpt.name == "best.pt", "--kind valsel must point at best.pt")
+    rows = measure(model, names, data_dir, device, lp, full=True, gated=(a.kind == "gated"))
     summary = means(rows, SUMMARY_KEYS)
     if a.preflight:
         print("FINAL_EVAL_PREFLIGHT_PASSED (validation images only; eval15 untouched)")
@@ -148,7 +162,8 @@ def main():
         return
     folder = OUT_DIR / a.run / a.label
     folder.mkdir(parents=True, exist_ok=False)
-    entry = {"kind": "final", "label": a.label, "checkpoint": str(ckpt), "checkpoint_sha256": H.sha256_file(ckpt),
+    entry = {"kind": a.kind, "notes": KIND_NOTES[a.kind], "gated": a.kind == "gated",
+             "label": a.label, "checkpoint": str(ckpt), "checkpoint_sha256": H.sha256_file(ckpt),
              "checkpoint_epoch": epoch, "config": {k: cfg.get(k) for k in
                  ("arm", "representation", "loss", "k0", "seed", "channels", "parameters", "split", "split_sha256",
                   "script_sha256", "commit", "selection")},
