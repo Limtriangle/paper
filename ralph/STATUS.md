@@ -23,6 +23,7 @@
 - writing: bind keys as they appear; never compute a number; storyline move 2 now has its first measured sentence (reproduction under upstream's reporting conditions).
 
 ## Log
+- 2026-09-24 21:20 UTC milestone audit of the n=5 draft passed after 12 fixes; draft fit for the author.
 - 2026-09-24 20:30 UTC GATE A final at n=5: PASS-with-P-A (23.25 ± 0.47 raw final; 27.74 GT-mean gated reproduces README 27.71). Ladders running (L2 ×3 done).
 - 2026-09-24 12:58 UTC GATE A PASS (provisional n=4): 23.34 ± 0.49 raw; gated+GT-mean 27.76 reproduces README 27.71. Ladders launched.
 - 2026-09-24 04:51 UTC GATE 0 PASS (author). 05:05 plan filled, Gate A launched, workers dispatched.
