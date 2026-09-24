@@ -6,15 +6,15 @@
 | Gate | State | Evidence |
 |---|---|---|
 | 0 — topic | **PASS** 2026-09-24 04:51 UTC | INBOX line 29 |
-| A — instrument + reproduction | **OPEN, launched** | A0-L0 seeds 42–46 from scratch; verdict = mean raw eval15 PSNR ∈ [23.3, 24.3] and σ ≤ 0.5 |
-| B — loss ladder S1 (25 runs) | pending | HVI-PLAN.md §4–§5 |
-| C — representation ladder S2 (20 runs) | pending | HVI-PLAN.md §4–§5 |
+| A — instrument + reproduction | **PASS (provisional n=4)** 12:58 UTC: raw 23.34 ± 0.49 in window; re-stamp at n=5 | ralph/results/final_eval__test.json |
+| B — loss ladder S1 (25 runs) | running (queue launched 13:00 UTC) | HVI-PLAN.md §4–§5 |
+| C — representation ladder S2 (20 + 6 extra-seed runs) | queued after S1's L2 arm | HVI-PLAN.md §4–§5 |
 | D — final | pending | |
 
 ## Agents
 | Agent | Doing | Since |
 |---|---|---|
-| master | Plan filled and committed; Gate A launched; both workers dispatched per §Opening; sweeping every 30 min while jobs run | 2026-09-24 05:05 UTC |
+| master | Gate A stamped PASS (provisional); S1/S2 queue dispatched; writing binding Gate A keys; sweeping every 30 min | 2026-09-24 13:00 UTC |
 | writing | ALL Phase 0 work done (ff56879: check/audit fail on missing src, custom.bib 112 verified, related.md §5, appendix). **Holding for Gate 0.** Build + audit green | 2026-09-23 23:35 UTC |
 
 ## Next actions
@@ -23,6 +23,7 @@
 - writing: draft → build green → commit → push; then the gen-table specs for S1/S2/S3 tables pointing at the not-yet-existing keys.
 
 ## Log
+- 2026-09-24 12:58 UTC GATE A PASS (provisional n=4): 23.34 ± 0.49 raw; gated+GT-mean 27.76 reproduces README 27.71. Ladders launched.
 - 2026-09-24 04:51 UTC GATE 0 PASS (author). 05:05 plan filled, Gate A launched, workers dispatched.
 - 2026-09-23 22:45 UTC reset wake-up: no Gate 0 answer; author's survey (ralph/related/) + red-team confirmation in INBOX; workers resumed on Next actions.
 - 2026-09-23 19:25 UTC Claude Code session limit at 96%, resets 22:40 UTC. Workers commit early and hold; master sweeps cheaply. Resume after reset: writing → corrections + appendix + C1 spec scaffold (Next actions); experiment → scene-disjoint split + arm wiring (Next actions); master → wait for Gate 0.

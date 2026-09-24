@@ -1,5 +1,5 @@
 {
- "exported_at": "2026-09-24T12:50:50",
+ "exported_at": "2026-09-24T12:54:08",
  "jobs": {
   "L0_seed42": {
    "best": {
@@ -374,12 +374,12 @@
     "width": 36
    },
    "curve": {
-    "best_val_psnr": 20.51830076885053,
-    "best_val_psnr_epoch": 15,
-    "final_train_loss": 1.1732792279550008,
+    "best_val_psnr": 21.539761895990473,
+    "best_val_psnr_epoch": 25,
+    "final_train_loss": 1.1452501841953822,
     "final_val_psnr": "",
-    "n_epochs": 19,
-    "train_seconds_total": 512.235454082489
+    "n_epochs": 26,
+    "train_seconds_total": 702.7195599079132
    },
    "epochs_trained": 1000,
    "status": "running"
@@ -496,8 +496,8 @@
   "L0_seed45/status.json": "1aa15fce90a347cc48e89fb24bd15e2606be24063e13bc4ccf343a60c5eca48c",
   "L0_seed45/validation_summary.csv": "b6880664c3957449a3e15c66b63e862ad48dfcd3d9fd253eb3de3fcc1c40e7c5",
   "L0_seed46/config.json": "f8b677317b2e41e2c0fb9eadedb2f1c46fbc6debf640cfff251bd16687b3927c",
-  "L0_seed46/metrics.csv": "bf955363e1f1651d48ba5a733f653d25661ea3b727cbe9b51fb3a309b65c14ea",
-  "L0_seed46/status.json": "f03e888455c0efd43cbb9a8a390522eb4d19ddbb32597afea648f79085f8d1b9",
+  "L0_seed46/metrics.csv": "4cd5f83ac67dfe0b5587223b94518db41fa9ed517213402adebdc2a549002491",
+  "L0_seed46/status.json": "15e0ccc272e207c6781330051ffc196838a47cea5e554585637799561e67d555",
   "manifest.json": "6a1e1ee52edde77e1113d7f952c2660ad29e5dd53f9306ac0dc279d1dd4fc11f"
  },
  "status": "partial",
