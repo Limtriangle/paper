@@ -1,6 +1,6 @@
 # phase0_candidates.md — thesis candidates (master)
 
-Status: **v7** (2026-09-24 03:40 UTC; v6 = the author's requested "v5 method candidates", v7 folds in the author's novelty checks `ralph/related/novelty/M1–M3` and adopts their numbering). Part I below is new: five
+Status: **v8** (2026-09-24 04:20 UTC): v6 = the author's requested "v5 method candidates"; v7 folded in the author's novelty checks M1–M3 (their numbering); **v8 adds the six transfer-style candidates T1–T6 with the author's verdicts and re-ranks: T1 (+T3) recommended, M2 pivot.** Part I below is new: five
 method candidates M1–M5 under the author's new Gate 0 criteria (INBOX line 18). Part II is the earlier C-series
 (v5, survey-reconciled); **C1, the R2 nested ladder, is now the ablation chapter of whichever method wins**, and C3–C6
 are kept for the record. Evidence keys are in `ralph/related/survey.bib` unless noted; file pointers use
@@ -134,22 +134,97 @@ bidirectional LCA. **Metric.** Edge PSNR, PSNR in high-gradient regions, GT-mean
 TCA-Net, HAIMNet, WIRNet (reported). **Novelty risk.** High: bug fixes are not a method and gated LCA exists; the
 measured size of the defects is the safe finding.
 
+## Transfer-style candidates T1–T6 (author's novelty checks `ralph/related/novelty/T1–T6`, 2026-09-24)
+Verdicts as written: **NOVEL-IN-HVI: T1, T3, T4, T6 (thin). INCREMENTAL: T2, T5.** None of the six checks states a
+numeric go/no-go; the thresholds below are master's proposals and are marked as such.
+
+### T1 — Hue-rotation-equivariant HV branch (+ hue augmentation + circular hue loss)  *(author's lean: primary)*
+**Verdict:** NOVEL-IN-HVI. No paper combines rotation/steerable-equivariant convs with the HVI chroma branch; the
+mechanism exists (CEConv, NeurIPS 2023, arXiv 2310.19368; "Learning Color Equivariant Representations", arXiv
+2406.09588, which already identifies hue as the 2D rotation group in HSL; hypertoroidal covering, arXiv 2603.04256;
+illuminant-equivariant nets for colour constancy, ECCV 2024) and the target problem is attacked non-equivariantly by
+CAGE (arXiv 2608.10512, AdaLAB/AdaCCT) and HVD-Net (continuous hue encoding). HVI makes this exact: a global hue
+rotation by Δh is a rigid rotation of the (H, V) vector field by 2πΔh, with I untouched.
+**Locus.** Colour casts / white-balance shifts in low light: hue error and — the equivariance-specific quantity — the
+*spread* of the output hue error across synthetic input rotations of the same scene; ΔE00 under simulated WB gains.
+Measurable on val with zero new data: rotate val inputs by Δh ∈ {± 10°, ± 20°, ± 40°} and apply WB gains.
+**Component.** Replace the first conv block(s) of the HV branch with a CEConv-style hue-rotation-equivariant lifting
+conv over a discrete group H_n (n = 8–12) — where the cast is still a pure rotation, before any mixing with I — plus a
+circular (von Mises / cosine) hue loss and hue-rotation augmentation. **Conceptual point the thesis must own:** an
+equivariant branch maps a rotated input to a rotated output, so alone it *preserves* a cast; the correction comes from
+pairing equivariant features with an **invariant global cast estimator** (group-pooled head predicting the rotation to
+undo) — "equivariant features, invariant estimate, exact undo in HVI". Loads w_perc for every unchanged tensor; the
+lifting layer starts fresh (≈ n × the first block's params).
+**Baselines to beat.** (i) CIDNet fine-tuned identically **with hue-rotation augmentation and the circular loss but a
+standard conv** — the fair control (augmentation alone may buy most of the robustness); (ii) CAGE's AdaCCT plug-in if
+code is released, else reported; (iii) HVD-Net's continuous hue encoding (reported).
+**Fast loop (the check's deciding experiment, ported).** Zero-run first: the released model's hue-error spread under
+input rotations (the gap to close). Wave 1: {control, +aug+circular loss, +equivariant lifting, +lifting+cast head}.
+**Go/no-go (master's proposal):** the equivariant variant cuts the hue-error spread across rotations by ≥ 50 % relative
+to the augmented control at equal global PSNR (± 0.1 dB) and lowers hue error under WB casts by ≥ 2°; otherwise
+"augmentation suffices" and T1 is dropped. Waves 2–3: group size n, which blocks are lifted, cast-head design.
+**Novelty risk (one line).** Low–medium on mechanism (unclaimed in HVI), medium on outcome: hue augmentation alone is
+the threat, and real casts are not pure rotations (they change S and I per channel), which bounds the exactness.
+
+### T3 — Test-time adaptation of HVI-CIDNet's own knobs (k, α_s, α_i, γ, I-branch norm)  *(author's lean: extension)*
+**Verdict:** NOVEL-IN-HVI as a component-wise assembly. Every block is taken (Zero-DCE non-reference losses;
+Retinex-unrolling test-time fine-tuning, arXiv 2202.05972 — the closest mechanism; SALVE, arXiv 2212.11484; genetic
+per-image gamma search, arXiv 2505.11246; few-parameter TTA for SR/open-set restoration, arXiv 2310.19011, 2312.02197),
+but nobody adapts HVI-CIDNet's exposed inference knobs per image; upstream sets them as fixed CLI flags.
+**Locus.** Brightness-shifted and out-of-distribution inputs: MILL's 26.4 → 17.7 dB collapse at a 20 % blend, NTIRE
+2026 zero-shot 13.85 dB. **Zero training:** it is inference-time optimisation, so it fits "no runs" and any primary.
+**Component.** Freeze the network; per image, 10–50 Adam steps on {k, α_s, α_i, γ, I-branch norm affine} (a few dozen
+scalars) minimising a Zero-DCE-style non-reference loss (exposure control + colour constancy + spatial consistency,
+optionally NIQE); ≈ 1–2 s/image on a 2080 Ti.
+**Baselines to beat.** Frozen CIDNet at default knobs; the genetic gamma search (arXiv 2505.11246); the zero-parameter
+mean-intensity normalise/invert wrapper (M1's baseline (c)).
+**Deciding experiment (zero runs).** On val GT-blends α ∈ {0.1, 0.2, 0.35, 0.5} and gains {× 0.5, × 2, × 4} (MILL's 11
+levels if downloaded): PSNR/ΔE recovery vs frozen, wall-clock per image, and the in-distribution regression.
+**Go/no-go (master's proposal):** recover ≥ 1/3 of the 26.4 → 17.7 dB gap on the blended set at ≤ 2 s/image with an
+in-distribution loss ≤ 0.2 dB; otherwise it is a footnote. **Risk (one line).** Non-reference losses drift toward
+over-exposure and flat colour; the in-distribution guard is what keeps it honest.
+
+### T2 — Heteroscedastic chroma-uncertainty head on the HV branch — **INCREMENTAL**
+Kendall & Gal-style log-variance head + Gaussian/Laplacian NLL on chroma; closest UCAMNet (MMM 2026, HVI + variance-
+guided intensity), GSAD (NeurIPS 2023), U2CLLIE (arXiv 2508.04176). Baseline: deterministic HV branch and UCAMNet. Loss +
+tiny head, loop-fit; locus = darkest deciles (ΔE00, hue error, AUSE calibration). No threshold stated. Kept as an
+optional add-on to M2 (same locus), not a primary.
+
+### T4 — Learned loss weights for the dual-space objective — **NOVEL-IN-HVI (transplant)**
+Uncertainty weighting (Kendall, Gal & Cipolla, CVPR 2018), GradNorm (ICML 2018) or DWA over the 2 spaces or all 8 terms;
+baseline = upstream weights (1.0 / 0.5 / 50 / 0.01, issue #163). Loss-only, perfect loop fit — but its headline claim is
+convergence speed, which fine-tuning from converged weights cannot show; the from-scratch 3-seed final would. Natural
+companion to M4. Locus = the weights themselves; metric PSNR/LPIPS/SSIM + epochs-to-target.
+
+### T5 — Illumination/SNR-gated LCA — **INCREMENTAL**
+Attn = softmax(QKᵀ/√d ⊙ σ(W·I_map)) with a 1×1 gate; closest CMIG-Net (arXiv 2608.01886), TCA-Net, WIRNet, HAIMNet.
+Baseline: plain LCA and CMIG-Net. Small module, loop-fit; would need Sony-Total-Dark for the check's protocol. Same
+crowded neighbourhood as M3/M5 → low.
+
+### T6 — HVI-space distillation into a small student (split I / HV losses) — **NOVEL-IN-HVI (thin)**
+Teacher HVI-CIDNet+ or an ensemble; closest MirrorDistill (arXiv 2609.25331; LOL-v2-Real 24.08 dB at 4.38 GMACs),
+DLIENet (PR 2025). Student is width-reduced, so released weights do not load; teacher inference first. Efficiency
+thesis, weak tie to a failure locus → low.
+
 ## Ranking (locus measurability × fit to the 25-min loop × chance to beat the named baselines × novelty margin)
 
-| # | Candidate | Locus metric instrumented? | Loop fit | Novelty margin (author's check) | Score |
+| # | Candidate | Locus metric instrumented? | Loop fit | Novelty verdict (author's checks) | Score |
 |---|---|---|---|---|---|
-| 1 | **M2 noise-calibrated per-pixel k(x) with bound** (+ M3's hue loss and decile protocol) | yes | excellent (< 1 k params, loads w_perc) | unclaimed; a provable statement; ISP LUT is the threat | ★★★★★ |
-| 2 | **M1 exposure-conditioned HVI parameters** | partly (blends/gains to add; MILL data to download) | very good | unclaimed parametrisation, crowded locus | ★★★★ |
-| 3 | M3 chroma-confidence gate + guided-filter prior | yes | good | thin (four 2026 works) | ★★★ |
-| 4 | M4 HVI-aware supervision | yes | perfect (loss-only) | medium; a chapter | ★★★ (as a chapter) |
-| 5 | M5 repaired LCA | yes | good | low | ★★ |
+| 1 | **T1 hue-equivariant HV branch + invariant cast estimator** (+ T3 as the brightness-shift extension) | yes, zero new data (synthetic rotations / WB gains on val) | very good (lifting layer new, rest loads w_perc) | NOVEL-IN-HVI | ★★★★★ |
+| 2 | **M2 noise-calibrated per-pixel k(x) with bound** (+ M3 hue loss, decile protocol) | yes | excellent | INCREMENTAL, unclaimed slice with a provable bound | ★★★★ |
+| 3 | T3 test-time knob adaptation | partly (blends/gains on val; MILL data optional) | zero training | NOVEL-IN-HVI (assembly) | ★★★★ (as extension) |
+| 4 | M1 exposure-conditioned HVI parameters | partly | very good | INCREMENTAL | ★★★ |
+| 5 | T4 learned loss weights / M4 HVI-aware supervision | yes | perfect (loss-only) | NOVEL-IN-HVI (transplant) / — | ★★★ (chapter) |
+| 6 | M3, T2, T5 (chroma gating / uncertainty / gated LCA) | yes | good | INCREMENTAL, crowded | ★★ |
+| 7 | T6 distillation, M5 repaired LCA | partly | mixed | thin / low | ★★ |
 
-**Recommendation: M2 as the thesis method** — per-pixel, noise-calibrated density with a conditioning bound, with
-M3's confidence-weighted hue loss and dark-decile protocol folded in and M4's loss fix as wave 1. **Pivot: M1**
-(different locus, shares the "parametrise HVIT from the input" machinery, so the loop code is reused). M3 stays as a
-zero-run comparison against CMIG-Net/TCA-Net outputs inside M2's chapter. The C1 ladder (A0/A2/A3/A4 + L1, fine-tune
-mode) is the ablation chapter. Budget after Gate 0: ≈ 3 loop rounds (≈ 12 waves ≈ 6 h wall-clock on 4 GPUs), then
-9 from-scratch runs (method, upstream, strongest baseline × 3 seeds ≈ 18 h wall-clock) + the ladder in fine-tune mode.
+**Recommendation (v8): T1 as the thesis method, T3 as its zero-training extension** — together "HVI-CIDNet robust to
+photometric shift: equivariant chroma under hue casts, adapted intensity knobs under brightness shift", two loci that
+are both measurable on the validation split with no new data. **Pivot: M2** if T1's wave 1 shows augmentation alone
+closes the hue-error spread (the stated go/no-go), since M2 shares the fine-tune loop and the decile protocol. M4/T4
+loss work is wave 1 of either. The C1 ladder (fine-tune mode) is the ablation chapter. Budget after Gate 0 unchanged:
+≈ 3 loop rounds (≈ 6 h wall-clock), T3 zero-run sweeps on saved fine-tunes, then 9 from-scratch runs for the final table
+(≈ 18 h wall-clock) + the ladder in fine-tune mode.
 
 ---
 
