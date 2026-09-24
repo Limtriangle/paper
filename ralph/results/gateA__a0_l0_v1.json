@@ -1,5 +1,5 @@
 {
- "exported_at": "2026-09-24T12:40:59",
+ "exported_at": "2026-09-24T12:45:32",
  "jobs": {
   "L0_seed42": {
    "best": {
@@ -127,15 +127,31 @@
    "curve": {
     "best_val_psnr": 22.66061316663081,
     "best_val_psnr_epoch": 215,
-    "final_train_loss": 0.5329911229865891,
-    "final_val_psnr": 21.29957766226147,
-    "n_epochs": 990,
-    "train_seconds_total": 26872.869007110596
+    "final_train_loss": 0.5278079754539898,
+    "final_val_psnr": 21.292792527068436,
+    "n_epochs": 1000,
+    "train_seconds_total": 27143.664919614792
    },
    "epochs_trained": 1000,
    "status": "running"
   },
   "L0_seed44": {
+   "best": {
+    "ab_error": 4.24861550448054,
+    "delta_e00": 8.194704175488997,
+    "edge_ab_error": 5.2131097874962,
+    "edge_delta_e00": 8.796723911896905,
+    "edge_psnr": 22.08643619760747,
+    "epoch": 530,
+    "lpips": 0.1340602919459343,
+    "lpips_gtmean": 0.12215299913659691,
+    "n": 40,
+    "n_images": 40,
+    "psnr": 22.962313304477707,
+    "psnr_gtmean": 28.42770487711377,
+    "ssim": 0.8669759955022057,
+    "ssim_gtmean": 0.8922734337794834
+   },
    "config": {
     "CUDA_VISIBLE_DEVICES": "2",
     "amp": false,
@@ -178,13 +194,29 @@
    "curve": {
     "best_val_psnr": 22.962313304477703,
     "best_val_psnr_epoch": 530,
-    "final_train_loss": 0.5080280921288899,
-    "final_val_psnr": "",
-    "n_epochs": 993,
-    "train_seconds_total": 26771.329315185547
+    "final_train_loss": 0.5085512016500745,
+    "final_val_psnr": 22.220901646026682,
+    "n_epochs": 1000,
+    "train_seconds_total": 26959.419402837753
    },
    "epochs_trained": 1000,
-   "status": "running"
+   "last": {
+    "ab_error": 4.234348177786776,
+    "delta_e00": 8.58952825016342,
+    "edge_ab_error": 5.1829938136630735,
+    "edge_delta_e00": 9.110652221114826,
+    "edge_psnr": 21.542900119795654,
+    "epoch": 1000,
+    "lpips": 0.13255271879024805,
+    "lpips_gtmean": 0.11971139246597887,
+    "n": 40,
+    "n_images": 40,
+    "psnr": 22.220901646026682,
+    "psnr_gtmean": 28.458596253844405,
+    "ssim": 0.8645318974816195,
+    "ssim_gtmean": 0.8925521672138992
+   },
+   "status": "complete"
   },
   "L0_seed45": {
    "config": {
@@ -229,10 +261,61 @@
    "curve": {
     "best_val_psnr": 23.205987878397043,
     "best_val_psnr_epoch": 205,
-    "final_train_loss": 0.5061004071363381,
+    "final_train_loss": 0.5065127494079726,
     "final_val_psnr": "",
-    "n_epochs": 987,
-    "train_seconds_total": 26760.733387231827
+    "n_epochs": 996,
+    "train_seconds_total": 27004.631818056107
+   },
+   "epochs_trained": 1000,
+   "status": "running"
+  },
+  "L0_seed46": {
+   "config": {
+    "CUDA_VISIBLE_DEVICES": "0",
+    "amp": false,
+    "batch_size": 8,
+    "channels": [
+     36,
+     36,
+     72,
+     144
+    ],
+    "condition": "L0",
+    "crop": 256,
+    "epochs_schedule": 1000,
+    "epochs_trained": 1000,
+    "gpu": "NVIDIA GeForce RTX 2080 Ti",
+    "heads": [
+     1,
+     2,
+     4,
+     8
+    ],
+    "lr": 0.0001,
+    "parameters": 1975569,
+    "script_sha256": "0fd3a438b64eb08abb3074cf32f57931eba93aa26265407d4601f4e26093b809",
+    "seed": 46,
+    "step_limit": 0,
+    "test15": "NEVER READ",
+    "torch": "2.7.0a0+7c8ec84dab.nv25.03",
+    "val_limit": 0,
+    "variant": "L0",
+    "weights": {
+     "HVI": 1.0,
+     "L1": 1.0,
+     "SSIM": 0.5,
+     "edge": 50.0,
+     "perceptual": 0.01
+    },
+    "width": 36
+   },
+   "curve": {
+    "best_val_psnr": 17.90115782661255,
+    "best_val_psnr_epoch": 5,
+    "final_train_loss": 1.5248554583106722,
+    "final_val_psnr": "",
+    "n_epochs": 7,
+    "train_seconds_total": 187.8765127658844
    },
    "epochs_trained": 1000,
    "status": "running"
@@ -243,8 +326,8 @@
   "split_sha256": "b0dde62736e3f59148fda31dd9dfa56a1b76af8b2be6637a57b5119b35428909"
  },
  "n_jobs": {
-  "complete": 1,
-  "total": 4
+  "complete": 2,
+  "total": 5
  },
  "protocol": {
   "augmentation": "RandomCrop(crop) + RandomHorizontalFlip + RandomVerticalFlip, same crop/flips for low and high (data/data.py:7-13)",
@@ -337,15 +420,19 @@
   "L0_seed42/status.json": "5fd68b68fbdc862f2b780be2ebccc73a6ba9dcac1db306afa7e35a1a41e2efd2",
   "L0_seed42/validation_summary.csv": "d1903630d2fe01c3d336778c4ad5a1770d9a27d3843a9173f2dc4466e48dbc98",
   "L0_seed43/config.json": "20ed984e54a72de85589ea38f7be8d2975151ed006aeb863525fe4ac61263c1d",
-  "L0_seed43/metrics.csv": "7a77120f96d50de866c9e380921de045339cc8ad3436d6be781078c086de373a",
-  "L0_seed43/status.json": "25b939a686bfb0abf63697677bef1e58e0d8a401e46522d73ff857db06c25d67",
-  "L0_seed44/config.json": "4ae56a4920ada179d1e45e3bdf429acc7869a4beb0813e3e22786b85ed1be5f8",
-  "L0_seed44/metrics.csv": "46f8cccac0c1ff0e91762a5b8ecc7a27ad3d1bcefab06c3c6a92d9628cf5c0e2",
-  "L0_seed44/status.json": "71acd7e8037aa6a573fc11fb3d22b0a572748e79c16321bd900720b1043c5906",
+  "L0_seed43/metrics.csv": "1c0427320f308ac2cfee5c3b29e487c7de01195cdaae61163e1728ef413abe73",
+  "L0_seed43/status.json": "a38c4533b2ff39599fd8a23678d565c2ffeb03c2cc5b503f0cea7c12b1549153",
+  "L0_seed44/config.json": "b21ebe2c500981b75dfb09424a74378361168aa9fb2142d9653390cbe8a98d1a",
+  "L0_seed44/metrics.csv": "d6ba6c80a6f6aa96421e040244d0a5e78abfd4ba04acac55b3d0624824f33236",
+  "L0_seed44/status.json": "7297f2a2eec6536903b0d8910c5f99d1ec421d627b75a2dfea04c9affdf144fa",
+  "L0_seed44/validation_summary.csv": "a198f5a23b50a6fc3ed4fcfcdc3b3dbf05c5e3757199db676d48aff89edafb13",
   "L0_seed45/config.json": "7acbedbbdfa6f1cec52202a4cdc61d2435aca2d9e31b5d9180e5abbb82becfb2",
-  "L0_seed45/metrics.csv": "c6fb16df766a8c8034b0cfec82cd26453b68e906c5ff516fb890707977d22740",
-  "L0_seed45/status.json": "6ecc462700b0a7f7ccc13c57f12ce58a97a748a71b888ca95484ce0964d1798b",
-  "manifest.json": "22686df8f0a4c57ec4809a81de426c450ea01c8b505b1a2c5d22ebd90fdbdc15"
+  "L0_seed45/metrics.csv": "ddc0ca972f62cf7941c1662043081e966648a084fe009e5b1aed3e680ada1700",
+  "L0_seed45/status.json": "8cd8e81169e56631db9fa331a01688bdeb0d85732b1ca82fa4e3c21cc1af6d36",
+  "L0_seed46/config.json": "f8b677317b2e41e2c0fb9eadedb2f1c46fbc6debf640cfff251bd16687b3927c",
+  "L0_seed46/metrics.csv": "96dff4455a276dc9fe83af32da838ad32ac74c348196a954b0ae7eb41ccccf1b",
+  "L0_seed46/status.json": "89e75bfec9cf111de2a2b21acc669604c3f2297d0d8943fb6e57ce1387b0c3c6",
+  "manifest.json": "6a1e1ee52edde77e1113d7f952c2660ad29e5dd53f9306ac0dc279d1dd4fc11f"
  },
  "status": "partial",
  "study": "gateA"
