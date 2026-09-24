@@ -1,0 +1,352 @@
+{
+ "exported_at": "2026-09-24T12:40:59",
+ "jobs": {
+  "L0_seed42": {
+   "best": {
+    "ab_error": 4.25850134406557,
+    "delta_e00": 8.353416940335071,
+    "edge_ab_error": 5.270895301732309,
+    "edge_delta_e00": 8.856029858393715,
+    "edge_psnr": 22.20861413432744,
+    "epoch": 430,
+    "lpips": 0.1350250646006316,
+    "lpips_gtmean": 0.11999463830143213,
+    "n": 40,
+    "n_images": 40,
+    "psnr": 23.07036038996914,
+    "psnr_gtmean": 28.27083485876029,
+    "ssim": 0.8653142570096197,
+    "ssim_gtmean": 0.8934449930016731
+   },
+   "config": {
+    "CUDA_VISIBLE_DEVICES": "0",
+    "amp": false,
+    "batch_size": 8,
+    "channels": [
+     36,
+     36,
+     72,
+     144
+    ],
+    "condition": "L0",
+    "crop": 256,
+    "epochs_schedule": 1000,
+    "epochs_trained": 1000,
+    "gpu": "NVIDIA GeForce RTX 2080 Ti",
+    "heads": [
+     1,
+     2,
+     4,
+     8
+    ],
+    "lr": 0.0001,
+    "parameters": 1975569,
+    "script_sha256": "0fd3a438b64eb08abb3074cf32f57931eba93aa26265407d4601f4e26093b809",
+    "seed": 42,
+    "step_limit": 0,
+    "test15": "NEVER READ",
+    "torch": "2.7.0a0+7c8ec84dab.nv25.03",
+    "val_limit": 0,
+    "variant": "L0",
+    "weights": {
+     "HVI": 1.0,
+     "L1": 1.0,
+     "SSIM": 0.5,
+     "edge": 50.0,
+     "perceptual": 0.01
+    },
+    "width": 36
+   },
+   "curve": {
+    "best_val_psnr": 23.07036038996914,
+    "best_val_psnr_epoch": 430,
+    "final_train_loss": 0.5148000562829631,
+    "final_val_psnr": 22.50758359112885,
+    "n_epochs": 1000,
+    "train_seconds_total": 26798.729268550873
+   },
+   "epochs_trained": 1000,
+   "last": {
+    "ab_error": 4.017550542261761,
+    "delta_e00": 8.666410138650138,
+    "edge_ab_error": 5.054059694451246,
+    "edge_delta_e00": 9.21319003135518,
+    "edge_psnr": 21.721613599395788,
+    "epoch": 1000,
+    "lpips": 0.127709968900308,
+    "lpips_gtmean": 0.1125081698410213,
+    "n": 40,
+    "n_images": 40,
+    "psnr": 22.507583591128856,
+    "psnr_gtmean": 28.338663837908218,
+    "ssim": 0.8647873407239903,
+    "ssim_gtmean": 0.895689186563127
+   },
+   "status": "complete"
+  },
+  "L0_seed43": {
+   "config": {
+    "CUDA_VISIBLE_DEVICES": "1",
+    "amp": false,
+    "batch_size": 8,
+    "channels": [
+     36,
+     36,
+     72,
+     144
+    ],
+    "condition": "L0",
+    "crop": 256,
+    "epochs_schedule": 1000,
+    "epochs_trained": 1000,
+    "gpu": "NVIDIA GeForce RTX 2080 Ti",
+    "heads": [
+     1,
+     2,
+     4,
+     8
+    ],
+    "lr": 0.0001,
+    "parameters": 1975569,
+    "script_sha256": "0fd3a438b64eb08abb3074cf32f57931eba93aa26265407d4601f4e26093b809",
+    "seed": 43,
+    "step_limit": 0,
+    "test15": "NEVER READ",
+    "torch": "2.7.0a0+7c8ec84dab.nv25.03",
+    "val_limit": 0,
+    "variant": "L0",
+    "weights": {
+     "HVI": 1.0,
+     "L1": 1.0,
+     "SSIM": 0.5,
+     "edge": 50.0,
+     "perceptual": 0.01
+    },
+    "width": 36
+   },
+   "curve": {
+    "best_val_psnr": 22.66061316663081,
+    "best_val_psnr_epoch": 215,
+    "final_train_loss": 0.5329911229865891,
+    "final_val_psnr": 21.29957766226147,
+    "n_epochs": 990,
+    "train_seconds_total": 26872.869007110596
+   },
+   "epochs_trained": 1000,
+   "status": "running"
+  },
+  "L0_seed44": {
+   "config": {
+    "CUDA_VISIBLE_DEVICES": "2",
+    "amp": false,
+    "batch_size": 8,
+    "channels": [
+     36,
+     36,
+     72,
+     144
+    ],
+    "condition": "L0",
+    "crop": 256,
+    "epochs_schedule": 1000,
+    "epochs_trained": 1000,
+    "gpu": "NVIDIA GeForce RTX 2080 Ti",
+    "heads": [
+     1,
+     2,
+     4,
+     8
+    ],
+    "lr": 0.0001,
+    "parameters": 1975569,
+    "script_sha256": "0fd3a438b64eb08abb3074cf32f57931eba93aa26265407d4601f4e26093b809",
+    "seed": 44,
+    "step_limit": 0,
+    "test15": "NEVER READ",
+    "torch": "2.7.0a0+7c8ec84dab.nv25.03",
+    "val_limit": 0,
+    "variant": "L0",
+    "weights": {
+     "HVI": 1.0,
+     "L1": 1.0,
+     "SSIM": 0.5,
+     "edge": 50.0,
+     "perceptual": 0.01
+    },
+    "width": 36
+   },
+   "curve": {
+    "best_val_psnr": 22.962313304477703,
+    "best_val_psnr_epoch": 530,
+    "final_train_loss": 0.5080280921288899,
+    "final_val_psnr": "",
+    "n_epochs": 993,
+    "train_seconds_total": 26771.329315185547
+   },
+   "epochs_trained": 1000,
+   "status": "running"
+  },
+  "L0_seed45": {
+   "config": {
+    "CUDA_VISIBLE_DEVICES": "3",
+    "amp": false,
+    "batch_size": 8,
+    "channels": [
+     36,
+     36,
+     72,
+     144
+    ],
+    "condition": "L0",
+    "crop": 256,
+    "epochs_schedule": 1000,
+    "epochs_trained": 1000,
+    "gpu": "NVIDIA GeForce RTX 2080 Ti",
+    "heads": [
+     1,
+     2,
+     4,
+     8
+    ],
+    "lr": 0.0001,
+    "parameters": 1975569,
+    "script_sha256": "0fd3a438b64eb08abb3074cf32f57931eba93aa26265407d4601f4e26093b809",
+    "seed": 45,
+    "step_limit": 0,
+    "test15": "NEVER READ",
+    "torch": "2.7.0a0+7c8ec84dab.nv25.03",
+    "val_limit": 0,
+    "variant": "L0",
+    "weights": {
+     "HVI": 1.0,
+     "L1": 1.0,
+     "SSIM": 0.5,
+     "edge": 50.0,
+     "perceptual": 0.01
+    },
+    "width": 36
+   },
+   "curve": {
+    "best_val_psnr": 23.205987878397043,
+    "best_val_psnr_epoch": 205,
+    "final_train_loss": 0.5061004071363381,
+    "final_val_psnr": "",
+    "n_epochs": 987,
+    "train_seconds_total": 26760.733387231827
+   },
+   "epochs_trained": 1000,
+   "status": "running"
+  }
+ },
+ "manifest": {
+  "script_sha256": "0fd3a438b64eb08abb3074cf32f57931eba93aa26265407d4601f4e26093b809",
+  "split_sha256": "b0dde62736e3f59148fda31dd9dfa56a1b76af8b2be6637a57b5119b35428909"
+ },
+ "n_jobs": {
+  "complete": 1,
+  "total": 4
+ },
+ "protocol": {
+  "augmentation": "RandomCrop(crop) + RandomHorizontalFlip + RandomVerticalFlip, same crop/flips for low and high (data/data.py:7-13)",
+  "batch_size": 8,
+  "betas": [
+   0.9,
+   0.999
+  ],
+  "channels": [
+   36,
+   36,
+   72,
+   144
+  ],
+  "commit": "eb43d7d91e9a336c66856824ff9e4603ae41f408",
+  "crop": 256,
+  "cudnn": "deterministic=True, benchmark=False (upstream: benchmark=True, random seed)",
+  "dataset": "LOLv1",
+  "drop_last": false,
+  "epochs": 1000,
+  "epochs_schedule": 1000,
+  "epochs_trained": 1000,
+  "eval_gated": false,
+  "finetune_from": null,
+  "finetune_from_sha256": null,
+  "grad_clip": "none (upstream calls clip_grad_norm_ before backward: no effect)",
+  "heads": [
+   1,
+   2,
+   4,
+   8
+  ],
+  "inverse_knobs": {
+   "alpha": 1.0,
+   "gamma": 1.0,
+   "gated": false,
+   "gated2": false
+  },
+  "k0": 1.1255,
+  "lr": 0.0001,
+  "lr_min": 1e-07,
+  "mode": "full",
+  "optimizer": "Adam",
+  "perceptual": {
+   "criterion": "mse",
+   "layers": [
+    "conv1_2",
+    "conv2_2",
+    "conv3_4",
+    "conv4_4"
+   ],
+   "range_norm": true,
+   "use_input_norm": true,
+   "vgg": "vgg19"
+  },
+  "precision": "FP32, TF32 disabled, no AMP",
+  "random_gamma": false,
+  "schedule": "GradualWarmupScheduler(multiplier=1,total_epoch=3) -> CosineAnnealingRestartLR(periods=[epochs-3], eta_min=1e-7); scheduler.step() once per epoch after training (train.py:160-161,219)",
+  "schedule_kind": "upstream",
+  "selection": "highest validation mean PSNR (uint8, ungated, no GT mean) over epochs",
+  "shuffle": true,
+  "snapshot_every": 10,
+  "split": "scene_v1",
+  "split_sha256": "b0dde62736e3f59148fda31dd9dfa56a1b76af8b2be6637a57b5119b35428909",
+  "step_limit": 0,
+  "strict_deterministic": false,
+  "study": "gateA",
+  "test15": "NEVER READ",
+  "test_source": "eval15",
+  "train_source": "our485 minus the held-out validation images",
+  "val_every": 5,
+  "val_limit": 0,
+  "val_source": "50 images held out from our485 (split seed 42)",
+  "warmup_epochs": 3,
+  "weights": {
+   "HVI": 1.0,
+   "L1": 1.0,
+   "SSIM": 0.5,
+   "edge": 50.0,
+   "perceptual": 0.01
+  },
+  "workers": 3
+ },
+ "root": "/home/work/research/outputs/gateA/a0_l0_v1",
+ "run": "a0_l0_v1",
+ "run_id": "gateA__a0_l0_v1",
+ "sources": {
+  "L0_seed42/config.json": "f0e00ee1829427641b3bbc2cbb08e3e1b7dc39ab5695fbc63279fc3418673754",
+  "L0_seed42/metrics.csv": "43dca6b6929fbad341f643954c02199c5687f221f25c6c67f5992ad96dfd98f5",
+  "L0_seed42/status.json": "5fd68b68fbdc862f2b780be2ebccc73a6ba9dcac1db306afa7e35a1a41e2efd2",
+  "L0_seed42/validation_summary.csv": "d1903630d2fe01c3d336778c4ad5a1770d9a27d3843a9173f2dc4466e48dbc98",
+  "L0_seed43/config.json": "20ed984e54a72de85589ea38f7be8d2975151ed006aeb863525fe4ac61263c1d",
+  "L0_seed43/metrics.csv": "7a77120f96d50de866c9e380921de045339cc8ad3436d6be781078c086de373a",
+  "L0_seed43/status.json": "25b939a686bfb0abf63697677bef1e58e0d8a401e46522d73ff857db06c25d67",
+  "L0_seed44/config.json": "4ae56a4920ada179d1e45e3bdf429acc7869a4beb0813e3e22786b85ed1be5f8",
+  "L0_seed44/metrics.csv": "46f8cccac0c1ff0e91762a5b8ecc7a27ad3d1bcefab06c3c6a92d9628cf5c0e2",
+  "L0_seed44/status.json": "71acd7e8037aa6a573fc11fb3d22b0a572748e79c16321bd900720b1043c5906",
+  "L0_seed45/config.json": "7acbedbbdfa6f1cec52202a4cdc61d2435aca2d9e31b5d9180e5abbb82becfb2",
+  "L0_seed45/metrics.csv": "c6fb16df766a8c8034b0cfec82cd26453b68e906c5ff516fb890707977d22740",
+  "L0_seed45/status.json": "6ecc462700b0a7f7ccc13c57f12ce58a97a748a71b888ca95484ce0964d1798b",
+  "manifest.json": "22686df8f0a4c57ec4809a81de426c450ea01c8b505b1a2c5d22ebd90fdbdc15"
+ },
+ "status": "partial",
+ "study": "gateA"
+}
