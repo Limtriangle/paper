@@ -1,4 +1,21 @@
 {
-  "_doc": "Binds every \\phm{written} in writing/ to a JSON key under ralph/results/. Read by tooling/verify-phm.py. Table cells: regenerate with `python3 tooling/gen-table.py --spec-entries` and paste under entries.",
-  "entries": []
+ "_doc": "Binds every \\phm{written} in writing/ to a JSON key under ralph/results/. Read by tooling/verify-phm.py. Table cells: regenerate with `python3 tooling/gen-table.py --spec-entries` and paste under entries.",
+ "entries": [
+  {
+   "written": "0.04",
+   "src": "phase0_codebase.json",
+   "key": "reproducibility.epoch2_val_psnr_spread_db",
+   "only_in": [
+    "appendix.tex"
+   ]
+  },
+  {
+   "written": "1975569",
+   "src": "phase0_arms_preflight.json",
+   "key": "ladder_parameter_count",
+   "only_in": [
+    "method.tex"
+   ]
+  }
+ ]
 }

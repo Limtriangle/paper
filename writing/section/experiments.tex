@@ -25,7 +25,7 @@ entirely costs \ph{0.6}~dB, so the second loss space contributes, and this is th
 the released recipe that survives the seeded test. Weighting the \hvi chroma terms by the
 collapse $\Ck(I_{\mathrm{gt}})$ is equivalent to the uniform weighting at $\pm 0.3$~dB. The
 frozen loss used in the representation ladder, L2, therefore differs from the released
-recipe by two removable steps.
+recipe by one removable step and one inconclusive step.
 
 \paragraph{What the coupling of $k$ does.} In the released code the inverse transform uses
 $k$ as a detached constant, so $k$ receives gradient only through the forward transform:
@@ -45,14 +45,14 @@ threshold at which A1 would have been dropped, the learned-versus-fixed contrast
 and it is removable: fixing $k$ at the converged value changes nothing the seeds can
 resolve. Removing the
 collapse altogether (A0$-$A2) costs \ph{0.4}~dB and is the one representation step that
-contributes; the per-decile analysis places its gain in the three darkest intensity deciles,
-where the A0$-$A2 hue-error and CIEDE2000 differences exclude zero while the five brightest
-deciles show none, and the difference grows monotonically under the darkness stress test.
+contributes; the per-decile hue-error and CIEDE2000 differences between A0 and A2 satisfy the
+pre-registered mechanism rule of \Cref{sec:method}: the gain sits in the three darkest
+intensity deciles, not in the five brightest, and it grows under the darkness stress test.
 This is the pattern the collapse mechanism predicts. Replacing polar chroma by linear
 opponent chroma at the same intensity (A2$-$A3) changes quality by \ph{0.1}~dB and is
 inconclusive, and replacing the max intensity by luma (A3$-$A4) changes raw PSNR by
 \ph{0.2}~dB but GT-mean PSNR by \ph{0.0}~dB: the max-versus-luma choice is an exposure
-effect, absorbed by one scalar gain, and the raw-MSE decomposition places the whole raw
+effect, absorbed by one scalar gain, and the raw-MSE decomposition places most of the raw
 difference in the gain term. The representation ladder thus ends where the loss ladder
 did: one step carries the design, and it is the one the mechanism story is about.
 
@@ -60,8 +60,8 @@ did: one step carries the design, and it is the one the mechanism story is about
 \label{sec:selection}
 Across arms the seed SD of test GT-mean PSNR is \ph{0.3}~dB. The post-hoc oracle, which
 scores every tenth checkpoint on the test split, exceeds the final checkpoint by
-\ph{0.3}~dB on average, and its maximum over seeds, the number a paper would report after
-test-split selection, exceeds the mean final checkpoint by \ph{0.6}~dB. Together with the
+\ph{0.3}~dB on average; its maximum over seeds, the number a paper would report after
+test-split selection, is listed per arm in \Cref{tab:app-s3}. Together with the
 \ph{3.9}~dB added by the GT-mean gain, these three quantities account for the
 \ph{23.5}--\ph{28.2}~dB spread of published \dataset values for the same model. None of the
 oracle numbers is used to rank arms; they exist to size the practice, and they are why the
@@ -70,10 +70,10 @@ primary read-out is the final checkpoint: a selected one imports this bias into 
 \paragraph{Transfer to LOL-v2-Real.} Scoring every final checkpoint on the LOL-v2-Real test
 split, deduplicated against the \dataset training set and without retraining, preserves the
 two verdicts that contribute: \hvi-space supervision and the collapse keep their sign in
-every seed, and the removable steps stay within $\pm 0.3$~dB. The absolute level drops for
-every arm by the same amount to within the seed SD, as expected for a model trained on
-\dataset alone, and we make no claim about the ranking of arms on the second dataset beyond
-the sign agreement; a verdict that flipped there would be reported as a flip.
+\ph{4} of 5 seeds, and the removable steps stay within $\pm 0.3$~dB. The absolute level
+drops, to \ph{22.0}~dB GT-mean PSNR for the released recipe, as expected for a model trained
+on \dataset alone, and we make no claim about the ranking of arms on the second dataset
+beyond the sign agreement; a verdict that flipped there would be reported as a flip.
 
 \paragraph{The recipe that follows.} Under this protocol, a practitioner keeps the \hvi
 working space with its collapse and a second loss space, and may drop the VGG term on \hvi

@@ -3,13 +3,13 @@
 
 \paragraph{Model.} We use the public \mname implementation \citep{yan2025hvi} unchanged:
 an sRGB image is mapped to a three-channel working space, an intensity branch takes the
-intensity channel and a chroma branch takes all three channels, six cross-attention blocks
-couple the two, the network predicts a residual in the working space, and the result is
+intensity channel and a chroma branch takes all three channels, twelve cross-attention
+blocks (six per branch) couple the two, the network predicts a residual in the working space, and the result is
 mapped back to sRGB. In \hvi the working space is $I = \max(R,G,B)$ and
 $(H, V) = \Ck(I)\, S\, (\cos h, \sin h)$ with $\Ck(I) = (\sin(\pi I/2) + \epsilon)^{k}$, where
 $k$ is a learned scalar initialised at $0.2$ and $S, h$ are HSV saturation and hue. Every arm
 below keeps the branch split, the residual in its own working space, the block structure,
-and the parameter count ($1{,}975{,}569$, asserted per run); only the step named in its row
+and the parameter count (\phm{1975569}, asserted per run); only the step named in its row
 changes.
 
 \paragraph{Loss ladder (S1).} The released objective is
@@ -30,8 +30,8 @@ space each: A0 is \hvi with learned $k$; A1 fixes $k$ at the median converged va
 runs; A2 sets $k = 0$, which removes the collapse and leaves Cartesian HSV
 $(I, S\cos h, S\sin h)$; A3 keeps $I = \max(R,G,B)$ but replaces polar chroma by the linear
 opponent channels $(C_b, C_r)$; A4 is YCbCr, replacing the max intensity by luma. Each
-transform is exactly invertible on the valid range and differentiable; round-trip error is
-below $4 \times 10^{-7}$ on a $17^3$ grid including black. The nested contrasts
+transform is invertible on the valid range and differentiable, and the round-trip error of
+every adapter is recorded in the preflight file of the run. The nested contrasts
 A0$-$A1, A0$-$A2, A2$-$A3, A3$-$A4 isolate learning $k$, the collapse, the chroma
 parametrisation, and the intensity definition. A1 is dropped only if $k$ moves by less than
 $0.05$ in the A0 runs.

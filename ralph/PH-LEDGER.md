@@ -32,20 +32,27 @@ Files: `abs` = abstract, `intro`, `exp` = experiments, `concl`, `app` = appendix
 | 0.1 inconclusive | exp, tables | A2−A3 | contrasts.A2-A3.* |
 | 0.2 raw / 0.0 GT-mean, removable | exp, tables | A3−A4 | contrasts.A3-A4.* (GT-mean); raw contrast key TBD |
 | 27.7, 27.6, 27.6, 27.0, 27.6 | app_s1_arms | per-arm GT-mean PSNR (derived: 27.7 − Δ) | arm_summary.<arm>.psnr_gtmean.mean |
-| 23.8 … (derived −3.9) | app_s1_arms, app_s2_arms | per-arm raw PSNR | arm_summary.<arm>.psnr.mean |
+| 23.8 … (derived −3.9; A3 23.2, A4 23.0 so that A3−A4 raw = 0.2 per §7) | app_s1_arms, app_s2_arms | per-arm raw PSNR | arm_summary.<arm>.psnr.mean |
 | 27.6, 27.5, 27.2, 27.1, 27.1 | app_s2_arms | per-arm GT-mean PSNR (derived) | arm_summary.<arm>.psnr_gtmean.mean |
 | 0.3 (SD cells) | app tables | per-arm seed SD | arm_summary.<arm>.<metric>.sd |
 | 0.3 | exp, app_s3 | oracle − final | `s3__selection_bias_v1.json` analysis.analysis_s3.decision.<arm>.oracle_minus_final_mean |
-| 0.6 | exp | paper-style max − mean final | derived from paper_style_max_over_seeds − arm mean |
 | 28.0, 27.9, 27.5, 27.4, 27.4 | app_s3 | paper-style max per arm (derived) | <arm>.paper_style_max_over_seeds |
 | 3.9 | abs, intro, exp, app | GT-mean rescaling gain | arm_summary.L0.psnr_gtmean.mean − psnr.mean |
-| 0.04 | app | same-seed run-to-run floor | `baseline__determinism_{a,b}.json` (exists; bind at next pass) |
-| (no number) | exp, transfer paragraph | cross-dataset sign agreement and uniform level drop; a claim without a §7 value: quantify from the LOL-v2-Real JSON (sign counts per contrast, mean drop) or delete the paragraph at the milestone | cross-dataset export (R6 §7), keys TBD |
-| 80 %, 0.3 dB | app S4 | brightness-shift loss explained by pre-gain; knob gain | S4 analysis JSON (not yet defined) |
+| 4 of 5; 22.0 | exp, transfer paragraph | contrasts keeping sign on LOL-v2-Real (dedup); A0-L0 GT-mean PSNR there | §7 row (R6 §7 placeholder); cross-dataset export, keys TBD |
+| 80 %, 0.3 dB | app S4 | brightness-shift loss explained by pre-gain; HVI knobs add ≤ 0.3 dB beyond gain-only (§7 rows) | S4 analysis JSON (not yet defined) |
 
 Rule: at the first milestone every row either becomes a `\phm{}` row below or its sentence is
 deleted. Literature rows (first three) become citations with the number attributed, or go.
 
+## Removed at master's audit of f0cd1fc (2026-09-24)
+- round-trip error "below 4e-7" (method): JSON says 6.43e-7 per arm; scientific notation cannot be bound by verify-phm, sentence deleted (the preflight file is named instead).
+- paper-style max − mean final "0.6" (exp): not in §7; replaced by a pointer to the S3 table.
+- "a dozen follow-ups" (intro): count removed.
+- "six cross-attention blocks" (method): it is twelve (six per branch); plain text, no number macro.
+
 ## `\phm{}` — measured (from `verify-phm.py --ledger`)
 
-*(none yet)*
+| written | file | key | actual |
+|---|---|---|---|
+| `0.04` | appendix.tex | `phase0_codebase.json: reproducibility.epoch2_val_psnr_spread_db` | 0.0424 |
+| `1975569` | method.tex | `phase0_arms_preflight.json: ladder_parameter_count` | 1975569 |

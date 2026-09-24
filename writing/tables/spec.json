@@ -311,7 +311,7 @@
      "ph": {
       "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr_gtmean.mean": 27.1,
       "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr_gtmean.sd": 0.3,
-      "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr.mean": 23.2,
+      "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr.mean": 23.0,
       "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr.sd": 0.3
      }
     }
