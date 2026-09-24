@@ -23,6 +23,8 @@ Spec: writing/tables/spec.json
     }
   ]
 }
+A row may carry "src" (its own JSON file) and "keys": {"<col key>": "<key in that file>"} when one
+row of a table comes from a different export (e.g. the Gate A row of the S3 table).
 A row may carry "ph": {"<col key>": <value>} — the provisional value from HVI-PLAN.md §7, rendered
 as \\ph{} ONLY while the key is absent from the JSON; it never competes for bold and is replaced
 by the measured \\phm{} the moment the key exists (--check then reports drift until --write).
@@ -74,9 +76,11 @@ def render(tbl):
     vals = {}   # (row_idx, col_idx) -> float|None
     prov = set()   # (row, col) cells whose value is a provisional \ph{} from the spec, not from JSON
     for i, row in enumerate(tbl["rows"]):
+        rdata = data if "src" not in row else load_src({"src": row["src"], "name": tbl["name"]})
         for j, col in enumerate(cols):
             try:
-                vals[(i, j)] = cell_value(data, row["job"], col["key"])
+                key = row.get("keys", {}).get(col["key"], col["key"])   # per-row key override
+                vals[(i, j)] = cell_value(rdata, row["job"], key)
             except (KeyError, IndexError):
                 # absent: render the spec's provisional value as \ph{} (HVI-PLAN.md §7, logged in
                 # PH-LEDGER.md) if one is given, else "--". Never a guess by this script.
@@ -128,15 +132,17 @@ def spec_entries(tbl):
     data = load_src(tbl)
     ents = []
     for row in tbl["rows"]:
+        rdata = data if "src" not in row else load_src({"src": row["src"], "name": tbl["name"]})
         for col in tbl["cols"]:
+            ck = row.get("keys", {}).get(col["key"], col["key"])
             try:
-                v = cell_value(data, row["job"], col["key"])
+                v = cell_value(rdata, row["job"], ck)
             except (KeyError, IndexError):
                 continue
             s = format(v, col.get("fmt", "")) if isinstance(v, (int, float)) else str(v)
-            k = col["key"].replace("{cond}", row["job"])
+            k = ck.replace("{cond}", row["job"])
             key = k[1:] if k.startswith("/") else f"jobs.{row['job']}.{k}"
-            ents.append({"written": s, "src": tbl["src"], "key": key, "only_in": [f"{tbl['name']}.tex"]})
+            ents.append({"written": s, "src": row.get("src", tbl["src"]), "key": key, "only_in": [f"{tbl['name']}.tex"]})
     return ents
 
 

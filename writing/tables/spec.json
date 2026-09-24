@@ -352,9 +352,10 @@
     {
      "label": "L0",
      "job": "L0",
-     "ph": {
-      "/analysis.analysis_s3.decision.{cond}.oracle_minus_final_mean": 0.3,
-      "/analysis.analysis_s3.decision.{cond}.paper_style_max_over_seeds": 28.0
+     "src": "gateA__summary_v1.json",
+     "keys": {
+      "/analysis.analysis_s3.decision.{cond}.oracle_minus_final_mean": "/summary.gateA_L0.decomposition.oracle_minus_final_gtmean.mean",
+      "/analysis.analysis_s3.decision.{cond}.paper_style_max_over_seeds": "/summary.gateA_L0.oracle.max_over_seeds.gtmean_psnr"
      }
     },
     {

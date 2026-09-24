@@ -35,8 +35,8 @@ Files: `abs` = abstract, `intro`, `exp` = experiments, `concl`, `app` = appendix
 | 23.8 … (derived −3.9; A3 23.2, A4 23.0 so that A3−A4 raw = 0.2 per §7) | app_s1_arms, app_s2_arms | per-arm raw PSNR | arm_summary.<arm>.psnr.mean |
 | 27.6, 27.5, 27.2, 27.1, 27.1 | app_s2_arms | per-arm GT-mean PSNR (derived) | arm_summary.<arm>.psnr_gtmean.mean |
 | 0.3 (SD cells) | app tables | per-arm seed SD | arm_summary.<arm>.<metric>.sd |
-| 0.3 | exp, app_s3 | oracle − final (summary has n=1 only; stays \ph until n≥3) | `s3__selection_bias_v1.json` analysis.analysis_s3.decision.<arm>.oracle_minus_final_mean, or summary.gateA_L0.decomposition.oracle_minus_final(_gtmean) once n≥3 |
-| 28.0, 27.9, 27.5, 27.4, 27.4 | app_s3 | paper-style max per arm (derived) | <arm>.paper_style_max_over_seeds |
+| 0.3 | app_s3 (arms A0-A4 only; L0 row now measured) | oracle − final per ladder arm | `s3__selection_bias_v1.json` analysis.analysis_s3.decision.<arm>.oracle_minus_final_mean |
+| 27.9, 27.5, 27.4, 27.4 | app_s3 (A0-A4) | paper-style max per arm (derived) | <arm>.paper_style_max_over_seeds |
 | 3.3 | abs, intro, exp, app | GT-mean rescaling gain (26.63 − 23.34 from the summary keys; the difference itself is not a key) | a derived key gtmean_minus_raw.mean, or state both means and drop the difference |
 | 4 of 5; 22.0 | exp, transfer paragraph | contrasts keeping sign on LOL-v2-Real (dedup); A0-L0 GT-mean PSNR there | §7 row (R6 §7 placeholder); cross-dataset export, keys TBD |
 | 80 %, 0.3 dB | app S4 | brightness-shift loss explained by pre-gain; HVI knobs add ≤ 0.3 dB beyond gain-only (§7 rows) | S4 analysis JSON (not yet defined) |
@@ -64,6 +64,9 @@ deleted. Literature rows (first three) become citations with the number attribut
 | `3.29` | abstract, introduction, experiments, appendix | `summary.gateA_L0.decomposition.gtmean_minus_raw.mean` | 3.290 |
 | `1.10` | experiments.tex | `decomposition.gated_minus_ungated_gtmean.mean` | 1.100 |
 | `-0.39` | appendix.tex | `decomposition.valsel_minus_final_gtmean.mean` | -0.389 |
+| `0.06` | abstract, introduction, experiments (headline selection term, GT-mean) | `decomposition.oracle_minus_final_gtmean.mean` (n=4) | 0.064 |
+| `0.35` | experiments.tex (raw) | `decomposition.oracle_minus_final.mean` | 0.352 |
+| app_s3 L0 row (2 cells) | app_s3.tex | `decomposition.oracle_minus_final_gtmean.mean`, `oracle.max_over_seeds.gtmean_psnr` (per-row src override) | 0.06, 26.96 |
 | `22.78`, `23.97` | experiments.tex | `final_eval__test.json: entries.gateA_L0_seed{42,44}.metrics.psnr` (min, max over completed seeds) | 22.7751, 23.9697 |
 | `26.52`, `26.90` | experiments.tex | `entries.gateA_L0_seed{43,44}.metrics.psnr_gtmean` (min, max) | 26.5215, 26.9044 |
 | `27.55`, `28.05` | experiments.tex | `entries.gateA_L0_seed{43,44}_gated.metrics.psnr_gtmean` (min, max) | 27.5513, 28.0453 |
