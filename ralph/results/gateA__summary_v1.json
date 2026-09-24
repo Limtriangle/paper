@@ -1,7 +1,7 @@
 {
   "run_id": "gateA__summary_v1",
-  "written_at": "2026-09-24T20:43:16",
-  "script_sha256": "4d57187cfbcc830d6a4406b5ce6b11f4426be8ff46c9ba71a05b0260bd1ff4b2",
+  "written_at": "2026-09-24T20:48:54",
+  "script_sha256": "44c174060a9aa345e34ddeebbd54942bbe37e2d8ec3c4b0d4e46c93ba6c0c1ae",
   "summary": {
     "gateA_L0": {
       "final": {
@@ -187,6 +187,14 @@
           "n": 5
         },
         "notes": "per-seed differences on eval15 (raw PSNR unless suffixed _gtmean), aggregated over seeds; decomposition only, never selection"
+      },
+      "window": {
+        "lower": 23.3,
+        "upper": 24.3,
+        "source": "HVI-PLAN.md \u00a75 Gate A",
+        "final_raw_mean_minus_lower": -0.046130374993499146,
+        "final_raw_mean_inside": false,
+        "gated_raw_mean_minus_lower": 0.3710826518261605
       }
     }
   },

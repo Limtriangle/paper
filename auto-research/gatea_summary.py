@@ -92,6 +92,12 @@ def main():
             dec["oracle_minus_final_gtmean"] = msd([per[str(s)]["gtmean_psnr"] - fin[s]["psnr_gtmean"] for s in both])
     dec["notes"] = "per-seed differences on eval15 (raw PSNR unless suffixed _gtmean), aggregated over seeds; decomposition only, never selection"
     out["decomposition"] = dec
+    # Gate A window (HVI-PLAN.md §5 constants, recorded for provenance) and the gap of the final raw mean to its lower edge
+    if out.get("final", {}).get("raw_psnr"):
+        out["window"] = {"lower": 23.3, "upper": 24.3, "source": "HVI-PLAN.md §5 Gate A",
+                         "final_raw_mean_minus_lower": out["final"]["raw_psnr"]["mean"] - 23.3,
+                         "final_raw_mean_inside": 23.3 <= out["final"]["raw_psnr"]["mean"] <= 24.3,
+                         "gated_raw_mean_minus_lower": (out["gated"]["raw_psnr"]["mean"] - 23.3) if out.get("gated", {}).get("raw_psnr") else None}
     res = {"run_id": "gateA__summary_v1", "written_at": time.strftime("%Y-%m-%dT%H:%M:%S"),
            "script_sha256": H.sha256_file(Path(__file__)), "summary": {"gateA_L0": out}, "sources": sources,
            "status": "complete" if len(seeds.get("final", {})) >= 5 else "partial",
