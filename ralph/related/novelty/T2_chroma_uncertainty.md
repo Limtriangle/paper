@@ -1,0 +1,30 @@
+# T2 — HVI-CIDNet + heteroscedastic chroma uncertainty: novelty check
+
+## Verdict: INCREMENTAL
+Closest work is **UCAMNet** (MMM 2026) — HVI color space + a GAN whose intensity branch is guided by an explicit variance-estimation "uncertainty constraint," i.e. the exact combination of (HVI, per-pixel variance head, uncertainty-guided training) already exists, just applied to the I (intensity) branch, in an unpaired GAN setting, not to the HV chroma branch with a Kendall&Gal Gaussian/Laplacian NLL.
+No paper found does classic heteroscedastic-NLL (mean+variance head, Kendall&Gal-style) specifically on the **HV chroma branch** of an HVI/CIDNet-style network, and none reports ΔE00/hue-error broken out by intensity decile or a calibration check on the resulting uncertainty map — that specific slice is open.
+Adjacent, non-identical precedent is dense: GSAD's uncertainty-guided diffusion regularization, an entropy-based "uncertainty-aware" LLIE (U2CLLIE), a Negative-Binomial heteroscedastic-noise Retinex model, and two purely-deterministic HVI chroma-reliability gates (ICDNet, CMIG-Net, TCA-Net) — so the paper must argue precisely against UCAMNet/GSAD, not just against CIDNet's deterministic L1.
+
+## Closest works
+
+| Paper | Venue/Year | What it does | Link |
+|---|---|---|---|
+| Kendall & Gal, "What Uncertainties Do We Need in Bayesian Deep Learning for Computer Vision?" | NeurIPS 2017 | Foundational heteroscedastic aleatoric uncertainty: network head predicts mean+variance, trained with Gaussian NLL; applied to depth/segmentation, not color/LLIE | https://www.semanticscholar.org/paper/ff7bcaa4556cb13fc7bf03e477172493546172cd |
+| UCAMNet | MMM 2026 | Unsupervised LLIE in **HVI space**; GAN's intensity branch enhancement is guided by an explicit variance-estimation "uncertainty constraint" + channel-spatial attention for color/noise. Closest HVI+uncertainty combo found; guidance targets intensity (I), not confirmed as chroma (HV) NLL head | https://link.springer.com/chapter/10.1007/978-981-95-6957-1_22 |
+| GSAD (Global Structure-Aware Diffusion) | NeurIPS 2023 | Diffusion LLIE with "uncertainty-guided regularization": an uncertainty map (from the diffusion process) relaxes curvature-regularization strength in extreme (dark/noisy) regions — conceptually the down-weighting mechanism the candidate wants, but not a learned per-pixel Gaussian/Laplacian NLL variance head, and not chroma-specific | https://arxiv.org/abs/2310.17577 |
+| U2CLLIE ("Uncertainty-Aware Spatial Color Correlation for LLIE") | arXiv Aug 2025 | Entropy-based uncertainty (not NLL/variance-head) driving a dual-domain denoise module + spatial-color causal correlation; "uncertainty-aware" framing applied broadly to color, but mechanism is entropy of frequency-domain features, not Kendall&Gal regression uncertainty | https://arxiv.org/abs/2508.04176 |
+| Bright-Channel Retinex + Conditional Overdispersed-Noise Analysis | arXiv Aug 2026 | Explicit heteroscedastic noise model (Negative-Binomial) for Retinex reflectance-ratio division; training-free MLE, not a learned network head, not HVI, not chroma-specific | https://arxiv.org/abs/2608.09137 |
+| TCA-Net (Thresholded Cross-Attention) | arXiv Jul 2026 | HVI-space intensity–chromaticity fusion gated by a **deterministic** per-layer confidence threshold on cross-attention (not a probabilistic variance/NLL) | https://arxiv.org/abs/2607.13925 |
+| ICDNet | arXiv 2026 (2605.02627) | Log-domain intensity–chromaticity decoupled space; deterministic cross-stream interaction + physically constrained inverse mapping. No probabilistic uncertainty — confirms candidate's premise | https://arxiv.org/abs/2605.02627 |
+| CMIG-Net | arXiv Aug 2026 (2608.01886) | Conditional-mutual-information-guided chrominance recalibration (deterministic information map), outperforms CIDNet on PSNR. No probabilistic uncertainty — confirms candidate's premise | https://arxiv.org/abs/2608.01886 |
+| Data Relativistic Uncertainty (DRU) | arXiv Dec 2025 (2512.21944) | "Relativistic"/wave-particle-duality-inspired illumination uncertainty to reweight unpaired GAN objectives (Enlighten-GAN); not per-pixel heteroscedastic regression, not chroma, not HVI | https://arxiv.org/abs/2512.21944 |
+| Color-histogram/hue-chroma uncertainty in colorization (pre-2018 line, e.g. Zhang et al. hue/chroma histograms) | ICCV/ECCV-era | Predicts hue/chroma as a classification distribution; uncertainty = entropy of predicted hue×chroma. Different task (colorization, not LLIE), classification not regression NLL | referenced via search summaries only |
+
+## Baseline to beat
+CIDNet's deterministic HV branch (plain L1 on chroma, CVPR 2025) **and** UCAMNet's HVI+variance-guided GAN (MMM 2026) as the nearest probabilistic-HVI analog — must show the Kendall&Gal-style chroma NLL head beats both on ΔE00/hue-error in the darkest intensity deciles at matched PSNR, and additionally show the uncertainty map is calibrated (e.g., sparsification/AUSE curve), which none of the found works report.
+
+## Cheapest deciding experiment
+Add a second linear head to CIDNet's existing HV decoder predicting log-variance per pixel; replace the chroma L1 with Gaussian (or Laplacian) NLL; no architecture change otherwise. Evaluate on LOLv2-Real/LOLv1: (a) ΔE00 and hue-angle error stratified by ground-truth intensity decile vs. stock CIDNet, at matched PSNR; (b) a sparsification/AUSE plot to check the predicted variance actually correlates with chroma error, especially in the bottom 1–2 deciles. This isolates the loss-function contribution from any architectural claim and directly targets the gap UCAMNet/GSAD leave open (variance head on chroma specifically, with calibration reported).
+
+## Locus where it should help
+Darkest-decile pixels (near-zero intensity, low saturation) where hue is dominated by sensor/quantization noise — exactly where CIDNet's fixed L1 forces a confident but arbitrary hue prediction; the heteroscedastic loss should let the network emit high variance there instead of hallucinating color, improving ΔE00/hue error in that regime without moving PSNR (which is dominated by better-lit, higher-confidence pixels).
