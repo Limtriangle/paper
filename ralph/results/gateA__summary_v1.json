@@ -1,7 +1,7 @@
 {
   "run_id": "gateA__summary_v1",
-  "written_at": "2026-09-24T13:01:48",
-  "script_sha256": "6fc5f66b36a9644165b5776116533174f599ec332fbd81418d7cabfcb674deb2",
+  "written_at": "2026-09-24T13:05:50",
+  "script_sha256": "4d57187cfbcc830d6a4406b5ce6b11f4426be8ff46c9ba71a05b0260bd1ff4b2",
   "summary": {
     "gateA_L0": {
       "final": {
@@ -99,6 +99,70 @@
           "45": 0.8701199889183044
         },
         "n": 4
+      },
+      "oracle": {
+        "max_over_ckpt_mean": {
+          "raw_psnr": {
+            "mean": 23.107034114952462,
+            "sd": null,
+            "n": 1
+          },
+          "gtmean_psnr": {
+            "mean": 26.595609226245106,
+            "sd": null,
+            "n": 1
+          }
+        },
+        "max_over_seeds": {
+          "raw_psnr": 23.107034114952462,
+          "gtmean_psnr": 26.595609226245106
+        },
+        "per_seed": {
+          "42": {
+            "raw_psnr": 23.107034114952462,
+            "gtmean_psnr": 26.595609226245106,
+            "n_checkpoints": 101
+          }
+        },
+        "notes": "paper-style numbers: max over saved checkpoints on the test split; NEVER used for selection"
+      },
+      "decomposition": {
+        "gtmean_minus_raw": {
+          "mean": 3.2902785924732383,
+          "sd": 0.3426922350456484,
+          "n": 4
+        },
+        "gated_minus_ungated": {
+          "mean": 0.4501885497102478,
+          "sd": 0.07026165764220338,
+          "n": 4
+        },
+        "gated_minus_ungated_gtmean": {
+          "mean": 1.1003299078580069,
+          "sd": 0.0568781247315393,
+          "n": 4
+        },
+        "valsel_minus_final": {
+          "mean": -0.7312819790786369,
+          "sd": 0.9486526715966892,
+          "n": 4
+        },
+        "valsel_minus_final_gtmean": {
+          "mean": -0.38927062818891134,
+          "sd": 0.19229708051421449,
+          "n": 4
+        },
+        "oracle_minus_final": {
+          "mean": 0.3319765864217885,
+          "sd": null,
+          "n": 1
+        },
+        "oracle_minus_final_gtmean": {
+          "mean": 0.07287674410811107,
+          "sd": null,
+          "n": 1
+        },
+        "notes": "per-seed differences on eval15 (raw PSNR unless suffixed _gtmean), aggregated over seeds; decomposition only, never selection"
       }
     }
   },
@@ -108,7 +172,8 @@
     "a0_l0_v1/L0_seed42/metrics.csv": "43dca6b6929fbad341f643954c02199c5687f221f25c6c67f5992ad96dfd98f5",
     "a0_l0_v1/L0_seed43/metrics.csv": "1c0427320f308ac2cfee5c3b29e487c7de01195cdaae61163e1728ef413abe73",
     "a0_l0_v1/L0_seed44/metrics.csv": "d6ba6c80a6f6aa96421e040244d0a5e78abfd4ba04acac55b3d0624824f33236",
-    "a0_l0_v1/L0_seed45/metrics.csv": "48f3dfce66c5b28126e14bb528b21fb4d35a082bdfee19e2587abe86aa48b43d"
+    "a0_l0_v1/L0_seed45/metrics.csv": "48f3dfce66c5b28126e14bb528b21fb4d35a082bdfee19e2587abe86aa48b43d",
+    "final_eval__oracle.json": "b2428dfcadd8752cd43ec4d7bab4a56c4af8245a1d21ebd77e6ea774d73a2da7"
   },
   "status": "partial",
   "notes": "derived by script from final_eval__test.json / gateA exports / final_eval__oracle.json; gated, valsel and oracle are Gate A decomposition columns, not selection"

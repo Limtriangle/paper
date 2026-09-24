@@ -71,6 +71,27 @@ def main():
                              "max_over_seeds": {"raw_psnr": max(maxes.values()), "gtmean_psnr": max(maxes_gm.values())},
                              "per_seed": {str(s): {"raw_psnr": maxes[s], "gtmean_psnr": maxes_gm[s], "n_checkpoints": per[s]["n_checkpoints"]} for s in sorted(per)},
                              "notes": "paper-style numbers: max over saved checkpoints on the test split; NEVER used for selection"}
+    # decomposition (master 2026-09-24): per-seed differences, then aggregated; raw PSNR unless named gtmean
+    fin, gat, vs = seeds.get("final", {}), seeds.get("gated", {}), seeds.get("valsel", {})
+    dec = {}
+    if fin:
+        dec["gtmean_minus_raw"] = msd([fin[s]["psnr_gtmean"] - fin[s]["psnr"] for s in sorted(fin)])
+    both = sorted(set(fin) & set(gat))
+    if both:
+        dec["gated_minus_ungated"] = msd([gat[s]["psnr"] - fin[s]["psnr"] for s in both])
+        dec["gated_minus_ungated_gtmean"] = msd([gat[s]["psnr_gtmean"] - fin[s]["psnr_gtmean"] for s in both])
+    both = sorted(set(fin) & set(vs))
+    if both:
+        dec["valsel_minus_final"] = msd([vs[s]["psnr"] - fin[s]["psnr"] for s in both])
+        dec["valsel_minus_final_gtmean"] = msd([vs[s]["psnr_gtmean"] - fin[s]["psnr_gtmean"] for s in both])
+    if "oracle" in out:
+        per = out["oracle"]["per_seed"]
+        both = sorted(s for s in fin if str(s) in per)
+        if both:
+            dec["oracle_minus_final"] = msd([per[str(s)]["raw_psnr"] - fin[s]["psnr"] for s in both])
+            dec["oracle_minus_final_gtmean"] = msd([per[str(s)]["gtmean_psnr"] - fin[s]["psnr_gtmean"] for s in both])
+    dec["notes"] = "per-seed differences on eval15 (raw PSNR unless suffixed _gtmean), aggregated over seeds; decomposition only, never selection"
+    out["decomposition"] = dec
     res = {"run_id": "gateA__summary_v1", "written_at": time.strftime("%Y-%m-%dT%H:%M:%S"),
            "script_sha256": H.sha256_file(Path(__file__)), "summary": {"gateA_L0": out}, "sources": sources,
            "status": "complete" if len(seeds.get("final", {})) >= 5 else "partial",
