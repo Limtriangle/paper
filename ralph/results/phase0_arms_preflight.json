@@ -1,5 +1,5 @@
 {
-  "written_at": "2026-09-23T22:46:26",
+  "written_at": "2026-09-24T02:33:24",
   "k0": 0.2,
   "arms": {
     "A0": {
@@ -10,19 +10,19 @@
       "model_k": {
         "value": 0.20000000298023224,
         "learnable": true,
-        "grad": -2.1912143230438232
+        "grad": -2.4432244300842285
       },
       "loss_terms": {
-        "rgb_l1": 0.33418992161750793,
-        "rgb_ssim": 0.4422830045223236,
-        "rgb_edge": 7.338963985443115,
-        "rgb_perc": 1.168988823890686,
-        "hvi_l1": 0.43781778216362,
-        "hvi_ssim": 0.4599705636501312,
-        "hvi_edge": 14.356104850769043
+        "rgb_l1": 0.33666953444480896,
+        "rgb_ssim": 0.44593262672424316,
+        "rgb_edge": 7.329616069793701,
+        "rgb_perc": 1.1034220457077026,
+        "hvi_l1": 0.4444555342197418,
+        "hvi_ssim": 0.4580604135990143,
+        "hvi_edge": 14.760175704956055
       },
-      "loss_total": 24.538318634033203,
-      "encode_decode_roundtrip_max_abs_err": 5.960464477539062e-07,
+      "loss_total": 24.878332138061523,
+      "encode_decode_roundtrip_max_abs_err": 6.426125764846802e-07,
       "output_dtype": "torch.float32",
       "n_param_tensors_without_grad": 13
     },
@@ -37,16 +37,16 @@
         "grad": null
       },
       "loss_terms": {
-        "rgb_l1": 0.3345947861671448,
-        "rgb_ssim": 0.4423767924308777,
-        "rgb_edge": 7.358009338378906,
-        "rgb_perc": 1.1710883378982544,
-        "hvi_l1": 0.4384741187095642,
-        "hvi_ssim": 0.4599377512931824,
-        "hvi_edge": 14.403404235839844
+        "rgb_l1": 0.3370998203754425,
+        "rgb_ssim": 0.44610533118247986,
+        "rgb_edge": 7.349188804626465,
+        "rgb_perc": 1.1054465770721436,
+        "hvi_l1": 0.4451112747192383,
+        "hvi_ssim": 0.4580502212047577,
+        "hvi_edge": 14.811023712158203
       },
-      "loss_total": 24.607885360717773,
-      "encode_decode_roundtrip_max_abs_err": 5.960464477539062e-07,
+      "loss_total": 24.9520263671875,
+      "encode_decode_roundtrip_max_abs_err": 6.426125764846802e-07,
       "output_dtype": "torch.float32",
       "n_param_tensors_without_grad": 13
     },
@@ -61,16 +61,16 @@
         "grad": null
       },
       "loss_terms": {
-        "rgb_l1": 0.33466148376464844,
-        "rgb_ssim": 0.443564236164093,
-        "rgb_edge": 7.217360496520996,
-        "rgb_perc": 1.167423129081726,
-        "hvi_l1": 0.4364202320575714,
-        "hvi_ssim": 0.46018898487091064,
-        "hvi_edge": 13.982380867004395
+        "rgb_l1": 0.33495137095451355,
+        "rgb_ssim": 0.4459574222564697,
+        "rgb_edge": 7.180903911590576,
+        "rgb_perc": 1.105226993560791,
+        "hvi_l1": 0.44155362248420715,
+        "hvi_ssim": 0.4594545364379883,
+        "hvi_edge": 14.28364372253418
       },
-      "loss_total": 24.04199981689453,
-      "encode_decode_roundtrip_max_abs_err": 1.341104507446289e-07,
+      "loss_total": 24.251691818237305,
+      "encode_decode_roundtrip_max_abs_err": 1.4901161193847656e-07,
       "output_dtype": "torch.float32",
       "n_param_tensors_without_grad": 14
     },
@@ -85,16 +85,16 @@
         "grad": null
       },
       "loss_terms": {
-        "rgb_l1": 0.33264654874801636,
-        "rgb_ssim": 0.4423629641532898,
-        "rgb_edge": 7.145735740661621,
-        "rgb_perc": 1.1646226644515991,
-        "hvi_l1": 0.43340179324150085,
-        "hvi_ssim": 0.4590824246406555,
-        "hvi_edge": 13.907064437866211
+        "rgb_l1": 0.3326281011104584,
+        "rgb_ssim": 0.4445531368255615,
+        "rgb_edge": 7.097771644592285,
+        "rgb_perc": 1.0777240991592407,
+        "hvi_l1": 0.4380376935005188,
+        "hvi_ssim": 0.45776963233947754,
+        "hvi_edge": 14.182710647583008
       },
-      "loss_total": 23.884918212890625,
-      "encode_decode_roundtrip_max_abs_err": 1.7881393432617188e-07,
+      "loss_total": 24.03119468688965,
+      "encode_decode_roundtrip_max_abs_err": 1.1920928955078125e-07,
       "output_dtype": "torch.float32",
       "n_param_tensors_without_grad": 14
     },
@@ -106,16 +106,16 @@
       "model_k": {
         "value": 0.20000000298023224,
         "learnable": true,
-        "grad": -0.6891451478004456
+        "grad": -0.7313453555107117
       },
       "loss_terms": {
-        "rgb_l1": 0.33418992161750793,
-        "rgb_ssim": 0.4422830045223236,
-        "rgb_edge": 7.338963985443115,
-        "rgb_perc": 1.168988823890686
+        "rgb_l1": 0.33666953444480896,
+        "rgb_ssim": 0.44593262672424316,
+        "rgb_edge": 7.329616069793701,
+        "rgb_perc": 1.1034220457077026
       },
-      "loss_total": 9.284425735473633,
-      "encode_decode_roundtrip_max_abs_err": 5.960464477539062e-07,
+      "loss_total": 9.2156400680542,
+      "encode_decode_roundtrip_max_abs_err": 6.426125764846802e-07,
       "output_dtype": "torch.float32",
       "n_param_tensors_without_grad": 13
     },
@@ -130,15 +130,15 @@
         "grad": null
       },
       "loss_terms": {
-        "rgb_l1": 0.33680298924446106,
-        "rgb_ssim": 0.4419102668762207,
-        "rgb_edge": 7.335100173950195,
-        "rgb_perc": 1.2022243738174438,
-        "hvi_l1": 0.43343305587768555,
-        "hvi_ssim": 0.45887136459350586,
-        "hvi_edge": 13.913400650024414
+        "rgb_l1": 0.3383050262928009,
+        "rgb_ssim": 0.445253849029541,
+        "rgb_edge": 7.315493583679199,
+        "rgb_perc": 1.1240310668945312,
+        "hvi_l1": 0.4389488399028778,
+        "hvi_ssim": 0.45704084634780884,
+        "hvi_edge": 14.31590747833252
       },
-      "loss_total": 24.121742248535156,
+      "loss_total": 24.434980392456055,
       "encode_decode_roundtrip_max_abs_err": 0.0,
       "output_dtype": "torch.float32",
       "n_param_tensors_without_grad": 14
@@ -151,20 +151,20 @@
       "model_k": {
         "value": 0.20000000298023224,
         "learnable": true,
-        "grad": -5.658759117126465
+        "grad": -5.931136131286621
       },
       "loss_terms": {
-        "rgb_l1": 0.33418992161750793,
-        "rgb_ssim": 0.4422830045223236,
-        "rgb_edge": 7.338963985443115,
-        "rgb_perc": 1.168988823890686,
-        "hvi_l1": 0.43781778216362,
-        "hvi_ssim": 0.4599705636501312,
-        "hvi_edge": 14.356104850769043,
-        "hvi_perc": 1.6985546350479126
+        "rgb_l1": 0.33666953444480896,
+        "rgb_ssim": 0.44593262672424316,
+        "rgb_edge": 7.329616069793701,
+        "rgb_perc": 1.1034220457077026,
+        "hvi_l1": 0.4444555342197418,
+        "hvi_ssim": 0.4580604135990143,
+        "hvi_edge": 14.760175704956055,
+        "hvi_perc": 1.840577244758606
       },
-      "loss_total": 26.236873626708984,
-      "encode_decode_roundtrip_max_abs_err": 5.960464477539062e-07,
+      "loss_total": 26.718910217285156,
+      "encode_decode_roundtrip_max_abs_err": 6.426125764846802e-07,
       "output_dtype": "torch.float32",
       "n_param_tensors_without_grad": 13
     }
