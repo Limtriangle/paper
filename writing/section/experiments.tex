@@ -51,14 +51,13 @@ resolve. Removing the
 collapse altogether (A0$-$A2) costs \ph{0.4}~dB and is the one representation step that
 contributes; the per-decile hue-error and CIEDE2000 differences between A0 and A2 satisfy the
 pre-registered mechanism rule of \Cref{sec:method}: the gain sits in the three darkest
-intensity deciles, not in the five brightest, and it grows under the darkness stress test.
-This is the pattern the collapse mechanism predicts. Replacing polar chroma by linear
+intensity deciles, not in the five brightest, and it grows under the darkness stress test,
+the pattern the collapse mechanism predicts. Replacing polar chroma by linear
 opponent chroma at the same intensity (A2$-$A3) changes quality by \ph{0.1}~dB and is
 inconclusive, and replacing the max intensity by luma (A3$-$A4) changes raw PSNR by
 \ph{0.2}~dB but GT-mean PSNR by \ph{0.0}~dB: the max-versus-luma choice is an exposure
 effect, absorbed by one scalar gain, and the raw-MSE decomposition places most of the raw
-difference in the gain term. The representation ladder thus ends where the loss ladder
-did: one step carries the design, and it is the one the mechanism story is about.
+difference in the gain term.
 
 \paragraph{Seed variance and selection bias.}
 \label{sec:selection}
