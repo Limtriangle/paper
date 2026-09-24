@@ -1,0 +1,150 @@
+{
+  "written_at": "2026-09-24T02:55:48",
+  "pair": [
+    "A0_seed42",
+    "A2_seed42"
+  ],
+  "split": "scene_v1 validation (40 images)",
+  "test15": "NEVER READ",
+  "sources": {
+    "finetune__rankcheck_v2.json": "81cd4053736683285b64191f7a5c8afafdfe7c088109b7808479da880766a11c",
+    "baseline__rankcheck_v2.json": "df6e24a2528ff26aa20228cb5f1626a6214eb444535553c8af952a378f9e6726"
+  },
+  "loops": {
+    "finetune": {
+      "best": {
+        "psnr": {
+          "A0": 29.14063361191773,
+          "A2": 21.41708445559641,
+          "A0_minus_A2": 7.723549156321319,
+          "A0_better": true
+        },
+        "psnr_gtmean": {
+          "A0": 31.006653531523586,
+          "A2": 26.697098869863407,
+          "A0_minus_A2": 4.309554661660179,
+          "A0_better": true
+        },
+        "ssim": {
+          "A0": 0.9059488965446636,
+          "A2": 0.8068893228554668,
+          "A0_minus_A2": 0.09905957368919682,
+          "A0_better": true
+        },
+        "lpips": {
+          "A0": 0.07413693880662323,
+          "A2": 0.24564041066914796,
+          "A0_minus_A2": -0.17150347186252474,
+          "A0_better": true
+        },
+        "delta_e00": {
+          "A0": 3.733594856936219,
+          "A2": 9.784496589913498,
+          "A0_minus_A2": -6.050901732977279,
+          "A0_better": true
+        },
+        "edge_delta_e00": {
+          "A0": 4.733198163663132,
+          "A2": 10.280863534683133,
+          "A0_minus_A2": -5.547665371020002,
+          "A0_better": true
+        },
+        "epochs": {
+          "A0_seed42": 9,
+          "A2_seed42": 7
+        }
+      },
+      "last": {
+        "psnr": {
+          "A0": 28.793869190252234,
+          "A2": 21.121785999020354,
+          "A0_minus_A2": 7.672083191231881,
+          "A0_better": true
+        },
+        "psnr_gtmean": {
+          "A0": 31.014095562219467,
+          "A2": 26.94220708432055,
+          "A0_minus_A2": 4.071888477898916,
+          "A0_better": true
+        },
+        "ssim": {
+          "A0": 0.9066912459746727,
+          "A2": 0.841071379246188,
+          "A0_minus_A2": 0.06561986672848463,
+          "A0_better": true
+        },
+        "lpips": {
+          "A0": 0.07415030165575445,
+          "A2": 0.18746948931366206,
+          "A0_minus_A2": -0.1133191876579076,
+          "A0_better": true
+        },
+        "delta_e00": {
+          "A0": 3.8091385103174824,
+          "A2": 9.819984260112813,
+          "A0_minus_A2": -6.0108457497953305,
+          "A0_better": true
+        },
+        "edge_delta_e00": {
+          "A0": 4.759809127111795,
+          "A2": 10.32031511157442,
+          "A0_minus_A2": -5.560505984462625,
+          "A0_better": true
+        },
+        "epochs": {
+          "A0_seed42": 50,
+          "A2_seed42": 50
+        }
+      },
+      "status": {
+        "A0_seed42": "complete",
+        "A2_seed42": "complete"
+      },
+      "curve": {
+        "A0_seed42": {
+          "best_val_psnr": 29.14063361191773,
+          "best_val_psnr_epoch": 9,
+          "final_train_loss": 0.45932494902185034,
+          "final_val_psnr": 28.793869190252252,
+          "n_epochs": 50,
+          "train_seconds_total": 1107.0175042152405
+        },
+        "A2_seed42": {
+          "best_val_psnr": 21.41708445559641,
+          "best_val_psnr_epoch": 7,
+          "final_train_loss": 0.7047566569277218,
+          "final_val_psnr": 21.121785999020354,
+          "n_epochs": 50,
+          "train_seconds_total": 1109.8848721981049
+        }
+      }
+    },
+    "scratch": {
+      "status": {
+        "A0_seed42": "running",
+        "A2_seed42": "running"
+      },
+      "curve": {
+        "A0_seed42": {
+          "best_val_psnr": 21.74350400194455,
+          "best_val_psnr_epoch": 55,
+          "final_train_loss": 0.7943163269332477,
+          "final_val_psnr": "",
+          "n_epochs": 57,
+          "train_seconds_total": 1269.2644546031952
+        },
+        "A2_seed42": {
+          "best_val_psnr": 21.91844742895776,
+          "best_val_psnr_epoch": 55,
+          "final_train_loss": 0.815711929329804,
+          "final_val_psnr": "",
+          "n_epochs": 57,
+          "train_seconds_total": 1270.0159966945648
+        }
+      }
+    }
+  },
+  "agreement": {},
+  "summary": "partial: see loops.*.status",
+  "caveat": "one seed per arm; a sign agreement here is a necessary condition for the fast loop, not evidence about the arms themselves; the frozen protocol's seed spread is unknown until the 5-seed A0 gate"
+}
