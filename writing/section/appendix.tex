@@ -24,7 +24,9 @@ training, which bounds how far any \dataset number generalises.
 the frozen protocol: the primary final-checkpoint read, the same checkpoint scored with the
 upstream test-time saturation gate, and the validation-selected checkpoint. The gated and
 validation-selected reads exist only to decompose the gap to the published number and are
-not used by any contrast.
+not used by any contrast; the validation-selected checkpoint differs from the final one by
+$\phm{-0.39}$~dB of GT-mean PSNR (mean over seeds), so selecting on validation would have
+lowered, not raised, the reported number.
 
 \input{tables/app_gatea_seeds}
 
@@ -33,8 +35,8 @@ not used by any contrast.
 
 \Cref{tab:app-s1,tab:app-s2} list the absolute GT-mean and raw PSNR of every arm. The
 ladders in the body report only differences because the absolute level is dominated by the
-gain term: the \ph{3.3}~dB between the raw and GT-mean columns is the same for every arm to
-within the seed SD.
+gain term: the \phm{3.29}~dB between the raw and GT-mean columns is the same for every arm
+to within the seed SD.
 
 \input{tables/app_s1_arms}
 \input{tables/app_s2_arms}

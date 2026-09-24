@@ -268,6 +268,33 @@
     "conclusion.tex",
     "experiments.tex"
    ]
+  },
+  {
+   "written": "3.29",
+   "src": "gateA__summary_v1.json",
+   "key": "summary.gateA_L0.decomposition.gtmean_minus_raw.mean",
+   "only_in": [
+    "abstract.tex",
+    "introduction.tex",
+    "experiments.tex",
+    "appendix.tex"
+   ]
+  },
+  {
+   "written": "1.10",
+   "src": "gateA__summary_v1.json",
+   "key": "summary.gateA_L0.decomposition.gated_minus_ungated_gtmean.mean",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "-0.39",
+   "src": "gateA__summary_v1.json",
+   "key": "summary.gateA_L0.decomposition.valsel_minus_final_gtmean.mean",
+   "only_in": [
+    "appendix.tex"
+   ]
   }
  ]
 }

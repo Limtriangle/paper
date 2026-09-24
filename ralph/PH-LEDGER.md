@@ -22,7 +22,6 @@ Files: `abs` = abstract, `intro`, `exp` = experiments, `concl`, `app` = appendix
 | 23.3, 24.3 | exp | Gate A window | HVI-PLAN §5 (protocol constant, not a measurement; becomes plain text) |
 | 27.71 | exp | README w_perc GT-mean number for the released checkpoint (literature) | cite `yan2025hvi` README or delete |
 | 0.5 | abs, intro, exp, concl | achieved paired MDE | analysis decision_rules.mde (to be added by experiment) or derived 1.66·SD(Δ) |
-| 3.3 and every other difference of two keys | abs, intro, exp, app | GT-mean rescaling gain etc. | summary.gateA_L0.decomposition.* (requested by master 2026-09-24); bind by key when it lands |
 | 0.1 removable | exp, tables | L0−L1 | `s1__loss_ladder_v1.json` analysis.analysis_s1.decision.contrasts.L0-L1.{mean,sd,ci_holm,verdict} |
 | 0.0 inconclusive | exp, tables | L1−L2 | contrasts.L1-L2.* |
 | 1.1 | exp (S2 paragraph) | k end value in the A0-L2 runs (plan §7; the L0 runs give median 0.85, now \phm) | S2 summary k_final.median for A0 under L2 |
@@ -36,7 +35,7 @@ Files: `abs` = abstract, `intro`, `exp` = experiments, `concl`, `app` = appendix
 | 23.8 … (derived −3.9; A3 23.2, A4 23.0 so that A3−A4 raw = 0.2 per §7) | app_s1_arms, app_s2_arms | per-arm raw PSNR | arm_summary.<arm>.psnr.mean |
 | 27.6, 27.5, 27.2, 27.1, 27.1 | app_s2_arms | per-arm GT-mean PSNR (derived) | arm_summary.<arm>.psnr_gtmean.mean |
 | 0.3 (SD cells) | app tables | per-arm seed SD | arm_summary.<arm>.<metric>.sd |
-| 0.3 | exp, app_s3 | oracle − final | `s3__selection_bias_v1.json` analysis.analysis_s3.decision.<arm>.oracle_minus_final_mean |
+| 0.3 | exp, app_s3 | oracle − final (summary has n=1 only; stays \ph until n≥3) | `s3__selection_bias_v1.json` analysis.analysis_s3.decision.<arm>.oracle_minus_final_mean, or summary.gateA_L0.decomposition.oracle_minus_final(_gtmean) once n≥3 |
 | 28.0, 27.9, 27.5, 27.4, 27.4 | app_s3 | paper-style max per arm (derived) | <arm>.paper_style_max_over_seeds |
 | 3.3 | abs, intro, exp, app | GT-mean rescaling gain (26.63 − 23.34 from the summary keys; the difference itself is not a key) | a derived key gtmean_minus_raw.mean, or state both means and drop the difference |
 | 4 of 5; 22.0 | exp, transfer paragraph | contrasts keeping sign on LOL-v2-Real (dedup); A0-L0 GT-mean PSNR there | §7 row (R6 §7 placeholder); cross-dataset export, keys TBD |
@@ -62,6 +61,9 @@ deleted. Literature rows (first three) become citations with the number attribut
 | `26.63`, `0.18` | experiments.tex; `0.18` also abstract, introduction, conclusion (headline seed SD, GT-mean = primary metric; master ruling 2026-09-24) | `summary.gateA_L0.final.gtmean_psnr.{mean,sd}` | 26.634, 0.183 |
 | `27.73` | experiments.tex | `summary.gateA_L0.gated.gtmean_psnr.mean` | 27.735 |
 | `0.85` | experiments.tex | `summary.gateA_L0.k_final.median` | 0.847 |
+| `3.29` | abstract, introduction, experiments, appendix | `summary.gateA_L0.decomposition.gtmean_minus_raw.mean` | 3.290 |
+| `1.10` | experiments.tex | `decomposition.gated_minus_ungated_gtmean.mean` | 1.100 |
+| `-0.39` | appendix.tex | `decomposition.valsel_minus_final_gtmean.mean` | -0.389 |
 | `22.78`, `23.97` | experiments.tex | `final_eval__test.json: entries.gateA_L0_seed{42,44}.metrics.psnr` (min, max over completed seeds) | 22.7751, 23.9697 |
 | `26.52`, `26.90` | experiments.tex | `entries.gateA_L0_seed{43,44}.metrics.psnr_gtmean` (min, max) | 26.5215, 26.9044 |
 | `27.55`, `28.05` | experiments.tex | `entries.gateA_L0_seed{43,44}_gated.metrics.psnr_gtmean` (min, max) | 27.5513, 28.0453 |
