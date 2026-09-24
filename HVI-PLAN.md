@@ -214,6 +214,8 @@ Written as if final (guidelines §1). Sources: README/paper numbers and R2's pre
 | Selection bias (oracle − final) | 0.3 dB | R2 |
 | GT-mean rescaling gain | 3.9 dB | README 27.71 − 23.81 |
 | Brightness-shift loss explained by one scalar gain (S4) | 80 % | R4 |
+| HVI knobs add beyond gain-only (S4) | ≤ 0.3 dB | R4 (Y unspecified; placeholder) |
+| LOL-v2-Real (dedup) A0-L0 GT-mean PSNR; contrasts keeping sign | 22.0 dB; 4 of 5 seeds | R6 §7 cross-dataset check (placeholder) |
 
 ## 8. Pivots (pre-committed; master logs which one fired)
 
