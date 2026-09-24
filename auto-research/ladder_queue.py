@@ -225,14 +225,34 @@ def tick(st):
         if g0.is_file() and H.json_load(g0).get("state") in ("complete", "failed"):
             st["gpu0_released"] = True
             log("GPU 0 released (Gate A seed 46 terminal)")
+    now = time.time()
+    fs, stalls = st.setdefault("free_since", {}), st.setdefault("stalls", {})
     for g in sorted(free):
-        if not free[g] or g in busy or (g == 0 and not st.get("gpu0_released")) or (QDIR / f"hold_gpu{g}").exists():
-            continue   # hold_gpu<N>: a file created by experiment reserves the GPU for Gate A eval passes
-        nxt = next((j for j in jobs if j["state"] == "queued" and (j["arm"] != "A1" or st["k_fixed_A1"] is not None)), None)
-        if nxt is None:
-            break
-        launch(nxt, g, st)
-        busy.add(g)
+        key = str(g)
+        if not free[g] or g in busy:
+            fs.pop(key, None); continue
+        fs.setdefault(key, now)
+        reason = None
+        if g == 0 and not st.get("gpu0_released"):
+            reason = "GPU 0 reserved for Gate A seed 46 (not terminal yet)"
+        elif (QDIR / f"hold_gpu{g}").exists():
+            reason = f"hold file {QDIR / f'hold_gpu{g}'} present (experiment's eval passes)"
+        else:
+            nxt = next((j for j in jobs if j["state"] == "queued" and (j["arm"] != "A1" or st["k_fixed_A1"] is not None)), None)
+            if nxt is None:
+                reason = ("queue empty" if not any(j["state"] == "queued" for j in jobs)
+                          else "only A1 jobs queued and k_fixed_A1 not yet available (L2 runs incomplete)")
+            else:
+                ok = launch(nxt, g, st)
+                busy.add(g)
+                if ok:
+                    fs.pop(key, None); stalls.pop(key, None); continue
+                reason = f"last launch failed for {nxt['arm']}_seed{nxt['seed']}: {nxt.get('error', '')[-200:]}"
+        # stall visibility (master 2026-09-24): free > 5 min and nothing launched -> reason in events.log + queue.json
+        if now - fs[key] > 300 and now - stalls.get(key, {}).get("logged_at", 0) > 600:
+            stalls[key] = {"free_for_s": int(now - fs[key]), "reason": reason, "logged_at": now,
+                           "at": time.strftime("%Y-%m-%dT%H:%M:%S")}
+            log(f"STALL GPU {g}: free for {int((now - fs[key]) / 60)} min, nothing launched: {reason}")
 
 
 def main():
