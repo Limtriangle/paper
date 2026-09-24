@@ -34,6 +34,29 @@ def deltas(export):
     return out
 
 
+def curve_summary(export, res, every=5):
+    """Per-epoch validation curve (ungated PSNR + gated if present) read from each job's metrics.csv
+    (sha256 recorded in sources); rows at epochs 1, every k-th, best and last; A0 - A2 at shared epochs."""
+    import csv
+    out = {}
+    for j in PAIR:
+        p = Path(export["root"]) / j / "metrics.csv"
+        if not p.is_file():
+            continue
+        res["sources"][f"{export['run_id']}/{j}/metrics.csv"] = H.sha256_file(p)
+        rows = [r for r in csv.DictReader(open(p)) if r.get("val_psnr") not in ("", None)]
+        curve = {int(r["epoch"]): float(r["val_psnr"]) for r in rows}
+        best = max(curve, key=curve.get) if curve else None
+        keep = sorted({e for e in curve if e == 1 or e % every == 0 or e == best or e == max(curve)})
+        out[j] = {"val_psnr_by_epoch": {str(e): curve[e] for e in keep}, "best_epoch": best,
+                  "best_val_psnr": curve.get(best), "last_epoch": max(curve) if curve else None,
+                  "last_val_psnr": curve.get(max(curve)) if curve else None, "n_validated_epochs": len(curve)}
+    if all(j in out for j in PAIR):
+        a, b = out[PAIR[0]]["val_psnr_by_epoch"], out[PAIR[1]]["val_psnr_by_epoch"]
+        out["A0_minus_A2_by_epoch"] = {e: a[e] - b[e] for e in a if e in b}
+    return out
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--finetune", default="finetune__rankcheck_v2.json")
@@ -48,7 +71,9 @@ def main():
             res["loops"][name] = {"status": "export missing"}
             continue
         res["sources"][fn] = H.sha256_file(p)
-        res["loops"][name] = deltas(H.json_load(p))
+        export = H.json_load(p)
+        res["loops"][name] = deltas(export)
+        res["loops"][name]["curve_summary"] = curve_summary(export, res)
     agree = {}
     for ck in ("best", "last"):
         f, s = res["loops"].get("finetune", {}).get(ck), res["loops"].get("scratch", {}).get(ck)
