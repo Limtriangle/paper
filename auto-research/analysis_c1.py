@@ -311,11 +311,20 @@ def main():
     stamp = {"written_at": time.strftime("%Y-%m-%dT%H:%M:%S"), "script_sha256": H.sha256_file(SCRIPT), "sources": sources,
              "status": "complete", "test15": "read once per label by final_eval_test.py; these are those reads"}
     # writing's contract (DECISIONS 2026-09-24 06:10): <src>.analysis.analysis_s{1,2,3}.decision.*
+    RUN_DIRS = {"s1": H.OUTPUTS / "s1" / "loss_ladder_v1", "s2": H.OUTPUTS / "s2" / "rep_ladder_v1"}
     for ladder in ("s1", "s2"):
         dec = analyse(runs, ladder)
-        out = {"run_id": LADDERS[ladder]["src"][:-5], "analysis": {f"analysis_{ladder}": {"decision": dec}}, **stamp}
-        H.json_save(R / LADDERS[ladder]["src"], out)
-        print("wrote", R / LADDERS[ladder]["src"], {k: v.get("verdict") for k, v in dec["contrasts"].items()})
+        dec.update(stamp)
+        rd = RUN_DIRS[ladder]
+        if rd.is_dir():   # export_results.py merges <run>/analysis_<ladder>/decision.json as analysis.analysis_<ladder>.decision
+            (rd / f"analysis_{ladder}").mkdir(exist_ok=True)
+            H.json_save(rd / f"analysis_{ladder}" / "decision.json", dec)
+            print("wrote", rd / f"analysis_{ladder}" / "decision.json", "-> run export_results.py --run", f"{ladder}/{rd.name}")
+        else:
+            out = {"run_id": LADDERS[ladder]["src"][:-5], "analysis": {f"analysis_{ladder}": {"decision": dec}}, **stamp}
+            H.json_save(R / LADDERS[ladder]["src"], out)
+            print("wrote", R / LADDERS[ladder]["src"])
+        print(ladder, {k: v.get("verdict") for k, v in dec["contrasts"].items()})
     s3 = {"run_id": "s3__selection_bias_v1", "analysis": {"analysis_s3": {"decision": selection_bias(runs, a.oracle)}}, **stamp}
     H.json_save(R / "s3__selection_bias_v1.json", s3)
     print("wrote", R / "s3__selection_bias_v1.json")

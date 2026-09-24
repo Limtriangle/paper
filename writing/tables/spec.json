@@ -402,6 +402,54 @@
      "fmt": ".2f"
     }
    ]
+  },
+  {
+   "name": "app_gatea_seeds",
+   "src": "final_eval__test.json",
+   "label": "tab:app-gatea",
+   "star": false,
+   "row_label": "Seed",
+   "caption": "\\textbf{Released recipe (L0 on A0) per seed under the frozen protocol.} Test-split (eval15) PSNR of \\mname read once per checkpoint by the final-evaluation script, on \\hw. Columns: raw PSNR and GT-mean PSNR at the final epoch-1000 checkpoint with identity test-time knobs (the primary read-out); GT-mean PSNR of the same checkpoint with the upstream saturation gate; GT-mean PSNR of the validation-selected checkpoint. Seeds are not ranked, so no value is highlighted.",
+   "rows": [
+    {
+     "label": "42",
+     "job": "gateA_L0_seed42"
+    },
+    {
+     "label": "43",
+     "job": "gateA_L0_seed43"
+    },
+    {
+     "label": "44",
+     "job": "gateA_L0_seed44"
+    },
+    {
+     "label": "45",
+     "job": "gateA_L0_seed45"
+    }
+   ],
+   "cols": [
+    {
+     "label": "raw PSNR",
+     "key": "/entries.{cond}.metrics.psnr",
+     "fmt": ".2f"
+    },
+    {
+     "label": "GT-mean PSNR",
+     "key": "/entries.{cond}.metrics.psnr_gtmean",
+     "fmt": ".2f"
+    },
+    {
+     "label": "gated, GT-mean",
+     "key": "/entries.{cond}_gated.metrics.psnr_gtmean",
+     "fmt": ".2f"
+    },
+    {
+     "label": "val-selected, GT-mean",
+     "key": "/entries.{cond}_valsel.metrics.psnr_gtmean",
+     "fmt": ".2f"
+    }
+   ]
   }
  ]
 }

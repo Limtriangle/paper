@@ -197,7 +197,8 @@ def make_protocol(args, split):
               "step_limit": 0, "val_limit": 0, "commit": H.COMMIT,
               "split_sha256": H.split_sha(split), "workers": args.workers,
               "snapshot_every": args.snapshot_every,   # upstream options.py:18 snapshots=10; 0 = off
-              "strict_deterministic": bool(args.strict)})
+              "strict_deterministic": bool(args.strict),
+              "k_fixed": args.k_fixed})   # A1 only: median final k of the A0-L2 runs (recorded here)
     return p
 
 
@@ -210,7 +211,7 @@ def launch(args):
     fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
     free = H.free_gpus()
     H.require(args.gpu in free, f"GPU {args.gpu} is not free (free: {free}); nothing was stopped")
-    name = job_name(args.arm, args.seed)
+    name = job_name(args.arm, args.seed) + (args.job_suffix or "")
     split = H.load_split(args.split)
     release_check = None
     if args.finetune:
@@ -243,7 +244,7 @@ def launch(args):
     env.update(CUDA_VISIBLE_DEVICES=str(args.gpu), OMP_NUM_THREADS="3", MKL_NUM_THREADS="3",
                PYTHONUNBUFFERED="1", TORCH_HOME=str(H.HUB), CUBLAS_WORKSPACE_CONFIG=":4096:8")
     cmd = [sys.executable, "-u", str(SCRIPT), "--worker", "--run", args.run, "--study", args.study,
-           "--arm", args.arm, "--seed", str(args.seed)]
+           "--arm", args.arm, "--seed", str(args.seed)] + (["--job-suffix", args.job_suffix] if args.job_suffix else [])
     try:
         with (out / f"{name}.log").open("x") as log:
             proc = subprocess.Popen(cmd, env=env, stdout=log, stderr=subprocess.STDOUT,
@@ -272,7 +273,7 @@ def worker(args):
     H.require(H.sha256_file(LIB) == manifest["lib_sha256"], "hvilib changed since launch")
     p = dict(manifest["protocol"], arm=args.arm, condition=args.arm,
              representation=C.ARMS[args.arm][0], loss=C.ARMS[args.arm][1])
-    job = H.Job(out, job_name(args.arm, args.seed))
+    job = H.Job(out, job_name(args.arm, args.seed) + (args.job_suffix or ""))
     job.status("running", phase="initializing")
     try:
         H.import_repo()
@@ -283,8 +284,8 @@ def worker(args):
         H.require(H.split_sha(split) == p["split_sha256"] == H.split_sha(H.load_split(p["split"])),
                   "split changed")
         seed = args.seed
-        model = C.build_arm(p["arm"], seed, p["channels"], p["heads"])
-        init_info = {"init": "scratch (seeded)"}
+        model = C.build_arm(p["arm"], seed, p["channels"], p["heads"], k_fixed=p.get("k_fixed"))
+        init_info = {"init": "scratch (seeded)", "k_fixed": p.get("k_fixed")}
         if p.get("finetune_from"):
             import safetensors.torch as sf
             src = Path(p["finetune_from"])
@@ -468,6 +469,8 @@ def parse_args():
     ap.add_argument("--arm", default="U", choices=tuple(C.ARMS),
                     help="C1 arm (c1_arms.py); U = upstream model + upstream loss")
     ap.add_argument("--k0", type=float, default=C.K0_DEFAULT, help="frozen k in the loss-side HVI transform")
+    ap.add_argument("--k-fixed", type=float, default=None, help="A1 only: model k frozen at this value")
+    ap.add_argument("--job-suffix", default=None, help="e.g. _retry1 (persona §7: one restart after a crash)")
     ap.add_argument("--val-every", type=int, default=5, help="validate every N epochs (and the last)")
     ap.add_argument("--split", default="scene_v1", choices=tuple(H.SPLITS))
     ap.add_argument("--eval-gated", action="store_true",

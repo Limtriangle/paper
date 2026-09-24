@@ -19,9 +19,11 @@ Files: `abs` = abstract, `intro`, `exp` = experiments, `concl`, `app` = appendix
 | 23.5, 28.2 | abs, intro, exp | published LOL-v1 spread (README raw / paper GT-mean) | literature numbers; cite `phase0_related.md` §2.3 sources or delete at milestone |
 | 24.0 | intro | third-party raw reproductions upper bound | literature (PAL, issue #66); cite or delete |
 | 0.2, 0.4 | intro | seed SD reported for comparable restoration models | `shafi2026iphoneblur` numbers; cite or delete |
-| 23.8 / 27.7 | exp, intro | A0-L0 raw / GT-mean PSNR, mean of 5 | `gateA__a0_l0_v1.json` arm_summary.L0.psnr(.mean), psnr_gtmean(.mean) |
+| 23.3 / 26.6 | exp, intro | A0-L0 raw / GT-mean PSNR, mean over completed seeds (computed by hand from the 4 per-seed reads in final_eval__test.json: 22.78/23.36/23.97/23.27 and 26.52/26.52/26.90/26.59; NOT a key, so still \ph) | an aggregate key: e.g. final_eval__test.json summary.gateA_L0.{psnr,psnr_gtmean}.{mean,sd,n} or gateA__a0_l0_v1.json analysis — requested from experiment 2026-09-24 |
 | 23.3, 24.3 | exp | Gate A window | HVI-PLAN §5 (protocol constant, not a measurement; becomes plain text) |
-| 0.3 | abs, intro, exp, concl | σ_seed (val and test GT-mean PSNR) | `gateA__a0_l0_v1.json` arm_summary.L0.psnr_gtmean.sd; later per-arm |
+| 0.3 | abs, intro, concl | σ_seed (val and test GT-mean PSNR), plan §7 | aggregate sd key (see row above) |
+| 0.5 / 0.2 | exp | seed SD of raw / GT-mean test PSNR over the 4 completed L0 seeds (hand-computed 0.49 / 0.18; NOT a key) | aggregate sd key |
+| 27.71 | exp | README w_perc GT-mean number for the released checkpoint (literature) | cite `yan2025hvi` README or delete |
 | 0.5 | abs, intro, exp, concl | achieved paired MDE | analysis decision_rules.mde (to be added by experiment) or derived 1.66·SD(Δ) |
 | 0.1 removable | exp, tables | L0−L1 | `s1__loss_ladder_v1.json` analysis.analysis_s1.decision.contrasts.L0-L1.{mean,sd,ci_holm,verdict} |
 | 0.0 inconclusive; k 0.2→1.1 | exp, tables | L1−L2; k trajectory | contrasts.L1-L2.*; k trajectory key (experiment logs k per epoch; key TBD) |
@@ -37,7 +39,7 @@ Files: `abs` = abstract, `intro`, `exp` = experiments, `concl`, `app` = appendix
 | 0.3 (SD cells) | app tables | per-arm seed SD | arm_summary.<arm>.<metric>.sd |
 | 0.3 | exp, app_s3 | oracle − final | `s3__selection_bias_v1.json` analysis.analysis_s3.decision.<arm>.oracle_minus_final_mean |
 | 28.0, 27.9, 27.5, 27.4, 27.4 | app_s3 | paper-style max per arm (derived) | <arm>.paper_style_max_over_seeds |
-| 3.9 | abs, intro, exp, app | GT-mean rescaling gain | arm_summary.L0.psnr_gtmean.mean − psnr.mean |
+| 3.3 | abs, intro, exp, app | GT-mean rescaling gain (was 3.9 from README; now the 4-seed hand-computed 26.64 − 23.34) | aggregate keys (mean GT-mean − mean raw) or a derived key |
 | 4 of 5; 22.0 | exp, transfer paragraph | contrasts keeping sign on LOL-v2-Real (dedup); A0-L0 GT-mean PSNR there | §7 row (R6 §7 placeholder); cross-dataset export, keys TBD |
 | 80 %, 0.3 dB | app S4 | brightness-shift loss explained by pre-gain; HVI knobs add ≤ 0.3 dB beyond gain-only (§7 rows) | S4 analysis JSON (not yet defined) |
 
@@ -56,3 +58,8 @@ deleted. Literature rows (first three) become citations with the number attribut
 |---|---|---|---|
 | `0.04` | appendix.tex | `phase0_codebase.json: reproducibility.epoch2_val_psnr_spread_db` | 0.0424 |
 | `1975569` | method.tex | `phase0_arms_preflight.json: ladder_parameter_count` | 1975569 |
+| `4` | experiments.tex | `gateA__a0_l0_v1.json: n_jobs.complete` | 4 (becomes 5 when seed 46 lands; re-bind then) |
+| `22.78`, `23.97` | experiments.tex | `final_eval__test.json: entries.gateA_L0_seed{42,44}.metrics.psnr` (min, max over completed seeds) | 22.7751, 23.9697 |
+| `26.52`, `26.90` | experiments.tex | `entries.gateA_L0_seed{43,44}.metrics.psnr_gtmean` (min, max) | 26.5215, 26.9044 |
+| `27.55`, `28.05` | experiments.tex | `entries.gateA_L0_seed{43,44}_gated.metrics.psnr_gtmean` (min, max) | 27.5513, 28.0453 |
+| 16 table cells | app_gatea_seeds.tex | `entries.gateA_L0_seed{42..45}{,_gated,_valsel}.metrics.{psnr,psnr_gtmean}` | see `verify-phm.py --ledger` |

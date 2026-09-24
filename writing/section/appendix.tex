@@ -17,12 +17,23 @@ images that share a scene with a test image stay in the training set, as in ever
 \dataset result; we state this because 14 of the 15 test images have a near-duplicate in
 training, which bounds how far any \dataset number generalises.
 
+\subsection{Gate A: the Released Recipe per Seed}
+\label{sec:app-gatea}
+
+\Cref{tab:app-gatea} lists every completed seed of the released recipe (L0 on A0) under
+the frozen protocol: the primary final-checkpoint read, the same checkpoint scored with the
+upstream test-time saturation gate, and the validation-selected checkpoint. The gated and
+validation-selected reads exist only to decompose the gap to the published number and are
+not used by any contrast.
+
+\input{tables/app_gatea_seeds}
+
 \subsection{Absolute Values per Arm}
 \label{sec:app-arms}
 
 \Cref{tab:app-s1,tab:app-s2} list the absolute GT-mean and raw PSNR of every arm. The
 ladders in the body report only differences because the absolute level is dominated by the
-gain term: the \ph{3.9}~dB between the raw and GT-mean columns is the same for every arm to
+gain term: the \ph{3.3}~dB between the raw and GT-mean columns is the same for every arm to
 within the seed SD.
 
 \input{tables/app_s1_arms}

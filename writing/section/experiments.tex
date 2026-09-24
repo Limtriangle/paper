@@ -5,13 +5,16 @@ Each ladder is reported as its four nested contrasts (\Cref{tab:s1,tab:s2}): the
 difference in the primary metric between neighbouring arms, its seed SD, the Holm-adjusted
 interval, and the verdict in the vocabulary of \Cref{sec:method}.
 
-\paragraph{Reproduction under the frozen protocol.} The five L0 runs of the released
-recipe reach a raw test PSNR of \ph{23.8}~dB and \ph{27.7}~dB after the GT-mean gain, with a
-seed SD of \ph{0.3}~dB on the validation split. The raw value lies inside the window
-\ph{23.3}--\ph{24.3}~dB spanned by the authors' released checkpoint and independent
-retrainings, so the protocol reproduces the published model, and the seed SD sets the paired
-minimum detectable effect at \ph{0.5}~dB for every contrast below. The window was fixed
-before the runs as the pipeline gate.
+\paragraph{Reproduction under the frozen protocol.} The \phm{4} completed L0 runs of the
+released recipe (of five) reach a raw test PSNR between \phm{22.78} and \phm{23.97}~dB at
+the final checkpoint, mean \ph{23.3}~dB with a seed SD of \ph{0.5}~dB, and between
+\phm{26.52} and \phm{26.90}~dB after the GT-mean gain, mean \ph{26.6}~dB with a seed SD of
+\ph{0.2}~dB (per seed in \Cref{tab:app-gatea}). With the upstream test-time saturation
+gate and the GT-mean gain the same checkpoints score \phm{27.55} to \phm{28.05}~dB,
+bracketing the \ph{27.71}~dB the authors report for their released checkpoint under that
+evaluation. The raw mean lies inside the pre-registered window \ph{23.3}--\ph{24.3}~dB, so
+the protocol reproduces the published model, and the seed SD sets the paired minimum
+detectable effect at \ph{0.5}~dB for every contrast below.
 
 \input{tables/s1_contrasts}
 
@@ -32,10 +35,9 @@ $k$ as a detached constant, so $k$ receives gradient only through the forward tr
 through the \hvi-space loss on both the prediction and the target, and through the residual
 connection. Coupling $k$ into the loss therefore lets the network shrink the second loss
 term by collapsing chroma in the target as much as in the prediction, which is the shortcut
-that L2 removes. That the quality difference between L1 and L2 is inconclusive while the
-trajectory of $k$ changes shows that the learned collapse is a property of the objective as
-much as of the representation, and it is why the representation ladder is run under the
-detached loss rather than the released one.
+that L2 removes. That the L1$-$L2 quality difference is inconclusive while the trajectory of $k$ changes
+shows that the learned collapse is a property of the objective as much as of the
+representation, which is why the representation ladder runs under the detached loss.
 
 \input{tables/s2_contrasts}
 
@@ -62,7 +64,7 @@ Across arms the seed SD of test GT-mean PSNR is \ph{0.3}~dB. The post-hoc oracle
 scores every tenth checkpoint on the test split, exceeds the final checkpoint by
 \ph{0.3}~dB on average; its maximum over seeds, the number a paper would report after
 test-split selection, is listed per arm in \Cref{tab:app-s3}. Together with the
-\ph{3.9}~dB added by the GT-mean gain, these three quantities account for the
+\ph{3.3}~dB added by the GT-mean gain, these three quantities account for the
 \ph{23.5}--\ph{28.2}~dB spread of published \dataset values for the same model. None of the
 oracle numbers is used to rank arms; they exist to size the practice, and they are why the
 primary read-out is the final checkpoint: a selected one imports this bias into every contrast.

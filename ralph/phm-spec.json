@@ -16,6 +16,190 @@
    "only_in": [
     "method.tex"
    ]
+  },
+  {
+   "written": "4",
+   "src": "gateA__a0_l0_v1.json",
+   "key": "n_jobs.complete",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "22.78",
+   "src": "final_eval__test.json",
+   "key": "entries.gateA_L0_seed42.metrics.psnr",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "23.97",
+   "src": "final_eval__test.json",
+   "key": "entries.gateA_L0_seed44.metrics.psnr",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "26.52",
+   "src": "final_eval__test.json",
+   "key": "entries.gateA_L0_seed43.metrics.psnr_gtmean",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "26.90",
+   "src": "final_eval__test.json",
+   "key": "entries.gateA_L0_seed44.metrics.psnr_gtmean",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "27.55",
+   "src": "final_eval__test.json",
+   "key": "entries.gateA_L0_seed43_gated.metrics.psnr_gtmean",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "28.05",
+   "src": "final_eval__test.json",
+   "key": "entries.gateA_L0_seed44_gated.metrics.psnr_gtmean",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "22.78",
+   "src": "final_eval__test.json",
+   "key": "entries.gateA_L0_seed42.metrics.psnr",
+   "only_in": [
+    "app_gatea_seeds.tex"
+   ]
+  },
+  {
+   "written": "26.52",
+   "src": "final_eval__test.json",
+   "key": "entries.gateA_L0_seed42.metrics.psnr_gtmean",
+   "only_in": [
+    "app_gatea_seeds.tex"
+   ]
+  },
+  {
+   "written": "27.67",
+   "src": "final_eval__test.json",
+   "key": "entries.gateA_L0_seed42_gated.metrics.psnr_gtmean",
+   "only_in": [
+    "app_gatea_seeds.tex"
+   ]
+  },
+  {
+   "written": "26.31",
+   "src": "final_eval__test.json",
+   "key": "entries.gateA_L0_seed42_valsel.metrics.psnr_gtmean",
+   "only_in": [
+    "app_gatea_seeds.tex"
+   ]
+  },
+  {
+   "written": "23.36",
+   "src": "final_eval__test.json",
+   "key": "entries.gateA_L0_seed43.metrics.psnr",
+   "only_in": [
+    "app_gatea_seeds.tex"
+   ]
+  },
+  {
+   "written": "26.52",
+   "src": "final_eval__test.json",
+   "key": "entries.gateA_L0_seed43.metrics.psnr_gtmean",
+   "only_in": [
+    "app_gatea_seeds.tex"
+   ]
+  },
+  {
+   "written": "27.55",
+   "src": "final_eval__test.json",
+   "key": "entries.gateA_L0_seed43_gated.metrics.psnr_gtmean",
+   "only_in": [
+    "app_gatea_seeds.tex"
+   ]
+  },
+  {
+   "written": "25.90",
+   "src": "final_eval__test.json",
+   "key": "entries.gateA_L0_seed43_valsel.metrics.psnr_gtmean",
+   "only_in": [
+    "app_gatea_seeds.tex"
+   ]
+  },
+  {
+   "written": "23.97",
+   "src": "final_eval__test.json",
+   "key": "entries.gateA_L0_seed44.metrics.psnr",
+   "only_in": [
+    "app_gatea_seeds.tex"
+   ]
+  },
+  {
+   "written": "26.90",
+   "src": "final_eval__test.json",
+   "key": "entries.gateA_L0_seed44.metrics.psnr_gtmean",
+   "only_in": [
+    "app_gatea_seeds.tex"
+   ]
+  },
+  {
+   "written": "28.05",
+   "src": "final_eval__test.json",
+   "key": "entries.gateA_L0_seed44_gated.metrics.psnr_gtmean",
+   "only_in": [
+    "app_gatea_seeds.tex"
+   ]
+  },
+  {
+   "written": "26.65",
+   "src": "final_eval__test.json",
+   "key": "entries.gateA_L0_seed44_valsel.metrics.psnr_gtmean",
+   "only_in": [
+    "app_gatea_seeds.tex"
+   ]
+  },
+  {
+   "written": "23.27",
+   "src": "final_eval__test.json",
+   "key": "entries.gateA_L0_seed45.metrics.psnr",
+   "only_in": [
+    "app_gatea_seeds.tex"
+   ]
+  },
+  {
+   "written": "26.59",
+   "src": "final_eval__test.json",
+   "key": "entries.gateA_L0_seed45.metrics.psnr_gtmean",
+   "only_in": [
+    "app_gatea_seeds.tex"
+   ]
+  },
+  {
+   "written": "27.67",
+   "src": "final_eval__test.json",
+   "key": "entries.gateA_L0_seed45_gated.metrics.psnr_gtmean",
+   "only_in": [
+    "app_gatea_seeds.tex"
+   ]
+  },
+  {
+   "written": "26.13",
+   "src": "final_eval__test.json",
+   "key": "entries.gateA_L0_seed45_valsel.metrics.psnr_gtmean",
+   "only_in": [
+    "app_gatea_seeds.tex"
+   ]
   }
  ]
 }

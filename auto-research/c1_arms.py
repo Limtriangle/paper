@@ -28,6 +28,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import sys
 import time
 from pathlib import Path
@@ -39,10 +40,16 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 import hvilib as H  # noqa: E402
 
-LADDER = ("A0", "A2", "A3", "A4", "L1", "U", "L0")   # identical parameter counts by construction
-ARMS = {"A0": ("hvi", "frozen"), "A2": ("hvi_k0", "frozen"), "A3": ("max_cbcr", "frozen"),
-        "A4": ("ycbcr", "frozen"), "L1": ("hvi", "rgb_only"), "R": ("rgb_residual", "frozen"),
-        "U": ("hvi", "upstream"), "L0": ("hvi", "upstream")}   # L0 = plan §4 name of the Gate A arm (= U)
+# HVI-PLAN.md §4 names. S1 (loss ladder on the HVI representation): L0 full upstream loss; L1 = L0 minus VGG
+# on HVI (k still coupled); L2 = L1 with k detached at k0 (= "frozen", the loss of S2); L3 = RGB-only; L4 = L2
+# with the HVI chroma terms weighted by C_k(I_gt). S2 (representation ladder under L2): A0 (= L2 runs), A1 k
+# frozen at the median final k of A0-L2 (k_fixed), A2 k = 0, A3 max + CbCr, A4 YCbCr. U = L0 (old name).
+LADDER = ("L0", "L1", "L2", "L3", "L4", "A0", "A1", "A2", "A3", "A4", "U")   # identical parameter counts
+ARMS = {"L0": ("hvi", "upstream"), "L1": ("hvi", "coupled_novgg"), "L2": ("hvi", "frozen"),
+        "L3": ("hvi", "rgb_only"), "L4": ("hvi", "frozen_ckw"),
+        "A0": ("hvi", "frozen"), "A1": ("hvi_kfixed", "frozen"), "A2": ("hvi_k0", "frozen"),
+        "A3": ("max_cbcr", "frozen"), "A4": ("ycbcr", "frozen"),
+        "R": ("rgb_residual", "frozen"), "U": ("hvi", "upstream")}
 K0_DEFAULT = 1.1255       # HVI-PLAN §3: released converged k, constant and detached in the loss transform
 BT601 = torch.tensor([[.299, .587, .114], [-.299 * .564, -.587 * .564, (1 - .114) * .564],
                       [(1 - .299) * .713, -.587 * .713, -.114 * .713]])
@@ -64,7 +71,7 @@ def ycbcr_inverse(y, cb, cr):
 class ArmNet(nn.Module):
     """CIDNet body (net/CIDNet.py:74-119 transcribed) between an encode() and a decode()."""
 
-    def __init__(self, arm, channels=None, heads=None, seed=None):
+    def __init__(self, arm, channels=None, heads=None, seed=None, k_fixed=None):
         super().__init__()
         H.require(arm in ARMS, f"unknown arm {arm}")
         self.arm, (self.rep, self.loss_kind) = arm, ARMS[arm]
@@ -72,9 +79,13 @@ class ArmNet(nn.Module):
         self.trans = self.net.trans                                     # infer() toggles knobs here
         self.trans.gated = self.trans.gated2 = False
         self.trans.alpha, self.trans.alpha_s = 1.0, 1.3
-        if self.rep == "hvi_k0":
+        self.k_fixed = None
+        if self.rep in ("hvi_k0", "hvi_kfixed"):
+            if self.rep == "hvi_kfixed":
+                H.require(k_fixed is not None, "A1 needs k_fixed (median final k of the A0-L2 runs)")
+            self.k_fixed = 0.0 if self.rep == "hvi_k0" else float(k_fixed)
             with torch.no_grad():
-                self.trans.density_k.fill_(0.0)
+                self.trans.density_k.fill_(self.k_fixed)
             self.trans.density_k.requires_grad_(False)
         if self.rep == "rgb_residual":
             ch1 = self.net.HVD_block0[1].in_channels
@@ -94,9 +105,9 @@ class ArmNet(nn.Module):
         sd = {k: v for k, v in sd.items() if k not in skip}
         missing, unexpected = self.net.load_state_dict(sd, strict=False)
         H.require(not unexpected and set(missing) <= skip, f"pretrained mismatch: missing={missing} unexpected={unexpected}")
-        if self.rep == "hvi_k0":
+        if self.rep in ("hvi_k0", "hvi_kfixed"):
             with torch.no_grad():
-                self.trans.density_k.fill_(0.0)
+                self.trans.density_k.fill_(self.k_fixed)
             self.trans.density_k.requires_grad_(False)
         return {"released_k": released_k, "skipped": sorted(skip), "k_after_load": float(self.trans.density_k.item())}
 
@@ -105,7 +116,7 @@ class ArmNet(nn.Module):
         """rgb [0,1] -> (x3 working tensor, i1 I-branch input), FP32."""
         rgb = rgb.float()
         with _no_autocast(rgb):
-            if self.rep in ("hvi", "hvi_k0"):
+            if self.rep in ("hvi", "hvi_k0", "hvi_kfixed"):
                 x = self.trans.HVIT(rgb)                                # net/HVI_transform.py:16-47
                 return x, x[:, 2:3]
             y, cb, cr = ycbcr(rgb).unbind(1)
@@ -121,7 +132,7 @@ class ArmNet(nn.Module):
     def decode(self, out):
         with _no_autocast(out):
             out = out.float()
-            if self.rep in ("hvi", "hvi_k0"):
+            if self.rep in ("hvi", "hvi_k0", "hvi_kfixed"):
                 return self.trans.PHVIT(out)                            # net/HVI_transform.py:49-122
             if self.rep == "ycbcr":
                 return ycbcr_inverse(out[:, 2].clamp(0, 1), out[:, 0], out[:, 1]).clamp(0, 1)
@@ -184,26 +195,41 @@ class ArmNet(nn.Module):
 
 # ---- losses -------------------------------------------------------------------------------
 class FrozenLoss:
-    """L_rgb (L1+0.5 SSIM+50 edge+0.01 VGG) + L_hvi at constant k0 (L1+0.5 SSIM+50 edge, no VGG)."""
+    """L_rgb (L1+0.5 SSIM+50 edge+0.01 VGG) + L_hvi (L1+0.5 SSIM+50 edge, no VGG) computed in HVI space.
+    kind = frozen        L_hvi at constant k0 in a separate RGB_HVI (requires_grad False): L2.
+    kind = rgb_only      L_rgb only: L3.
+    kind = coupled_novgg L_hvi through the MODEL's own HVIT (learned k, gradient to k as upstream): L1.
+    kind = frozen_ckw    as frozen, but the H,V channels of both tensors are multiplied by
+                         w = C_k0(I_gt) = (sin(pi I_gt/2)+1e-8)^k0 before the three terms (dark pixels
+                         down-weighted in proportion to their chroma collapse); I channel unweighted: L4."""
 
-    def __init__(self, k0=K0_DEFAULT, rgb_only=False, weights=None):
+    def __init__(self, k0=K0_DEFAULT, kind="frozen", weights=None):
         from net.HVI_transform import RGB_HVI
+        H.require(kind in ("frozen", "rgb_only", "coupled_novgg", "frozen_ckw"), f"bad loss kind {kind}")
         up = H.UpstreamLoss(weights)                                     # reuses the upstream modules
         self.L1, self.D, self.E, self.P = up.L1, up.D, up.E, up.P
         self.P_weight, self.HVI_weight, self.weights = up.P_weight, up.HVI_weight, up.weights
-        self.rgb_only, self.k0 = rgb_only, k0
+        self.kind, self.k0 = kind, k0
+        self.rgb_only = kind == "rgb_only"
         self.hvi_k0 = RGB_HVI().cuda()               # no-op under the CPU preflight shim
         with torch.no_grad():
             self.hvi_k0.density_k.fill_(k0)
         self.hvi_k0.density_k.requires_grad_(False)
-        self.kind = "rgb_only" if rgb_only else "frozen"
 
     def __call__(self, model, out, gt):
         t = {"rgb_l1": self.L1(out, gt), "rgb_ssim": self.D(out, gt), "rgb_edge": self.E(out, gt),
              "rgb_perc": self.P_weight * self.P(out, gt)[0]}
         total = t["rgb_l1"] + t["rgb_ssim"] + t["rgb_edge"] + t["rgb_perc"]
         if not self.rgb_only:
-            oh, gh = self.hvi_k0.HVIT(out.float()), self.hvi_k0.HVIT(gt.float())
+            if self.kind == "coupled_novgg":
+                oh, gh = model.HVIT(out), model.HVIT(gt)                # train.py:60-61, learned k
+            else:
+                oh, gh = self.hvi_k0.HVIT(out.float()), self.hvi_k0.HVIT(gt.float())
+            if self.kind == "frozen_ckw":
+                i_gt = gt.float().max(1, keepdim=True)[0]
+                w = ((i_gt * 0.5 * math.pi).sin() + 1e-8).pow(self.k0)  # C_k0(I_gt), no gradient path to k
+                oh = torch.cat([oh[:, :2] * w, oh[:, 2:]], 1)
+                gh = torch.cat([gh[:, :2] * w, gh[:, 2:]], 1)
             t.update(hvi_l1=self.L1(oh, gh), hvi_ssim=self.D(oh, gh), hvi_edge=self.E(oh, gh))
             total = total + self.HVI_weight * (t["hvi_l1"] + t["hvi_ssim"] + t["hvi_edge"])
         return total, t
@@ -214,13 +240,13 @@ def make_loss(kind, k0=K0_DEFAULT, weights=None):
         f = H.UpstreamLoss(weights)
         f.kind = "upstream"
         return f
-    return FrozenLoss(k0, rgb_only=(kind == "rgb_only"), weights=weights)
+    return FrozenLoss(k0, kind=kind, weights=weights)
 
 
-def build_arm(arm, seed, channels=None, heads=None):
+def build_arm(arm, seed, channels=None, heads=None, k_fixed=None):
     """Matched seeds: identical init for every shape-identical layer across arms."""
     H.seed_all(seed)
-    return ArmNet(arm, channels, heads, seed=seed)
+    return ArmNet(arm, channels, heads, seed=seed, k_fixed=k_fixed)
 
 
 # ---- preflight ---------------------------------------------------------------------------
@@ -238,9 +264,9 @@ def preflight(verbose=True):
         with torch.no_grad():
             H.require(torch.equal(a0(x), ref(x)), "A0 wrapper != upstream CIDNet forward")
         report["A0_equals_upstream_forward"] = "BITWISE"
-        losses = {k: make_loss(k) for k in ("frozen", "rgb_only", "upstream")}
+        losses = {k: make_loss(k) for k in ("frozen", "rgb_only", "upstream", "coupled_novgg", "frozen_ckw")}
         for arm in ARMS:
-            m = build_arm(arm, 42).train()
+            m = build_arm(arm, 42, k_fixed=(0.85 if arm == "A1" else None)).train()
             loss_fn = losses[m.loss_kind]
             with torch.autocast("cpu", dtype=torch.bfloat16):          # transforms must stay FP32
                 xr, ir = m.encode(x)
@@ -256,6 +282,8 @@ def preflight(verbose=True):
             if m.loss_kind != "upstream":
                 H.require(loss_fn.hvi_k0.density_k.grad is None and not loss_fn.hvi_k0.density_k.requires_grad,
                           "loss-side k0 received a gradient")
+            if m.loss_kind in ("frozen", "frozen_ckw", "rgb_only") and m.rep == "hvi":
+                pass  # model k may still get gradient through the input transform + residual (by design)
             with torch.no_grad():
                 rt = (m.decode(m.encode(x)[0]) - x).abs().max().item()
             report["arms"][arm] = {
