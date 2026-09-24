@@ -1,14 +1,72 @@
 \section{Introduction}
 \label{sec:introduction}
 
-Low-light image enhancement recovers a well-exposed image from an underexposed capture.
-Learned enhancers now dominate the paired benchmarks \citep{wei2018retinex,
-cai2023retinexformer, guo2020zerodce}, and a recent line of work argues that the color
-space in which the network operates and is supervised matters as much as the architecture.
-\mname \citep{yan2025hvi} maps images into a polar Horizontal/Vertical/Intensity (\hvi)
-space, enhances intensity and chroma along separate interacting branches, and is trained
-with a loss summed over both the RGB output and its \hvi transform.
+Learned low-light image enhancement recovers a well-exposed image from an underexposed
+capture, and the paired \dataset benchmark \citep{wei2018retinex} has been the field's main
+yardstick from Retinex decomposition networks \citep{wei2018retinex, zhang2019kind} through
+normalizing flows \citep{wang2022llflow} and Retinex transformers
+\citep{cai2023retinexformer} to diffusion models \citep{hou2023gsad}. A recent line of work
+argues that the color space in which the network operates and is supervised matters as much
+as the backbone \citep{guo2023bread, brateanu2025lytnet, guan2025cstnet}. \mname
+\citep{yan2025hvi} is the most visible instance: it maps sRGB into a polar
+Horizontal/Vertical/Intensity (\hvi) space in which hue is an angle, saturation a radius, and
+the radius is shrunk toward the origin as intensity approaches zero by a learned collapse
+function $\Ck$; two interacting branches enhance intensity and chroma, and the network is
+trained with a loss of four terms (L1, SSIM, edge, VGG) applied once in sRGB and once in
+\hvi. It reports the strongest \dataset numbers among the methods it compares, and a dozen
+follow-ups adopt or modify the space \citep{shi2025fusionnet, yang2026rhvifdd, ai2026bcihv,
+cheng2026vcr, wang2026haimnet}.
 
-This paper asks one question about that design. The question, the claims it supports, and
-the experiments that decide it are stated in \Cref{sec:method}; the results follow in
-\Cref{sec:experiments}.
+The evidence behind the design is thinner than its adoption suggests. Every number in the
+paper and in its follow-ups is a single training run; no work in this family reports a seed
+spread. The released code selects checkpoints on the \dataset test split, which has fifteen
+images, and ships several checkpoints per dataset named by the metric they maximize. The
+headline \dataset value, \ph{28.2}~dB, is reported after rescaling the output to the
+ground-truth mean luminance, while the same authors' later work and independent retrainings
+report \ph{23.5}--\ph{24.0}~dB without it. The color-space ablation was run on a proxy
+network rather than on \mname, its rows moved by several dB between the two versions of the
+paper, and the loss weights ($1$, $0.5$, $50$, $0.01$, duplicated across two spaces) are
+stated nowhere. A reader cannot tell which parts of the design carry the result.
+
+Follow-ups do not settle this. They replace the intensity definition \citep{yang2026rhvifdd,
+ai2026bcihv}, the branch interaction \citep{wang2026haimnet, wu2026tcanet}, or the loss
+\citep{li2026pal}, and each reports a single-run gain over the previous single run. The one
+matched comparison of \hvi against LAB and YCbCr that exists puts YCbCr ahead on LOL-v2
+\citep{shi2025tpcnet}, and the authors' own later ablation on \dataset ranks the spaces
+differently \citep{yan2025hvicidnetplus}. Seed variance of the size reported for comparable
+restoration models, \ph{0.2}--\ph{0.4}~dB \citep{shafi2026iphoneblur}, would account for
+most of these margins. We therefore ask:
+
+\begin{center}
+\emph{Under a frozen protocol with matched seeds, which steps of \mname's representation \\
+and loss change \dataset quality by more than the seed spread, by how much, and where?}
+\end{center}
+
+Our angle is to measure rather than to propose. Swapping a whole color space changes four
+things at once: the branch split, the space of the auxiliary loss, the learnable $k$, and the
+space of the residual connection. We instead build two \emph{nested single-factor ladders}
+inside one \mname, so that neighbouring arms differ in exactly one step, and we evaluate each
+step with a paired-by-seed test whose decision rules, equivalence margin, and metric were
+fixed before the first run. The loss ladder walks from the released recipe to RGB-only
+supervision in four steps; the representation ladder walks from learned-$k$ \hvi to YCbCr in
+four steps while the loss stays frozen. Every arm has the same architecture, the same
+parameter count, the same schedule, the same scene-disjoint validation split for checkpoint
+selection, and the same single read of the test split at the final checkpoint.
+
+The key observation that makes the study decidable is that the published spread is not one
+number. Rescaling the output to the ground-truth mean adds \ph{3.9}~dB to a raw \ph{23.8}~dB;
+picking the best of one hundred checkpoints on the test split adds \ph{0.3}~dB; the seed SD
+is \ph{0.3}~dB. Once those three are separated, a step of \ph{0.5}~dB is detectable with five
+seeds, and the question above has an answer for every step.
+
+We make four contributions. (1)~A frozen, fully specified protocol for \mname with a
+scene-disjoint validation split, matched seeds, final-checkpoint read-out, and one test read
+per arm (\Cref{sec:method}). (2)~A loss ladder: \hvi-space supervision contributes
+\ph{0.6}~dB over RGB-only training, while the VGG term on \hvi tensors and the coupling of
+$k$ through the loss are removable or inconclusive at $\pm 0.3$~dB (\Cref{sec:experiments}).
+(3)~A representation ladder under the frozen loss: the intensity collapse $\Ck$ contributes
+\ph{0.4}~dB, and its gain sits in the three darkest intensity deciles as its mechanism
+predicts, while learning $k$, polar versus linear chroma, and max versus luma intensity are
+each removable or inconclusive. (4)~A decomposition of the published \dataset spread into
+rescaling, selection, and seed noise, with the seed SD and the minimum detectable effect
+stated for every claim.

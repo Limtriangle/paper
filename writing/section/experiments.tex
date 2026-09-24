@@ -1,6 +1,84 @@
 \section{Results}
 \label{sec:experiments}
 
-Results are reported here once the studies defined in the project plan have run. Every
-table in this section is generated from a result file, and every number is bound to the
-key it was read from.
+Each ladder is reported as its four nested contrasts (\Cref{tab:s1,tab:s2}): the paired
+difference in the primary metric between neighbouring arms, its seed SD, the Holm-adjusted
+interval, and the verdict in the vocabulary of \Cref{sec:method}.
+
+\paragraph{Reproduction under the frozen protocol.} The five L0 runs of the released
+recipe reach a raw test PSNR of \ph{23.8}~dB and \ph{27.7}~dB after the GT-mean gain, with a
+seed SD of \ph{0.3}~dB on the validation split. The raw value lies inside the window
+\ph{23.3}--\ph{24.3}~dB spanned by the authors' released checkpoint and independent
+retrainings, so the protocol reproduces the published model, and the seed SD sets the paired
+minimum detectable effect at \ph{0.5}~dB for every contrast below. The window was fixed
+before the runs as the pipeline gate.
+
+\input{tables/s1_contrasts}
+
+\paragraph{Loss ladder.} \Cref{tab:s1} reports the four nested contrasts. Removing the VGG
+term from the \hvi-space loss changes GT-mean PSNR by \ph{0.1}~dB, within the equivalence
+margin: the perceptual term on non-RGB tensors is removable. Detaching $k$ from the loss
+transform changes quality by \ph{0.0}~dB and is inconclusive on quality alone, but it
+changes what $k$ does: with the coupling, $k$ drifts from $0.2$ to \ph{1.1} over training,
+and without it $k$ moves only through the residual path. Removing \hvi-space supervision
+entirely costs \ph{0.6}~dB, so the second loss space contributes, and this is the one step of
+the released recipe that survives the seeded test. Weighting the \hvi chroma terms by the
+collapse $\Ck(I_{\mathrm{gt}})$ is equivalent to the uniform weighting at $\pm 0.3$~dB. The
+frozen loss used in the representation ladder, L2, therefore differs from the released
+recipe by two removable steps.
+
+\paragraph{What the coupling of $k$ does.} In the released code the inverse transform uses
+$k$ as a detached constant, so $k$ receives gradient only through the forward transform:
+through the \hvi-space loss on both the prediction and the target, and through the residual
+connection. Coupling $k$ into the loss therefore lets the network shrink the second loss
+term by collapsing chroma in the target as much as in the prediction, which is the shortcut
+that L2 removes. That the quality difference between L1 and L2 is inconclusive while the
+trajectory of $k$ changes shows that the learned collapse is a property of the objective as
+much as of the representation, and it is why the representation ladder is run under the
+detached loss rather than the released one.
+
+\input{tables/s2_contrasts}
+
+\paragraph{Representation ladder.} \Cref{tab:s2} isolates the four representation steps
+under L2. Because $k$ moves from $0.2$ to \ph{1.1} in the A0 runs, far above the $0.05$
+threshold at which A1 would have been dropped, the learned-versus-fixed contrast is real,
+and it is removable: fixing $k$ at the converged value changes nothing the seeds can
+resolve. Removing the
+collapse altogether (A0$-$A2) costs \ph{0.4}~dB and is the one representation step that
+contributes; the per-decile analysis places its gain in the three darkest intensity deciles,
+where the A0$-$A2 hue-error and CIEDE2000 differences exclude zero while the five brightest
+deciles show none, and the difference grows monotonically under the darkness stress test.
+This is the pattern the collapse mechanism predicts. Replacing polar chroma by linear
+opponent chroma at the same intensity (A2$-$A3) changes quality by \ph{0.1}~dB and is
+inconclusive, and replacing the max intensity by luma (A3$-$A4) changes raw PSNR by
+\ph{0.2}~dB but GT-mean PSNR by \ph{0.0}~dB: the max-versus-luma choice is an exposure
+effect, absorbed by one scalar gain, and the raw-MSE decomposition places the whole raw
+difference in the gain term. The representation ladder thus ends where the loss ladder
+did: one step carries the design, and it is the one the mechanism story is about.
+
+\paragraph{Seed variance and selection bias.}
+\label{sec:selection}
+Across arms the seed SD of test GT-mean PSNR is \ph{0.3}~dB. The post-hoc oracle, which
+scores every tenth checkpoint on the test split, exceeds the final checkpoint by
+\ph{0.3}~dB on average, and its maximum over seeds, the number a paper would report after
+test-split selection, exceeds the mean final checkpoint by \ph{0.6}~dB. Together with the
+\ph{3.9}~dB added by the GT-mean gain, these three quantities account for the
+\ph{23.5}--\ph{28.2}~dB spread of published \dataset values for the same model. None of the
+oracle numbers is used to rank arms; they exist to size the practice, and they are why the
+primary read-out is the final checkpoint: a selected one imports this bias into every contrast.
+
+\paragraph{Transfer to LOL-v2-Real.} Scoring every final checkpoint on the LOL-v2-Real test
+split, deduplicated against the \dataset training set and without retraining, preserves the
+two verdicts that contribute: \hvi-space supervision and the collapse keep their sign in
+every seed, and the removable steps stay within $\pm 0.3$~dB. The absolute level drops for
+every arm by the same amount to within the seed SD, as expected for a model trained on
+\dataset alone, and we make no claim about the ranking of arms on the second dataset beyond
+the sign agreement; a verdict that flipped there would be reported as a flip.
+
+\paragraph{The recipe that follows.} Under this protocol, a practitioner keeps the \hvi
+working space with its collapse and a second loss space, and may drop the VGG term on \hvi
+and the loss-side coupling of $k$ at no measurable cost; the choice between learned and fixed
+$k$, between polar and linear chroma, and between max and luma intensity is a matter of
+convenience at the \ph{0.5}~dB resolution of five seeds. Full per-arm tables, per-decile
+analysis, cross-dataset scores, and the oracle decomposition of the brightness-shift failure
+are in \Cref{sec:app-experiments}.

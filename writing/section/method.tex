@@ -1,12 +1,85 @@
-\section{Method and Protocol}
+\section{Two Ladders inside One Network}
 \label{sec:method}
 
-\paragraph{Model.} We use the public \mname implementation \citep{yan2025hvi}. The network
-takes an sRGB image, converts it to \hvi, processes the intensity map and the chroma map
-along two interacting branches, and converts the result back to sRGB.
+\paragraph{Model.} We use the public \mname implementation \citep{yan2025hvi} unchanged:
+an sRGB image is mapped to a three-channel working space, an intensity branch takes the
+intensity channel and a chroma branch takes all three channels, six cross-attention blocks
+couple the two, the network predicts a residual in the working space, and the result is
+mapped back to sRGB. In \hvi the working space is $I = \max(R,G,B)$ and
+$(H, V) = \Ck(I)\, S\, (\cos h, \sin h)$ with $\Ck(I) = (\sin(\pi I/2) + \epsilon)^{k}$, where
+$k$ is a learned scalar initialised at $0.2$ and $S, h$ are HSV saturation and hue. Every arm
+below keeps the branch split, the residual in its own working space, the block structure,
+and the parameter count ($1{,}975{,}569$, asserted per run); only the step named in its row
+changes.
 
-\paragraph{Protocol.} All runs share one frozen protocol: the same dataset split, seeds,
-optimizer, schedule, and hardware (\hw). Checkpoints are selected on the validation split
-only; the test split is read once, by a separate final-evaluation script, per reported
-configuration. Each run records the SHA-256 of its training script, the upstream commit,
-and the split file.
+\paragraph{Loss ladder (S1).} The released objective is
+$\mathcal{L} = \ell(\hat{x}, x) + \lambda\, \ell(T_k(\hat{x}), T_k(x))$ with
+$\ell = \mathrm{L1} + 0.5\,\mathrm{SSIM} + 50\,\mathrm{edge} + 0.01\,\mathrm{VGG}$, $\lambda = 1$,
+and $T_k$ the forward \hvi transform through which the learned $k$ also receives gradient.
+Two properties of this recipe are unexamined: the VGG term is applied to \hvi tensors after a
+range shift that leaves the sRGB input in $[0.5, 1]$, and $k$ can lower the second term by
+collapsing chroma in both prediction and target. The ladder removes one property per step on
+the \hvi representation: L0 is the released recipe; L1 drops the VGG term from the \hvi
+loss; L2 additionally detaches $k$ in the loss transform, fixing it at the released converged
+value $k_0 = 1.1255$; L3 sets $\lambda = 0$ (RGB only); L4 returns to L2 and weights the \hvi
+chroma terms by $\Ck(I_{\mathrm{gt}})$, so that pixels whose chroma the transform has
+collapsed count in proportion. L2 is the frozen loss of the second ladder.
+
+\paragraph{Representation ladder (S2).} Under L2, five arms change one aspect of the working
+space each: A0 is \hvi with learned $k$; A1 fixes $k$ at the median converged value of the A0
+runs; A2 sets $k = 0$, which removes the collapse and leaves Cartesian HSV
+$(I, S\cos h, S\sin h)$; A3 keeps $I = \max(R,G,B)$ but replaces polar chroma by the linear
+opponent channels $(C_b, C_r)$; A4 is YCbCr, replacing the max intensity by luma. Each
+transform is exactly invertible on the valid range and differentiable; round-trip error is
+below $4 \times 10^{-7}$ on a $17^3$ grid including black. The nested contrasts
+A0$-$A1, A0$-$A2, A2$-$A3, A3$-$A4 isolate learning $k$, the collapse, the chroma
+parametrisation, and the intensity definition. A1 is dropped only if $k$ moves by less than
+$0.05$ in the A0 runs.
+
+\paragraph{Frozen protocol.} All 45 runs share one protocol, pinned by the SHA-256 of the
+training script, the upstream commit, and the split file in every run manifest. Training
+follows the released code: 1000 epochs, batch 8, $256^2$ crops, random flips, Adam at
+$10^{-4}$ with a 3-epoch warm-up and cosine decay to $10^{-7}$, FP32, on \hw. The 485
+\dataset training pairs are split into 445 training and 40 validation pairs by scene, using
+DINOv2 and perceptual-hash clusters so that no validation scene appears in training and no
+validation cluster contains a test image. Each arm is trained with the five seeds
+$\{42, \dots, 46\}$, which fix data order, crops, flips, and initialisation of the
+shape-identical layers, so that the seed is a blocking factor across arms. Validation is
+scored every five epochs; the \emph{primary read-out is the final checkpoint}, the
+best-validation checkpoint is secondary, and the test split is read once per run by a
+separate script at the end. A post-hoc oracle scores every tenth checkpoint on the test
+split for \Cref{sec:selection} only and never selects anything. Test-time gates and gains
+are off in every arm.
+
+\paragraph{Metrics.} The primary metric is PSNR after one scalar luminance gain that matches
+the prediction's mean to the ground truth (GT-mean), because the released code, the paper,
+and most baselines report \dataset that way and because a raw-PSNR difference that vanishes
+under the gain is a brightness bias, not an enhancement difference. We report raw PSNR, SSIM,
+LPIPS, CIEDE2000 before and after the gain, and the log-exposure error beside it, and we
+decompose raw MSE into a gain term and a residual. For the mechanism claim we compute, per
+arm and seed, RGB error, CIEDE2000, and chroma-weighted circular hue error in ten deciles of
+ground-truth intensity, plus a darkness stress test in which the test input is scaled by
+$0.5$ and $0.25$ with fixed Poisson--Gaussian noise.
+
+\paragraph{Decision rules.} For each contrast we take the five paired-by-seed differences of
+the primary metric and test them with a paired $t$-test, Holm-adjusted across the four
+contrasts of its ladder. A step \emph{contributes} when the adjusted CI excludes zero, the
+mean difference is at least $0.3$~dB and more than twice its SD, the sign agrees in at least
+four seeds, and a mixed model with image and seed intercepts agrees in direction. A step is
+\emph{removable} when two one-sided tests at $\pm 0.3$~dB reject equivalence's complement at
+$\alpha = 0.05$. Otherwise it is \emph{inconclusive}, and we report the minimum detectable
+effect. The mechanism claim for $\Ck$ holds only if the A0$-$A2 hue and CIEDE2000
+differences have CIs excluding zero in the three darkest deciles while the five brightest
+deciles show none or a difference at least three times smaller, and the stress-test
+difference grows with darkening. These rules, the loss weights, $k_0$, the split, and the
+analysis code were frozen with hashes before the first ladder run.
+
+\paragraph{What the ladders do not test.} The ladders hold the architecture fixed, so they
+say nothing about whether a different backbone would prefer a different space, and they keep
+the two-branch split in every arm, so an sRGB arm without a luma/chroma split is not on the
+ladder; the released ablation's sRGB row is a different architecture, not a missing rung.
+They use one dataset for training; cross-dataset scores on LOL-v2-Real are secondary and
+reported without retraining. Polar HSV with a wrapped hue axis is omitted on purpose: the
+paper already shows it fails, and A2 is HSV without the wrap. Finally, a step that is
+inconclusive here is not shown to be useless; it is shown to be smaller than the \ph{0.5}~dB
+that five seeds can resolve under this protocol, and we state that bound wherever it applies.

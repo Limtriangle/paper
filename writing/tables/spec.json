@@ -1,177 +1,405 @@
 {
- "_doc": "SCAFFOLD for candidate C1 (HVI-PLAN.md \u00a74 once Gate 0 passes). src does not exist yet; gen-table.py renders every cell as -- and prints MISSING. Contract for experiment: the C1 run export c1__colorspace_v1.json carries analysis.analysis_c1.decision.summary.<cond>.<metric>.{mean,sd,n} with cond in {srgb,hsv,ycbcr,hvi_nock,hvi}, metric in {psnr,ssim,lpips,delta_e00,psnr_gated,ssim_gated,lpips_gated,psnr_gtmean,ssim_gtmean,lpips_gtmean}, computed over the 3 seeds from the one final test evaluation per condition. Keys containing {cond} are expanded per row from the row's job. Neither table is \\input by the paper until the src exists.",
+ "_doc": "Tables for HVI-PLAN.md \u00a74. Sources are experiment's exports (names may be renamed when published): s1__loss_ladder_v1.json, s2__rep_ladder_v1.json, s3__selection_bias_v1.json. Contract: analysis.analysis_s{1,2}.decision = output of auto-research/analysis_c1.py (contrasts.<A-B>.{mean,sd,ci_holm,verdict}) plus arm_summary.<arm>.<metric>.{mean,sd} over the 5 seeds' final-checkpoint test reads; analysis.analysis_s3.decision = selection_bias() output keyed by arm. Every 'ph' value comes from HVI-PLAN.md \u00a77 (or is derived from it by subtraction) and is listed in ralph/PH-LEDGER.md; gen-table renders it as \\ph{} only while the key is absent and never bolds it.",
  "tables": [
   {
-   "name": "c1_colorspace",
-   "src": "c1__colorspace_v1.json",
-   "label": "tab:c1",
-   "star": true,
-   "row_label": "Color space",
-   "caption": "\\textbf{Color space under an identical network.} \\mname trained in each color space with the same architecture, loss, schedule, and seeds on \\dataset; PSNR, SSIM, LPIPS, and CIEDE2000 on the test split, evaluated once per condition by the final-evaluation script after validation-based checkpoint selection, on \\hw. Cells are the mean over three seeds with the seed SD beside them; no gating and no GT-mean rescaling. The best mean in each column is in \\textbf{bold}, whichever color space attains it.",
+   "name": "s1_contrasts",
+   "src": "s1__loss_ladder_v1.json",
+   "label": "tab:s1",
+   "star": false,
+   "row_label": "Contrast",
+   "caption": "\\textbf{Loss ladder (S1).} Paired-by-seed difference in GT-mean PSNR between neighbouring loss arms of \\mname on the A0 representation, \\dataset test split (eval15), final checkpoint, five matched seeds, on \\hw. SD is the seed-to-seed SD of the difference; CI$^{-}$/CI$^{+}$ bound the Holm-adjusted 95\\% paired $t$ interval across the four contrasts. The verdict follows the pre-registered rules: \\emph{contributes} if the CI excludes zero and $|\\Delta| \\ge 0.3$~dB, \\emph{removable} if TOST at $\\pm 0.3$~dB rejects, else \\emph{inconclusive}. No value is highlighted; a contrast is not a ranking.",
    "rows": [
     {
-     "label": "sRGB",
-     "job": "srgb"
+     "label": "L0$-$L1: VGG on \\hvi",
+     "job": "L0-L1",
+     "ph": {
+      "/analysis.analysis_s1.decision.contrasts.{cond}.mean": 0.1,
+      "/analysis.analysis_s1.decision.contrasts.{cond}.sd": 0.3,
+      "/analysis.analysis_s1.decision.contrasts.{cond}.ci_holm.0": -0.3,
+      "/analysis.analysis_s1.decision.contrasts.{cond}.ci_holm.1": 0.5,
+      "/analysis.analysis_s1.decision.contrasts.{cond}.verdict": "removable"
+     }
     },
     {
-     "label": "HSV",
-     "job": "hsv"
+     "label": "L1$-$L2: $k$ in the loss",
+     "job": "L1-L2",
+     "ph": {
+      "/analysis.analysis_s1.decision.contrasts.{cond}.mean": 0.0,
+      "/analysis.analysis_s1.decision.contrasts.{cond}.sd": 0.3,
+      "/analysis.analysis_s1.decision.contrasts.{cond}.ci_holm.0": -0.4,
+      "/analysis.analysis_s1.decision.contrasts.{cond}.ci_holm.1": 0.4,
+      "/analysis.analysis_s1.decision.contrasts.{cond}.verdict": "inconclusive"
+     }
     },
     {
-     "label": "YCbCr",
-     "job": "ycbcr"
+     "label": "L2$-$L3: \\hvi supervision",
+     "job": "L2-L3",
+     "ph": {
+      "/analysis.analysis_s1.decision.contrasts.{cond}.mean": 0.6,
+      "/analysis.analysis_s1.decision.contrasts.{cond}.sd": 0.3,
+      "/analysis.analysis_s1.decision.contrasts.{cond}.ci_holm.0": 0.2,
+      "/analysis.analysis_s1.decision.contrasts.{cond}.ci_holm.1": 1.0,
+      "/analysis.analysis_s1.decision.contrasts.{cond}.verdict": "contributes"
+     }
     },
     {
-     "label": "HVI without $C_k$",
-     "job": "hvi_nock"
-    },
-    {
-     "label": "HVI",
-     "job": "hvi"
+     "label": "L2$-$L4: $\\Ck$-weighted chroma",
+     "job": "L2-L4",
+     "ph": {
+      "/analysis.analysis_s1.decision.contrasts.{cond}.mean": 0.0,
+      "/analysis.analysis_s1.decision.contrasts.{cond}.sd": 0.3,
+      "/analysis.analysis_s1.decision.contrasts.{cond}.ci_holm.0": -0.4,
+      "/analysis.analysis_s1.decision.contrasts.{cond}.ci_holm.1": 0.4,
+      "/analysis.analysis_s1.decision.contrasts.{cond}.verdict": "removable"
+     }
     }
    ],
    "cols": [
     {
-     "label": "PSNR$\\uparrow$",
-     "key": "/analysis.analysis_c1.decision.summary.{cond}.psnr.mean",
-     "fmt": ".2f",
-     "best": "max"
-    },
-    {
-     "label": "SD",
-     "key": "/analysis.analysis_c1.decision.summary.{cond}.psnr.sd",
+     "label": "$\\Delta$ (dB)",
+     "key": "/analysis.analysis_s1.decision.contrasts.{cond}.mean",
      "fmt": ".2f"
     },
     {
-     "label": "SSIM$\\uparrow$",
-     "key": "/analysis.analysis_c1.decision.summary.{cond}.ssim.mean",
-     "fmt": ".3f",
+     "label": "SD",
+     "key": "/analysis.analysis_s1.decision.contrasts.{cond}.sd",
+     "fmt": ".2f"
+    },
+    {
+     "label": "CI$^{-}$",
+     "key": "/analysis.analysis_s1.decision.contrasts.{cond}.ci_holm.0",
+     "fmt": ".2f"
+    },
+    {
+     "label": "CI$^{+}$",
+     "key": "/analysis.analysis_s1.decision.contrasts.{cond}.ci_holm.1",
+     "fmt": ".2f"
+    },
+    {
+     "label": "Verdict",
+     "key": "/analysis.analysis_s1.decision.contrasts.{cond}.verdict",
+     "map": {
+      "difference": "contributes",
+      "equivalent": "removable"
+     }
+    }
+   ],
+   "size": "\\footnotesize",
+   "tabcolsep": "3pt"
+  },
+  {
+   "name": "s2_contrasts",
+   "src": "s2__rep_ladder_v1.json",
+   "label": "tab:s2",
+   "star": false,
+   "row_label": "Contrast",
+   "caption": "\\textbf{Representation ladder (S2).} Paired-by-seed difference in GT-mean PSNR between neighbouring representation arms of \\mname under the frozen loss L2, \\dataset test split (eval15), final checkpoint, five matched seeds, on \\hw. Columns and verdict rules as in \\Cref{tab:s1}. No value is highlighted.",
+   "rows": [
+    {
+     "label": "A0$-$A1: learned vs.\\ fixed $k$",
+     "job": "A0-A1",
+     "ph": {
+      "/analysis.analysis_s2.decision.contrasts.{cond}.mean": 0.1,
+      "/analysis.analysis_s2.decision.contrasts.{cond}.sd": 0.3,
+      "/analysis.analysis_s2.decision.contrasts.{cond}.ci_holm.0": -0.3,
+      "/analysis.analysis_s2.decision.contrasts.{cond}.ci_holm.1": 0.5,
+      "/analysis.analysis_s2.decision.contrasts.{cond}.verdict": "removable"
+     }
+    },
+    {
+     "label": "A0$-$A2: collapse $\\Ck$",
+     "job": "A0-A2",
+     "ph": {
+      "/analysis.analysis_s2.decision.contrasts.{cond}.mean": 0.4,
+      "/analysis.analysis_s2.decision.contrasts.{cond}.sd": 0.3,
+      "/analysis.analysis_s2.decision.contrasts.{cond}.ci_holm.0": 0.0,
+      "/analysis.analysis_s2.decision.contrasts.{cond}.ci_holm.1": 0.8,
+      "/analysis.analysis_s2.decision.contrasts.{cond}.verdict": "contributes"
+     }
+    },
+    {
+     "label": "A2$-$A3: polar vs.\\ linear chroma",
+     "job": "A2-A3",
+     "ph": {
+      "/analysis.analysis_s2.decision.contrasts.{cond}.mean": 0.1,
+      "/analysis.analysis_s2.decision.contrasts.{cond}.sd": 0.3,
+      "/analysis.analysis_s2.decision.contrasts.{cond}.ci_holm.0": -0.3,
+      "/analysis.analysis_s2.decision.contrasts.{cond}.ci_holm.1": 0.5,
+      "/analysis.analysis_s2.decision.contrasts.{cond}.verdict": "inconclusive"
+     }
+    },
+    {
+     "label": "A3$-$A4: max vs.\\ luma",
+     "job": "A3-A4",
+     "ph": {
+      "/analysis.analysis_s2.decision.contrasts.{cond}.mean": 0.0,
+      "/analysis.analysis_s2.decision.contrasts.{cond}.sd": 0.3,
+      "/analysis.analysis_s2.decision.contrasts.{cond}.ci_holm.0": -0.4,
+      "/analysis.analysis_s2.decision.contrasts.{cond}.ci_holm.1": 0.4,
+      "/analysis.analysis_s2.decision.contrasts.{cond}.verdict": "removable"
+     }
+    }
+   ],
+   "cols": [
+    {
+     "label": "$\\Delta$ (dB)",
+     "key": "/analysis.analysis_s2.decision.contrasts.{cond}.mean",
+     "fmt": ".2f"
+    },
+    {
+     "label": "SD",
+     "key": "/analysis.analysis_s2.decision.contrasts.{cond}.sd",
+     "fmt": ".2f"
+    },
+    {
+     "label": "CI$^{-}$",
+     "key": "/analysis.analysis_s2.decision.contrasts.{cond}.ci_holm.0",
+     "fmt": ".2f"
+    },
+    {
+     "label": "CI$^{+}$",
+     "key": "/analysis.analysis_s2.decision.contrasts.{cond}.ci_holm.1",
+     "fmt": ".2f"
+    },
+    {
+     "label": "Verdict",
+     "key": "/analysis.analysis_s2.decision.contrasts.{cond}.verdict",
+     "map": {
+      "difference": "contributes",
+      "equivalent": "removable"
+     }
+    }
+   ],
+   "size": "\\footnotesize",
+   "tabcolsep": "3pt"
+  },
+  {
+   "name": "app_s1_arms",
+   "src": "s1__loss_ladder_v1.json",
+   "label": "tab:app-s1",
+   "star": false,
+   "row_label": "Arm",
+   "caption": "\\textbf{Loss arms, absolute values.} Mean and seed SD over five seeds of GT-mean PSNR (one scalar luminance gain) and raw PSNR of \\mname on the \\dataset test split (eval15), final checkpoint, on \\hw. The test split is read once per arm by the final-evaluation script. The best measured mean in each PSNR column is in \\textbf{bold}, whichever arm attains it.",
+   "rows": [
+    {
+     "label": "L0 (upstream loss)",
+     "job": "L0",
+     "ph": {
+      "/analysis.analysis_s1.decision.arm_summary.{cond}.psnr_gtmean.mean": 27.7,
+      "/analysis.analysis_s1.decision.arm_summary.{cond}.psnr_gtmean.sd": 0.3,
+      "/analysis.analysis_s1.decision.arm_summary.{cond}.psnr.mean": 23.8,
+      "/analysis.analysis_s1.decision.arm_summary.{cond}.psnr.sd": 0.3
+     }
+    },
+    {
+     "label": "L1 (no VGG on HVI)",
+     "job": "L1",
+     "ph": {
+      "/analysis.analysis_s1.decision.arm_summary.{cond}.psnr_gtmean.mean": 27.6,
+      "/analysis.analysis_s1.decision.arm_summary.{cond}.psnr_gtmean.sd": 0.3,
+      "/analysis.analysis_s1.decision.arm_summary.{cond}.psnr.mean": 23.7,
+      "/analysis.analysis_s1.decision.arm_summary.{cond}.psnr.sd": 0.3
+     }
+    },
+    {
+     "label": "L2 (L1, $k$ detached)",
+     "job": "L2",
+     "ph": {
+      "/analysis.analysis_s1.decision.arm_summary.{cond}.psnr_gtmean.mean": 27.6,
+      "/analysis.analysis_s1.decision.arm_summary.{cond}.psnr_gtmean.sd": 0.3,
+      "/analysis.analysis_s1.decision.arm_summary.{cond}.psnr.mean": 23.7,
+      "/analysis.analysis_s1.decision.arm_summary.{cond}.psnr.sd": 0.3
+     }
+    },
+    {
+     "label": "L3 (RGB only)",
+     "job": "L3",
+     "ph": {
+      "/analysis.analysis_s1.decision.arm_summary.{cond}.psnr_gtmean.mean": 27.0,
+      "/analysis.analysis_s1.decision.arm_summary.{cond}.psnr_gtmean.sd": 0.3,
+      "/analysis.analysis_s1.decision.arm_summary.{cond}.psnr.mean": 23.1,
+      "/analysis.analysis_s1.decision.arm_summary.{cond}.psnr.sd": 0.3
+     }
+    },
+    {
+     "label": "L4 (L2, $C_k$-weighted chroma)",
+     "job": "L4",
+     "ph": {
+      "/analysis.analysis_s1.decision.arm_summary.{cond}.psnr_gtmean.mean": 27.6,
+      "/analysis.analysis_s1.decision.arm_summary.{cond}.psnr_gtmean.sd": 0.3,
+      "/analysis.analysis_s1.decision.arm_summary.{cond}.psnr.mean": 23.7,
+      "/analysis.analysis_s1.decision.arm_summary.{cond}.psnr.sd": 0.3
+     }
+    }
+   ],
+   "cols": [
+    {
+     "label": "GT-mean PSNR",
+     "key": "/analysis.analysis_s1.decision.arm_summary.{cond}.psnr_gtmean.mean",
+     "fmt": ".2f",
      "best": "max"
     },
     {
      "label": "SD",
-     "key": "/analysis.analysis_c1.decision.summary.{cond}.ssim.sd",
-     "fmt": ".3f"
+     "key": "/analysis.analysis_s1.decision.arm_summary.{cond}.psnr_gtmean.sd",
+     "fmt": ".2f"
     },
     {
-     "label": "LPIPS$\\downarrow$",
-     "key": "/analysis.analysis_c1.decision.summary.{cond}.lpips.mean",
-     "fmt": ".3f",
-     "best": "min"
-    },
-    {
-     "label": "SD",
-     "key": "/analysis.analysis_c1.decision.summary.{cond}.lpips.sd",
-     "fmt": ".3f"
-    },
-    {
-     "label": "$\\Delta E_{00}\\downarrow$",
-     "key": "/analysis.analysis_c1.decision.summary.{cond}.delta_e00.mean",
+     "label": "raw PSNR",
+     "key": "/analysis.analysis_s1.decision.arm_summary.{cond}.psnr.mean",
      "fmt": ".2f",
-     "best": "min"
+     "best": "max"
     },
     {
      "label": "SD",
-     "key": "/analysis.analysis_c1.decision.summary.{cond}.delta_e00.sd",
+     "key": "/analysis.analysis_s1.decision.arm_summary.{cond}.psnr.sd",
      "fmt": ".2f"
     }
    ]
   },
   {
-   "name": "c1_colorspace_gated",
-   "src": "c1__colorspace_v1.json",
-   "label": "tab:c1-gated",
-   "star": true,
-   "row_label": "Color space",
-   "caption": "\\textbf{Color space under upstream evaluation conventions.} The same checkpoints as \\Cref{tab:c1} on the \\dataset test split on \\hw, scored (left) with the upstream inference-time saturation gate and (right) with GT-mean brightness rescaling. Mean over three seeds with the seed SD beside it. The best mean in each column is in \\textbf{bold}, whichever color space attains it.",
+   "name": "app_s2_arms",
+   "src": "s2__rep_ladder_v1.json",
+   "label": "tab:app-s2",
+   "star": false,
+   "row_label": "Arm",
+   "caption": "\\textbf{Representation arms, absolute values.} As \\Cref{tab:app-s1}, for the five representation arms under the frozen loss L2. The best measured mean in each PSNR column is in \\textbf{bold}, whichever arm attains it.",
    "rows": [
     {
-     "label": "sRGB",
-     "job": "srgb"
+     "label": "A0 (HVI, learned $k$)",
+     "job": "A0",
+     "ph": {
+      "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr_gtmean.mean": 27.6,
+      "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr_gtmean.sd": 0.3,
+      "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr.mean": 23.7,
+      "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr.sd": 0.3
+     }
     },
     {
-     "label": "HSV",
-     "job": "hsv"
+     "label": "A1 (HVI, fixed $k$)",
+     "job": "A1",
+     "ph": {
+      "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr_gtmean.mean": 27.5,
+      "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr_gtmean.sd": 0.3,
+      "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr.mean": 23.6,
+      "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr.sd": 0.3
+     }
     },
     {
-     "label": "YCbCr",
-     "job": "ycbcr"
+     "label": "A2 (HVI, $k=0$)",
+     "job": "A2",
+     "ph": {
+      "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr_gtmean.mean": 27.2,
+      "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr_gtmean.sd": 0.3,
+      "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr.mean": 23.3,
+      "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr.sd": 0.3
+     }
     },
     {
-     "label": "HVI without $C_k$",
-     "job": "hvi_nock"
+     "label": "A3 (max / Cb, Cr)",
+     "job": "A3",
+     "ph": {
+      "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr_gtmean.mean": 27.1,
+      "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr_gtmean.sd": 0.3,
+      "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr.mean": 23.2,
+      "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr.sd": 0.3
+     }
     },
     {
-     "label": "HVI",
-     "job": "hvi"
+     "label": "A4 (YCbCr)",
+     "job": "A4",
+     "ph": {
+      "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr_gtmean.mean": 27.1,
+      "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr_gtmean.sd": 0.3,
+      "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr.mean": 23.2,
+      "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr.sd": 0.3
+     }
     }
    ],
    "cols": [
     {
-     "label": "PSNR$\\uparrow$",
-     "key": "/analysis.analysis_c1.decision.summary.{cond}.psnr_gated.mean",
+     "label": "GT-mean PSNR",
+     "key": "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr_gtmean.mean",
      "fmt": ".2f",
      "best": "max"
     },
     {
      "label": "SD",
-     "key": "/analysis.analysis_c1.decision.summary.{cond}.psnr_gated.sd",
+     "key": "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr_gtmean.sd",
      "fmt": ".2f"
     },
     {
-     "label": "SSIM$\\uparrow$",
-     "key": "/analysis.analysis_c1.decision.summary.{cond}.ssim_gated.mean",
-     "fmt": ".3f",
-     "best": "max"
-    },
-    {
-     "label": "SD",
-     "key": "/analysis.analysis_c1.decision.summary.{cond}.ssim_gated.sd",
-     "fmt": ".3f"
-    },
-    {
-     "label": "LPIPS$\\downarrow$",
-     "key": "/analysis.analysis_c1.decision.summary.{cond}.lpips_gated.mean",
-     "fmt": ".3f",
-     "best": "min"
-    },
-    {
-     "label": "SD",
-     "key": "/analysis.analysis_c1.decision.summary.{cond}.lpips_gated.sd",
-     "fmt": ".3f"
-    },
-    {
-     "label": "PSNR$\\uparrow$",
-     "key": "/analysis.analysis_c1.decision.summary.{cond}.psnr_gtmean.mean",
+     "label": "raw PSNR",
+     "key": "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr.mean",
      "fmt": ".2f",
      "best": "max"
     },
     {
      "label": "SD",
-     "key": "/analysis.analysis_c1.decision.summary.{cond}.psnr_gtmean.sd",
+     "key": "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr.sd",
+     "fmt": ".2f"
+    }
+   ]
+  },
+  {
+   "name": "app_s3",
+   "src": "s3__selection_bias_v1.json",
+   "label": "tab:app-s3",
+   "star": false,
+   "row_label": "Arm",
+   "caption": "\\textbf{Selection bias (S3).} Per arm of \\mname, the mean over five seeds of (best test PSNR over every tenth checkpoint) minus (final-checkpoint test PSNR), GT-mean, \\dataset test split (eval15), on \\hw; and the paper-style number, the maximum of that oracle over seeds. The oracle pass reads the test split post hoc and is never used to select anything. No value is highlighted.",
+   "rows": [
+    {
+     "label": "L0",
+     "job": "L0",
+     "ph": {
+      "/analysis.analysis_s3.decision.{cond}.oracle_minus_final_mean": 0.3,
+      "/analysis.analysis_s3.decision.{cond}.paper_style_max_over_seeds": 28.0
+     }
+    },
+    {
+     "label": "A0 (= L2)",
+     "job": "A0",
+     "ph": {
+      "/analysis.analysis_s3.decision.{cond}.oracle_minus_final_mean": 0.3,
+      "/analysis.analysis_s3.decision.{cond}.paper_style_max_over_seeds": 27.9
+     }
+    },
+    {
+     "label": "A2",
+     "job": "A2",
+     "ph": {
+      "/analysis.analysis_s3.decision.{cond}.oracle_minus_final_mean": 0.3,
+      "/analysis.analysis_s3.decision.{cond}.paper_style_max_over_seeds": 27.5
+     }
+    },
+    {
+     "label": "A3",
+     "job": "A3",
+     "ph": {
+      "/analysis.analysis_s3.decision.{cond}.oracle_minus_final_mean": 0.3,
+      "/analysis.analysis_s3.decision.{cond}.paper_style_max_over_seeds": 27.4
+     }
+    },
+    {
+     "label": "A4",
+     "job": "A4",
+     "ph": {
+      "/analysis.analysis_s3.decision.{cond}.oracle_minus_final_mean": 0.3,
+      "/analysis.analysis_s3.decision.{cond}.paper_style_max_over_seeds": 27.4
+     }
+    }
+   ],
+   "cols": [
+    {
+     "label": "oracle $-$ final (dB)",
+     "key": "/analysis.analysis_s3.decision.{cond}.oracle_minus_final_mean",
      "fmt": ".2f"
     },
     {
-     "label": "SSIM$\\uparrow$",
-     "key": "/analysis.analysis_c1.decision.summary.{cond}.ssim_gtmean.mean",
-     "fmt": ".3f",
-     "best": "max"
-    },
-    {
-     "label": "SD",
-     "key": "/analysis.analysis_c1.decision.summary.{cond}.ssim_gtmean.sd",
-     "fmt": ".3f"
-    },
-    {
-     "label": "LPIPS$\\downarrow$",
-     "key": "/analysis.analysis_c1.decision.summary.{cond}.lpips_gtmean.mean",
-     "fmt": ".3f",
-     "best": "min"
-    },
-    {
-     "label": "SD",
-     "key": "/analysis.analysis_c1.decision.summary.{cond}.lpips_gtmean.sd",
-     "fmt": ".3f"
+     "label": "paper-style max (dB)",
+     "key": "/analysis.analysis_s3.decision.{cond}.paper_style_max_over_seeds",
+     "fmt": ".2f"
     }
    ]
   }

@@ -1,12 +1,73 @@
 \section{Additional Experiments}
 \label{sec:app-experiments}
 
-Full tables, per-image analysis, and protocol details are reported here once the studies
-have run.
-
 \subsection{Protocol Details}
 \label{sec:app-protocol}
 
 Each run directory records the training-script SHA-256, the upstream \mname commit, the
 split-file SHA-256, the torch version, and the GPU name. The validation summary written at
-the end of every run is the only source of the numbers in this paper.
+the end of every run and the single test read by the final-evaluation script are the only
+sources of the numbers in this paper; every table is generated from those files and every
+number in the text is bound to the key it was read from. Training runs in the default
+non-deterministic CUDA mode; two runs with the same seed differ by \ph{0.04}~dB on
+validation, which we report as the run-to-run floor beneath the seed SD. The upstream
+gradient clipping, which the released code calls before the backward pass and which
+therefore does not act, is kept unchanged so that L0 is the released recipe. The 24 training
+images that share a scene with a test image stay in the training set, as in every published
+\dataset result; we state this because 14 of the 15 test images have a near-duplicate in
+training, which bounds how far any \dataset number generalises.
+
+\subsection{Absolute Values per Arm}
+\label{sec:app-arms}
+
+\Cref{tab:app-s1,tab:app-s2} list the absolute GT-mean and raw PSNR of every arm. The
+ladders in the body report only differences because the absolute level is dominated by the
+gain term: the \ph{3.9}~dB between the raw and GT-mean columns is the same for every arm to
+within the seed SD.
+
+\input{tables/app_s1_arms}
+\input{tables/app_s2_arms}
+
+\subsection{Selection Bias per Arm}
+\label{sec:app-selection}
+
+\Cref{tab:app-s3} gives the oracle-minus-final difference and the paper-style maximum per
+arm. The oracle pass reads the test split after all training has finished and is reported
+only to size the selection effect; no arm, checkpoint, or claim in this paper was chosen
+with it.
+
+\input{tables/app_s3}
+
+\subsection{Mechanism Analysis}
+\label{sec:app-mechanism}
+
+For the A0$-$A2 contrast we report, per seed, the difference in chroma-weighted circular hue
+error and in CIEDE2000 in each decile of ground-truth intensity, with seed-level 95\%
+confidence intervals, and the same difference under the darkness stress test at input
+scales $1$, $0.5$, and $0.25$ with frozen Poisson--Gaussian noise. The pre-registered rule
+requires the bottom three deciles to exclude zero, the top five to include it or to be at
+least three times smaller, and the stress-test difference to grow with darkening. The
+per-decile curves for every other contrast are reported descriptively, without a rule.
+
+\subsection{Cross-Dataset Scores}
+\label{sec:app-cross}
+
+Every final checkpoint is also scored on the LOL-v2-Real test split, deduplicated against
+the \dataset training set by hash and embedding, without retraining. These scores are
+secondary: they test whether the ladder verdicts transfer, and a verdict that flips across
+datasets is reported as such.
+
+\subsection{Oracle Decomposition of the Brightness-Shift Failure}
+\label{sec:app-s4}
+
+\mname degrades sharply when the input brightness moves away from the training distribution
+\citep{pilligua2025mill}. This chapter asks how much of that loss is one scalar of exposure
+miscalibration, using no training. On the validation split we blend each input toward its
+ground truth at $\alpha \in \{0.1, 0.2, 0.35, 0.5\}$ and scale it by $\{0.5, 2, 4\}$, then
+compare three per-image oracles that read the ground truth: identity, a closed-form
+mean-matching pre-gain, and a joint search over the pre-gain and \mname's inference knobs
+$(k, \alpha_s, \alpha_i, \gamma)$. Scenes are the replication unit. Under this design
+\ph{80}\% of the brightness-shift loss is recovered by the scalar pre-gain alone, and the
+\hvi-specific knobs add at most \ph{0.3}~dB beyond it. Because the oracles read the ground
+truth, these numbers bound what any adaptation method could recover and do not constitute
+one.

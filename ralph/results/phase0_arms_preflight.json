@@ -1,6 +1,6 @@
 {
-  "written_at": "2026-09-24T02:33:24",
-  "k0": 0.2,
+  "written_at": "2026-09-24T04:57:53",
+  "k0": 1.1255,
   "arms": {
     "A0": {
       "representation": "hvi",
@@ -10,18 +10,18 @@
       "model_k": {
         "value": 0.20000000298023224,
         "learnable": true,
-        "grad": -2.4432244300842285
+        "grad": -1.6915373802185059
       },
       "loss_terms": {
         "rgb_l1": 0.33666953444480896,
         "rgb_ssim": 0.44593262672424316,
         "rgb_edge": 7.329616069793701,
         "rgb_perc": 1.1034220457077026,
-        "hvi_l1": 0.4444555342197418,
-        "hvi_ssim": 0.4580604135990143,
-        "hvi_edge": 14.760175704956055
+        "hvi_l1": 0.4135596454143524,
+        "hvi_ssim": 0.45889556407928467,
+        "hvi_edge": 12.646711349487305
       },
-      "loss_total": 24.878332138061523,
+      "loss_total": 22.734806060791016,
       "encode_decode_roundtrip_max_abs_err": 6.426125764846802e-07,
       "output_dtype": "torch.float32",
       "n_param_tensors_without_grad": 13
@@ -41,11 +41,11 @@
         "rgb_ssim": 0.44610533118247986,
         "rgb_edge": 7.349188804626465,
         "rgb_perc": 1.1054465770721436,
-        "hvi_l1": 0.4451112747192383,
-        "hvi_ssim": 0.4580502212047577,
-        "hvi_edge": 14.811023712158203
+        "hvi_l1": 0.41402560472488403,
+        "hvi_ssim": 0.4588605761528015,
+        "hvi_edge": 12.678061485290527
       },
-      "loss_total": 24.9520263671875,
+      "loss_total": 22.788787841796875,
       "encode_decode_roundtrip_max_abs_err": 6.426125764846802e-07,
       "output_dtype": "torch.float32",
       "n_param_tensors_without_grad": 13
@@ -65,11 +65,11 @@
         "rgb_ssim": 0.4459574222564697,
         "rgb_edge": 7.180903911590576,
         "rgb_perc": 1.105226993560791,
-        "hvi_l1": 0.44155362248420715,
-        "hvi_ssim": 0.4594545364379883,
-        "hvi_edge": 14.28364372253418
+        "hvi_l1": 0.4104469418525696,
+        "hvi_ssim": 0.4587695300579071,
+        "hvi_edge": 12.264768600463867
       },
-      "loss_total": 24.251691818237305,
+      "loss_total": 22.201025009155273,
       "encode_decode_roundtrip_max_abs_err": 1.4901161193847656e-07,
       "output_dtype": "torch.float32",
       "n_param_tensors_without_grad": 14
@@ -89,11 +89,11 @@
         "rgb_ssim": 0.4445531368255615,
         "rgb_edge": 7.097771644592285,
         "rgb_perc": 1.0777240991592407,
-        "hvi_l1": 0.4380376935005188,
-        "hvi_ssim": 0.45776963233947754,
-        "hvi_edge": 14.182710647583008
+        "hvi_l1": 0.40791481733322144,
+        "hvi_ssim": 0.45729777216911316,
+        "hvi_edge": 12.205562591552734
       },
-      "loss_total": 24.03119468688965,
+      "loss_total": 22.023452758789062,
       "encode_decode_roundtrip_max_abs_err": 1.1920928955078125e-07,
       "output_dtype": "torch.float32",
       "n_param_tensors_without_grad": 14
@@ -134,16 +134,41 @@
         "rgb_ssim": 0.445253849029541,
         "rgb_edge": 7.315493583679199,
         "rgb_perc": 1.1240310668945312,
-        "hvi_l1": 0.4389488399028778,
-        "hvi_ssim": 0.45704084634780884,
-        "hvi_edge": 14.31590747833252
+        "hvi_l1": 0.4108806252479553,
+        "hvi_ssim": 0.4569230079650879,
+        "hvi_edge": 12.426074981689453
       },
-      "loss_total": 24.434980392456055,
+      "loss_total": 22.5169620513916,
       "encode_decode_roundtrip_max_abs_err": 0.0,
       "output_dtype": "torch.float32",
       "n_param_tensors_without_grad": 14
     },
     "U": {
+      "representation": "hvi",
+      "loss": "upstream",
+      "parameters": 1975569,
+      "parameters_trainable": 1975569,
+      "model_k": {
+        "value": 0.20000000298023224,
+        "learnable": true,
+        "grad": -5.931136131286621
+      },
+      "loss_terms": {
+        "rgb_l1": 0.33666953444480896,
+        "rgb_ssim": 0.44593262672424316,
+        "rgb_edge": 7.329616069793701,
+        "rgb_perc": 1.1034220457077026,
+        "hvi_l1": 0.4444555342197418,
+        "hvi_ssim": 0.4580604135990143,
+        "hvi_edge": 14.760175704956055,
+        "hvi_perc": 1.840577244758606
+      },
+      "loss_total": 26.718910217285156,
+      "encode_decode_roundtrip_max_abs_err": 6.426125764846802e-07,
+      "output_dtype": "torch.float32",
+      "n_param_tensors_without_grad": 13
+    },
+    "L0": {
       "representation": "hvi",
       "loss": "upstream",
       "parameters": 1975569,

@@ -1,8 +1,19 @@
 \begin{abstract}
-\mname \citep{yan2025hvi} enhances low-light images by mapping them into the \hvi
-(Horizontal/Vertical/Intensity) color space, processing intensity and chroma along
-separate branches, and supervising the output in both RGB and \hvi. This thesis studies a
-question about that design; the question, the claims, and the experiments are fixed in the
-project plan before any run starts, and every reported number is read from a result file
-by a verification script rather than transcribed.
+\mname enhances low-light images in a polar Horizontal/Vertical/Intensity (\hvi) color space
+whose intensity-dependent chroma collapse is claimed to remove color noise near black, and it
+is trained with a four-term loss duplicated in sRGB and \hvi. Its published \dataset numbers
+come from single runs selected on the test split, and third-party reproductions span
+\ph{23.5}--\ph{28.2}~dB. We ask under which conditions, and by how much, each design step
+reproduces. Inside one frozen \mname we build two nested single-factor ladders: five loss arms
+(full recipe, no VGG term on \hvi, $k$ detached, RGB only, $\Ck$-weighted chroma) and five
+representation arms (learned $k$, fixed $k$, no collapse, linear chroma, luma intensity), each
+trained from scratch with five matched seeds, selected on a scene-disjoint validation split,
+read on the test split once at the final checkpoint, and judged by paired-by-seed tests fixed
+before launch. The seed SD is \ph{0.3}~dB, so the minimum detectable step is \ph{0.5}~dB.
+\hvi-space supervision contributes \ph{0.6}~dB over RGB-only training; the intensity collapse
+contributes \ph{0.4}~dB, located in the three darkest intensity deciles as its mechanism
+predicts; the VGG term on \hvi, the loss-side coupling of $k$, learning $k$, and the
+max-versus-luma intensity choice are each removable or inconclusive at $\pm 0.3$~dB. The
+published spread decomposes into GT-mean rescaling (\ph{3.9}~dB), test-split checkpoint
+selection (\ph{0.3}~dB), and seed noise (\ph{0.3}~dB).
 \end{abstract}
