@@ -1,0 +1,34 @@
+{
+  "written_at": "2026-09-24T13:04:49",
+  "purpose": "gateA/a0_l0_v2 pooled with v1 (master requirement 2026-09-24)",
+  "v1_code": {
+    "commit": "ef9a1cc373da7a17bfd8d6b242a90d43888aceff",
+    "worktree": "/tmp/claude-1100/-home-work-research-paper/be5cd6c3-7486-4335-8176-2d02e6223f76/scratchpad/v1code",
+    "hvi_baseline_sha256": "0fd3a438b64eb08abb3074cf32f57931eba93aa26265407d4601f4e26093b809",
+    "hvilib_sha256": "8ce497ae1a0ecd64f171cd1404792d7e7efa92b5f04c3d0ae61c0e0253b54846",
+    "c1_arms_sha256": "e50e6a02e13daee2d3c43f23118e43a702a4574c243f308bb8436fe9111b47c3"
+  },
+  "v2_code": {
+    "commit": "de0bd15c71cd24ad39234d83818d33c9c6281096",
+    "hvi_baseline_sha256": "138696b4147efc3de9300a636e06e5bfa0bc633b5780a31c0cc390246353fa8e",
+    "hvilib_sha256": "8ce497ae1a0ecd64f171cd1404792d7e7efa92b5f04c3d0ae61c0e0253b54846",
+    "c1_arms_sha256": "70a0bfbc067fd7221755e175b9c5e664e5d8a2dd64b279c3fa2f78f3cfec881d"
+  },
+  "checkpoint": "/home/work/research/outputs/gateA/a0_l0_v1/L0_seed42/last.pt",
+  "checkpoint_sha256": "1473de9e37722f74b068b48999b705eca8df46c3c1ebbb1364e830a6dba48aa7",
+  "inputs": "5 scene_v1 val images, fixed 64x64 crop at (100,200), CPU, FP32; arm L0, upstream loss, one forward/backward",
+  "max_abs_diff": {
+    "y_eval": 0.0,
+    "y_train": 0.0,
+    "loss": 0.0,
+    "terms": 0.0,
+    "grads": 0.0,
+    "k_grad": 0.0
+  },
+  "loss_v1": 0.8673515319824219,
+  "loss_v2": 0.8673515319824219,
+  "n_params": 1975569,
+  "tolerance": 1e-06,
+  "pass": true,
+  "driver_sha256": "f0c219d4551891c00f754caa8a282be1aed67feb1e3cc84e51a3c2b41671c344"
+}

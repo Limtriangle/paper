@@ -105,11 +105,37 @@ def launch(j, gpu, st):
     r = subprocess.run(args, capture_output=True, text=True, timeout=1800)
     ok = "LAUNCHED" in r.stdout
     j["state"], j["gpu"], j["launched_at"] = ("running" if ok else "launch_failed"), gpu, time.time()
+    if ok and j["study"] == "gateA" and j["run"] == "a0_l0_v2":
+        annotate_v2_manifest()
     line = [l for l in r.stdout.splitlines() if "LAUNCHED" in l]
     log((line[0] if line else f"LAUNCH FAILED {j['arm']}_seed{j['seed']}: {r.stderr[-300:]}"))
     if not ok:
         j["error"] = (r.stdout + r.stderr)[-1000:]
     return ok
+
+
+def annotate_v2_manifest():
+    """Master requirement (2026-09-24): v2 seeds 47-49 pool with v1 only if the manifest records (a) an
+    identical config and (b) the CPU equivalence result of the v2 code vs the v1 code. Both computed, not asserted."""
+    mp = H.OUTPUTS / "gateA" / "a0_l0_v2" / "manifest.json"
+    if not mp.is_file():
+        return
+    m = H.json_load(mp)
+    if "pooling_with_v1" in m:
+        return
+    v1 = H.json_load(H.OUTPUTS / "gateA" / "a0_l0_v1" / "manifest.json")["protocol"]
+    v2 = dict(m["protocol"])
+    added = {k: v2[k] for k in v2 if k not in v1}          # fields that did not exist in v1 (e.g. k_fixed=None)
+    diff = {k: {"v1": v1[k], "v2": v2.get(k)} for k in v1 if v1[k] != v2.get(k)}
+    eq_p = H.PAPER / "ralph" / "results" / "gateA__v2_equivalence.json"
+    eq = H.json_load(eq_p) if eq_p.is_file() else {"pass": False, "error": "equivalence JSON missing"}
+    m["pooling_with_v1"] = {"config_identical_to_v1": not diff, "protocol_diff": diff, "fields_added_since_v1": added,
+                            "code_equivalence": {"pass": eq.get("pass"), "max_abs_diff": eq.get("max_abs_diff"),
+                                                 "v1_commit": eq.get("v1_code", {}).get("commit"), "v2_commit": eq.get("v2_code", {}).get("commit"),
+                                                 "file": str(eq_p), "sha256": (H.sha256_file(eq_p) if eq_p.is_file() else None)},
+                            "poolable": bool(not diff and eq.get("pass"))}
+    H.json_save(mp, m)
+    log(f"gateA/a0_l0_v2 manifest annotated: config_identical={not diff} code_equivalence={eq.get('pass')} poolable={m['pooling_with_v1']['poolable']}")
 
 
 def finish(j, st):
