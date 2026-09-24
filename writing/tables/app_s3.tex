@@ -2,7 +2,7 @@
 \begin{table}[t]
 \centering
 \small
-\caption{\textbf{Selection bias (S3).} Per arm of \mname, the mean over five seeds of (best test PSNR over every tenth checkpoint) minus (final-checkpoint test PSNR), GT-mean, \dataset test split (eval15), on \hw; and the paper-style number, the maximum of that oracle over seeds. The oracle pass reads the test split post hoc and is never used to select anything. No value is highlighted.}
+\caption{\textbf{Selection bias (S3), under our protocol.} Per arm of \mname, five seeds, the mean of (best test GT-mean PSNR over every tenth checkpoint) minus (final-checkpoint test GT-mean PSNR) on the \dataset test split (eval15), on \hw; and the paper-style number, the maximum of that oracle over seeds. The primary read-out everywhere else is the final checkpoint; the oracle pass reads the test split post hoc and is never used to select anything. No value is highlighted.}
 \label{tab:app-s3}
 \begin{tabular}{lcc}
 \toprule

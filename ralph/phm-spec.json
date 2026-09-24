@@ -373,6 +373,47 @@
    "only_in": [
     "app_gatea_seeds.tex"
    ]
+  },
+  {
+   "written": "23.67",
+   "src": "gateA__summary_v1.json",
+   "key": "summary.gateA_L0.gated.raw_psnr.mean",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "-0.05",
+   "src": "gateA__summary_v1.json",
+   "key": "summary.gateA_L0.window.final_raw_mean_minus_lower",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "101",
+   "src": "gateA__summary_v1.json",
+   "key": "summary.gateA_L0.oracle.per_seed.42.n_checkpoints",
+   "only_in": [
+    "introduction.tex"
+   ]
+  },
+  {
+   "written": "445",
+   "src": "phase0_val_split_scene.json",
+   "key": "n_train",
+   "only_in": [
+    "method.tex",
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "27.71",
+   "src": "phase0_codebase.json",
+   "key": "facts.evaluation_protocol_upstream.readme_lolv1_numbers.w_perc_gtmean.psnr",
+   "only_in": [
+    "experiments.tex"
+   ]
   }
  ]
 }

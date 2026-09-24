@@ -1,25 +1,25 @@
 \section{Results}
 \label{sec:experiments}
 
-Each ladder is reported as its four nested contrasts (\Cref{tab:s1,tab:s2}): the paired
-difference in the primary metric between neighbouring arms, its seed SD, the Holm-adjusted
-interval, and the verdict of \Cref{sec:method}.
+
 
 \paragraph{Reproduction under the frozen protocol.} The \phm{5} L0 runs of the released
 recipe reach a raw test PSNR between \phm{22.78} and \phm{23.97}~dB at the final
 checkpoint, mean \phm{23.25}~dB with a seed SD of \phm{0.47}~dB, and between \phm{26.52}
 and \phm{26.90}~dB after the GT-mean gain, mean \phm{26.65}~dB with a seed SD of
-\phm{0.16}~dB (per seed in \Cref{tab:app-gatea}). The raw mean sits \ph{0.05}~dB below
-the pre-registered reproduction window of \ph{23.3}--\ph{24.3}~dB, while two other reads
-of the same runs sit inside it: the test-split oracle over checkpoints, \phm{23.66}~dB raw,
-and the final checkpoint with the upstream saturation gate and GT-mean gain,
-\phm{27.55}--\phm{28.05}~dB (mean \phm{27.73}~dB, the gate adding \phm{1.09}~dB),
-matching the \ph{27.71}~dB the authors report for their checkpoint. The shortfall is
-protocol, not model: we read the final checkpoint rather than a test-selected one, without
-the gate, after training on 445 rather than 485 images. Every absolute number in this paper
-is therefore \emph{under our protocol}; the contrasts are unaffected, since every arm
-shares it. The learned $k$ ends at a median of \phm{0.85}, and the seed SD sets the paired
-minimum detectable effect at \ph{0.5}~dB for every contrast below.
+\phm{0.16}~dB (per seed in \Cref{tab:app-gatea}). The raw mean minus the lower edge of the pre-registered reproduction window,
+\ph{23.3}--\ph{24.3}~dB, is $\phm{-0.05}$~dB, while two other raw reads of the same runs
+sit inside the window: the test-split oracle over checkpoints, \phm{23.66}~dB, and the
+final checkpoint with the upstream saturation gate, \phm{23.67}~dB. Gated and GT-mean
+together, the checkpoints score \phm{27.55}--\phm{28.05}~dB (mean \phm{27.73}~dB; the
+gate adds \phm{1.09}~dB), matching the \phm{27.71}~dB the authors report for their
+checkpoint. The shortfall is protocol, not model: we read the final checkpoint rather than
+a test-selected one, without the gate, after training on \phm{445} rather than 485 images.
+Every absolute number in this paper is therefore \emph{under our protocol}; the contrasts
+are unaffected, since every arm shares it. The seed SD of \phm{0.47}~dB passes the
+$\le 0.5$~dB gate; because it lies in the $0.4$--$0.5$ band, the pre-registered rule adds
+seeds 47--49 to A0, A2 and A3 (running). The learned $k$ ends at a median of \phm{0.85},
+and the seed SD sets the paired minimum detectable effect at \ph{0.5}~dB below.
 
 \input{tables/s1_contrasts}
 
@@ -32,7 +32,7 @@ over training,
 and without it $k$ moves only through the residual path. Removing \hvi-space supervision
 entirely costs \ph{0.6}~dB, so the second loss space contributes, and this is the one step of
 the released recipe that survives the seeded test. Weighting the \hvi chroma terms by the
-collapse $\Ck(I_{\mathrm{gt}})$ is equivalent to the uniform weighting at $\pm 0.3$~dB. The
+collapse $\Ck(I_{\mathrm{gt}})$ is removable relative to uniform weighting at $\pm 0.3$~dB. The
 frozen loss used in the representation ladder, L2, therefore differs from the released
 recipe by one removable step and one inconclusive step.
 
@@ -71,7 +71,7 @@ mostly picks checkpoints whose brightness happens to match, and the GT-mean gain
 that. Its maximum over seeds, the number a paper would report after test-split selection,
 is listed per arm in \Cref{tab:app-s3}. The \ph{23.5}--\ph{28.2}~dB spread of published
 \dataset values for the same model is therefore mostly the GT-mean gain (\phm{3.39}~dB) and the saturation gate (\phm{1.09}~dB), with
-selection and seed noise (\phm{0.16}~dB) a small remainder. None of the
+selection (\phm{0.06}~dB) and seed noise (\phm{0.16}~dB) a small remainder. None of the
 oracle numbers is used to rank arms; they exist to size the practice, and they are why the
 primary read-out is the final checkpoint.
 

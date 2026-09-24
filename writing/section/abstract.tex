@@ -2,8 +2,8 @@
 \mname enhances low-light images in a polar Horizontal/Vertical/Intensity (\hvi) color space
 whose intensity-dependent chroma collapse is claimed to remove color noise near black, and it
 is trained with a four-term loss duplicated in sRGB and \hvi. Its published \dataset numbers
-come from single runs selected on the test split, and third-party reproductions span
-\ph{23.5}--\ph{28.2}~dB. We ask under which conditions, and by how much, each design step
+come from single runs selected on the test split: the paper reports \ph{28.2}~dB while
+third-party reproductions report \ph{23.5}--\ph{24.0}~dB. We ask under which conditions, and by how much, each design step
 reproduces. Inside one frozen \mname we build two nested single-factor ladders: five loss arms
 (full recipe, no VGG term on \hvi, $k$ detached, RGB only, $\Ck$-weighted chroma) and five
 representation arms (learned $k$, fixed $k$, no collapse, linear chroma, luma intensity), each

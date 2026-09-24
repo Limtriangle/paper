@@ -16,12 +16,10 @@ Files: `abs` = abstract, `intro`, `exp` = experiments, `concl`, `app` = appendix
 
 | Value | Where | Meaning | Waits on (JSON key, source) |
 |---|---|---|---|
-| 23.5, 28.2 | abs, intro, exp | published LOL-v1 spread (README raw / paper GT-mean) | literature numbers; cite `phase0_related.md` §2.3 sources or delete at milestone |
+| 23.5, 28.2 | abs, intro, exp | published LOL-v1 spread (paper GT-mean 28.2; third-party raw 23.5-24.0) | literature numbers; cite `phase0_related.md` §2.3 sources or delete at milestone |
 | 24.0 | intro | third-party raw reproductions upper bound | literature (PAL, issue #66); cite or delete |
 | 0.2, 0.4 | intro | seed SD reported for comparable restoration models | `shafi2026iphoneblur` numbers; cite or delete |
 | 23.3, 24.3 | exp | Gate A window | HVI-PLAN §5 (protocol constant, not a measurement; becomes plain text) |
-| 0.05 | exp | raw final mean (23.25, key) minus the window's lower edge (23.3, constant); arithmetic, not a key | becomes plain text or a derived key |
-| 27.71 | exp | README w_perc GT-mean number for the released checkpoint (literature) | cite `yan2025hvi` README or delete |
 | 0.5 | abs, intro, exp, concl | achieved paired MDE | analysis decision_rules.mde (to be added by experiment) or derived 1.66·SD(Δ) |
 | 0.1 removable | exp, tables | L0−L1 | `s1__loss_ladder_v1.json` analysis.analysis_s1.decision.contrasts.L0-L1.{mean,sd,ci_holm,verdict} |
 | 0.0 inconclusive | exp, tables | L1−L2 | contrasts.L1-L2.* |
@@ -68,6 +66,11 @@ deleted. Literature rows (first three) become citations with the number attribut
 | `0.06` | abstract, introduction, experiments (headline selection term, GT-mean) | `decomposition.oracle_minus_final_gtmean.mean` (n=4) | 0.064 |
 | `0.41` | abstract, introduction, experiments (raw selection inflation) | `decomposition.oracle_minus_final.mean` (n=5) | 0.408 |
 | `23.66` | experiments.tex | `summary.gateA_L0.oracle.max_over_ckpt_mean.raw_psnr.mean` (oracle raw read, inside the window) | 23.662 |
+| `23.67` | experiments.tex | `summary.gateA_L0.gated.raw_psnr.mean` (gated raw read, inside the window) | 23.671 |
+| `-0.05` | experiments.tex | `summary.gateA_L0.window.final_raw_mean_minus_lower` | -0.046 |
+| `101` | introduction.tex | `summary.gateA_L0.oracle.per_seed.42.n_checkpoints` | 101 |
+| `445` | method.tex, experiments.tex | `phase0_val_split_scene.json: n_train` | 445 |
+| `27.71` | experiments.tex | `phase0_codebase.json: facts.evaluation_protocol_upstream.readme_lolv1_numbers.w_perc_gtmean.psnr` | 27.7146 |
 | app_s3 L0 row (2 cells) | app_s3.tex | `decomposition.oracle_minus_final_gtmean.mean`, `oracle.max_over_seeds.gtmean_psnr` (per-row src override) | 0.06, 26.96 |
 | `22.78`, `23.97` | experiments.tex | `final_eval__test.json: entries.gateA_L0_seed{42,44}.metrics.psnr` (min, max over completed seeds) | 22.7751, 23.9697 |
 | `26.52`, `26.90` | experiments.tex | `entries.gateA_L0_seed{43,44}.metrics.psnr_gtmean` (min, max) | 26.5215, 26.9044 |

@@ -65,7 +65,7 @@ def load_src(tbl):
     path = R / tbl["src"]
     if not path.exists():
         MISSING.append(tbl["src"])
-        print(f"MISSING ralph/results/{tbl['src']} (table {tbl['name']}: every cell rendered as --)", file=sys.stderr)
+        print(f"MISSING ralph/results/{tbl['src']} (table {tbl['name']}: cells render as their spec \\ph value, or -- where none is given)", file=sys.stderr)
         return {"jobs": {}}
     return json.load(open(path))
 

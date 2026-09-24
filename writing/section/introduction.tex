@@ -56,9 +56,9 @@ parameter count, the same schedule, the same scene-disjoint validation split for
 selection, and the same single read of the test split at the final checkpoint.
 
 The key observation that makes the study decidable is that the published spread is not one
-number. Rescaling the output to the ground-truth mean adds \phm{3.39}~dB to a raw
-\phm{23.25}~dB and the saturation gate adds \phm{1.09}~dB more; picking the best of one
-hundred checkpoints on the test split adds only \phm{0.06}~dB under GT-mean; the seed SD of
+number. Under our protocol, rescaling the output to the ground-truth mean adds \phm{3.39}~dB to a
+raw \phm{23.25}~dB and the saturation gate adds \phm{1.09}~dB more; picking the best of
+\phm{101} checkpoints on the test split adds only \phm{0.06}~dB under GT-mean; the seed SD of
 GT-mean PSNR is \phm{0.16}~dB. Once those are separated, a step of \ph{0.5}~dB is
 detectable with five seeds, and the question above has an answer for every step.
 

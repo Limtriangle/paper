@@ -4,7 +4,8 @@
 \paragraph{Model.} We use the public \mname implementation \citep{yan2025hvi} unchanged:
 an sRGB image is mapped to a three-channel working space, an intensity branch takes the
 intensity channel and a chroma branch takes all three channels, twelve cross-attention
-blocks (six per branch) couple the two, the network predicts a residual in the working space, and the result is
+blocks (six per branch, one of which in the intensity branch receives no gradient because
+the released code overwrites its output before use) couple the two, the network predicts a residual in the working space, and the result is
 mapped back to sRGB. In \hvi the working space is $I = \max(R,G,B)$ and
 $(H, V) = \Ck(I)\, S\, (\cos h, \sin h)$ with $\Ck(I) = (\sin(\pi I/2) + \epsilon)^{k}$, where
 $k$ is a learned scalar initialised at $0.2$ and $S, h$ are HSV saturation and hue. Every arm
@@ -40,7 +41,7 @@ $0.05$ in the A0 runs.
 training script, the upstream commit, and the split file in every run manifest. Training
 follows the released code: 1000 epochs, batch 8, $256^2$ crops, random flips, Adam at
 $10^{-4}$ with a 3-epoch warm-up and cosine decay to $10^{-7}$, FP32, on \hw. The 485
-\dataset training pairs are split into 445 training and 40 validation pairs by scene, using
+\dataset training pairs are split into \phm{445} training and 40 validation pairs by scene, using
 DINOv2 and perceptual-hash clusters so that no validation scene appears in training and no
 validation cluster contains a test image. Each arm is trained with the five seeds
 $\{42, \dots, 46\}$, which fix data order, crops, flips, and initialisation of the
