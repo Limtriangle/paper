@@ -20,6 +20,7 @@ Files: `abs` = abstract, `intro`, `exp` = experiments, `concl`, `app` = appendix
 | 24.0 | intro | third-party raw reproductions upper bound | literature (PAL, issue #66); cite or delete |
 | 0.2, 0.4 | intro | seed SD reported for comparable restoration models | `shafi2026iphoneblur` numbers; cite or delete |
 | 23.3, 24.3 | exp | Gate A window | HVI-PLAN §5 (protocol constant, not a measurement; becomes plain text) |
+| 0.05 | exp | raw final mean (23.25, key) minus the window's lower edge (23.3, constant); arithmetic, not a key | becomes plain text or a derived key |
 | 27.71 | exp | README w_perc GT-mean number for the released checkpoint (literature) | cite `yan2025hvi` README or delete |
 | 0.5 | abs, intro, exp, concl | achieved paired MDE | analysis decision_rules.mde (to be added by experiment) or derived 1.66·SD(Δ) |
 | 0.1 removable | exp, tables | L0−L1 | `s1__loss_ladder_v1.json` analysis.analysis_s1.decision.contrasts.L0-L1.{mean,sd,ci_holm,verdict} |
@@ -56,18 +57,19 @@ deleted. Literature rows (first three) become citations with the number attribut
 |---|---|---|---|
 | `0.04` | appendix.tex | `phase0_codebase.json: reproducibility.epoch2_val_psnr_spread_db` | 0.0424 |
 | `1975569` | method.tex | `phase0_arms_preflight.json: ladder_parameter_count` | 1975569 |
-| `4` | experiments.tex | `gateA__a0_l0_v1.json: n_jobs.complete` and `gateA__summary_v1.json: summary.gateA_L0.final.raw_psnr.n` | 4 (becomes 5 when seed 46 lands; re-bind then) |
-| `23.34`, `0.49` | experiments.tex, introduction.tex | `gateA__summary_v1.json: summary.gateA_L0.final.raw_psnr.{mean,sd}` | 23.344, 0.490 |
-| `26.63`, `0.18` | experiments.tex; `0.18` also abstract, introduction, conclusion (headline seed SD, GT-mean = primary metric; master ruling 2026-09-24) | `summary.gateA_L0.final.gtmean_psnr.{mean,sd}` | 26.634, 0.183 |
+| `5` | experiments.tex | `gateA__a0_l0_v1.json: n_jobs.complete` and `gateA__summary_v1.json: summary.gateA_L0.final.raw_psnr.n` | 5 |
+| `23.25`, `0.47` | experiments.tex, introduction.tex | `gateA__summary_v1.json: summary.gateA_L0.final.raw_psnr.{mean,sd}` (n=5) | 23.254, 0.470 |
+| `26.65`, `0.16` | experiments.tex; `0.16` also abstract, introduction, conclusion (headline seed SD, GT-mean = primary metric) | `summary.gateA_L0.final.gtmean_psnr.{mean,sd}` (n=5) | 26.645, 0.160 |
 | `27.73` | experiments.tex | `summary.gateA_L0.gated.gtmean_psnr.mean` | 27.735 |
 | `0.85` | experiments.tex | `summary.gateA_L0.k_final.median` | 0.847 |
-| `3.29` | abstract, introduction, experiments, appendix | `summary.gateA_L0.decomposition.gtmean_minus_raw.mean` | 3.290 |
-| `1.10` | abstract, introduction, experiments | `decomposition.gated_minus_ungated_gtmean.mean` | 1.100 |
-| `-0.39` | appendix.tex | `decomposition.valsel_minus_final_gtmean.mean` | -0.389 |
+| `3.39` | abstract, introduction, experiments, appendix | `summary.gateA_L0.decomposition.gtmean_minus_raw.mean` (n=5) | 3.392 |
+| `1.09` | abstract, introduction, experiments | `decomposition.gated_minus_ungated_gtmean.mean` (n=5) | 1.088 |
+| `-0.71` | appendix.tex | `decomposition.valsel_minus_final_gtmean.mean` (n=5; seed 46's val-selected checkpoint is 2 dB low) | -0.713 |
 | `0.06` | abstract, introduction, experiments (headline selection term, GT-mean) | `decomposition.oracle_minus_final_gtmean.mean` (n=4) | 0.064 |
-| `0.35` | abstract, introduction, experiments (raw selection inflation) | `decomposition.oracle_minus_final.mean` | 0.352 |
+| `0.41` | abstract, introduction, experiments (raw selection inflation) | `decomposition.oracle_minus_final.mean` (n=5) | 0.408 |
+| `23.66` | experiments.tex | `summary.gateA_L0.oracle.max_over_ckpt_mean.raw_psnr.mean` (oracle raw read, inside the window) | 23.662 |
 | app_s3 L0 row (2 cells) | app_s3.tex | `decomposition.oracle_minus_final_gtmean.mean`, `oracle.max_over_seeds.gtmean_psnr` (per-row src override) | 0.06, 26.96 |
 | `22.78`, `23.97` | experiments.tex | `final_eval__test.json: entries.gateA_L0_seed{42,44}.metrics.psnr` (min, max over completed seeds) | 22.7751, 23.9697 |
 | `26.52`, `26.90` | experiments.tex | `entries.gateA_L0_seed{43,44}.metrics.psnr_gtmean` (min, max) | 26.5215, 26.9044 |
 | `27.55`, `28.05` | experiments.tex | `entries.gateA_L0_seed{43,44}_gated.metrics.psnr_gtmean` (min, max) | 27.5513, 28.0453 |
-| 16 table cells | app_gatea_seeds.tex | `entries.gateA_L0_seed{42..45}{,_gated,_valsel}.metrics.{psnr,psnr_gtmean}` | see `verify-phm.py --ledger` |
+| 20 table cells (seed 46 added) | app_gatea_seeds.tex | `entries.gateA_L0_seed{42..45}{,_gated,_valsel}.metrics.{psnr,psnr_gtmean}` | see `verify-phm.py --ledger` |

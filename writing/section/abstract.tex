@@ -9,12 +9,13 @@ reproduces. Inside one frozen \mname we build two nested single-factor ladders: 
 representation arms (learned $k$, fixed $k$, no collapse, linear chroma, luma intensity), each
 trained from scratch with five matched seeds, selected on a scene-disjoint validation split,
 read on the test split once at the final checkpoint, and judged by paired-by-seed tests fixed
-before launch. The seed SD of GT-mean PSNR, the primary metric, is \phm{0.18}~dB, so the
+before launch. The seed SD of GT-mean PSNR, the primary metric, is \phm{0.16}~dB, so the
 minimum detectable step is \ph{0.5}~dB.
 \hvi-space supervision contributes \ph{0.6}~dB over RGB-only training; the intensity collapse
 contributes \ph{0.4}~dB, located in the three darkest intensity deciles as its mechanism
 predicts; the VGG term on \hvi, the loss-side coupling of $k$, learning $k$, and the
-max-versus-luma intensity choice are each removable or inconclusive at $\pm 0.3$~dB. Test-split checkpoint selection inflates raw PSNR by \phm{0.35}~dB but GT-mean PSNR by only
-\phm{0.06}~dB; the published spread is mostly GT-mean rescaling (\phm{3.29}~dB) and the
-test-time saturation gate (\phm{1.10}~dB).
+max-versus-luma intensity choice are each removable or inconclusive at $\pm 0.3$~dB. Test-split checkpoint selection inflates raw PSNR by \phm{0.41}~dB but GT-mean PSNR by only
+\phm{0.06}~dB; the published spread is mostly GT-mean rescaling (\phm{3.39}~dB) and the
+test-time saturation gate (\phm{1.09}~dB), and every absolute number we report is under
+our protocol.
 \end{abstract}

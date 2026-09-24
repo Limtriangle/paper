@@ -179,7 +179,7 @@
    "label": "tab:app-s1",
    "star": false,
    "row_label": "Arm",
-   "caption": "\\textbf{Loss arms, absolute values.} Mean and seed SD over five seeds of GT-mean PSNR (one scalar luminance gain) and raw PSNR of \\mname on the \\dataset test split (eval15), final checkpoint, on \\hw. The test split is read once per arm by the final-evaluation script. The best measured mean in each PSNR column is in \\textbf{bold}, whichever arm attains it.",
+   "caption": "\\textbf{Loss arms, absolute values.} Under our protocol (\\Cref{sec:method}): mean and seed SD over five seeds of GT-mean PSNR (one scalar luminance gain) and raw PSNR of \\mname on the \\dataset test split (eval15), final checkpoint, on \\hw. The test split is read once per arm by the final-evaluation script. The best measured mean in each PSNR column is in \\textbf{bold}, whichever arm attains it.",
    "rows": [
     {
      "label": "L0 (upstream loss)",
@@ -263,7 +263,7 @@
    "label": "tab:app-s2",
    "star": false,
    "row_label": "Arm",
-   "caption": "\\textbf{Representation arms, absolute values.} As \\Cref{tab:app-s1}, for the five representation arms under the frozen loss L2. The best measured mean in each PSNR column is in \\textbf{bold}, whichever arm attains it.",
+   "caption": "\\textbf{Representation arms, absolute values.} Under our protocol, as \\Cref{tab:app-s1}, for the five representation arms under the frozen loss L2. The best measured mean in each PSNR column is in \\textbf{bold}, whichever arm attains it.",
    "rows": [
     {
      "label": "A0 (HVI, learned $k$)",
@@ -427,6 +427,10 @@
     {
      "label": "45",
      "job": "gateA_L0_seed45"
+    },
+    {
+     "label": "46",
+     "job": "gateA_L0_seed46"
     }
    ],
    "cols": [

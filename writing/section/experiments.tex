@@ -5,17 +5,21 @@ Each ladder is reported as its four nested contrasts (\Cref{tab:s1,tab:s2}): the
 difference in the primary metric between neighbouring arms, its seed SD, the Holm-adjusted
 interval, and the verdict of \Cref{sec:method}.
 
-\paragraph{Reproduction under the frozen protocol.} The \phm{4} completed L0 runs of the
-released recipe (of five) reach a raw test PSNR between \phm{22.78} and \phm{23.97}~dB at
-the final checkpoint, mean \phm{23.34}~dB with a seed SD of \phm{0.49}~dB, and between
-\phm{26.52} and \phm{26.90}~dB after the GT-mean gain, mean \phm{26.63}~dB with a seed SD
-of \phm{0.18}~dB (per seed in \Cref{tab:app-gatea}). With the upstream test-time
-saturation gate and the GT-mean gain the same checkpoints score \phm{27.55} to
-\phm{28.05}~dB, mean \phm{27.73}~dB: the gate alone adds \phm{1.10}~dB of GT-mean PSNR, matching
-the \ph{27.71}~dB the authors report for their checkpoint under that evaluation. The learned $k$ ends at a median of
-\phm{0.85} over the four seeds. The raw mean lies inside the pre-registered window \ph{23.3}--\ph{24.3}~dB, so
-the protocol reproduces the published model, and the seed SD sets the paired minimum
-detectable effect at \ph{0.5}~dB for every contrast below.
+\paragraph{Reproduction under the frozen protocol.} The \phm{5} L0 runs of the released
+recipe reach a raw test PSNR between \phm{22.78} and \phm{23.97}~dB at the final
+checkpoint, mean \phm{23.25}~dB with a seed SD of \phm{0.47}~dB, and between \phm{26.52}
+and \phm{26.90}~dB after the GT-mean gain, mean \phm{26.65}~dB with a seed SD of
+\phm{0.16}~dB (per seed in \Cref{tab:app-gatea}). The raw mean sits \ph{0.05}~dB below
+the pre-registered reproduction window of \ph{23.3}--\ph{24.3}~dB, while two other reads
+of the same runs sit inside it: the test-split oracle over checkpoints, \phm{23.66}~dB raw,
+and the final checkpoint with the upstream saturation gate and GT-mean gain,
+\phm{27.55}--\phm{28.05}~dB (mean \phm{27.73}~dB, the gate adding \phm{1.09}~dB),
+matching the \ph{27.71}~dB the authors report for their checkpoint. The shortfall is
+protocol, not model: we read the final checkpoint rather than a test-selected one, without
+the gate, after training on 445 rather than 485 images. Every absolute number in this paper
+is therefore \emph{under our protocol}; the contrasts are unaffected, since every arm
+shares it. The learned $k$ ends at a median of \phm{0.85}, and the seed SD sets the paired
+minimum detectable effect at \ph{0.5}~dB for every contrast below.
 
 \input{tables/s1_contrasts}
 
@@ -59,16 +63,15 @@ difference in the gain term.
 
 \paragraph{Seed variance and selection bias.}
 \label{sec:selection}
-For the released recipe the seed SD of test GT-mean PSNR is \phm{0.18}~dB (\phm{0.49}~dB on
+For the released recipe the seed SD of test GT-mean PSNR is \phm{0.16}~dB (\phm{0.47}~dB on
 raw PSNR); the ladder arms are listed per arm in the appendix. The post-hoc oracle, which
 scores every tenth checkpoint on the test split, exceeds the final checkpoint by
-\phm{0.35}~dB of raw PSNR but by only \phm{0.06}~dB of GT-mean PSNR: test-set selection
+\phm{0.41}~dB of raw PSNR but by only \phm{0.06}~dB of GT-mean PSNR: test-set selection
 mostly picks checkpoints whose brightness happens to match, and the GT-mean gain absorbs
 that. Its maximum over seeds, the number a paper would report after test-split selection,
 is listed per arm in \Cref{tab:app-s3}. The \ph{23.5}--\ph{28.2}~dB spread of published
-\dataset values for the same model is therefore mostly the GT-mean gain (\phm{3.29}~dB) and
-the saturation gate (\phm{1.10}~dB), with selection and seed noise (\phm{0.18}~dB) a
-small remainder. None of the
+\dataset values for the same model is therefore mostly the GT-mean gain (\phm{3.39}~dB) and the saturation gate (\phm{1.09}~dB), with
+selection and seed noise (\phm{0.16}~dB) a small remainder. None of the
 oracle numbers is used to rank arms; they exist to size the practice, and they are why the
 primary read-out is the final checkpoint.
 
