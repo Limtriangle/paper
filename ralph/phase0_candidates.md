@@ -1,6 +1,6 @@
 # phase0_candidates.md — thesis candidates (master)
 
-Status: **v9** (2026-09-24 03:30 UTC; T1 REJECTED by the author's R3, T3 under review, recommendation back to M2). v8 (02:35 UTC): v6 = the author's requested "v5 method candidates"; v7 folded in the author's novelty checks M1–M3 (their numbering); **v8 adds the six transfer-style candidates T1–T6 with the author's verdicts and re-ranks: T1 (+T3) recommended, M2 pivot.** Part I below is new: five
+Status: **v10** (2026-09-24 03:50 UTC): after the author's R4–R6, T3/T6/T4 are rejected *as methods* (P(beat trivial baseline) = 0.30 / 0.20 / 0.12) and survive only as seeded measurement studies; **the C1 ladder ranks first again**, with T3's GT-oracle decomposition as an optional zero-training chapter. v9 (03:30 UTC; T1 REJECTED by R3). v8 (02:35 UTC): v6 = the author's requested "v5 method candidates"; v7 folded in the author's novelty checks M1–M3 (their numbering); **v8 adds the six transfer-style candidates T1–T6 with the author's verdicts and re-ranks: T1 (+T3) recommended, M2 pivot.** Part I below is new: five
 method candidates M1–M5 under the author's new Gate 0 criteria (INBOX line 18). Part II is the earlier C-series
 (v5, survey-reconciled); **C1, the R2 nested ladder, is now the ablation chapter of whichever method wins**, and C3–C6
 are kept for the record. Evidence keys are in `ralph/related/survey.bib` unless noted; file pointers use
@@ -195,7 +195,19 @@ to the augmented control at equal global PSNR (± 0.1 dB) and lowers hue error u
 **Novelty risk (one line).** Low–medium on mechanism (unclaimed in HVI), medium on outcome: hue augmentation alone is
 the threat, and real casts are not pure rotations (they change S and I per channel), which bounds the exactness.
 
-### T3 — Test-time adaptation of HVI-CIDNet's own knobs (k, α_s, α_i, γ, I-branch norm)  *(UNDER THE AUTHOR'S REVIEW, 2026-09-24)*
+### T3 — Test-time adaptation of the knobs — **REJECTED AS A METHOD (R4); kept as an optional zero-training *oracle-decomposition chapter***
+**R4 verdict (`redteam/R4_T3_design_redteam.md`).** "Recovers PSNR under brightness shift" is almost guaranteed true and
+almost guaranteed trivial: MILL's collapse is mostly a global over-exposure error that any scalar gain chosen by an
+exposure loss removes. **What survives:** (a) a zero-training **GT-oracle phase**: per-image oracle over {pre-gain
+only} vs {all knobs k, α_s, α_i, γ} — decides whether HVI's knobs carry anything beyond auto-gamma; (b) primary
+contrast = T3-full vs T3-gain-only under the same loss and target, so the exposure prior cancels; (c) closed-form
+mean-match pre-gain and identity baselines (MILL inputs contain up to 50 % GT); (d) the augmentation baseline
+retrained with 3 seeds, matched and mismatched augmentation families; (e) scene as the replication unit, pooled with
+de-duplicated LOL-v2-Real. **Honest expected outcome:** "CIDNet's brightness-shift failure is X % one scalar of exposure
+miscalibration, fixable without training; HVI's chroma knobs add ≤ Y dB / ≤ Z ΔE." A legitimate chapter; not a method.
+*Original T3 entry follows for the record.*
+
+#### T3 (original entry, superseded)
 **Verdict:** NOVEL-IN-HVI as a component-wise assembly. Every block is taken (Zero-DCE non-reference losses;
 Retinex-unrolling test-time fine-tuning, arXiv 2202.05972 — the closest mechanism; SALVE, arXiv 2212.11484; genetic
 per-image gamma search, arXiv 2505.11246; few-parameter TTA for SR/open-set restoration, arXiv 2310.19011, 2312.02197),
@@ -219,7 +231,12 @@ guided intensity), GSAD (NeurIPS 2023), U2CLLIE (arXiv 2508.04176). Baseline: de
 tiny head, loop-fit; locus = darkest deciles (ΔE00, hue error, AUSE calibration). No threshold stated. Kept as an
 optional add-on to M2 (same locus), not a primary.
 
-### T4 — Learned loss weights for the dual-space objective — **NOVEL-IN-HVI (transplant)**
+### T4 — Learned loss weights — **REJECTED AS A METHOD (R6)**
+R6: with 3 seeds on 15 near-duplicate test images the MDE is ≈ 0.6–0.7 dB and the fine-tune loop cannot test weighting
+at all; homoscedastic-uncertainty weighting on these terms reduces to w_i → 1/L_i and erases the ×50 / ×0.01 scales.
+Salvage = a seeded study of the dual-space loss from scratch (RGB/HVI ablation, HVI-VGG removal, gradient-share
+attribution, learned vs hand-tuned vs equal-compute random search; ≈ 420 GPU-h) — this is C4, not a method.
+*Original T4 note:*
 Uncertainty weighting (Kendall, Gal & Cipolla, CVPR 2018), GradNorm (ICML 2018) or DWA over the 2 spaces or all 8 terms;
 baseline = upstream weights (1.0 / 0.5 / 50 / 0.01, issue #163). Loss-only, perfect loop fit — but its headline claim is
 convergence speed, which fine-tuning from converged weights cannot show; the from-scratch 3-seed final would. Natural
@@ -230,32 +247,33 @@ Attn = softmax(QKᵀ/√d ⊙ σ(W·I_map)) with a 1×1 gate; closest CMIG-Net (
 Baseline: plain LCA and CMIG-Net. Small module, loop-fit; would need Sony-Total-Dark for the check's protocol. Same
 crowded neighbourhood as M3/M5 → low.
 
-### T6 — HVI-space distillation into a small student (split I / HV losses) — **NOVEL-IN-HVI (thin)**
+### T6 — HVI-space distillation — **REJECTED AS A METHOD (R5)**
+R5: "student within 0.3 dB at 3× fewer FLOPs" is probably true without distillation (1.9 M-param teacher, tiny data,
+seed noise ≈ effect); the teacher fit the same 485 pairs so its outputs carry little extra signal. Salvage = a
+width/FLOPs Pareto KD study with a transfer set the teacher did not fit and a strictly stronger teacher (HVI-CIDNet+
+weights are released at github.com/shikangbiao/CIDNet_extension), tested as a 2×2 intensity/chroma factorial.
+*Original T6 note:*
 Teacher HVI-CIDNet+ or an ensemble; closest MirrorDistill (arXiv 2609.25331; LOL-v2-Real 24.08 dB at 4.38 GMACs),
 DLIENet (PR 2025). Student is width-reduced, so released weights do not load; teacher inference first. Efficiency
 thesis, weak tie to a failure locus → low.
 
 ## Ranking (locus measurability × fit to the 25-min loop × chance to beat the named baselines × novelty margin)
 
-| # | Candidate | Locus metric instrumented? | Loop fit | Novelty verdict (author's checks) | Score |
-|---|---|---|---|---|---|
-| 1 | **M2 noise-calibrated per-pixel k(x) with bound** (+ M3 hue loss, decile protocol) | yes | excellent (release-compatible init at k = 1.1255) | INCREMENTAL, unclaimed slice with a provable bound | ★★★★★ |
-| 2 | T3 test-time knob adaptation — **under the author's review** | partly (blends/gains on val; MILL data optional) | zero training | NOVEL-IN-HVI (assembly) | ★★★★ (as extension, pending R-review) |
-| — | ~~T1 hue-equivariant HV branch~~ | — | — | **REJECTED by R3** (wrong group; cannot represent a bias correction) | — |
-| 4 | M1 exposure-conditioned HVI parameters | partly | very good | INCREMENTAL | ★★★ |
-| 5 | T4 learned loss weights / M4 HVI-aware supervision | yes | perfect (loss-only) | NOVEL-IN-HVI (transplant) / — | ★★★ (chapter) |
-| 6 | M3, T2, T5 (chroma gating / uncertainty / gated LCA) | yes | good | INCREMENTAL, crowded | ★★ |
-| 7 | T6 distillation, M5 repaired LCA | partly | mixed | thin / low | ★★ |
+| # | Candidate | Status after the author's red-teams R1–R6 | Instrument | Score |
+|---|---|---|---|---|
+| 1 | **C1 nested HVI ladder** (Part II; A0/A2/A3/A4 + L1, frozen loss, 5 matched seeds, pre-registered rules) | R1: partially done, not redundant; R2: the corrected design | **built and self-tested**; seed 1 of A0/A2 running from scratch now | ★★★★★ |
+| 2 | T3 GT-oracle decomposition (R4's version) | survives as a zero-training measurement chapter | needs only the released weights + val | ★★★★ (as chapter) |
+| 3 | M2 per-pixel bounded k(x) | INCREMENTAL (author's check); not red-teamed; the best remaining *method* if the author wants one | release-compatible at init | ★★★ |
+| 4 | M1 exposure-conditioned parameters | INCREMENTAL; not red-teamed | release-compatible at init | ★★ |
+| 5 | C4 / T4-salvage seeded loss study; C3 k sweep | measurement studies, from scratch | ladder instruments reuse | ★★ (chapters) |
+| — | ~~T1~~ (R3), ~~T3 as method~~ (R4), ~~T6~~ (R5), ~~T4 as method~~ (R6), M3/T2/T5 (crowded), M5 (bug fix) | rejected or not recommended | — | — |
 
-**Recommendation (v9, after R3): M2 as the thesis method** — per-pixel, noise-calibrated density k(x) with a
-per-pixel conditioning bound, release-compatible at init (k(x) ≡ 1.1255), with M3's confidence-weighted hue loss and
-the dark-decile hue/ΔE00 protocol folded in and M4's loss fix as wave 1; go/no-go from the author's M2 check (beat
-RHVI-style I-refinement and the ISP chroma-suppression LUT by ≥ 0.5 ΔE00 or ≥ 2° hue in deciles 1–2 at equal PSNR).
-**T3 joins as the zero-training extension only if it survives the author's review** (its locus, brightness shift, is
-orthogonal to M2's). **Pivot: M1** (exposure-conditioned HVI parameters; shares the transform-parametrisation code).
-T1 is out. The C1 ladder is the ablation chapter, from scratch (A0/A2/A3 × 3 seeds; the running pair is seed 1).
-Budget after Gate 0: ≈ 3 loop rounds (≈ 6 h wall-clock), 9 from-scratch runs for the final table (≈ 18 h) + 9
-from-scratch ladder runs (≈ 18 h, 2 already running).
+**Recommendation (v10, after R4–R6): the C1 nested ladder as the thesis** — it is the only candidate that survived a
+red-team, its instrument is built and self-tested, its decision rules are pre-registered, and its first from-scratch
+pair is already running — **with T3's GT-oracle decomposition as an optional zero-training chapter** (R4's design:
+gain-only vs all-knobs oracle, mean-match and identity baselines, scene as the replication unit). If the author still
+wants a *method* thesis, M2 is the best remaining candidate but has not been red-teamed. Budget: the ladder's 25 core
+runs ≈ 2.0 days on 4 GPUs (5 A0 seeds first, pipeline gate), + the T3 chapter at zero training.
 
 ---
 
