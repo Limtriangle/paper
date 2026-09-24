@@ -32,14 +32,12 @@ collapse $\Ck(I_{\mathrm{gt}})$ is equivalent to the uniform weighting at $\pm 0
 frozen loss used in the representation ladder, L2, therefore differs from the released
 recipe by one removable step and one inconclusive step.
 
-\paragraph{What the coupling of $k$ does.} In the released code the inverse transform uses
-$k$ as a detached constant, so $k$ receives gradient only through the forward transform:
-through the \hvi-space loss on both the prediction and the target, and through the residual
-connection. Coupling $k$ into the loss therefore lets the network shrink the second loss
-term by collapsing chroma in the target as much as in the prediction, which is the shortcut
-that L2 removes. That the L1$-$L2 quality difference is inconclusive while the trajectory of $k$ changes
-shows that the learned collapse is a property of the objective as much as of the
-representation; hence the representation ladder runs under the detached loss.
+\paragraph{What the coupling of $k$ does.} In the released code $k$ receives gradient only
+through the forward transform, so coupling it into the loss lets the network shrink the
+second loss term by collapsing chroma in the target as much as in the prediction; L2 removes
+that shortcut. An inconclusive L1$-$L2 quality difference beside a changed $k$ trajectory
+means the learned collapse is a property of the objective as much as of the representation,
+which is why the representation ladder runs under the detached loss.
 
 \input{tables/s2_contrasts}
 
@@ -64,24 +62,25 @@ difference in the gain term.
 For the released recipe the seed SD of test GT-mean PSNR is \phm{0.18}~dB (\phm{0.49}~dB on
 raw PSNR); the ladder arms are listed per arm in the appendix. The post-hoc oracle, which
 scores every tenth checkpoint on the test split, exceeds the final checkpoint by
-\phm{0.06}~dB of GT-mean PSNR (\phm{0.35}~dB raw) on average; its maximum over seeds, the number a paper would report after
-test-split selection, is listed per arm in \Cref{tab:app-s3}. Together with the
-\phm{3.29}~dB added by the GT-mean gain, these three quantities account for the
-\ph{23.5}--\ph{28.2}~dB spread of published \dataset values for the same model. None of the
+\phm{0.35}~dB of raw PSNR but by only \phm{0.06}~dB of GT-mean PSNR: test-set selection
+mostly picks checkpoints whose brightness happens to match, and the GT-mean gain absorbs
+that. Its maximum over seeds, the number a paper would report after test-split selection,
+is listed per arm in \Cref{tab:app-s3}. The \ph{23.5}--\ph{28.2}~dB spread of published
+\dataset values for the same model is therefore mostly the GT-mean gain (\phm{3.29}~dB) and
+the saturation gate (\phm{1.10}~dB), with selection and seed noise (\phm{0.18}~dB) a
+small remainder. None of the
 oracle numbers is used to rank arms; they exist to size the practice, and they are why the
 primary read-out is the final checkpoint.
 
-\paragraph{Transfer to LOL-v2-Real.} Scoring every final checkpoint on the LOL-v2-Real test
-split, deduplicated against the \dataset training set and without retraining, preserves the
-two verdicts that contribute: \hvi-space supervision and the collapse keep their sign in
-\ph{4} of 5 seeds, and the removable steps stay within $\pm 0.3$~dB. The absolute level
-drops, to \ph{22.0}~dB GT-mean PSNR for the released recipe, as expected for a model trained
-on \dataset alone, and we make no claim about the ranking of arms on the second dataset
-beyond the sign agreement; a verdict that flipped there would be reported as a flip.
+\paragraph{Transfer to LOL-v2-Real.} Scoring every final checkpoint on the deduplicated
+LOL-v2-Real test split without retraining preserves the two verdicts that contribute: both
+keep their sign in \ph{4} of 5 seeds, and the removable steps stay within $\pm 0.3$~dB. The
+level drops to \ph{22.0}~dB GT-mean PSNR for the released recipe; we claim nothing about the
+ranking of arms there beyond the sign agreement.
 
-\paragraph{The recipe that follows.} Under this protocol, a practitioner keeps the \hvi
-working space with its collapse and a second loss space, and may drop the VGG term on \hvi
-and the loss-side coupling of $k$ at no measurable cost; the choice between learned and fixed
-$k$, between polar and linear chroma, and between max and luma intensity is a matter of
-convenience at the \ph{0.5}~dB resolution of five seeds. Per-arm tables, per-decile
-analysis, cross-dataset scores, and the oracle decomposition are in \Cref{sec:app-experiments}.
+\paragraph{The recipe that follows.} A practitioner keeps the \hvi working space with its
+collapse and a second loss space, may drop the VGG term on \hvi and the loss-side coupling
+of $k$ at no measurable cost, and may choose learned or fixed $k$, polar or linear chroma,
+and max or luma intensity by convenience at the \ph{0.5}~dB resolution of five seeds.
+Per-arm tables, per-decile analysis, and the oracle decomposition are in
+\Cref{sec:app-experiments}.

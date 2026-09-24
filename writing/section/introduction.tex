@@ -20,10 +20,12 @@ cheng2026vcr, wang2026haimnet}.
 The evidence behind the design is thinner than its adoption suggests. Every number in the
 paper and in its follow-ups is a single training run; no work in this family reports a seed
 spread. The released code selects checkpoints on the \dataset test split, which has fifteen
-images, and ships several checkpoints per dataset named by the metric they maximize. The
-headline \dataset value, \ph{28.2}~dB, is reported after rescaling the output to the
-ground-truth mean luminance, while the same authors' later work and independent retrainings
-report \ph{23.5}--\ph{24.0}~dB without it. The color-space ablation was run on a proxy
+images, and ships several checkpoints per dataset named by the metric they maximize; we
+measure that this inflates raw PSNR by \phm{0.35}~dB but GT-mean PSNR by only
+\phm{0.06}~dB. The headline \dataset value, \ph{28.2}~dB, is reported after rescaling the
+output to the ground-truth mean luminance and with a test-time saturation gate, while the
+same authors' later work and independent retrainings report \ph{23.5}--\ph{24.0}~dB
+without them. The color-space ablation was run on a proxy
 network rather than on \mname, its rows moved by several dB between the two versions of the
 paper, and the loss weights ($1$, $0.5$, $50$, $0.01$, duplicated across two spaces) are
 stated nowhere. A reader cannot tell which parts of the design carry the result.
@@ -54,10 +56,11 @@ parameter count, the same schedule, the same scene-disjoint validation split for
 selection, and the same single read of the test split at the final checkpoint.
 
 The key observation that makes the study decidable is that the published spread is not one
-number. Rescaling the output to the ground-truth mean adds \phm{3.29}~dB to a raw \phm{23.34}~dB;
-picking the best of one hundred checkpoints on the test split adds \phm{0.06}~dB; the seed SD
-of GT-mean PSNR is \phm{0.18}~dB. Once those three are separated, a step of \ph{0.5}~dB is detectable with five
-seeds, and the question above has an answer for every step.
+number. Rescaling the output to the ground-truth mean adds \phm{3.29}~dB to a raw
+\phm{23.34}~dB and the saturation gate adds \phm{1.10}~dB more; picking the best of one
+hundred checkpoints on the test split adds only \phm{0.06}~dB under GT-mean; the seed SD of
+GT-mean PSNR is \phm{0.18}~dB. Once those are separated, a step of \ph{0.5}~dB is
+detectable with five seeds, and the question above has an answer for every step.
 
 We make four contributions. (1)~A frozen, fully specified protocol for \mname with a
 scene-disjoint validation split, matched seeds, final-checkpoint read-out, and one test read
@@ -67,6 +70,5 @@ $k$ through the loss are removable or inconclusive at $\pm 0.3$~dB (\Cref{sec:ex
 (3)~A representation ladder under the frozen loss: the intensity collapse $\Ck$ contributes
 \ph{0.4}~dB, and its gain sits in the three darkest intensity deciles as its mechanism
 predicts, while learning $k$, polar versus linear chroma, and max versus luma intensity are
-each removable or inconclusive. (4)~A decomposition of the published \dataset spread into
-rescaling, selection, and seed noise, with the seed SD and the minimum detectable effect
-stated for every claim.
+each removable or inconclusive. (4)~A decomposition of the published \dataset spread into rescaling, gating, selection,
+and seed noise, with the seed SD and the minimum detectable effect stated for every claim.

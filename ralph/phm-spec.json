@@ -157,6 +157,8 @@
    "src": "gateA__summary_v1.json",
    "key": "summary.gateA_L0.decomposition.gated_minus_ungated_gtmean.mean",
    "only_in": [
+    "abstract.tex",
+    "introduction.tex",
     "experiments.tex"
    ]
   },
@@ -183,6 +185,8 @@
    "src": "gateA__summary_v1.json",
    "key": "summary.gateA_L0.decomposition.oracle_minus_final.mean",
    "only_in": [
+    "abstract.tex",
+    "introduction.tex",
     "experiments.tex"
    ]
   },

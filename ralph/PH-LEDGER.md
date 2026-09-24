@@ -62,10 +62,10 @@ deleted. Literature rows (first three) become citations with the number attribut
 | `27.73` | experiments.tex | `summary.gateA_L0.gated.gtmean_psnr.mean` | 27.735 |
 | `0.85` | experiments.tex | `summary.gateA_L0.k_final.median` | 0.847 |
 | `3.29` | abstract, introduction, experiments, appendix | `summary.gateA_L0.decomposition.gtmean_minus_raw.mean` | 3.290 |
-| `1.10` | experiments.tex | `decomposition.gated_minus_ungated_gtmean.mean` | 1.100 |
+| `1.10` | abstract, introduction, experiments | `decomposition.gated_minus_ungated_gtmean.mean` | 1.100 |
 | `-0.39` | appendix.tex | `decomposition.valsel_minus_final_gtmean.mean` | -0.389 |
 | `0.06` | abstract, introduction, experiments (headline selection term, GT-mean) | `decomposition.oracle_minus_final_gtmean.mean` (n=4) | 0.064 |
-| `0.35` | experiments.tex (raw) | `decomposition.oracle_minus_final.mean` | 0.352 |
+| `0.35` | abstract, introduction, experiments (raw selection inflation) | `decomposition.oracle_minus_final.mean` | 0.352 |
 | app_s3 L0 row (2 cells) | app_s3.tex | `decomposition.oracle_minus_final_gtmean.mean`, `oracle.max_over_seeds.gtmean_psnr` (per-row src override) | 0.06, 26.96 |
 | `22.78`, `23.97` | experiments.tex | `final_eval__test.json: entries.gateA_L0_seed{42,44}.metrics.psnr` (min, max over completed seeds) | 22.7751, 23.9697 |
 | `26.52`, `26.90` | experiments.tex | `entries.gateA_L0_seed{43,44}.metrics.psnr_gtmean` (min, max) | 26.5215, 26.9044 |

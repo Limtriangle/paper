@@ -74,12 +74,10 @@ deciles show none or a difference at least three times smaller, and the stress-t
 difference grows with darkening. These rules, the loss weights, $k_0$, the split, and the
 analysis code were frozen with hashes before the first ladder run.
 
-\paragraph{What the ladders do not test.} The ladders hold the architecture fixed, so they
-say nothing about whether a different backbone would prefer a different space, and they keep
-the two-branch split in every arm, so an sRGB arm without a luma/chroma split is not on the
-ladder; the released ablation's sRGB row is a different architecture, not a missing rung.
-They use one dataset for training; cross-dataset scores on LOL-v2-Real are secondary and
-reported without retraining. Polar HSV with a wrapped hue axis is omitted on purpose: the
-paper already shows it fails, and A2 is HSV without the wrap. Finally, a step that is
-inconclusive here is not shown to be useless; it is shown to be smaller than the \ph{0.5}~dB
-that five seeds can resolve under this protocol, and we state that bound wherever it applies.
+\paragraph{What the ladders do not test.} The architecture and the two-branch split are
+fixed, so an sRGB arm without a luma/chroma split is not on the ladder (the released
+ablation's sRGB row is a different architecture), and a different backbone might prefer a
+different space. Training uses one dataset; LOL-v2-Real scores are secondary. Polar HSV
+with a wrapped hue axis is omitted because the paper already shows it fails; A2 is HSV
+without the wrap. An inconclusive step is not shown to be useless, only smaller than the
+\ph{0.5}~dB that five seeds resolve here.
