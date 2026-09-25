@@ -51,9 +51,8 @@ inside one \mname, so that neighbouring arms differ in exactly one step, and we 
 step with a paired-by-seed test whose decision rules, equivalence margin, and metric were
 fixed before the first run. The loss ladder walks from the released recipe to RGB-only
 supervision in four steps; the representation ladder walks from learned-$k$ \hvi to YCbCr in
-four steps while the loss stays frozen. Every arm has the same architecture, the same
-parameter count, the same schedule, the same scene-disjoint validation split for checkpoint
-selection, and the same single read of the test split at the final checkpoint.
+four steps while the loss stays frozen; every arm shares architecture, parameter count,
+schedule, validation split, and the single final-checkpoint test read.
 
 The key observation that makes the study decidable is that the published spread is not one
 number. Under our protocol, rescaling the output to the ground-truth mean adds \phm{3.39}~dB to a

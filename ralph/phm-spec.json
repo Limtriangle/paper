@@ -414,6 +414,38 @@
    "only_in": [
     "experiments.tex"
    ]
+  },
+  {
+   "written": "0.2",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_k.decision.constants.k_init",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "0.85",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_k.decision.summary.L0.k_final.median",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "0.29",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_k.decision.summary.L2.k_final.median",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "1.13",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_k.decision.constants.k_released",
+   "only_in": [
+    "experiments.tex"
+   ]
   }
  ]
 }

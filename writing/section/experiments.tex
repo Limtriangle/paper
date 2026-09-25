@@ -16,9 +16,8 @@ gate adds \phm{1.09}~dB), matching the \phm{27.71}~dB the authors report for the
 checkpoint. The shortfall is protocol, not model: we read the final checkpoint rather than
 a test-selected one, without the gate, after training on \phm{445} rather than 485 images.
 Every absolute number in this paper is therefore \emph{under our protocol}; the contrasts
-are unaffected, since every arm shares it. The seed SD of \phm{0.47}~dB passes the
-$\le 0.5$~dB gate; because it lies in the $0.4$--$0.5$ band, the pre-registered rule adds
-seeds 47--49 to A0, A2 and A3 (running). The learned $k$ ends at a median of \phm{0.85},
+are unaffected, since every arm shares it. The seed SD of \phm{0.47}~dB passes the $\le 0.5$~dB gate but lies in the $0.4$--$0.5$
+band, so the pre-registered rule adds seeds 47--49 to A0, A2 and A3 (running). The learned $k$ ends at a median of \phm{0.85},
 and the seed SD sets the paired minimum detectable effect at \ph{0.5}~dB below.
 
 \input{tables/s1_contrasts}
@@ -27,9 +26,9 @@ and the seed SD sets the paired minimum detectable effect at \ph{0.5}~dB below.
 term from the \hvi-space loss changes GT-mean PSNR by \ph{0.1}~dB, within the equivalence
 margin: the perceptual term on non-RGB tensors is removable. Detaching $k$ from the loss
 transform changes quality by \ph{0.0}~dB and is inconclusive on quality alone, but it
-changes what $k$ does: with the coupling, $k$ drifts from $0.2$ to a median of \phm{0.85}
-over training,
-and without it $k$ moves only through the residual path. Removing \hvi-space supervision
+changes what $k$ does: coupled through the loss (L0), $k$ converges from its initial
+\phm{0.2} to a median of \phm{0.85} over five seeds; detached (L2), it stops at a median of
+\phm{0.29}; the released checkpoint carries \phm{1.13}. Removing \hvi-space supervision
 entirely costs \ph{0.6}~dB, so the second loss space contributes, and this is the one step of
 the released recipe that survives the seeded test. Weighting the \hvi chroma terms by the
 collapse $\Ck(I_{\mathrm{gt}})$ is removable relative to uniform weighting at $\pm 0.3$~dB. The
@@ -46,9 +45,9 @@ which is why the representation ladder runs under the detached loss.
 \input{tables/s2_contrasts}
 
 \paragraph{Representation ladder.} \Cref{tab:s2} isolates the four representation steps
-under L2. Because $k$ moves from $0.2$ to \ph{1.1} in the A0 runs, far above the $0.05$
-threshold at which A1 would have been dropped, the learned-versus-fixed contrast is real,
-and it is removable: fixing $k$ at the converged value changes nothing the seeds can
+under L2. Because $k$ moves from \phm{0.2} to a median of \phm{0.29} in the A0 runs,
+above the $0.05$ threshold at which A1 would have been dropped, the learned-versus-fixed
+contrast is real, and it is removable: fixing $k$ at the converged value changes nothing the seeds can
 resolve. Removing the
 collapse altogether (A0$-$A2) costs \ph{0.4}~dB and is the one representation step that
 contributes; the per-decile hue-error and CIEDE2000 differences between A0 and A2 satisfy the
@@ -58,8 +57,7 @@ the pattern the collapse mechanism predicts. Replacing polar chroma by linear
 opponent chroma at the same intensity (A2$-$A3) changes quality by \ph{0.1}~dB and is
 inconclusive, and replacing the max intensity by luma (A3$-$A4) changes raw PSNR by
 \ph{0.2}~dB but GT-mean PSNR by \ph{0.0}~dB: the max-versus-luma choice is an exposure
-effect, absorbed by one scalar gain, and the raw-MSE decomposition places most of the raw
-difference in the gain term.
+effect, absorbed by one scalar gain.
 
 \paragraph{Seed variance and selection bias.}
 \label{sec:selection}
@@ -71,15 +69,13 @@ mostly picks checkpoints whose brightness happens to match, and the GT-mean gain
 that. Its maximum over seeds, the number a paper would report after test-split selection,
 is listed per arm in \Cref{tab:app-s3}. The \ph{23.5}--\ph{28.2}~dB spread of published
 \dataset values for the same model is therefore mostly the GT-mean gain (\phm{3.39}~dB) and the saturation gate (\phm{1.09}~dB), with
-selection (\phm{0.06}~dB) and seed noise (\phm{0.16}~dB) a small remainder. None of the
-oracle numbers is used to rank arms; they exist to size the practice, and they are why the
-primary read-out is the final checkpoint.
+selection (\phm{0.06}~dB) and seed noise (\phm{0.16}~dB) a small remainder. Oracle numbers never rank arms; they size the practice and justify the final-checkpoint
+read-out.
 
 \paragraph{Transfer to LOL-v2-Real.} Scoring every final checkpoint on the deduplicated
 LOL-v2-Real test split without retraining preserves the two verdicts that contribute: both
-keep their sign in \ph{4} of 5 seeds, and the removable steps stay within $\pm 0.3$~dB. The
-level drops to \ph{22.0}~dB GT-mean PSNR for the released recipe; we claim nothing about the
-ranking of arms there beyond the sign agreement.
+keep their sign in \ph{4} of 5 seeds, and the removable steps stay within $\pm 0.3$~dB. The level drops to \ph{22.0}~dB GT-mean PSNR for the released recipe; we claim nothing
+about the ranking of arms there.
 
 \paragraph{The recipe that follows.} A practitioner keeps the \hvi working space with its
 collapse and a second loss space, may drop the VGG term on \hvi and the loss-side coupling
