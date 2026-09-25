@@ -75,7 +75,7 @@
   },
   {
    "written": "23.25",
-   "src": "gateA__summary_v1.json",
+   "src": "gateA__summary_n5_v1.json",
    "key": "summary.gateA_L0.final.raw_psnr.mean",
    "only_in": [
     "experiments.tex",
@@ -84,7 +84,7 @@
   },
   {
    "written": "0.47",
-   "src": "gateA__summary_v1.json",
+   "src": "gateA__summary_n5_v1.json",
    "key": "summary.gateA_L0.final.raw_psnr.sd",
    "only_in": [
     "experiments.tex"
@@ -92,7 +92,7 @@
   },
   {
    "written": "26.65",
-   "src": "gateA__summary_v1.json",
+   "src": "gateA__summary_n5_v1.json",
    "key": "summary.gateA_L0.final.gtmean_psnr.mean",
    "only_in": [
     "experiments.tex"
@@ -100,7 +100,7 @@
   },
   {
    "written": "0.16",
-   "src": "gateA__summary_v1.json",
+   "src": "gateA__summary_n5_v1.json",
    "key": "summary.gateA_L0.final.gtmean_psnr.sd",
    "only_in": [
     "experiments.tex"
@@ -108,7 +108,7 @@
   },
   {
    "written": "27.73",
-   "src": "gateA__summary_v1.json",
+   "src": "gateA__summary_n5_v1.json",
    "key": "summary.gateA_L0.gated.gtmean_psnr.mean",
    "only_in": [
     "experiments.tex"
@@ -116,7 +116,7 @@
   },
   {
    "written": "0.85",
-   "src": "gateA__summary_v1.json",
+   "src": "gateA__summary_n5_v1.json",
    "key": "summary.gateA_L0.k_final.median",
    "only_in": [
     "experiments.tex"
@@ -124,7 +124,7 @@
   },
   {
    "written": "5",
-   "src": "gateA__summary_v1.json",
+   "src": "gateA__summary_n5_v1.json",
    "key": "summary.gateA_L0.final.raw_psnr.n",
    "only_in": [
     "experiments.tex"
@@ -132,7 +132,7 @@
   },
   {
    "written": "0.16",
-   "src": "gateA__summary_v1.json",
+   "src": "gateA__summary_n5_v1.json",
    "key": "summary.gateA_L0.final.gtmean_psnr.sd",
    "only_in": [
     "abstract.tex",
@@ -143,7 +143,7 @@
   },
   {
    "written": "3.39",
-   "src": "gateA__summary_v1.json",
+   "src": "gateA__summary_n5_v1.json",
    "key": "summary.gateA_L0.decomposition.gtmean_minus_raw.mean",
    "only_in": [
     "abstract.tex",
@@ -154,7 +154,7 @@
   },
   {
    "written": "1.09",
-   "src": "gateA__summary_v1.json",
+   "src": "gateA__summary_n5_v1.json",
    "key": "summary.gateA_L0.decomposition.gated_minus_ungated_gtmean.mean",
    "only_in": [
     "abstract.tex",
@@ -164,7 +164,7 @@
   },
   {
    "written": "-0.71",
-   "src": "gateA__summary_v1.json",
+   "src": "gateA__summary_n5_v1.json",
    "key": "summary.gateA_L0.decomposition.valsel_minus_final_gtmean.mean",
    "only_in": [
     "appendix.tex"
@@ -172,7 +172,7 @@
   },
   {
    "written": "0.06",
-   "src": "gateA__summary_v1.json",
+   "src": "gateA__summary_n5_v1.json",
    "key": "summary.gateA_L0.decomposition.oracle_minus_final_gtmean.mean",
    "only_in": [
     "abstract.tex",
@@ -182,7 +182,7 @@
   },
   {
    "written": "0.41",
-   "src": "gateA__summary_v1.json",
+   "src": "gateA__summary_n5_v1.json",
    "key": "summary.gateA_L0.decomposition.oracle_minus_final.mean",
    "only_in": [
     "abstract.tex",
@@ -192,15 +192,88 @@
   },
   {
    "written": "23.66",
-   "src": "gateA__summary_v1.json",
+   "src": "gateA__summary_n5_v1.json",
    "key": "summary.gateA_L0.oracle.max_over_ckpt_mean.raw_psnr.mean",
    "only_in": [
     "experiments.tex"
    ]
   },
   {
+   "written": "23.67",
+   "src": "gateA__summary_n5_v1.json",
+   "key": "summary.gateA_L0.gated.raw_psnr.mean",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "-0.05",
+   "src": "gateA__summary_n5_v1.json",
+   "key": "summary.gateA_L0.window.final_raw_mean_minus_lower",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "101",
+   "src": "gateA__summary_n5_v1.json",
+   "key": "summary.gateA_L0.oracle.per_seed.42.n_checkpoints",
+   "only_in": [
+    "introduction.tex"
+   ]
+  },
+  {
+   "written": "445",
+   "src": "phase0_val_split_scene.json",
+   "key": "n_train",
+   "only_in": [
+    "method.tex",
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "27.71",
+   "src": "phase0_codebase.json",
+   "key": "facts.evaluation_protocol_upstream.readme_lolv1_numbers.w_perc_gtmean.psnr",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "0.2",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_k.decision.constants.k_init",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "0.85",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_k.decision.summary.L0.k_final.median",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "0.29",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_k.decision.summary.L2.k_final.median",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "1.13",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_k.decision.constants.k_released",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
    "written": "0.06",
-   "src": "gateA__summary_v1.json",
+   "src": "gateA__summary_n5_v1.json",
    "key": "summary.gateA_L0.decomposition.oracle_minus_final_gtmean.mean",
    "only_in": [
     "app_s3.tex"
@@ -208,7 +281,7 @@
   },
   {
    "written": "26.96",
-   "src": "gateA__summary_v1.json",
+   "src": "gateA__summary_n5_v1.json",
    "key": "summary.gateA_L0.oracle.max_over_seeds.gtmean_psnr",
    "only_in": [
     "app_s3.tex"
@@ -372,79 +445,6 @@
    "key": "entries.gateA_L0_seed46_valsel.metrics.psnr_gtmean",
    "only_in": [
     "app_gatea_seeds.tex"
-   ]
-  },
-  {
-   "written": "23.67",
-   "src": "gateA__summary_v1.json",
-   "key": "summary.gateA_L0.gated.raw_psnr.mean",
-   "only_in": [
-    "experiments.tex"
-   ]
-  },
-  {
-   "written": "-0.05",
-   "src": "gateA__summary_v1.json",
-   "key": "summary.gateA_L0.window.final_raw_mean_minus_lower",
-   "only_in": [
-    "experiments.tex"
-   ]
-  },
-  {
-   "written": "101",
-   "src": "gateA__summary_v1.json",
-   "key": "summary.gateA_L0.oracle.per_seed.42.n_checkpoints",
-   "only_in": [
-    "introduction.tex"
-   ]
-  },
-  {
-   "written": "445",
-   "src": "phase0_val_split_scene.json",
-   "key": "n_train",
-   "only_in": [
-    "method.tex",
-    "experiments.tex"
-   ]
-  },
-  {
-   "written": "27.71",
-   "src": "phase0_codebase.json",
-   "key": "facts.evaluation_protocol_upstream.readme_lolv1_numbers.w_perc_gtmean.psnr",
-   "only_in": [
-    "experiments.tex"
-   ]
-  },
-  {
-   "written": "0.2",
-   "src": "s1__loss_ladder_v1.json",
-   "key": "analysis.analysis_k.decision.constants.k_init",
-   "only_in": [
-    "experiments.tex"
-   ]
-  },
-  {
-   "written": "0.85",
-   "src": "s1__loss_ladder_v1.json",
-   "key": "analysis.analysis_k.decision.summary.L0.k_final.median",
-   "only_in": [
-    "experiments.tex"
-   ]
-  },
-  {
-   "written": "0.29",
-   "src": "s1__loss_ladder_v1.json",
-   "key": "analysis.analysis_k.decision.summary.L2.k_final.median",
-   "only_in": [
-    "experiments.tex"
-   ]
-  },
-  {
-   "written": "1.13",
-   "src": "s1__loss_ladder_v1.json",
-   "key": "analysis.analysis_k.decision.constants.k_released",
-   "only_in": [
-    "experiments.tex"
    ]
   }
  ]

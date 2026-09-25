@@ -54,8 +54,8 @@ deleted. Literature rows (first three) become citations with the number attribut
 |---|---|---|---|
 | `0.04` | appendix.tex | `phase0_codebase.json: reproducibility.epoch2_val_psnr_spread_db` | 0.0424 |
 | `1975569` | method.tex | `phase0_arms_preflight.json: ladder_parameter_count` | 1975569 |
-| `5` | experiments.tex | `gateA__a0_l0_v1.json: n_jobs.complete` and `gateA__summary_v1.json: summary.gateA_L0.final.raw_psnr.n` | 5 |
-| `23.25`, `0.47` | experiments.tex, introduction.tex | `gateA__summary_v1.json: summary.gateA_L0.final.raw_psnr.{mean,sd}` (n=5) | 23.254, 0.470 |
+| `5` | experiments.tex | `gateA__a0_l0_v1.json: n_jobs.complete` and `gateA__summary_n5_v1.json: summary.gateA_L0.final.raw_psnr.n` | 5 |
+| `23.25`, `0.47` | experiments.tex, introduction.tex | `gateA__summary_n5_v1.json: summary.gateA_L0.final.raw_psnr.{mean,sd}` (n=5) | 23.254, 0.470 |
 | `26.65`, `0.16` | experiments.tex; `0.16` also abstract, introduction, conclusion (headline seed SD, GT-mean = primary metric) | `summary.gateA_L0.final.gtmean_psnr.{mean,sd}` (n=5) | 26.645, 0.160 |
 | `27.73` | experiments.tex | `summary.gateA_L0.gated.gtmean_psnr.mean` | 27.735 |
 | `0.85` | experiments.tex | `summary.gateA_L0.k_final.median` and `s1__loss_ladder_v1.json: analysis.analysis_k.decision.summary.L0.k_final.median` (n=5) | 0.850 |
