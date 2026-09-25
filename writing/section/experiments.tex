@@ -25,7 +25,8 @@ and the seed SD sets the paired minimum detectable effect at \ph{0.5}~dB below.
 
 \input{tables/s1_contrasts}
 
-\paragraph{Loss ladder.} \Cref{tab:s1} reports the four nested contrasts. Removing the VGG term from the \hvi-space loss changes GT-mean PSNR by \phm{0.07}~dB,
+\paragraph{Loss ladder.} \Cref{tab:s1}: two of four contrasts measured so far
+(Holm over all four, missing $p = 1$). Removing the VGG term from the \hvi-space loss changes GT-mean PSNR by \phm{0.07}~dB,
 within the equivalence margin: the perceptual term on non-RGB tensors is \phm{removable}.
 Detaching $k$ from the loss transform raises GT-mean PSNR: L1$-$L2 is
 $\phm{-0.16}$~dB, negative in \phm{5} of 5 seeds;
@@ -41,8 +42,8 @@ recipe by two removable steps.
 \paragraph{What the coupling of $k$ does.} In the released code $k$ receives gradient only
 through the forward transform, so coupling it into the loss lets the network shrink the
 second loss term by collapsing chroma in the target as much as in the prediction; L2 removes
-that shortcut. A quality change inside the equivalence margin beside a threefold change in final $k$ means the learned collapse is a property of the objective as much as of the representation,
-which is why the representation ladder runs under the detached loss.
+that shortcut. A quality change inside the margin beside a threefold change in final $k$ makes the learned
+collapse a property of the objective, hence the detached loss in the representation ladder.
 
 \input{tables/s2_contrasts}
 
@@ -79,9 +80,7 @@ LOL-v2-Real test split without retraining preserves the two verdicts that contri
 keep their sign in \ph{4} of 5 seeds, and the removable steps stay within $\pm 0.3$~dB. The level drops to \ph{22.0}~dB GT-mean PSNR for the released recipe; we claim nothing
 about the ranking of arms there.
 
-\paragraph{The recipe that follows.} A practitioner keeps the \hvi working space with its
-collapse and a second loss space, may drop the VGG term on \hvi and the loss-side coupling
-of $k$ at no measurable cost, and may choose learned or fixed $k$, polar or linear chroma,
-and max or luma intensity by convenience at the \ph{0.5}~dB resolution of five seeds.
-Per-arm tables, per-decile analysis, and the oracle decomposition are in
-\Cref{sec:app-experiments}.
+\paragraph{The recipe that follows.} Keep the \hvi space with its collapse and a second
+loss space; drop the VGG term on \hvi and the loss-side coupling of $k$; choose the rest by
+convenience at the \ph{0.5}~dB resolution of five seeds (details in
+\Cref{sec:app-experiments}).
