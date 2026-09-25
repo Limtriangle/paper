@@ -163,20 +163,44 @@ def finish(j, st):
     with (H.PAPER / "ralph" / "RESULTS.md").open("a") as f:
         f.write(row)
     j["final_read"] = "done"
+    subprocess.run([PY, str(HERE / "run_analysis.py")], capture_output=True, text=True, timeout=1800,
+                   env=dict(os.environ, CUDA_VISIBLE_DEVICES=""))   # frozen analysis on complete arms (after this job's read)
     msg = (f"experiment[queue]: {j['arm']} seed {j['seed']} COMPLETE ({run}): eval15 final raw {m['psnr']:.2f} / GT-mean {m['psnr_gtmean']:.2f} "
            f"/ SSIM {m['ssim']:.3f} / LPIPS {m['lpips']:.3f}; val best {ex['best']['psnr']:.2f}; exported + RESULTS row appended (uncommitted).")
     log(msg)
     send(msg)
 
 
-def oracle_pass(j, st):
+def oracle_start(j, gpu, st):
+    """Non-blocking (2026-09-25): the daemon loop keeps handling completions and launches meanwhile."""
     lab = "oracle_" + label(j)
-    r = subprocess.run([PY, str(HERE / "final_eval_test.py"), "--oracle", "--job", str(job_dir(j)), "--label", lab,
-                        "--gpu", str(j["gpu"])], capture_output=True, text=True, timeout=7200,
-                       env=dict(os.environ, CUDA_VISIBLE_DEVICES=str(j["gpu"])))
-    ok = "wrote" in r.stdout
-    st["oracle_done"].append(lab if ok else f"FAILED:{lab}")
-    log(f"oracle {lab}: {'done' if ok else 'FAILED ' + r.stderr[-200:]}")
+    logf = QDIR / f"{lab}.log"
+    p = subprocess.Popen([PY, str(HERE / "final_eval_test.py"), "--oracle", "--job", str(job_dir(j)), "--label", lab,
+                          "--gpu", str(gpu)], stdout=logf.open("w"), stderr=subprocess.STDOUT,
+                         env=dict(os.environ, CUDA_VISIBLE_DEVICES=str(gpu)), start_new_session=True)
+    st.setdefault("oracle_running", {})[lab] = {"pid": p.pid, "gpu": gpu, "started": time.time(), "log": str(logf)}
+    log(f"oracle {lab}: started on GPU {gpu} pid {p.pid}")
+
+
+def oracle_poll(st):
+    """Finished oracle processes -> done if their label is in final_eval__oracle.json, else FAILED."""
+    running = st.setdefault("oracle_running", {})
+    of = H.PAPER / "ralph" / "results" / "final_eval__oracle.json"
+    for lab, info in list(running.items()):
+        if Path(f"/proc/{info['pid']}").exists():
+            try:
+                if Path(f"/proc/{info['pid']}/stat").read_text().rsplit(")", 1)[1].split()[0] != "Z":
+                    continue
+            except OSError:
+                pass
+            try:
+                os.waitpid(info["pid"], os.WNOHANG)
+            except ChildProcessError:
+                pass
+        ok = of.is_file() and lab in H.json_load(of).get("entries", {})
+        st["oracle_done"].append(lab if ok else f"FAILED:{lab}")
+        del running[lab]
+        log(f"oracle {lab}: {'done' if ok else 'FAILED (see ' + info['log'] + ')'}")
 
 
 def tick(st):
@@ -197,21 +221,8 @@ def tick(st):
                     j["state"] = "failed"
                     log(f"FAILED twice {j['arm']}_seed{j['seed']} -> marked failed, reported")
                     send(f"experiment[queue]: {j['arm']} seed {j['seed']} FAILED twice; marked failed; see {job_dir(j)}/error.txt")
-    # 2. per-arm oracle passes once all seeds of the arm are complete (one per seed, sequential, on the seed's last GPU)
-    for arm in {j["arm"] for j in jobs}:
-        js = [j for j in jobs if j["arm"] == arm]
-        if all(j["state"] == "complete" for j in js):
-            for j in js:
-                lab = "oracle_" + label(j)
-                if lab not in st["oracle_done"] and f"FAILED:{lab}" not in st["oracle_done"]:
-                    free = gpu_free()
-                    busy = {x["gpu"] for x in jobs if x["state"] == "running"}
-                    cand = [g for g, f in free.items() if f and g not in busy and (g != 0 or st.get("gpu0_released"))
-                            and not (QDIR / f"hold_gpu{g}").exists()]
-                    if cand:
-                        j["gpu"] = cand[0]
-                        oracle_pass(j, st)
-                        return   # one action per tick
+    # 2. poll running oracle passes (they are started in step 5, only on GPUs no training job can use)
+    oracle_poll(st)
     # 3. A1 gate: k_fixed from the five L2 runs
     if st["k_fixed_A1"] is None:
         k = final_k_median_L2(jobs)
@@ -221,7 +232,7 @@ def tick(st):
             log(st["notes"][-1]); send(f"experiment[queue]: A1 k_fixed = {k:.4f} (median final k of the five L2 runs)")
     # 4. launches: one per free GPU
     free = gpu_free()
-    busy = {j["gpu"] for j in jobs if j["state"] == "running"}
+    busy = {j["gpu"] for j in jobs if j["state"] == "running"} | {o["gpu"] for o in st.get("oracle_running", {}).values()}
     if not st.get("gpu0_released"):
         g0 = H.OUTPUTS / "gateA" / "a0_l0_v1" / "L0_seed46" / "status.json"
         if g0.is_file() and H.json_load(g0).get("state") in ("complete", "failed"):
@@ -255,6 +266,22 @@ def tick(st):
             stalls[key] = {"free_for_s": int(now - fs[key]), "reason": reason, "logged_at": now,
                            "at": time.strftime("%Y-%m-%dT%H:%M:%S")}
             log(f"STALL GPU {g}: free for {int((now - fs[key]) / 60)} min, nothing launched: {reason}")
+    # 5. oracle passes: per arm once ALL its seeds are complete; only on a GPU no training job could take
+    launchable = any(j["state"] == "queued" and (j["arm"] != "A1" or st["k_fixed_A1"] is not None) for j in jobs)
+    if not launchable:
+        free = gpu_free()
+        busy = {j["gpu"] for j in jobs if j["state"] == "running"} | {o["gpu"] for o in st.get("oracle_running", {}).values()}
+        idle = [g for g in sorted(free) if free[g] and g not in busy and (g != 0 or st.get("gpu0_released"))
+                and not (QDIR / f"hold_gpu{g}").exists()]
+        pending = []
+        for arm in sorted({j["arm"] for j in jobs}):
+            js = [j for j in jobs if j["arm"] == arm]
+            if all(j["state"] == "complete" for j in js):
+                pending += [j for j in js if ("oracle_" + label(j)) not in st["oracle_done"]
+                            and f"FAILED:oracle_{label(j)}" not in st["oracle_done"]
+                            and ("oracle_" + label(j)) not in st.get("oracle_running", {})]
+        for g, j in zip(idle, pending):
+            oracle_start(j, g, st)
 
 
 def main():
@@ -280,7 +307,7 @@ def main():
             st = H.json_load(STATE)
             tick(st)
             H.json_save(STATE, st)
-            if all(j["state"] in ("complete", "failed", "launch_failed") for j in st["jobs"]) and \
+            if not st.get("oracle_running") and all(j["state"] in ("complete", "failed", "launch_failed") for j in st["jobs"]) and \
                all(("oracle_" + label(j)) in st["oracle_done"] or f"FAILED:oracle_{label(j)}" in st["oracle_done"]
                    for j in st["jobs"] if j["state"] == "complete"):
                 log("queue finished"); send("experiment[queue]: all ladder jobs and oracle passes finished"); return
