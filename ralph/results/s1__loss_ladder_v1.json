@@ -30,7 +30,8 @@
      "s1/loss_ladder_v1/L2_seed45/metrics.csv": "395ecc28b8d09b136e07d3a74c5996809c33a2247674c644c5d6ce6652d8cfd9",
      "s1/loss_ladder_v1/L2_seed46/metrics.csv": "b49fea0e2995cbbc1df24bd633ea029e9e77a3a7295658b5b791021bc91f5f7a",
      "s1/loss_ladder_v1/L3_seed42/metrics.csv": "760fe2659ac3d567e765987e4c8dba53dc714ebc61861d82459219235865581a",
-     "s1/loss_ladder_v1/L3_seed43/metrics.csv": "b6e37506f70154e227e01ca55770dc8c7135e437320f83bc2324115f7039e230"
+     "s1/loss_ladder_v1/L3_seed43/metrics.csv": "b6e37506f70154e227e01ca55770dc8c7135e437320f83bc2324115f7039e230",
+     "s1/loss_ladder_v1/L3_seed44/metrics.csv": "3f4dacf8408011773e32c21ff17b4891af56b56260f50f31282752a048b86a91"
     },
     "summary": {
      "L0": {
@@ -90,19 +91,20 @@
      "L3": {
       "k_final": {
        "max": 0.25858718156814575,
-       "median": 0.23813065141439438,
-       "min": 0.217674121260643,
-       "n": 2,
+       "median": 0.217674121260643,
+       "min": 0.20393402874469757,
+       "n": 3,
        "per_seed": {
         "42": 0.25858718156814575,
-        "43": 0.217674121260643
+        "43": 0.217674121260643,
+        "44": 0.20393402874469757
        },
-       "sd": 0.028929902382529366
+       "sd": 0.028430135887866356
       },
       "k_learnable": true
      }
     },
-    "written_at": "2026-09-25T17:14:14"
+    "written_at": "2026-09-25T23:18:10"
    }
   },
   "analysis_s1": {
@@ -607,15 +609,15 @@
      "L2": 5
     },
     "sources": {
-     "final_eval__test.json": "ad07467c24d24b902dce4e50cc2ae1b7f6e009638fcbb09ef389c82c0573f7af"
+     "final_eval__test.json": "7c363e9579531fc128892a907edae57b7800d94e1f1519f14a519d8fbee88e0d"
     },
     "test15": "final-checkpoint reads by final_eval_test.py; no selection",
     "wrapper_sha256": "5862e7bfa0059f552d89e4f0ad4b00b22b2d5be9e2831d6d7d3e06249b0eb71e",
-    "written_at": "2026-09-25T20:36:34"
+    "written_at": "2026-09-25T23:19:09"
    }
   }
  },
- "exported_at": "2026-09-25T20:36:34",
+ "exported_at": "2026-09-25T23:19:09",
  "jobs": {
   "L1_seed42": {
    "best": {
@@ -1614,6 +1616,22 @@
    "status": "complete"
   },
   "L3_seed44": {
+   "best": {
+    "ab_error": 4.543505137392649,
+    "delta_e00": 8.126726490362696,
+    "edge_ab_error": 5.6922096740234425,
+    "edge_delta_e00": 8.740612253028193,
+    "edge_psnr": 22.4072286303522,
+    "epoch": 545,
+    "lpips": 0.12673025093972684,
+    "lpips_gtmean": 0.11686097285710276,
+    "n": 40,
+    "n_images": 40,
+    "psnr": 23.229156145795766,
+    "psnr_gtmean": 28.084664563209174,
+    "ssim": 0.8711093137034528,
+    "ssim_gtmean": 0.8942069110571168
+   },
    "config": {
     "CUDA_VISIBLE_DEVICES": "2",
     "amp": false,
@@ -1656,13 +1674,29 @@
    "curve": {
     "best_val_psnr": 23.22915614579577,
     "best_val_psnr_epoch": 545,
-    "final_train_loss": 0.24909439895834243,
-    "final_val_psnr": "",
-    "n_epochs": 576,
-    "train_seconds_total": 12452.5972032547
+    "final_train_loss": 0.23421480426830904,
+    "final_val_psnr": 22.503942206209324,
+    "n_epochs": 1000,
+    "train_seconds_total": 21668.48013830185
    },
    "epochs_trained": 1000,
-   "status": "running"
+   "last": {
+    "ab_error": 4.515175571957411,
+    "delta_e00": 8.66910023895926,
+    "edge_ab_error": 5.6182969318703995,
+    "edge_delta_e00": 9.254271483926575,
+    "edge_psnr": 21.757203900953392,
+    "epoch": 1000,
+    "lpips": 0.12651589657180012,
+    "lpips_gtmean": 0.11571948528289795,
+    "n": 40,
+    "n_images": 40,
+    "psnr": 22.503942206209324,
+    "psnr_gtmean": 28.002760641136838,
+    "ssim": 0.8684348552063957,
+    "ssim_gtmean": 0.8947439810107836
+   },
+   "status": "complete"
   },
   "L3_seed45": {
    "config": {
@@ -1707,10 +1741,10 @@
    "curve": {
     "best_val_psnr": 22.580034876067643,
     "best_val_psnr_epoch": 300,
-    "final_train_loss": 0.24636091930525644,
+    "final_train_loss": 0.23216104321181774,
     "final_val_psnr": "",
-    "n_epochs": 546,
-    "train_seconds_total": 11771.700841665268
+    "n_epochs": 978,
+    "train_seconds_total": 21133.79172897339
    },
    "epochs_trained": 1000,
    "status": "running"
@@ -1756,12 +1790,12 @@
     "width": 36
    },
    "curve": {
-    "best_val_psnr": 22.015317060375402,
-    "best_val_psnr_epoch": 225,
-    "final_train_loss": 0.2741185455982174,
+    "best_val_psnr": 22.04509610022984,
+    "best_val_psnr_epoch": 470,
+    "final_train_loss": 0.23930411200438226,
     "final_val_psnr": "",
-    "n_epochs": 321,
-    "train_seconds_total": 6979.697343587875
+    "n_epochs": 749,
+    "train_seconds_total": 16334.90723323822
    },
    "epochs_trained": 1000,
    "status": "running"
@@ -1807,12 +1841,12 @@
     "width": 36
    },
    "curve": {
-    "best_val_psnr": 22.07289214753363,
-    "best_val_psnr_epoch": 80,
-    "final_train_loss": 0.42448058990495546,
+    "best_val_psnr": 22.267773628065953,
+    "best_val_psnr_epoch": 365,
+    "final_train_loss": 0.34445151846323696,
     "final_val_psnr": "",
-    "n_epochs": 312,
-    "train_seconds_total": 6991.856902837753
+    "n_epochs": 727,
+    "train_seconds_total": 16352.736139535904
    },
    "epochs_trained": 1000,
    "status": "running"
@@ -1823,7 +1857,7 @@
   "split_sha256": "b0dde62736e3f59148fda31dd9dfa56a1b76af8b2be6637a57b5119b35428909"
  },
  "n_jobs": {
-  "complete": 12,
+  "complete": 13,
   "total": 16
  },
  "protocol": {
@@ -1961,20 +1995,21 @@
   "L3_seed43/metrics.csv": "b6e37506f70154e227e01ca55770dc8c7135e437320f83bc2324115f7039e230",
   "L3_seed43/status.json": "054ad96eff1dd1eb4b7fb03634d11ad279b53b14416cec4978bd0b9d6fa987ca",
   "L3_seed43/validation_summary.csv": "511dd6ab2d5d46397ea915840e243903c800b679cc4e4da9366fcbb9ca9c6956",
-  "L3_seed44/config.json": "3c19e71c561fb6b13a5109b29a01f67aff529db8fc093153eb7029674e960193",
-  "L3_seed44/metrics.csv": "80a1a26bdf1bafd5a1b5fcd0c7b5712a65837e38553f7a96368d8f25c48eb0d9",
-  "L3_seed44/status.json": "5845be241c149897cbed59f4347e8849cd0b8e5cf06c3ecddcf09743eab3db5f",
+  "L3_seed44/config.json": "306a56659f024ac651caea0abd30f79cee2c422656eaf60ccf21aa100c7f5423",
+  "L3_seed44/metrics.csv": "3f4dacf8408011773e32c21ff17b4891af56b56260f50f31282752a048b86a91",
+  "L3_seed44/status.json": "851eb9d52742b60496ff2d9aae9c521a0e567fbbd951ab62ddcf2f04f9891d80",
+  "L3_seed44/validation_summary.csv": "bfafc0cf43743f008d301a9b20599c4649fa62f4e956f72395b46ea2af885956",
   "L3_seed45/config.json": "04222d1e034c06ac6c42cb037d2f9c25b5d033def06dad9e7ea8b1ba1870e829",
-  "L3_seed45/metrics.csv": "30ea5fd053abfc5bfbf30502473a4b829b4d023681ddc00fe47945d874c76713",
-  "L3_seed45/status.json": "a74c64f19b6f6b6702f273c8d4dd0b63dcd994f47a3633787e2f0a0f036ce306",
+  "L3_seed45/metrics.csv": "2dbb8855f27d25f898da9babda371a242ad867f1cc1dd081cb8cc34a6ada5a0e",
+  "L3_seed45/status.json": "1ef4dac93760e855378312ce12bbda11271178150e4fbdb92af4257eaaff975c",
   "L3_seed46/config.json": "987a793c63f79716235b1757b9d026efdc5e277c69ccdee89c47c83843920847",
-  "L3_seed46/metrics.csv": "3f062906ee4d2f59d70bd55833099d75c73d99ee0adb2c2dd13e7bee1c681026",
-  "L3_seed46/status.json": "66ba5907b916792f5c61d78f71dadc25b0917ea7a7f051c1b381309b8a4a0ffd",
+  "L3_seed46/metrics.csv": "eaaf228e37bbb5bc7615c13fb0325a88edef2ff8ec9e2902444e25193aa7779c",
+  "L3_seed46/status.json": "4d9ffe6f6db7e47ee7a257df76b96fcc7c352371a1fdf168b897993058ee4d31",
   "L4_seed42/config.json": "1c5d11983e8c7a09213fe6e3b4493bbe1e51779adf822e042423266d85d4feda",
-  "L4_seed42/metrics.csv": "1aad53e6475a7964d45068c2a30444ffe42d063148037acc97a99ebb64149d9f",
-  "L4_seed42/status.json": "4d1f11e442ebfc4c09ef9c6929b114a3349d0317b0294907994671e51a74fe17",
-  "analysis_k/decision.json": "b8a14148c3d9940f2c3af4f5240bd764c9a76c0bcdf133fc9703d07fed2e7551",
-  "analysis_s1/decision.json": "d3c9478e5d7089b3ea9e1b4b0ff14178f8036e07862737490233020bef41fa4e",
+  "L4_seed42/metrics.csv": "f5a96009c328549ba1dd475c4218098601fd9d7c9acc85c2722886ed38f16a7e",
+  "L4_seed42/status.json": "605b9d7edebc78f9fdb3988841153684e71a828690e22775dbe2cbc0873fc9df",
+  "analysis_k/decision.json": "eaf8625734898d950890561c1bcb6eba0dce6e41f2a4ccc6c9858298d99311c9",
+  "analysis_s1/decision.json": "a543854a7df10a06badad758c851b1a581c9370ea3b00345817af273337f5349",
   "manifest.json": "9c61ca94843afbdb3af7c1cf268477e22fdf1be00ce1cde7d206567f55204931"
  },
  "status": "partial",
