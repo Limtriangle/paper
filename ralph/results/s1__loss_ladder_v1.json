@@ -19,6 +19,7 @@
      "gateA/a0_l0_v2/L0_seed47/metrics.csv": "6ab4ee3cbd995674c3d609afa8f3191997b4b48a8cc75ffa35fc05a12d458695",
      "gateA/a0_l0_v2/L0_seed48/metrics.csv": "9130ee6b6e91da4b7b69d624c8c5b2e343cb3e644a8aee6d3de4df0d22a014d5",
      "gateA/a0_l0_v2/L0_seed49/metrics.csv": "0439a7bfc6bde142e2faacebeff4c43da6357cba8da8daad88665ad386cc5ad6",
+     "s1/loss_ladder_v1/L1_seed42/metrics.csv": "96104524aab74a7a952dc9899c0b8377cd3a40851394bf6decf4cf4717987e21",
      "s1/loss_ladder_v1/L2_seed42/metrics.csv": "f7af01a353c3aa9f21f3451f1dbefc11f2c91170a7443377b4af8dc962292a22",
      "s1/loss_ladder_v1/L2_seed43/metrics.csv": "09c77e24448d165c35566c1d8a527d96df22fa0d8fcfd8f423c5e0f25c459def",
      "s1/loss_ladder_v1/L2_seed44/metrics.csv": "f6e514011eac564c5117fa8c07ae19140dcdc261bd1d4002767239d06919f86f",
@@ -46,6 +47,19 @@
       },
       "k_learnable": true
      },
+     "L1": {
+      "k_final": {
+       "max": 0.961597204208374,
+       "median": 0.961597204208374,
+       "min": 0.961597204208374,
+       "n": 1,
+       "per_seed": {
+        "42": 0.961597204208374
+       },
+       "sd": null
+      },
+      "k_learnable": true
+     },
      "L2": {
       "k_final": {
        "max": 0.3079058527946472,
@@ -64,13 +78,29 @@
       "k_learnable": true
      }
     },
-    "written_at": "2026-09-25T09:50:45"
+    "written_at": "2026-09-25T10:23:50"
    }
   }
  },
- "exported_at": "2026-09-25T09:50:45",
+ "exported_at": "2026-09-25T10:23:50",
  "jobs": {
   "L1_seed42": {
+   "best": {
+    "ab_error": 4.642767647625388,
+    "delta_e00": 8.139404932970347,
+    "edge_ab_error": 5.720881987254768,
+    "edge_delta_e00": 8.912355584430783,
+    "edge_psnr": 21.99685740793108,
+    "epoch": 115,
+    "lpips": 0.19023109851405023,
+    "lpips_gtmean": 0.18078688476234675,
+    "n": 40,
+    "n_images": 40,
+    "psnr": 23.018634792756625,
+    "psnr_gtmean": 27.723686955365558,
+    "ssim": 0.8470537474920381,
+    "ssim_gtmean": 0.8694751260207978
+   },
    "config": {
     "CUDA_VISIBLE_DEVICES": "1",
     "amp": false,
@@ -113,13 +143,29 @@
    "curve": {
     "best_val_psnr": 23.01863479275662,
     "best_val_psnr_epoch": 115,
-    "final_train_loss": 0.3996521362236568,
-    "final_val_psnr": "",
-    "n_epochs": 929,
-    "train_seconds_total": 20921.590354919434
+    "final_train_loss": 0.40284943527409006,
+    "final_val_psnr": 22.26489724442069,
+    "n_epochs": 1000,
+    "train_seconds_total": 22523.21596646309
    },
    "epochs_trained": 1000,
-   "status": "running"
+   "last": {
+    "ab_error": 3.9791171241604744,
+    "delta_e00": 8.467185735846574,
+    "edge_ab_error": 5.097490447788044,
+    "edge_delta_e00": 9.093910795224316,
+    "edge_psnr": 21.594353953524212,
+    "epoch": 1000,
+    "lpips": 0.1281777972355485,
+    "lpips_gtmean": 0.11434932379052043,
+    "n": 40,
+    "n_images": 40,
+    "psnr": 22.26489724442069,
+    "psnr_gtmean": 28.448357900815466,
+    "ssim": 0.8645306810026195,
+    "ssim_gtmean": 0.8935968831655862
+   },
+   "status": "complete"
   },
   "L1_seed43": {
    "config": {
@@ -164,10 +210,10 @@
    "curve": {
     "best_val_psnr": 22.79130777554761,
     "best_val_psnr_epoch": 120,
-    "final_train_loss": 0.3945635450737817,
+    "final_train_loss": 0.390034626105002,
     "final_val_psnr": "",
-    "n_epochs": 872,
-    "train_seconds_total": 19522.67689561844
+    "n_epochs": 957,
+    "train_seconds_total": 21426.664794683456
    },
    "epochs_trained": 1000,
    "status": "running"
@@ -215,10 +261,10 @@
    "curve": {
     "best_val_psnr": 22.58249346294204,
     "best_val_psnr_epoch": 445,
-    "final_train_loss": 0.39090515460286823,
-    "final_val_psnr": 22.139433394034192,
-    "n_epochs": 835,
-    "train_seconds_total": 18598.78014945984
+    "final_train_loss": 0.39256760717502664,
+    "final_val_psnr": "",
+    "n_epochs": 921,
+    "train_seconds_total": 20515.459534406662
    },
    "epochs_trained": 1000,
    "status": "running"
@@ -644,7 +690,7 @@
   "split_sha256": "b0dde62736e3f59148fda31dd9dfa56a1b76af8b2be6637a57b5119b35428909"
  },
  "n_jobs": {
-  "complete": 5,
+  "complete": 6,
   "total": 8
  },
  "protocol": {
@@ -734,15 +780,16 @@
  "run": "loss_ladder_v1",
  "run_id": "s1__loss_ladder_v1",
  "sources": {
-  "L1_seed42/config.json": "42bc04fd74449b5edcbcb1f2672dd255e03f2b0a0ce712cefa458569af308897",
-  "L1_seed42/metrics.csv": "266f7a07b28f0bee7bb844b26c257d8507fb89ee88718596b2933c65e6ac56c7",
-  "L1_seed42/status.json": "85c41ac0cfdc78bc8fdc329f8996a9c1bd552b69f0cf619fba24aff26a0db03c",
+  "L1_seed42/config.json": "c8f2e83d74e399fe48a1ae746ff24dfa2cba659287ce44a32beab5776f783bb0",
+  "L1_seed42/metrics.csv": "96104524aab74a7a952dc9899c0b8377cd3a40851394bf6decf4cf4717987e21",
+  "L1_seed42/status.json": "3e18aba5aee9cfce22f54da27fdce59399e371e5a78b22adf7c7cdd4923635b2",
+  "L1_seed42/validation_summary.csv": "f003ab0af5c50e0fe65a82a389f8870c86c02cb1d6d6d4da4ce594086b4f0a71",
   "L1_seed43/config.json": "242f7938f20fbd1f362500a21705cea56378195abe79f4e8641337e4a3ca4c8a",
-  "L1_seed43/metrics.csv": "e358b859908fb1897845964ac13b3c0cecf164c077abddf17a13a1bbb86fd43e",
-  "L1_seed43/status.json": "6328b4ae3d967fc927d543363cd0a1443779b9997fa9580de71313eaa36f85f7",
+  "L1_seed43/metrics.csv": "aadf859c1db92e638cec5ee135ea45702a583a24f02eae6bb84d30a3f14ee01c",
+  "L1_seed43/status.json": "a090b2574b8c695015c8b539551fa1026c8cdb41818649fd9883d4c2f0f3efd6",
   "L1_seed44/config.json": "c7a32b621ce53a9b0b45ed7617fbee391d97a4c76e937ef005ab43fcf89f732b",
-  "L1_seed44/metrics.csv": "6192dd63f560b4d85bea3b2879b485689ff2ae232e6bb5ecdc4b83f12d1a87be",
-  "L1_seed44/status.json": "04a2e044ed8c2365c10f06bde7d17d374eee7382c5c86d7b4d5126446f30f807",
+  "L1_seed44/metrics.csv": "14a3a1808005682d0b314d9fec764d256c5ea251d5f1f94e032f78fd411471f6",
+  "L1_seed44/status.json": "911093360a4ceef89e0896026b60200b7fe829c9fb1079826f883c6740da220f",
   "L2_seed42/config.json": "2b474d76212a19c976d2425bb0b811482ad714fcf4d30ccdc675cf5f3836e457",
   "L2_seed42/metrics.csv": "f7af01a353c3aa9f21f3451f1dbefc11f2c91170a7443377b4af8dc962292a22",
   "L2_seed42/status.json": "c5fcf1f4246d1cf7b3dc4a2408f1e475538b99648df4bbe9becbfc2bbe1d71ec",
@@ -763,7 +810,7 @@
   "L2_seed46/metrics.csv": "b49fea0e2995cbbc1df24bd633ea029e9e77a3a7295658b5b791021bc91f5f7a",
   "L2_seed46/status.json": "e20fbe6cb77e43b4451d757ac85a01f7519f4b57c534091e7ae38c8fb26bb594",
   "L2_seed46/validation_summary.csv": "ba7b42bf225c87fd9a6e4c8ca69758da8318fcd6f1d251b7c8b5b8b764a8a77c",
-  "analysis_k/decision.json": "17807fa39713fa3f70927220bb60109c0c914eb2d063f77c8ad41c9f96345824",
+  "analysis_k/decision.json": "3892db51fb5e52d0d886035d05dc090ebcceda3b7c52bd0d90223528e9b28e5e",
   "manifest.json": "65d59e8c275975cd3378e16fa6bb2a48cf5de5afb4e45444ed88b99e820f7e87"
  },
  "status": "partial",
