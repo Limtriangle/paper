@@ -1,29 +1,30 @@
 {
   "run_id": "gateA__summary_v1",
-  "written_at": "2026-09-25T04:12:37",
-  "script_sha256": "44c174060a9aa345e34ddeebbd54942bbe37e2d8ec3c4b0d4e46c93ba6c0c1ae",
+  "seeds_included": "all present",
+  "written_at": "2026-09-25T04:28:26",
+  "script_sha256": "47471712563d6e6edf3685d52d2b23d10df94584f4385a86ca6d2be2b5b0725f",
   "summary": {
     "gateA_L0": {
       "final": {
         "raw_psnr": {
-          "mean": 23.32486411730867,
-          "sd": 0.4548064299725741,
-          "n": 6
+          "mean": 23.306755984789692,
+          "sd": 0.4179346901095189,
+          "n": 7
         },
         "gtmean_psnr": {
-          "mean": 26.65432969770165,
-          "sd": 0.1449214974266048,
-          "n": 6
+          "mean": 26.66581208095248,
+          "sd": 0.13573791986572506,
+          "n": 7
         },
         "ssim": {
-          "mean": 0.8417321146304831,
-          "sd": 0.0040120702950821,
-          "n": 6
+          "mean": 0.841763912632064,
+          "sd": 0.003663468461385358,
+          "n": 7
         },
         "lpips": {
-          "mean": 0.10814821893970172,
-          "sd": 0.0023851708433646223,
-          "n": 6
+          "mean": 0.10793362515313284,
+          "sd": 0.002250160011940265,
+          "n": 7
         },
         "seeds": [
           42,
@@ -31,7 +32,8 @@
           44,
           45,
           46,
-          47
+          47,
+          48
         ]
       },
       "gated": {
@@ -93,7 +95,7 @@
         ]
       },
       "k_final": {
-        "median": 0.8471305668354034,
+        "median": 0.8444452285766602,
         "min": 0.8095167875289917,
         "max": 0.8701199889183044,
         "per_seed": {
@@ -102,9 +104,10 @@
           "44": 0.8444452285766602,
           "45": 0.8701199889183044,
           "46": 0.8585001826286316,
-          "47": 0.8402021527290344
+          "47": 0.8402021527290344,
+          "48": 0.8222259879112244
         },
-        "n": 6
+        "n": 7
       },
       "oracle": {
         "max_over_ckpt_mean": {
@@ -154,9 +157,9 @@
       },
       "decomposition": {
         "gtmean_minus_raw": {
-          "mean": 3.3294655803929802,
-          "sd": 0.36705040212359796,
-          "n": 6
+          "mean": 3.3590560961627918,
+          "sd": 0.34409425324162285,
+          "n": 7
         },
         "gated_minus_ungated": {
           "mean": 0.41721302681965894,
@@ -194,22 +197,23 @@
         "lower": 23.3,
         "upper": 24.3,
         "source": "HVI-PLAN.md \u00a75 Gate A",
-        "final_raw_mean_minus_lower": 0.02486411730867033,
+        "final_raw_mean_minus_lower": 0.006755984789691638,
         "final_raw_mean_inside": true,
         "gated_raw_mean_minus_lower": 0.3710826518261605
       }
     }
   },
   "sources": {
-    "final_eval__test.json": "d54ba9cde8a2b7bbad187446ffa2ec8278c3c2a220c8276dc39e7ed3c1d5a585",
+    "final_eval__test.json": "3949ace56bf24d594dff2e55e5ac7c20f43be6549a1a7a5e4b258ac3701659dc",
     "gateA__a0_l0_v1.json": "dbf5e1e2e8bb00c1cae41b9ec33165e713459b054c5efb3ee56c919130a4c48f",
     "a0_l0_v1/L0_seed42/metrics.csv": "43dca6b6929fbad341f643954c02199c5687f221f25c6c67f5992ad96dfd98f5",
     "a0_l0_v1/L0_seed43/metrics.csv": "1c0427320f308ac2cfee5c3b29e487c7de01195cdaae61163e1728ef413abe73",
     "a0_l0_v1/L0_seed44/metrics.csv": "d6ba6c80a6f6aa96421e040244d0a5e78abfd4ba04acac55b3d0624824f33236",
     "a0_l0_v1/L0_seed45/metrics.csv": "48f3dfce66c5b28126e14bb528b21fb4d35a082bdfee19e2587abe86aa48b43d",
     "a0_l0_v1/L0_seed46/metrics.csv": "a93ecc9d08e636407e5ea179fb31717ccad22677ad51d32f6885be2443a69793",
-    "gateA__a0_l0_v2.json": "7491d7c4c35a724fab7c7c80fc1006a9e9b82f99cda2a4e0db53f126c70faabd",
+    "gateA__a0_l0_v2.json": "701f72ff2d855fb4812b7973bf536354fec4f6dc208eeab8b5700013b8e5e029",
     "a0_l0_v2/L0_seed47/metrics.csv": "6ab4ee3cbd995674c3d609afa8f3191997b4b48a8cc75ffa35fc05a12d458695",
+    "a0_l0_v2/L0_seed48/metrics.csv": "9130ee6b6e91da4b7b69d624c8c5b2e343cb3e644a8aee6d3de4df0d22a014d5",
     "final_eval__oracle.json": "dbfbbca60e8b338b15e4bb5e32e3c4f255d4b0f4bc3dbea52d5f321029416464"
   },
   "status": "complete",
