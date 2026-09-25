@@ -45,7 +45,8 @@ to within the seed SD.
 \label{sec:app-selection}
 
 \Cref{tab:app-s3} gives the oracle-minus-final difference and the paper-style maximum per
-arm. The oracle pass reads the test split after all training has finished and is reported
+arm, read from the selection-bias export; it is partial until every loss arm has its oracle
+pass (L0 on the ladder seeds 42--46, L1, and L2 so far). The oracle pass reads the test split after all training has finished and is reported
 only to size the selection effect; no arm, checkpoint, or claim in this paper was chosen
 with it.
 

@@ -70,8 +70,8 @@ scores every tenth checkpoint on the test split, exceeds the final checkpoint by
 \phm{0.41}~dB of raw PSNR but by only \phm{0.06}~dB of GT-mean PSNR: test-set selection
 mostly picks checkpoints whose brightness happens to match, and the GT-mean gain absorbs
 that. Its maximum over seeds, the number a paper would report after test-split selection,
-is listed per arm in \Cref{tab:app-s3}. The \ph{23.5}--\ph{28.2}~dB spread of published
-\dataset values for the same model is therefore mostly the GT-mean gain (\phm{3.39}~dB) and the saturation gate (\phm{1.09}~dB), with
+is listed per arm in \Cref{tab:app-s3}. The \phm{23.6}--\phm{28.2}~dB spread of reported \dataset values
+\citep{yan2025hvi, hvicidnet_issue66} is therefore mostly the GT-mean gain (\phm{3.39}~dB) and the saturation gate (\phm{1.09}~dB), with
 selection (\phm{0.06}~dB) and seed noise (\phm{0.16}~dB) a small remainder. Oracle numbers never rank arms; they size the practice and justify the final-checkpoint
 read-out.
 

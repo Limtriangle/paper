@@ -348,24 +348,19 @@
    "label": "tab:app-s3",
    "star": false,
    "row_label": "Arm",
-   "caption": "\\textbf{Selection bias (S3), under our protocol.} Per arm of \\mname, five seeds, the mean of (best test GT-mean PSNR over every tenth checkpoint) minus (final-checkpoint test GT-mean PSNR) on the \\dataset test split (eval15), on \\hw; and the paper-style number, the maximum of that oracle over seeds. The primary read-out everywhere else is the final checkpoint; the oracle pass reads the test split post hoc and is never used to select anything. No value is highlighted.",
+   "caption": "\\textbf{Selection bias (S3), under our protocol; partial.} Rows without an oracle pass yet carry provisional values. Per arm of \\mname, five seeds, the mean of (best test GT-mean PSNR over every tenth checkpoint) minus (final-checkpoint test GT-mean PSNR) on the \\dataset test split (eval15), on \\hw; and the paper-style number, the maximum of that oracle over seeds. The primary read-out everywhere else is the final checkpoint; the oracle pass reads the test split post hoc and is never used to select anything. No value is highlighted.",
    "rows": [
     {
-     "label": "L0",
-     "job": "L0",
-     "src": "gateA__summary_n5_v1.json",
-     "keys": {
-      "/analysis.analysis_s3.decision.{cond}.oracle_minus_final_mean": "/summary.gateA_L0.decomposition.oracle_minus_final_gtmean.mean",
-      "/analysis.analysis_s3.decision.{cond}.paper_style_max_over_seeds": "/summary.gateA_L0.oracle.max_over_seeds.gtmean_psnr"
-     }
+     "label": "L0 (seeds 42--46)",
+     "job": "L0"
     },
     {
-     "label": "A0 (= L2)",
-     "job": "A0",
-     "ph": {
-      "/analysis.analysis_s3.decision.{cond}.oracle_minus_final_mean": 0.3,
-      "/analysis.analysis_s3.decision.{cond}.paper_style_max_over_seeds": 26.8
-     }
+     "label": "L1",
+     "job": "L1"
+    },
+    {
+     "label": "L2 (= A0)",
+     "job": "L2"
     },
     {
      "label": "A2",

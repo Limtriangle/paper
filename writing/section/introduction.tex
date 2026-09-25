@@ -22,22 +22,21 @@ paper and in its follow-ups is a single training run; no work in this family rep
 spread. The released code selects checkpoints on the \dataset test split, which has fifteen
 images, and ships several checkpoints per dataset named by the metric they maximize; we
 measure that this inflates raw PSNR by \phm{0.41}~dB but GT-mean PSNR by only
-\phm{0.06}~dB. The headline \dataset value, \ph{28.2}~dB, is reported after rescaling the
-output to the ground-truth mean luminance and with a test-time saturation gate, while the
-same authors' later work and independent retrainings report \ph{23.5}--\ph{24.0}~dB
-without them. The color-space ablation was run on a proxy
-network rather than on \mname, its rows moved by several dB between the two versions of the
-paper, and the loss weights ($1$, $0.5$, $50$, $0.01$, duplicated across two spaces) are
-stated nowhere. A reader cannot tell which parts of the design carry the result.
+\phm{0.06}~dB. The headline \dataset value, \phm{28.2}~dB \citep{yan2025hvi}, is reported after
+rescaling the output to the ground-truth mean and with a test-time saturation gate; without
+them, a retraining with the original configuration reports \phm{24.0}~dB \citep{li2026pal}
+and a user retraining \phm{23.6}~dB \citep{hvicidnet_issue66}; the authors' own
+\phm{23.50}~dB \citep{shi2025fusionnet} equals their released weights without GT-mean
+\citep{hvicidnet_readme}. The color-space ablation used a proxy network, and the loss weights
+($1$, $0.5$, $50$, $0.01$, in two spaces) are stated nowhere. A reader cannot tell which parts of the design carry the result.
 
 Follow-ups do not settle this. They replace the intensity definition \citep{yang2026rhvifdd,
 ai2026bcihv}, the branch interaction \citep{wang2026haimnet, wu2026tcanet}, or the loss
 \citep{li2026pal}, and each reports a single-run gain over the previous single run. The one
 matched comparison of \hvi against LAB and YCbCr that exists puts YCbCr ahead on LOL-v2
 \citep{shi2025tpcnet}, and the authors' own later ablation on \dataset ranks the spaces
-differently \citep{yan2025hvicidnetplus}. Seed variance of the size reported for comparable
-restoration models, \ph{0.2}--\ph{0.4}~dB \citep{shafi2026iphoneblur}, would account for
-most of these margins. We therefore ask:
+differently \citep{yan2025hvicidnetplus}. A three-seed SD of \phm{0.2}--\phm{0.4}~dB, reported for motion deblurring
+\citep{shafi2026iphoneblur}, would account for most of these margins. We therefore ask:
 
 \begin{center}
 \emph{Under a frozen protocol with matched seeds, which steps of \mname's representation \\

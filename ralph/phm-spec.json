@@ -344,6 +344,67 @@
    ]
   },
   {
+   "written": "28.2",
+   "src": "literature_v1.json",
+   "key": "entries.hvi_paper_lolv1.value.psnr",
+   "only_in": [
+    "abstract.tex",
+    "introduction.tex",
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "24.0",
+   "src": "literature_v1.json",
+   "key": "entries.pal_cidnet_lolv1.value.psnr",
+   "only_in": [
+    "abstract.tex",
+    "introduction.tex"
+   ]
+  },
+  {
+   "written": "23.6",
+   "src": "literature_v1.json",
+   "key": "entries.issue66_retrain_lolv1.value.psnr",
+   "only_in": [
+    "abstract.tex",
+    "introduction.tex",
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "23.50",
+   "src": "literature_v1.json",
+   "key": "entries.fusionnet_cidnet_lolv1.value.psnr",
+   "only_in": [
+    "introduction.tex"
+   ]
+  },
+  {
+   "written": "0.2",
+   "src": "literature_v1.json",
+   "key": "entries.shafi2026_seed_sd.value.psnr_sd_low",
+   "only_in": [
+    "introduction.tex"
+   ]
+  },
+  {
+   "written": "0.4",
+   "src": "literature_v1.json",
+   "key": "entries.shafi2026_seed_sd.value.psnr_sd_high",
+   "only_in": [
+    "introduction.tex"
+   ]
+  },
+  {
+   "written": "0.06",
+   "src": "s3__selection_bias_v1.json",
+   "key": "analysis.analysis_s3.decision.L0.oracle_minus_final_mean",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
    "written": "0.07",
    "src": "s1__loss_ladder_v1.json",
    "key": "analysis.analysis_s1.decision.contrasts.L0-L1.mean",
@@ -521,16 +582,48 @@
   },
   {
    "written": "0.06",
-   "src": "gateA__summary_n5_v1.json",
-   "key": "summary.gateA_L0.decomposition.oracle_minus_final_gtmean.mean",
+   "src": "s3__selection_bias_v1.json",
+   "key": "analysis.analysis_s3.decision.L0.oracle_minus_final_mean",
    "only_in": [
     "app_s3.tex"
    ]
   },
   {
    "written": "26.96",
-   "src": "gateA__summary_n5_v1.json",
-   "key": "summary.gateA_L0.oracle.max_over_seeds.gtmean_psnr",
+   "src": "s3__selection_bias_v1.json",
+   "key": "analysis.analysis_s3.decision.L0.paper_style_max_over_seeds",
+   "only_in": [
+    "app_s3.tex"
+   ]
+  },
+  {
+   "written": "0.11",
+   "src": "s3__selection_bias_v1.json",
+   "key": "analysis.analysis_s3.decision.L1.oracle_minus_final_mean",
+   "only_in": [
+    "app_s3.tex"
+   ]
+  },
+  {
+   "written": "26.78",
+   "src": "s3__selection_bias_v1.json",
+   "key": "analysis.analysis_s3.decision.L1.paper_style_max_over_seeds",
+   "only_in": [
+    "app_s3.tex"
+   ]
+  },
+  {
+   "written": "0.07",
+   "src": "s3__selection_bias_v1.json",
+   "key": "analysis.analysis_s3.decision.L2.oracle_minus_final_mean",
+   "only_in": [
+    "app_s3.tex"
+   ]
+  },
+  {
+   "written": "26.91",
+   "src": "s3__selection_bias_v1.json",
+   "key": "analysis.analysis_s3.decision.L2.paper_style_max_over_seeds",
    "only_in": [
     "app_s3.tex"
    ]
