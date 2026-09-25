@@ -1,6 +1,120 @@
 {
- "exported_at": "2026-09-25T02:26:35",
+ "analysis": {
+  "analysis_k": {
+   "decision": {
+    "constants": {
+     "k0_loss": 1.1255,
+     "k_init": 0.2,
+     "k_released": 1.1255,
+     "provenance": "k_init net/HVI_transform.py:9; k_released ralph/results/phase0_weights.json; k0_loss HVI-PLAN.md \u00a73"
+    },
+    "note": "final epoch value of the model's density_k per run (metrics.csv last row); A1/A2 hold k fixed",
+    "script_sha256": "8dec5bae47c046ab76d3a5db36d41139fdd6c99fbe2dff2d8a4fb3a4e178273a",
+    "sources": {
+     "gateA/a0_l0_v1/L0_seed42/metrics.csv": "43dca6b6929fbad341f643954c02199c5687f221f25c6c67f5992ad96dfd98f5",
+     "gateA/a0_l0_v1/L0_seed43/metrics.csv": "1c0427320f308ac2cfee5c3b29e487c7de01195cdaae61163e1728ef413abe73",
+     "gateA/a0_l0_v1/L0_seed44/metrics.csv": "d6ba6c80a6f6aa96421e040244d0a5e78abfd4ba04acac55b3d0624824f33236",
+     "gateA/a0_l0_v1/L0_seed45/metrics.csv": "48f3dfce66c5b28126e14bb528b21fb4d35a082bdfee19e2587abe86aa48b43d",
+     "gateA/a0_l0_v1/L0_seed46/metrics.csv": "a93ecc9d08e636407e5ea179fb31717ccad22677ad51d32f6885be2443a69793",
+     "s1/loss_ladder_v1/L2_seed42/metrics.csv": "f7af01a353c3aa9f21f3451f1dbefc11f2c91170a7443377b4af8dc962292a22",
+     "s1/loss_ladder_v1/L2_seed43/metrics.csv": "09c77e24448d165c35566c1d8a527d96df22fa0d8fcfd8f423c5e0f25c459def",
+     "s1/loss_ladder_v1/L2_seed44/metrics.csv": "f6e514011eac564c5117fa8c07ae19140dcdc261bd1d4002767239d06919f86f",
+     "s1/loss_ladder_v1/L2_seed45/metrics.csv": "395ecc28b8d09b136e07d3a74c5996809c33a2247674c644c5d6ce6652d8cfd9",
+     "s1/loss_ladder_v1/L2_seed46/metrics.csv": "b49fea0e2995cbbc1df24bd633ea029e9e77a3a7295658b5b791021bc91f5f7a"
+    },
+    "summary": {
+     "L0": {
+      "k_final": {
+       "max": 0.8701199889183044,
+       "median": 0.8498159050941467,
+       "min": 0.8095167875289917,
+       "n": 5,
+       "per_seed": {
+        "42": 0.8498159050941467,
+        "43": 0.8095167875289917,
+        "44": 0.8444452285766602,
+        "45": 0.8701199889183044,
+        "46": 0.8585001826286316
+       },
+       "sd": 0.022830251309802683
+      },
+      "k_learnable": true
+     },
+     "L2": {
+      "k_final": {
+       "max": 0.3079058527946472,
+       "median": 0.2936750054359436,
+       "min": 0.28514114022254944,
+       "n": 5,
+       "per_seed": {
+        "42": 0.3079058527946472,
+        "43": 0.28514114022254944,
+        "44": 0.2871071994304657,
+        "45": 0.3064298927783966,
+        "46": 0.2936750054359436
+       },
+       "sd": 0.010640969245105991
+      },
+      "k_learnable": true
+     }
+    },
+    "written_at": "2026-09-25T03:49:21"
+   }
+  }
+ },
+ "exported_at": "2026-09-25T03:49:21",
  "jobs": {
+  "L1_seed42": {
+   "config": {
+    "CUDA_VISIBLE_DEVICES": "1",
+    "amp": false,
+    "batch_size": 8,
+    "channels": [
+     36,
+     36,
+     72,
+     144
+    ],
+    "condition": "L1",
+    "crop": 256,
+    "epochs_schedule": 1000,
+    "epochs_trained": 1000,
+    "gpu": "NVIDIA GeForce RTX 2080 Ti",
+    "heads": [
+     1,
+     2,
+     4,
+     8
+    ],
+    "lr": 0.0001,
+    "parameters": 1975569,
+    "script_sha256": "138696b4147efc3de9300a636e06e5bfa0bc633b5780a31c0cc390246353fa8e",
+    "seed": 42,
+    "step_limit": 0,
+    "test15": "NEVER READ",
+    "torch": "2.7.0a0+7c8ec84dab.nv25.03",
+    "val_limit": 0,
+    "variant": "L1",
+    "weights": {
+     "HVI": 1.0,
+     "L1": 1.0,
+     "SSIM": 0.5,
+     "edge": 50.0,
+     "perceptual": 0.01
+    },
+    "width": 36
+   },
+   "curve": {
+    "best_val_psnr": "",
+    "best_val_psnr_epoch": 1,
+    "final_train_loss": 2.267681898815291,
+    "final_val_psnr": "",
+    "n_epochs": 2,
+    "train_seconds_total": 45.201032638549805
+   },
+   "epochs_trained": 1000,
+   "status": "running"
+  },
   "L2_seed42": {
    "best": {
     "ab_error": 4.283502711054404,
@@ -423,7 +537,7 @@
  },
  "n_jobs": {
   "complete": 5,
-  "total": 5
+  "total": 6
  },
  "protocol": {
   "augmentation": "RandomCrop(crop) + RandomHorizontalFlip + RandomVerticalFlip, same crop/flips for low and high (data/data.py:7-13)",
@@ -512,6 +626,9 @@
  "run": "loss_ladder_v1",
  "run_id": "s1__loss_ladder_v1",
  "sources": {
+  "L1_seed42/config.json": "42bc04fd74449b5edcbcb1f2672dd255e03f2b0a0ce712cefa458569af308897",
+  "L1_seed42/metrics.csv": "aa91bae948089a9e7ed5e74a0b4b2fb948882d28905e07736826b01215e1bf3f",
+  "L1_seed42/status.json": "f20a3d3332f91603ab0e5b8ca4bc5765db3a424436701ce3d18b1a1794e56844",
   "L2_seed42/config.json": "2b474d76212a19c976d2425bb0b811482ad714fcf4d30ccdc675cf5f3836e457",
   "L2_seed42/metrics.csv": "f7af01a353c3aa9f21f3451f1dbefc11f2c91170a7443377b4af8dc962292a22",
   "L2_seed42/status.json": "c5fcf1f4246d1cf7b3dc4a2408f1e475538b99648df4bbe9becbfc2bbe1d71ec",
@@ -532,8 +649,9 @@
   "L2_seed46/metrics.csv": "b49fea0e2995cbbc1df24bd633ea029e9e77a3a7295658b5b791021bc91f5f7a",
   "L2_seed46/status.json": "e20fbe6cb77e43b4451d757ac85a01f7519f4b57c534091e7ae38c8fb26bb594",
   "L2_seed46/validation_summary.csv": "ba7b42bf225c87fd9a6e4c8ca69758da8318fcd6f1d251b7c8b5b8b764a8a77c",
-  "manifest.json": "cf24b611284f8f768237d263ac2d26ff6e2d8dfc262db646d428afa568c10bc5"
+  "analysis_k/decision.json": "b5b51ccb3d6687e3efb98f375c9db5269b4464f84641a851698ae3cc7df2dfcd",
+  "manifest.json": "74d8b73378df6eec968b6b26eb8c7475d679a558ea3119fdc99b889fbbfd4d22"
  },
- "status": "complete",
+ "status": "partial",
  "study": "s1"
 }

@@ -141,7 +141,9 @@ def annotate_v2_manifest():
 def finish(j, st):
     """export + single final read + RESULTS row + report; called once per completed job."""
     run = f"{j['study']}/{j['run']}"
-    subprocess.run([PY, str(H.PAPER / "tooling" / "export_results.py"), "--run", run], capture_output=True, text=True, timeout=600)
+    subprocess.run([PY, str(HERE / "k_summary.py")], capture_output=True, text=True, timeout=600)   # per-arm k stats -> s1 analysis_k
+    for r in {run, "s1/loss_ladder_v1"}:
+        subprocess.run([PY, str(H.PAPER / "tooling" / "export_results.py"), "--run", r], capture_output=True, text=True, timeout=600)
     lab = label(j)
     entries = H.json_load(H.PAPER / "ralph" / "results" / "final_eval__test.json")["entries"] if (H.PAPER / "ralph" / "results" / "final_eval__test.json").is_file() else {}
     if lab not in entries:
