@@ -1,0 +1,150 @@
+{
+  "run_id": "literature_v1",
+  "written_at": "2026-09-25T20:35:28",
+  "notes": "Literature numbers the paper quotes, each checked against its primary source on 2026-09-25. Values are as printed in the source. 'third-party retrainings 23.5-24.0' is accurate only for PAL (23.97) and issue #66 (23.59); FusionNet's 23.50 is most likely the released wo_perc weights evaluated without GT mean.",
+  "entries": {
+    "hvi_paper_lolv1": {
+      "value": {
+        "psnr": 28.201,
+        "ssim": 0.889,
+        "lpips": 0.079
+      },
+      "protocol": "GT-mean (stated in the paper's Table 1 caption and Table 9; repeated in HVI-CIDNet+ Table I)",
+      "source": "Yan et al., HVI: A New Color Space for Low-light Image Enhancement, CVPR 2025, Table 1 row CIDNet(Ours)",
+      "url": "https://arxiv.org/abs/2502.20272",
+      "arxiv": "2502.20272v2",
+      "doi": "10.1109/CVPR52734.2025.00533",
+      "doi_note": "copied from custom.bib, not re-fetched",
+      "bib_key": "yan2025hvi",
+      "also_in": {
+        "bib_key": "yan2025hvicidnetplus",
+        "arxiv": "2507.06814v1",
+        "location": "Table I row CIDNet [12]"
+      },
+      "verified_by": "experiment agent, primary-source check (subagent) 2026-09-25",
+      "verified_on": "2026-09-25",
+      "found_in_primary": true,
+      "primary_location": "arXiv 2502.20272v2 Table 1 (main) and Table 9 (supplementary, same caption sentence), row 'CIDNet(Ours)'; supplementary has a 'GT Mean' paragraph. arXiv 2507.06814v1 TABLE I, row 'CIDNet [12]'.",
+      "how_checked": "Fetched https://arxiv.org/html/2502.20272 (v2) and https://arxiv.org/html/2507.06814 (v1), stripped HTML, grepped '28.201' and 'GT mean'; read row and caption text directly. arXiv abs pages confirmed titles."
+    },
+    "readme_wperc_lolv1": {
+      "value": {
+        "psnr": 23.8091,
+        "ssim": 0.8574,
+        "lpips": 0.0856,
+        "psnr_gtmean": 27.7146,
+        "ssim_gtmean": 0.876,
+        "lpips_gtmean": 0.0791
+      },
+      "protocol": "released LOLv1/w_perc.pth; first triple without GT mean, second with GT mean",
+      "source": "HVI-CIDNet GitHub README, LOLv1 w_perc rows (lines 113-114)",
+      "url": "https://github.com/Fediory/HVI-CIDNet/blob/eb43d7d91e9a336c66856824ff9e4603ae41f408/Readme.md",
+      "commit": "eb43d7d91e9a336c66856824ff9e4603ae41f408",
+      "bib_key": null,
+      "bib_note": "no repository entry in custom.bib; cite yan2025hvi + footnote URL, or writing adds a @misc",
+      "adjacent": {
+        "wo_perc": {
+          "psnr": 23.5,
+          "ssim": 0.8703,
+          "lpips": 0.1053,
+          "psnr_gtmean": 28.1405,
+          "ssim_gtmean": 0.8887,
+          "lpips_gtmean": 0.0988
+        }
+      },
+      "verified_by": "experiment agent, primary-source check (subagent) 2026-09-25",
+      "verified_on": "2026-09-25",
+      "found_in_primary": true,
+      "primary_location": "/home/work/research/code/HVI-CIDNet/Readme.md lines 113-114 (table header line 111), commit eb43d7d91e9a336c66856824ff9e4603ae41f408",
+      "how_checked": "git rev-parse HEAD in local clone = eb43d7d...; grep -n on Readme.md for perc / 23.8091 / 27.7146."
+    },
+    "fusionnet_cidnet_lolv1": {
+      "value": {
+        "psnr": 23.5,
+        "ssim": 0.87,
+        "lpips": 0.105
+      },
+      "protocol": "not stated; caption: results 'from the corresponding papers, or by running the pre-trained models released by the authors'",
+      "source": "Shi et al., FusionNet, CVPRW 2025 (NTIRE 2025), Table 3 row CIDNet [34]",
+      "url": "https://arxiv.org/abs/2504.19295",
+      "arxiv": "2504.19295v1",
+      "doi": null,
+      "bib_key": "shi2025fusionnet",
+      "caution": "the triple equals the README's released wo_perc weights without GT mean (23.5000/0.8703/0.1053): most likely an evaluation of released weights, NOT a third-party retraining (inference, not stated in the paper)",
+      "verified_by": "experiment agent, primary-source check (subagent) 2026-09-25",
+      "verified_on": "2026-09-25",
+      "found_in_primary": true,
+      "primary_location": "arXiv 2504.19295v1 Table 3 'Quantitative comparisons of different methods on LOLv1 and LOLv2.' row CIDNet [34]; also fusion-strategy ablation table on LOLv1.",
+      "how_checked": "Fetched https://arxiv.org/html/2504.19295, grepped '23.50'; read Table 3 row and caption. WebSearch returned the CVF open-access CVPR2025W/NTIRE page for venue."
+    },
+    "pal_cidnet_lolv1": {
+      "value": {
+        "psnr": 23.97,
+        "ssim": 0.849,
+        "lpips": 0.104
+      },
+      "protocol": "retrained with 'the original training configurations'; seeds and GT-mean protocol not stated",
+      "extra": {
+        "lolv2_real": {
+          "psnr": 23.19,
+          "ssim": 0.857
+        },
+        "lolv2_syn": {
+          "psnr": 25.44,
+          "ssim": 0.935
+        },
+        "gtmean_psnr_lolv1_stated_in_text": 23.72
+      },
+      "source": "Li et al., On the Global Photometric Alignment for Low-Level Vision (PAL), Table 1 row CID-Net",
+      "url": "https://arxiv.org/abs/2604.08172",
+      "arxiv": "2604.08172v1",
+      "doi": null,
+      "bib_key": "li2026pal",
+      "verified_by": "experiment agent, primary-source check (subagent) 2026-09-25",
+      "verified_on": "2026-09-25",
+      "found_in_primary": true,
+      "primary_location": "arXiv 2604.08172v1 Table 1 'Quantitative comparison on LOL, across PSNR, SSIM, LPIPS, IQA and IAA.' row CID-Net; experimental-setup paragraph for the 'original training configurations' sentence.",
+      "how_checked": "Fetched https://arxiv.org/html/2604.08172, grepped '23.97' and 'original training'; read the row and sentence."
+    },
+    "issue66_retrain_lolv1": {
+      "value": {
+        "psnr": 23.5881,
+        "ssim": 0.8539
+      },
+      "protocol": "user retrain, RTX 4090, torch 2.2.2, default hyper-parameters; evaluation presumably without GT mean",
+      "source": "GitHub issue #66 on Fediory/HVI-CIDNet (opened 2025-03-18 by Wuko-dev; title in Chinese: 'LOLv1->PSNR=23.5881, SSIM=0.8539, \u4e3a\u4ec0\u4e48\u548c\u8bba\u6587\u6307\u6807\u76f8\u5dee\u90a3\u4e48\u5927\uff1f')",
+      "url": "https://github.com/Fediory/HVI-CIDNet/issues/66",
+      "bib_key": null,
+      "bib_note": "no entry in custom.bib; writing adds a @misc or a footnote URL",
+      "correction": "the maintainer DID reply: reproduction fine, LOLv1 is tested with GT mean (measure.py --use_GT_mean), released hyper-parameters are not the optimal ones; the user then reported results close to the paper without numbers; closed as completed 2025-03-19. SURVEY.md / D_hvi_followups.md 'closed without explanation' is wrong.",
+      "verified_by": "experiment agent, primary-source check (subagent) 2026-09-25",
+      "verified_on": "2026-09-25",
+      "found_in_primary": true,
+      "primary_location": "Issue #66 opening post and title; maintainer comment by Fediory (first comment).",
+      "how_checked": "curl of the issue page (structured data: headline, articleBody, author, datePublished) plus api.github.com/repos/Fediory/HVI-CIDNet/issues/66 and /comments."
+    },
+    "shafi2026_seed_sd": {
+      "value": {
+        "psnr_sd_low": 0.2,
+        "psnr_sd_high": 0.4,
+        "ssim_sd_low": 0.004,
+        "ssim_sd_high": 0.012
+      },
+      "protocol": "sample SD over 3 seeds (42, 123, 456), motion DEBLURRING (not low-light enhancement)",
+      "source": "Shafi et al. 2026, Appendix A.2 'Multi-Run Reproducibility', Tables 5-7",
+      "url": "https://arxiv.org/abs/2605.05990",
+      "arxiv": "2605.05990v1",
+      "doi": null,
+      "bib_key": "shafi2026iphoneblur",
+      "verified_by": "experiment agent, primary-source check (subagent) 2026-09-25",
+      "verified_on": "2026-09-25",
+      "found_in_primary": true,
+      "primary_location": "arXiv 2605.05990v1 Appendix A.2 'Multi-Run Reproducibility'; Tables 5-7; Section 5.1 says 'all reported values represent means over three random seeds'.",
+      "how_checked": "Fetched https://arxiv.org/html/2605.05990, grepped '0.2\u20130.4', 'random seeds', 'A.2'."
+    }
+  },
+  "sources": {
+    "literature_check.json (scratch, subagent output)": "23ae7f7228d57fdb3f73ab55d14f5728aa75cc2fc3c7419298fb6d6de22be111",
+    "code/HVI-CIDNet/Readme.md@eb43d7d": "78a1fa346838832370ffdf6a0dbb37d759cfdc64de41dcd72912268f68d22af2"
+  }
+}
