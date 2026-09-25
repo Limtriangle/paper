@@ -18,11 +18,13 @@
 | writing | ALL Phase 0 work done (ff56879: check/audit fail on missing src, custom.bib 112 verified, related.md §5, appendix). **Holding for Gate 0.** Build + audit green | 2026-09-23 23:35 UTC |
 
 ## Next actions
+- **Until Fri 2026-09-26 20:00 UTC (Opus 5.5 window):** execute only; routine PASS stamps OK; any FAIL / pivot / plan or claim change is written to INBOX Open questions and HELD (INBOX line 37).
 - master: sweep every 30 min; re-stamp Gate A at n=5 (seed 46, ≈ 21:40 UTC); Gate B when S1's 25 runs are exported (≈ 2026-09-26); milestone audit before any push the author reads.
 - experiment: keep the daemon healthy; on a second failure of a cell, drop it and note it; summary/decomposition keys regenerated after each seed; no test read outside final_eval_test.py.
 - writing: bind keys as they appear; never compute a number; storyline move 2 now has its first measured sentence (reproduction under upstream's reporting conditions).
 
 ## Log
+- 2026-09-25 04:00 UTC agents switched to Opus 5.5 until Fri 20:00 UTC; decision authority restricted to pre-registered PASS stamps.
 - 2026-09-24 20:50 UTC milestone audit of the n=5 draft passed after 12 fixes; draft fit for the author.
 - 2026-09-24 20:30 UTC GATE A final at n=5: PASS-with-P-A (23.25 ± 0.47 raw final; 27.74 GT-mean gated reproduces README 27.71). Ladders running (L2 ×3 done).
 - 2026-09-24 12:58 UTC GATE A PASS (provisional n=4): 23.34 ± 0.49 raw; gated+GT-mean 27.76 reproduces README 27.71. Ladders launched.
