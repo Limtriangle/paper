@@ -58,7 +58,7 @@ deleted. Literature rows (first three) become citations with the number attribut
 | `23.25`, `0.47` | experiments.tex, introduction.tex | `gateA__summary_n5_v1.json: summary.gateA_L0.final.raw_psnr.{mean,sd}` (n=5) | 23.254, 0.470 |
 | `26.65`, `0.16` | experiments.tex; `0.16` also abstract, introduction, conclusion (headline seed SD, GT-mean = primary metric) | `summary.gateA_L0.final.gtmean_psnr.{mean,sd}` (n=5) | 26.645, 0.160 |
 | `27.73` | experiments.tex | `summary.gateA_L0.gated.gtmean_psnr.mean` | 27.735 |
-| `0.85` | experiments.tex | `summary.gateA_L0.k_final.median` and `s1__loss_ladder_v1.json: analysis.analysis_k.decision.summary.L0.k_final.median` (n=5) | 0.850 |
+| `0.85` | experiments.tex | `summary.gateA_L0.k_final.median` (n=5; the S1 file's L0 median now pools n=7 incl. seeds 47-48 and is not used, per the n=5 ruling) | 0.850 |
 | `0.2`, `1.13` | experiments.tex | `analysis.analysis_k.decision.constants.{k_init,k_released}` | 0.2, 1.1255 |
 | `0.29` | experiments.tex (L2 = A0 under the frozen loss; k moves 0.09 > 0.05, so A1 stays) | `analysis.analysis_k.decision.summary.L2.k_final.median` (n=5) | 0.294 |
 | `3.39` | abstract, introduction, experiments, appendix | `summary.gateA_L0.decomposition.gtmean_minus_raw.mean` (n=5) | 3.392 |

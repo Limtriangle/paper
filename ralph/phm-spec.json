@@ -249,8 +249,8 @@
   },
   {
    "written": "0.85",
-   "src": "s1__loss_ladder_v1.json",
-   "key": "analysis.analysis_k.decision.summary.L0.k_final.median",
+   "src": "gateA__summary_n5_v1.json",
+   "key": "summary.gateA_L0.k_final.median",
    "only_in": [
     "experiments.tex"
    ]
