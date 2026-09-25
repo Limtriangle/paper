@@ -1,0 +1,156 @@
+{
+  "run_id": "s3__selection_bias_v1",
+  "analysis": {
+    "analysis_s3": {
+      "decision": {
+        "L0": {
+          "per_seed": [
+            {
+              "seed": 42,
+              "oracle_max": 26.595609226245106,
+              "final": 26.52273248213699,
+              "oracle_minus_final": 0.07287674410811462
+            },
+            {
+              "seed": 43,
+              "oracle_max": 26.594695870892313,
+              "final": 26.521548932362485,
+              "oracle_minus_final": 0.07314693852982757
+            },
+            {
+              "seed": 44,
+              "oracle_max": 26.956625786256133,
+              "final": 26.904390848266477,
+              "oracle_minus_final": 0.05223493798965606
+            },
+            {
+              "seed": 45,
+              "oracle_max": 26.64680167482216,
+              "final": 26.588731788346003,
+              "oracle_minus_final": 0.05806988647615796
+            },
+            {
+              "seed": 46,
+              "oracle_max": 26.73743053659617,
+              "final": 26.690056479554695,
+              "oracle_minus_final": 0.0473740570414769
+            }
+          ],
+          "oracle_minus_final_mean": 0.06074051282904662,
+          "sd": 0.011825255780682924,
+          "paper_style_max_over_seeds": 26.956625786256133,
+          "warning": "oracle numbers are never used to rank arms"
+        },
+        "L1": {
+          "per_seed": [
+            {
+              "seed": 42,
+              "oracle_max": 26.50856684087787,
+              "final": 26.41648759353075,
+              "oracle_minus_final": 0.09207924734711881
+            },
+            {
+              "seed": 43,
+              "oracle_max": 26.73342291047194,
+              "final": 26.680955025051684,
+              "oracle_minus_final": 0.052467885420256266
+            },
+            {
+              "seed": 44,
+              "oracle_max": 26.746990333868045,
+              "final": 26.588595704144442,
+              "oracle_minus_final": 0.15839462972360252
+            },
+            {
+              "seed": 45,
+              "oracle_max": 26.652708002836707,
+              "final": 26.53195484163386,
+              "oracle_minus_final": 0.12075316120284896
+            },
+            {
+              "seed": 46,
+              "oracle_max": 26.775418137433984,
+              "final": 26.673805046072793,
+              "oracle_minus_final": 0.10161309136119101
+            }
+          ],
+          "oracle_minus_final_mean": 0.10506160301100351,
+          "sd": 0.038849612797338916,
+          "paper_style_max_over_seeds": 26.775418137433984,
+          "warning": "oracle numbers are never used to rank arms"
+        },
+        "L2": {
+          "per_seed": [
+            {
+              "seed": 42,
+              "oracle_max": 26.731134614614643,
+              "final": 26.588942283377104,
+              "oracle_minus_final": 0.14219233123753838
+            },
+            {
+              "seed": 43,
+              "oracle_max": 26.914240530827477,
+              "final": 26.86841971767852,
+              "oracle_minus_final": 0.04582081314895703
+            },
+            {
+              "seed": 44,
+              "oracle_max": 26.86659452266802,
+              "final": 26.828383940089218,
+              "oracle_minus_final": 0.03821058257880239
+            },
+            {
+              "seed": 45,
+              "oracle_max": 26.651211358948512,
+              "final": 26.611848395964156,
+              "oracle_minus_final": 0.03936296298435593
+            },
+            {
+              "seed": 46,
+              "oracle_max": 26.872632699405617,
+              "final": 26.77031386651099,
+              "oracle_minus_final": 0.10231883289462829
+            }
+          ],
+          "oracle_minus_final_mean": 0.0735811045688564,
+          "sd": 0.04670638680461881,
+          "paper_style_max_over_seeds": 26.914240530827477,
+          "warning": "oracle numbers are never used to rank arms"
+        }
+      }
+    }
+  },
+  "written_at": "2026-09-25T20:36:34",
+  "analysis_script": "auto-research/analysis_c1.py (frozen, imported unchanged)",
+  "analysis_sha256": "7fc297afdd08392e83709a31e5e687e029b75ff679a433a4c47ddd6dcd163d07",
+  "wrapper_sha256": "5862e7bfa0059f552d89e4f0ad4b00b22b2d5be9e2831d6d7d3e06249b0eb71e",
+  "arms_included": {
+    "L0": [
+      42,
+      43,
+      44,
+      45,
+      46
+    ],
+    "L1": [
+      42,
+      43,
+      44,
+      45,
+      46
+    ],
+    "L2": [
+      42,
+      43,
+      44,
+      45,
+      46
+    ]
+  },
+  "status": "partial",
+  "sources": {
+    "final_eval__test.json": "ad07467c24d24b902dce4e50cc2ae1b7f6e009638fcbb09ef389c82c0573f7af",
+    "final_eval__oracle.json": "315eb91d417553863d1a4ef7e46b561f99e09f15baf7bb99f5011a1cca0e84ea"
+  },
+  "notes": "oracle numbers are never used to rank arms"
+}

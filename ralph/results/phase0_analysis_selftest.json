@@ -121,5 +121,38 @@
   "expected_note": "A3-A4 plants +0.15 dB: below the 0.3 dB SESOI (rule 3b fails) and inside the +-0.3 dB TOST margin with the small synthetic seed SD, so 'removable' is the correct verdict; vocabulary = HVI-PLAN \u00a74 (contributes / removable / inconclusive)",
   "arm_summary_keys_present": true,
   "mde_db_A0-A2": 0.038788463929717625,
-  "all_as_expected": true
+  "all_as_expected": true,
+  "wrapper_selftest": {
+    "written_at": "2026-09-25T20:36:32",
+    "wrapper_sha256": "5862e7bfa0059f552d89e4f0ad4b00b22b2d5be9e2831d6d7d3e06249b0eb71e",
+    "analysis_sha256": "7fc297afdd08392e83709a31e5e687e029b75ff679a433a4c47ddd6dcd163d07",
+    "all_four_contrasts": {
+      "rule_outputs_identical_to_frozen": true,
+      "verdicts": {
+        "A0-A1": "removable",
+        "A0-A2": "contributes",
+        "A2-A3": "removable",
+        "A3-A4": "removable"
+      }
+    },
+    "interim_two_contrasts": {
+      "p_holm_ge_final": true,
+      "p_holm": {
+        "A0-A1": 1.0,
+        "A0-A2": 2.2894347387081065e-06
+      },
+      "verdicts": {
+        "A0-A1": "removable",
+        "A0-A2": "contributes"
+      }
+    },
+    "oracle_adapter": {
+      "mapped_keys": [
+        "A2_seed43",
+        "L0_seed42"
+      ],
+      "ok": true
+    },
+    "pass": true
+  }
 }
