@@ -184,11 +184,12 @@
     {
      "label": "L0 (upstream loss)",
      "job": "L0",
-     "ph": {
-      "/analysis.analysis_s1.decision.arm_summary.{cond}.psnr_gtmean.mean": 27.7,
-      "/analysis.analysis_s1.decision.arm_summary.{cond}.psnr_gtmean.sd": 0.3,
-      "/analysis.analysis_s1.decision.arm_summary.{cond}.psnr.mean": 23.8,
-      "/analysis.analysis_s1.decision.arm_summary.{cond}.psnr.sd": 0.3
+     "src": "gateA__summary_v1.json",
+     "keys": {
+      "/analysis.analysis_s1.decision.arm_summary.{cond}.psnr_gtmean.mean": "/summary.gateA_L0.final.gtmean_psnr.mean",
+      "/analysis.analysis_s1.decision.arm_summary.{cond}.psnr_gtmean.sd": "/summary.gateA_L0.final.gtmean_psnr.sd",
+      "/analysis.analysis_s1.decision.arm_summary.{cond}.psnr.mean": "/summary.gateA_L0.final.raw_psnr.mean",
+      "/analysis.analysis_s1.decision.arm_summary.{cond}.psnr.sd": "/summary.gateA_L0.final.raw_psnr.sd"
      }
     },
     {
@@ -215,9 +216,9 @@
      "label": "L3 (RGB only)",
      "job": "L3",
      "ph": {
-      "/analysis.analysis_s1.decision.arm_summary.{cond}.psnr_gtmean.mean": 27.0,
+      "/analysis.analysis_s1.decision.arm_summary.{cond}.psnr_gtmean.mean": 26.1,
       "/analysis.analysis_s1.decision.arm_summary.{cond}.psnr_gtmean.sd": 0.3,
-      "/analysis.analysis_s1.decision.arm_summary.{cond}.psnr.mean": 23.1,
+      "/analysis.analysis_s1.decision.arm_summary.{cond}.psnr.mean": 22.7,
       "/analysis.analysis_s1.decision.arm_summary.{cond}.psnr.sd": 0.3
      }
     },
@@ -225,9 +226,9 @@
      "label": "L4 (L2, $C_k$-weighted chroma)",
      "job": "L4",
      "ph": {
-      "/analysis.analysis_s1.decision.arm_summary.{cond}.psnr_gtmean.mean": 27.6,
+      "/analysis.analysis_s1.decision.arm_summary.{cond}.psnr_gtmean.mean": 26.7,
       "/analysis.analysis_s1.decision.arm_summary.{cond}.psnr_gtmean.sd": 0.3,
-      "/analysis.analysis_s1.decision.arm_summary.{cond}.psnr.mean": 23.7,
+      "/analysis.analysis_s1.decision.arm_summary.{cond}.psnr.mean": 23.3,
       "/analysis.analysis_s1.decision.arm_summary.{cond}.psnr.sd": 0.3
      }
     }
@@ -269,9 +270,9 @@
      "label": "A0 (HVI, learned $k$)",
      "job": "A0",
      "ph": {
-      "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr_gtmean.mean": 27.6,
+      "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr_gtmean.mean": 26.7,
       "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr_gtmean.sd": 0.3,
-      "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr.mean": 23.7,
+      "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr.mean": 23.3,
       "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr.sd": 0.3
      }
     },
@@ -279,9 +280,9 @@
      "label": "A1 (HVI, fixed $k$)",
      "job": "A1",
      "ph": {
-      "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr_gtmean.mean": 27.5,
+      "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr_gtmean.mean": 26.6,
       "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr_gtmean.sd": 0.3,
-      "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr.mean": 23.6,
+      "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr.mean": 23.2,
       "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr.sd": 0.3
      }
     },
@@ -289,9 +290,9 @@
      "label": "A2 (HVI, $k=0$)",
      "job": "A2",
      "ph": {
-      "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr_gtmean.mean": 27.2,
+      "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr_gtmean.mean": 26.3,
       "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr_gtmean.sd": 0.3,
-      "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr.mean": 23.3,
+      "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr.mean": 22.9,
       "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr.sd": 0.3
      }
     },
@@ -299,9 +300,9 @@
      "label": "A3 (max / Cb, Cr)",
      "job": "A3",
      "ph": {
-      "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr_gtmean.mean": 27.1,
+      "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr_gtmean.mean": 26.2,
       "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr_gtmean.sd": 0.3,
-      "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr.mean": 23.2,
+      "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr.mean": 22.8,
       "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr.sd": 0.3
      }
     },
@@ -309,9 +310,9 @@
      "label": "A4 (YCbCr)",
      "job": "A4",
      "ph": {
-      "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr_gtmean.mean": 27.1,
+      "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr_gtmean.mean": 26.2,
       "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr_gtmean.sd": 0.3,
-      "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr.mean": 23.0,
+      "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr.mean": 22.6,
       "/analysis.analysis_s2.decision.arm_summary.{cond}.psnr.sd": 0.3
      }
     }
@@ -363,7 +364,7 @@
      "job": "A0",
      "ph": {
       "/analysis.analysis_s3.decision.{cond}.oracle_minus_final_mean": 0.3,
-      "/analysis.analysis_s3.decision.{cond}.paper_style_max_over_seeds": 27.9
+      "/analysis.analysis_s3.decision.{cond}.paper_style_max_over_seeds": 26.8
      }
     },
     {
@@ -371,7 +372,7 @@
      "job": "A2",
      "ph": {
       "/analysis.analysis_s3.decision.{cond}.oracle_minus_final_mean": 0.3,
-      "/analysis.analysis_s3.decision.{cond}.paper_style_max_over_seeds": 27.5
+      "/analysis.analysis_s3.decision.{cond}.paper_style_max_over_seeds": 26.4
      }
     },
     {
@@ -379,7 +380,7 @@
      "job": "A3",
      "ph": {
       "/analysis.analysis_s3.decision.{cond}.oracle_minus_final_mean": 0.3,
-      "/analysis.analysis_s3.decision.{cond}.paper_style_max_over_seeds": 27.4
+      "/analysis.analysis_s3.decision.{cond}.paper_style_max_over_seeds": 26.3
      }
     },
     {
@@ -387,7 +388,7 @@
      "job": "A4",
      "ph": {
       "/analysis.analysis_s3.decision.{cond}.oracle_minus_final_mean": 0.3,
-      "/analysis.analysis_s3.decision.{cond}.paper_style_max_over_seeds": 27.4
+      "/analysis.analysis_s3.decision.{cond}.paper_style_max_over_seeds": 26.3
      }
     }
    ],

@@ -272,6 +272,254 @@
    ]
   },
   {
+   "written": "8",
+   "src": "gateA__summary_v1.json",
+   "key": "summary.gateA_L0.final.raw_psnr.n",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "23.26",
+   "src": "gateA__summary_v1.json",
+   "key": "summary.gateA_L0.final.raw_psnr.mean",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "0.41",
+   "src": "gateA__summary_v1.json",
+   "key": "summary.gateA_L0.final.raw_psnr.sd",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "-0.04",
+   "src": "gateA__summary_v1.json",
+   "key": "summary.gateA_L0.window.final_raw_mean_minus_lower",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "0.07",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.contrasts.L0-L1.mean",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "removable",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.contrasts.L0-L1.verdict",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "-0.16",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.contrasts.L1-L2.mean",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "5",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.contrasts.L1-L2.sign_agreement",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "removable",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.contrasts.L1-L2.verdict",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "0.07",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.contrasts.L0-L1.mean",
+   "only_in": [
+    "s1_contrasts.tex"
+   ]
+  },
+  {
+   "written": "0.17",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.contrasts.L0-L1.sd",
+   "only_in": [
+    "s1_contrasts.tex"
+   ]
+  },
+  {
+   "written": "-0.21",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.contrasts.L0-L1.ci_holm.0",
+   "only_in": [
+    "s1_contrasts.tex"
+   ]
+  },
+  {
+   "written": "0.35",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.contrasts.L0-L1.ci_holm.1",
+   "only_in": [
+    "s1_contrasts.tex"
+   ]
+  },
+  {
+   "written": "removable",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.contrasts.L0-L1.verdict",
+   "only_in": [
+    "s1_contrasts.tex"
+   ]
+  },
+  {
+   "written": "-0.16",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.contrasts.L1-L2.mean",
+   "only_in": [
+    "s1_contrasts.tex"
+   ]
+  },
+  {
+   "written": "0.07",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.contrasts.L1-L2.sd",
+   "only_in": [
+    "s1_contrasts.tex"
+   ]
+  },
+  {
+   "written": "-0.28",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.contrasts.L1-L2.ci_holm.0",
+   "only_in": [
+    "s1_contrasts.tex"
+   ]
+  },
+  {
+   "written": "-0.03",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.contrasts.L1-L2.ci_holm.1",
+   "only_in": [
+    "s1_contrasts.tex"
+   ]
+  },
+  {
+   "written": "removable",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.contrasts.L1-L2.verdict",
+   "only_in": [
+    "s1_contrasts.tex"
+   ]
+  },
+  {
+   "written": "26.63",
+   "src": "gateA__summary_v1.json",
+   "key": "summary.gateA_L0.final.gtmean_psnr.mean",
+   "only_in": [
+    "app_s1_arms.tex"
+   ]
+  },
+  {
+   "written": "0.16",
+   "src": "gateA__summary_v1.json",
+   "key": "summary.gateA_L0.final.gtmean_psnr.sd",
+   "only_in": [
+    "app_s1_arms.tex"
+   ]
+  },
+  {
+   "written": "23.26",
+   "src": "gateA__summary_v1.json",
+   "key": "summary.gateA_L0.final.raw_psnr.mean",
+   "only_in": [
+    "app_s1_arms.tex"
+   ]
+  },
+  {
+   "written": "0.41",
+   "src": "gateA__summary_v1.json",
+   "key": "summary.gateA_L0.final.raw_psnr.sd",
+   "only_in": [
+    "app_s1_arms.tex"
+   ]
+  },
+  {
+   "written": "26.58",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.arm_summary.L1.psnr_gtmean.mean",
+   "only_in": [
+    "app_s1_arms.tex"
+   ]
+  },
+  {
+   "written": "0.11",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.arm_summary.L1.psnr_gtmean.sd",
+   "only_in": [
+    "app_s1_arms.tex"
+   ]
+  },
+  {
+   "written": "23.04",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.arm_summary.L1.psnr.mean",
+   "only_in": [
+    "app_s1_arms.tex"
+   ]
+  },
+  {
+   "written": "0.41",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.arm_summary.L1.psnr.sd",
+   "only_in": [
+    "app_s1_arms.tex"
+   ]
+  },
+  {
+   "written": "26.73",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.arm_summary.L2.psnr_gtmean.mean",
+   "only_in": [
+    "app_s1_arms.tex"
+   ]
+  },
+  {
+   "written": "0.13",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.arm_summary.L2.psnr_gtmean.sd",
+   "only_in": [
+    "app_s1_arms.tex"
+   ]
+  },
+  {
+   "written": "23.31",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.arm_summary.L2.psnr.mean",
+   "only_in": [
+    "app_s1_arms.tex"
+   ]
+  },
+  {
+   "written": "0.34",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.arm_summary.L2.psnr.sd",
+   "only_in": [
+    "app_s1_arms.tex"
+   ]
+  },
+  {
    "written": "0.06",
    "src": "gateA__summary_n5_v1.json",
    "key": "summary.gateA_L0.decomposition.oracle_minus_final_gtmean.mean",
@@ -445,38 +693,6 @@
    "key": "entries.gateA_L0_seed46_valsel.metrics.psnr_gtmean",
    "only_in": [
     "app_gatea_seeds.tex"
-   ]
-  },
-  {
-   "written": "8",
-   "src": "gateA__summary_v1.json",
-   "key": "summary.gateA_L0.final.raw_psnr.n",
-   "only_in": [
-    "experiments.tex"
-   ]
-  },
-  {
-   "written": "23.26",
-   "src": "gateA__summary_v1.json",
-   "key": "summary.gateA_L0.final.raw_psnr.mean",
-   "only_in": [
-    "experiments.tex"
-   ]
-  },
-  {
-   "written": "0.41",
-   "src": "gateA__summary_v1.json",
-   "key": "summary.gateA_L0.final.raw_psnr.sd",
-   "only_in": [
-    "experiments.tex"
-   ]
-  },
-  {
-   "written": "-0.04",
-   "src": "gateA__summary_v1.json",
-   "key": "summary.gateA_L0.window.final_raw_mean_minus_lower",
-   "only_in": [
-    "experiments.tex"
    ]
   }
  ]
