@@ -446,6 +446,38 @@
    "only_in": [
     "app_gatea_seeds.tex"
    ]
+  },
+  {
+   "written": "8",
+   "src": "gateA__summary_v1.json",
+   "key": "summary.gateA_L0.final.raw_psnr.n",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "23.26",
+   "src": "gateA__summary_v1.json",
+   "key": "summary.gateA_L0.final.raw_psnr.mean",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "0.41",
+   "src": "gateA__summary_v1.json",
+   "key": "summary.gateA_L0.final.raw_psnr.sd",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "-0.04",
+   "src": "gateA__summary_v1.json",
+   "key": "summary.gateA_L0.window.final_raw_mean_minus_lower",
+   "only_in": [
+    "experiments.tex"
+   ]
   }
  ]
 }

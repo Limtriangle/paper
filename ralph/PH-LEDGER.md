@@ -68,6 +68,7 @@ deleted. Literature rows (first three) become citations with the number attribut
 | `0.41` | abstract, introduction, experiments (raw selection inflation) | `decomposition.oracle_minus_final.mean` (n=5) | 0.408 |
 | `23.66` | experiments.tex | `summary.gateA_L0.oracle.max_over_ckpt_mean.raw_psnr.mean` (oracle raw read, inside the window) | 23.662 |
 | `23.67` | experiments.tex | `summary.gateA_L0.gated.raw_psnr.mean` (gated raw read, inside the window) | 23.671 |
+| `8`, `23.26`, `0.41`, `-0.04` | experiments.tex (pooled reference-arm sentence, master ruling 2026-09-25) | `gateA__summary_v1.json: summary.gateA_L0.final.raw_psnr.{n,mean,sd}`, `window.final_raw_mean_minus_lower` (n=8) | 8, 23.264, 0.406, -0.036 |
 | `-0.05` | experiments.tex | `summary.gateA_L0.window.final_raw_mean_minus_lower` | -0.046 |
 | `101` | introduction.tex | `summary.gateA_L0.oracle.per_seed.42.n_checkpoints` | 101 |
 | `445` | method.tex, experiments.tex | `phase0_val_split_scene.json: n_train` | 445 |

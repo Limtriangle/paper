@@ -17,7 +17,10 @@ checkpoint. The shortfall is protocol, not model: we read the final checkpoint r
 a test-selected one, without the gate, after training on \phm{445} rather than 485 images.
 Every absolute number in this paper is therefore \emph{under our protocol}; the contrasts
 are unaffected, since every arm shares it. The seed SD of \phm{0.47}~dB passes the $\le 0.5$~dB gate but lies in the $0.4$--$0.5$
-band, so the pre-registered rule adds seeds 47--49 to A0, A2 and A3 (running). The learned $k$ ends at a median of \phm{0.85},
+band, so the pre-registered rule adds seeds 47--49 to A0, A2 and A3. Pooled over all
+\phm{8} seeds, the released recipe reaches \phm{23.26}~dB raw (SD \phm{0.41}~dB),
+$\phm{-0.04}$~dB from the window's lower edge; the gate verdict stays on the
+pre-registered five. The learned $k$ ends at a median of \phm{0.85},
 and the seed SD sets the paired minimum detectable effect at \ph{0.5}~dB below.
 
 \input{tables/s1_contrasts}
