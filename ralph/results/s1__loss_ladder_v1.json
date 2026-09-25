@@ -20,6 +20,7 @@
      "gateA/a0_l0_v2/L0_seed48/metrics.csv": "9130ee6b6e91da4b7b69d624c8c5b2e343cb3e644a8aee6d3de4df0d22a014d5",
      "gateA/a0_l0_v2/L0_seed49/metrics.csv": "0439a7bfc6bde142e2faacebeff4c43da6357cba8da8daad88665ad386cc5ad6",
      "s1/loss_ladder_v1/L1_seed42/metrics.csv": "96104524aab74a7a952dc9899c0b8377cd3a40851394bf6decf4cf4717987e21",
+     "s1/loss_ladder_v1/L1_seed43/metrics.csv": "0ef3e6e3b9f392e73e909512b2a70753fddbd80dbca191b94a9ce288a7a14f57",
      "s1/loss_ladder_v1/L2_seed42/metrics.csv": "f7af01a353c3aa9f21f3451f1dbefc11f2c91170a7443377b4af8dc962292a22",
      "s1/loss_ladder_v1/L2_seed43/metrics.csv": "09c77e24448d165c35566c1d8a527d96df22fa0d8fcfd8f423c5e0f25c459def",
      "s1/loss_ladder_v1/L2_seed44/metrics.csv": "f6e514011eac564c5117fa8c07ae19140dcdc261bd1d4002767239d06919f86f",
@@ -49,14 +50,15 @@
      },
      "L1": {
       "k_final": {
-       "max": 0.961597204208374,
-       "median": 0.961597204208374,
+       "max": 0.9754310846328735,
+       "median": 0.9685141444206238,
        "min": 0.961597204208374,
-       "n": 1,
+       "n": 2,
        "per_seed": {
-        "42": 0.961597204208374
+        "42": 0.961597204208374,
+        "43": 0.9754310846328735
        },
-       "sd": null
+       "sd": 0.009782030658287439
       },
       "k_learnable": true
      },
@@ -78,11 +80,11 @@
       "k_learnable": true
      }
     },
-    "written_at": "2026-09-25T10:23:50"
+    "written_at": "2026-09-25T10:41:59"
    }
   }
  },
- "exported_at": "2026-09-25T10:23:50",
+ "exported_at": "2026-09-25T10:41:59",
  "jobs": {
   "L1_seed42": {
    "best": {
@@ -168,6 +170,22 @@
    "status": "complete"
   },
   "L1_seed43": {
+   "best": {
+    "ab_error": 4.563525254545874,
+    "delta_e00": 8.502969699514388,
+    "edge_ab_error": 5.703553970392789,
+    "edge_delta_e00": 9.210424087832115,
+    "edge_psnr": 21.808565733401213,
+    "epoch": 120,
+    "lpips": 0.18607548102736474,
+    "lpips_gtmean": 0.17191930459812282,
+    "n": 40,
+    "n_images": 40,
+    "psnr": 22.791307775547615,
+    "psnr_gtmean": 27.526449516229224,
+    "ssim": 0.8488700538621009,
+    "ssim_gtmean": 0.8743835480211883
+   },
    "config": {
     "CUDA_VISIBLE_DEVICES": "2",
     "amp": false,
@@ -210,13 +228,29 @@
    "curve": {
     "best_val_psnr": 22.79130777554761,
     "best_val_psnr_epoch": 120,
-    "final_train_loss": 0.390034626105002,
-    "final_val_psnr": "",
-    "n_epochs": 957,
-    "train_seconds_total": 21426.664794683456
+    "final_train_loss": 0.38601007897939,
+    "final_val_psnr": 21.545332900125416,
+    "n_epochs": 1000,
+    "train_seconds_total": 22389.49083685875
    },
    "epochs_trained": 1000,
-   "status": "running"
+   "last": {
+    "ab_error": 4.043831402815323,
+    "delta_e00": 9.246926267991537,
+    "edge_ab_error": 5.1744239007369845,
+    "edge_delta_e00": 9.643497019383782,
+    "edge_psnr": 21.012878385756103,
+    "epoch": 1000,
+    "lpips": 0.12818765374831856,
+    "lpips_gtmean": 0.11075307792052627,
+    "n": 40,
+    "n_images": 40,
+    "psnr": 21.54533290012542,
+    "psnr_gtmean": 28.373891112293244,
+    "ssim": 0.8633239601245439,
+    "ssim_gtmean": 0.8959381878358675
+   },
+   "status": "complete"
   },
   "L1_seed44": {
    "config": {
@@ -261,10 +295,112 @@
    "curve": {
     "best_val_psnr": 22.58249346294204,
     "best_val_psnr_epoch": 445,
-    "final_train_loss": 0.39256760717502664,
+    "final_train_loss": 0.39175628072449137,
     "final_val_psnr": "",
-    "n_epochs": 921,
-    "train_seconds_total": 20515.459534406662
+    "n_epochs": 968,
+    "train_seconds_total": 21563.969769239426
+   },
+   "epochs_trained": 1000,
+   "status": "running"
+  },
+  "L1_seed45": {
+   "config": {
+    "CUDA_VISIBLE_DEVICES": "1",
+    "amp": false,
+    "batch_size": 8,
+    "channels": [
+     36,
+     36,
+     72,
+     144
+    ],
+    "condition": "L1",
+    "crop": 256,
+    "epochs_schedule": 1000,
+    "epochs_trained": 1000,
+    "gpu": "NVIDIA GeForce RTX 2080 Ti",
+    "heads": [
+     1,
+     2,
+     4,
+     8
+    ],
+    "lr": 0.0001,
+    "parameters": 1975569,
+    "script_sha256": "138696b4147efc3de9300a636e06e5bfa0bc633b5780a31c0cc390246353fa8e",
+    "seed": 45,
+    "step_limit": 0,
+    "test15": "NEVER READ",
+    "torch": "2.7.0a0+7c8ec84dab.nv25.03",
+    "val_limit": 0,
+    "variant": "L1",
+    "weights": {
+     "HVI": 1.0,
+     "L1": 1.0,
+     "SSIM": 0.5,
+     "edge": 50.0,
+     "perceptual": 0.01
+    },
+    "width": 36
+   },
+   "curve": {
+    "best_val_psnr": "",
+    "best_val_psnr_epoch": 1,
+    "final_train_loss": 2.1302236786910465,
+    "final_val_psnr": "",
+    "n_epochs": 2,
+    "train_seconds_total": 45.25015902519226
+   },
+   "epochs_trained": 1000,
+   "status": "running"
+  },
+  "L1_seed46": {
+   "config": {
+    "CUDA_VISIBLE_DEVICES": "3",
+    "amp": false,
+    "batch_size": 8,
+    "channels": [
+     36,
+     36,
+     72,
+     144
+    ],
+    "condition": "L1",
+    "crop": 256,
+    "epochs_schedule": 1000,
+    "epochs_trained": 1000,
+    "gpu": "NVIDIA GeForce RTX 2080 Ti",
+    "heads": [
+     1,
+     2,
+     4,
+     8
+    ],
+    "lr": 0.0001,
+    "parameters": 1975569,
+    "script_sha256": "138696b4147efc3de9300a636e06e5bfa0bc633b5780a31c0cc390246353fa8e",
+    "seed": 46,
+    "step_limit": 0,
+    "test15": "NEVER READ",
+    "torch": "2.7.0a0+7c8ec84dab.nv25.03",
+    "val_limit": 0,
+    "variant": "L1",
+    "weights": {
+     "HVI": 1.0,
+     "L1": 1.0,
+     "SSIM": 0.5,
+     "edge": 50.0,
+     "perceptual": 0.01
+    },
+    "width": 36
+   },
+   "curve": {
+    "best_val_psnr": "",
+    "best_val_psnr_epoch": 1,
+    "final_train_loss": 2.1882805824279785,
+    "final_val_psnr": "",
+    "n_epochs": 2,
+    "train_seconds_total": 45.47195768356323
    },
    "epochs_trained": 1000,
    "status": "running"
@@ -690,8 +826,8 @@
   "split_sha256": "b0dde62736e3f59148fda31dd9dfa56a1b76af8b2be6637a57b5119b35428909"
  },
  "n_jobs": {
-  "complete": 6,
-  "total": 8
+  "complete": 7,
+  "total": 10
  },
  "protocol": {
   "augmentation": "RandomCrop(crop) + RandomHorizontalFlip + RandomVerticalFlip, same crop/flips for low and high (data/data.py:7-13)",
@@ -784,12 +920,19 @@
   "L1_seed42/metrics.csv": "96104524aab74a7a952dc9899c0b8377cd3a40851394bf6decf4cf4717987e21",
   "L1_seed42/status.json": "3e18aba5aee9cfce22f54da27fdce59399e371e5a78b22adf7c7cdd4923635b2",
   "L1_seed42/validation_summary.csv": "f003ab0af5c50e0fe65a82a389f8870c86c02cb1d6d6d4da4ce594086b4f0a71",
-  "L1_seed43/config.json": "242f7938f20fbd1f362500a21705cea56378195abe79f4e8641337e4a3ca4c8a",
-  "L1_seed43/metrics.csv": "aadf859c1db92e638cec5ee135ea45702a583a24f02eae6bb84d30a3f14ee01c",
-  "L1_seed43/status.json": "a090b2574b8c695015c8b539551fa1026c8cdb41818649fd9883d4c2f0f3efd6",
+  "L1_seed43/config.json": "d5beee9bd35f7e9404bd9f4198eef0359d77b5beed2629ce5f7b318b2372fb6e",
+  "L1_seed43/metrics.csv": "0ef3e6e3b9f392e73e909512b2a70753fddbd80dbca191b94a9ce288a7a14f57",
+  "L1_seed43/status.json": "bd6ddb5e84720c88a5e6460f7f2f2be5972232e1ca635ddb086de7e54714139a",
+  "L1_seed43/validation_summary.csv": "8108fda5caf2dc77b670dbf09e80e9838729f3c0fc3e1daeb1aad4733beeda70",
   "L1_seed44/config.json": "c7a32b621ce53a9b0b45ed7617fbee391d97a4c76e937ef005ab43fcf89f732b",
-  "L1_seed44/metrics.csv": "14a3a1808005682d0b314d9fec764d256c5ea251d5f1f94e032f78fd411471f6",
-  "L1_seed44/status.json": "911093360a4ceef89e0896026b60200b7fe829c9fb1079826f883c6740da220f",
+  "L1_seed44/metrics.csv": "61b0ce6943d430c5d085c6760286257e6fee20b3551641c8856ec4cb98a9cb5d",
+  "L1_seed44/status.json": "52940b93271a11a3468415cf4dceb53648e5a9baac4926c8afd0b5c59428a58a",
+  "L1_seed45/config.json": "427c0953f8ef071eb8209c13084da0075644b0905313c3a54fdcda93292993af",
+  "L1_seed45/metrics.csv": "85fee094459f0f1b341fccceca6332dfe10d06f2ed70827b1e9eb9f34605a046",
+  "L1_seed45/status.json": "427b06c144f8b6800812a342d0358ec4a73364acc86c0bef9e2ac61c8b9ce30e",
+  "L1_seed46/config.json": "1c969a186b0623a010ce851a83dffb792d33d587a066c5c01ce62d057c32a766",
+  "L1_seed46/metrics.csv": "41c5f5d118d05003f1c7aab117c49fb50ed33975ae26aee0854c06276498fe30",
+  "L1_seed46/status.json": "51edf99d2037d95acd971fbd9a649872fbcde6211e87c1727cc60c6b0b60b1b7",
   "L2_seed42/config.json": "2b474d76212a19c976d2425bb0b811482ad714fcf4d30ccdc675cf5f3836e457",
   "L2_seed42/metrics.csv": "f7af01a353c3aa9f21f3451f1dbefc11f2c91170a7443377b4af8dc962292a22",
   "L2_seed42/status.json": "c5fcf1f4246d1cf7b3dc4a2408f1e475538b99648df4bbe9becbfc2bbe1d71ec",
@@ -810,8 +953,8 @@
   "L2_seed46/metrics.csv": "b49fea0e2995cbbc1df24bd633ea029e9e77a3a7295658b5b791021bc91f5f7a",
   "L2_seed46/status.json": "e20fbe6cb77e43b4451d757ac85a01f7519f4b57c534091e7ae38c8fb26bb594",
   "L2_seed46/validation_summary.csv": "ba7b42bf225c87fd9a6e4c8ca69758da8318fcd6f1d251b7c8b5b8b764a8a77c",
-  "analysis_k/decision.json": "3892db51fb5e52d0d886035d05dc090ebcceda3b7c52bd0d90223528e9b28e5e",
-  "manifest.json": "65d59e8c275975cd3378e16fa6bb2a48cf5de5afb4e45444ed88b99e820f7e87"
+  "analysis_k/decision.json": "6ab62be822614a322ba68ab5be9a8536865b37fc6fc7b7588ab74df9562bbe30",
+  "manifest.json": "d0f271f881935572fd66be248613d95807fdd207fe02be69650da818880df870"
  },
  "status": "partial",
  "study": "s1"
