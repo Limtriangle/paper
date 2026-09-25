@@ -1,5 +1,5 @@
 {
- "exported_at": "2026-09-24T20:24:46",
+ "exported_at": "2026-09-25T02:01:35",
  "jobs": {
   "L2_seed42": {
    "best": {
@@ -251,6 +251,22 @@
    "status": "complete"
   },
   "L2_seed45": {
+   "best": {
+    "ab_error": 4.286529692902711,
+    "delta_e00": 8.565417070863312,
+    "edge_ab_error": 5.3133959377799895,
+    "edge_delta_e00": 9.183352040531423,
+    "edge_psnr": 21.606002281651993,
+    "epoch": 280,
+    "lpips": 0.13783714100718497,
+    "lpips_gtmean": 0.12390798451378941,
+    "n": 40,
+    "n_images": 40,
+    "psnr": 22.43307745358891,
+    "psnr_gtmean": 27.725212629886045,
+    "ssim": 0.8624094551975485,
+    "ssim_gtmean": 0.8909398385047382
+   },
    "config": {
     "CUDA_VISIBLE_DEVICES": "3",
     "amp": false,
@@ -291,15 +307,31 @@
     "width": 36
    },
    "curve": {
-    "best_val_psnr": 22.231387984276058,
-    "best_val_psnr_epoch": 90,
-    "final_train_loss": 0.5434339945869786,
-    "final_val_psnr": "",
-    "n_epochs": 134,
-    "train_seconds_total": 2999.9187195301056
+    "best_val_psnr": 22.433077453588908,
+    "best_val_psnr_epoch": 280,
+    "final_train_loss": 0.37415254062839914,
+    "final_val_psnr": 21.818746996618987,
+    "n_epochs": 1000,
+    "train_seconds_total": 22386.989087820053
    },
    "epochs_trained": 1000,
-   "status": "running"
+   "last": {
+    "ab_error": 4.159161677020707,
+    "delta_e00": 9.1218549729243,
+    "edge_ab_error": 5.105068496402831,
+    "edge_delta_e00": 9.600474792727622,
+    "edge_psnr": 21.204991151678037,
+    "epoch": 1000,
+    "lpips": 0.1309832435566932,
+    "lpips_gtmean": 0.1147437154315412,
+    "n": 40,
+    "n_images": 40,
+    "psnr": 21.818746996618984,
+    "psnr_gtmean": 28.257807387805947,
+    "ssim": 0.8607332042063369,
+    "ssim_gtmean": 0.8943601157830903
+   },
+   "status": "complete"
   },
   "L2_seed46": {
    "config": {
@@ -342,12 +374,12 @@
     "width": 36
    },
    "curve": {
-    "best_val_psnr": 21.883783721490822,
-    "best_val_psnr_epoch": 30,
-    "final_train_loss": 0.6540023780294827,
+    "best_val_psnr": 22.527312622699917,
+    "best_val_psnr_epoch": 195,
+    "final_train_loss": 0.3676105210823672,
     "final_val_psnr": "",
-    "n_epochs": 72,
-    "train_seconds_total": 1612.4787104129791
+    "n_epochs": 939,
+    "train_seconds_total": 21034.971186876297
    },
    "epochs_trained": 1000,
    "status": "running"
@@ -358,7 +390,7 @@
   "split_sha256": "b0dde62736e3f59148fda31dd9dfa56a1b76af8b2be6637a57b5119b35428909"
  },
  "n_jobs": {
-  "complete": 3,
+  "complete": 4,
   "total": 5
  },
  "protocol": {
@@ -460,12 +492,13 @@
   "L2_seed44/metrics.csv": "f6e514011eac564c5117fa8c07ae19140dcdc261bd1d4002767239d06919f86f",
   "L2_seed44/status.json": "417752a12d721c22391443a557eea802db1341199b1bf9f8d3928188e8df71a5",
   "L2_seed44/validation_summary.csv": "4a03967d6c85081953378de826be5ab3b901d20698d35193d9f7eb5f81063b1b",
-  "L2_seed45/config.json": "30fc2e8bcdb363b8911f98dbad169925d61593264a1dc73e41703530344e7a07",
-  "L2_seed45/metrics.csv": "acea77cc2f49de3edfa4a0b892b842dac250610c701a384709a0d2f68fa480c1",
-  "L2_seed45/status.json": "d1efdf4c89b3cf8b9155ea4532b1a4651e02b3755b1a77efe3f2826da7d1526d",
+  "L2_seed45/config.json": "7dbb9a8b9b322f7e8418cc8797f5e47591c8b3ef378a0c7b51060d0712d860ad",
+  "L2_seed45/metrics.csv": "395ecc28b8d09b136e07d3a74c5996809c33a2247674c644c5d6ce6652d8cfd9",
+  "L2_seed45/status.json": "ce9793ab4e741506b0d51e6fd9ca6d179846576b693058d251fe0b5b840e536d",
+  "L2_seed45/validation_summary.csv": "85a96b99b028009e6073518145c182914c15baee6b98670cbe953db16047d176",
   "L2_seed46/config.json": "d4be1ff54d8a66ff16df71270afe2013741126606a338a75741c364205ff6c1e",
-  "L2_seed46/metrics.csv": "ed7ead0b92494ad2e656313b52eb413aeffbf853504a29a8aec20fc808a95605",
-  "L2_seed46/status.json": "f8b0fe19b7b875f563aec9d84c9ebabe43bf530ba89fab5bb4f8907ad83494a9",
+  "L2_seed46/metrics.csv": "71a26d1c883f641eaaf1f5aace200d84bcf06a29ecb6d2e56e6894a27ac928e1",
+  "L2_seed46/status.json": "3ef5ba1d9bf700a1049ba2d3fd7b8569bf4bd7f14f634a7a7e0ec79e068f9dcb",
   "manifest.json": "cf24b611284f8f768237d263ac2d26ff6e2d8dfc262db646d428afa568c10bc5"
  },
  "status": "partial",
