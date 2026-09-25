@@ -9351,9 +9351,2814 @@
       "n_checkpoints": 101,
       "max_psnr_gtmean": 26.872632699405617,
       "warning": "ORACLE: test-split scores of every saved checkpoint; NEVER used for selection or ranking"
+    },
+    "oracle_gateA_L0_seed47": {
+      "kind": "oracle",
+      "label": "oracle_gateA_L0_seed47",
+      "job": "/home/work/research/outputs/gateA/a0_l0_v2/L0_seed47",
+      "split": "eval15 (15 pairs)",
+      "notes": "Gate A K0 decomposition (DECISIONS 2026-09-24): paper-style max over saved checkpoints; NOT for selection",
+      "config": {
+        "arm": "L0",
+        "seed": 47,
+        "split_sha256": "b0dde62736e3f59148fda31dd9dfa56a1b76af8b2be6637a57b5119b35428909",
+        "script_sha256": "138696b4147efc3de9300a636e06e5bfa0bc633b5780a31c0cc390246353fa8e",
+        "commit": "eb43d7d91e9a336c66856824ff9e4603ae41f408"
+      },
+      "test_split_access": {
+        "test_split_accessed": true,
+        "scope": "evaluate: the one final evaluation per reported configuration",
+        "reason": "oracle evaluation of oracle_gateA_L0_seed47",
+        "script": "/home/work/research/paper/auto-research/final_eval_test.py"
+      },
+      "evaluated_at": "2026-09-25T10:06:46",
+      "curve": [
+        {
+          "checkpoint": "epoch_0010.pt",
+          "epoch": 10,
+          "sha256": "c373685bc2e6f2ff7c989c5438a34adb949f67c5fdcf162d43ef85db9640a4b1",
+          "psnr": 18.669898610910295,
+          "psnr_gtmean": 23.83370330783762,
+          "ssim": 0.7506492126869715,
+          "lpips": 0.2683403770128886
+        },
+        {
+          "checkpoint": "epoch_0020.pt",
+          "epoch": 20,
+          "sha256": "ab1c4d15565acc0f147435977a720251106c5b6b95bcad77e33d77b1a9377a1d",
+          "psnr": 19.70426547449506,
+          "psnr_gtmean": 23.79757353980236,
+          "ssim": 0.7656246620585122,
+          "lpips": 0.26915349761644997
+        },
+        {
+          "checkpoint": "epoch_0030.pt",
+          "epoch": 30,
+          "sha256": "35622742c00052e9c3b38ccd18d556133e0498a000055b4d2a76fd204df35d7a",
+          "psnr": 20.075833584980288,
+          "psnr_gtmean": 24.14556750588885,
+          "ssim": 0.7669382922542282,
+          "lpips": 0.26552633543809256
+        },
+        {
+          "checkpoint": "epoch_0040.pt",
+          "epoch": 40,
+          "sha256": "89d054e3abc4a83e8cd8ca4f4c507390a6cec54ac387bd373f50d2c106e5c4ed",
+          "psnr": 20.093071849608176,
+          "psnr_gtmean": 24.419170266810852,
+          "ssim": 0.7785346900729657,
+          "lpips": 0.2542910039424896
+        },
+        {
+          "checkpoint": "epoch_0050.pt",
+          "epoch": 50,
+          "sha256": "41e08dbec99f561b34a584803a155bea02eb03c7ab1e4c9c40cbce2c1d16306a",
+          "psnr": 20.181510298897212,
+          "psnr_gtmean": 24.19744572103444,
+          "ssim": 0.7778208890477372,
+          "lpips": 0.24602345327536265
+        },
+        {
+          "checkpoint": "epoch_0060.pt",
+          "epoch": 60,
+          "sha256": "b06b170fa910c9edc0579f537a0c0d84cb7e3fef1c2fa99de588745e5aae24de",
+          "psnr": 19.640436927674276,
+          "psnr_gtmean": 24.223339675386917,
+          "ssim": 0.7749856797835185,
+          "lpips": 0.24001846313476563
+        },
+        {
+          "checkpoint": "epoch_0070.pt",
+          "epoch": 70,
+          "sha256": "40580dcd8f87e2b6f7ba5bc602d940a739e0c2b39d21c8d343676dc40527c255",
+          "psnr": 20.74797952360144,
+          "psnr_gtmean": 24.735141991847055,
+          "ssim": 0.7905605504133283,
+          "lpips": 0.2165411114692688
+        },
+        {
+          "checkpoint": "epoch_0080.pt",
+          "epoch": 80,
+          "sha256": "09d712518e85519605db37119c1e8080f90699767bdefe9d9401ceef1421619b",
+          "psnr": 20.437899214095115,
+          "psnr_gtmean": 24.08234887014677,
+          "ssim": 0.7936231348470845,
+          "lpips": 0.21674081087112426
+        },
+        {
+          "checkpoint": "epoch_0090.pt",
+          "epoch": 90,
+          "sha256": "c9939177d42ec3ac4460c227f16d9cb3a8fafb094221cca5cfa6cb46a6ead06e",
+          "psnr": 20.411214654785496,
+          "psnr_gtmean": 24.717296258153784,
+          "ssim": 0.7967230440393221,
+          "lpips": 0.19746416310469309
+        },
+        {
+          "checkpoint": "epoch_0100.pt",
+          "epoch": 100,
+          "sha256": "66c11acef3a7fac5f74d14b59a24e8fb7e21b816cd0c9d534fad2c26dcba3487",
+          "psnr": 20.756676756636992,
+          "psnr_gtmean": 24.77566945335127,
+          "ssim": 0.8041307829513897,
+          "lpips": 0.17721149673064548
+        },
+        {
+          "checkpoint": "epoch_0110.pt",
+          "epoch": 110,
+          "sha256": "d12f4940b4130b48f8c9e9740e3b8dcc77bacc268c13c8478a0f7852eebf94a2",
+          "psnr": 20.26286103992565,
+          "psnr_gtmean": 24.712922115005213,
+          "ssim": 0.7987152190677278,
+          "lpips": 0.17619608839352927
+        },
+        {
+          "checkpoint": "epoch_0120.pt",
+          "epoch": 120,
+          "sha256": "15be9473d32f1b25b293fc9b471187edc85ff39e01a0e9cc75a5f2cc94b06217",
+          "psnr": 21.11309252853461,
+          "psnr_gtmean": 24.991416827924564,
+          "ssim": 0.8117608907845757,
+          "lpips": 0.1602707674105962
+        },
+        {
+          "checkpoint": "epoch_0130.pt",
+          "epoch": 130,
+          "sha256": "f54933a9f0d2435fcf38881868a219b65827069ce20c55283d16a0be157bd1b2",
+          "psnr": 21.387013140604452,
+          "psnr_gtmean": 25.047416443943494,
+          "ssim": 0.8158594727131391,
+          "lpips": 0.1524691214164098
+        },
+        {
+          "checkpoint": "epoch_0140.pt",
+          "epoch": 140,
+          "sha256": "a74f93a51c1a2152c18e52f275dd527a2569a9745e15941e16f5925a01ae2524",
+          "psnr": 21.379801933123474,
+          "psnr_gtmean": 25.057327002417345,
+          "ssim": 0.8197465893898809,
+          "lpips": 0.14700772215922672
+        },
+        {
+          "checkpoint": "epoch_0150.pt",
+          "epoch": 150,
+          "sha256": "ba795d73f762ffbe53637d23fb680612e85311ca82b3cd36cf9ec845f25a05fe",
+          "psnr": 21.315489307769507,
+          "psnr_gtmean": 25.212110896736373,
+          "ssim": 0.8150384380601406,
+          "lpips": 0.1536671608686447
+        },
+        {
+          "checkpoint": "epoch_0160.pt",
+          "epoch": 160,
+          "sha256": "1d1b87ece0fc4b95b950f132594a1046208566fee6ff3d9693727f71426cf708",
+          "psnr": 21.41757378234475,
+          "psnr_gtmean": 25.37909402874332,
+          "ssim": 0.8151269530244228,
+          "lpips": 0.14863665501276652
+        },
+        {
+          "checkpoint": "epoch_0170.pt",
+          "epoch": 170,
+          "sha256": "94ad074ace9acfccf3d43ca71ae14d769b01b4898613daf540909682464dca06",
+          "psnr": 21.845290615073896,
+          "psnr_gtmean": 25.373410290811453,
+          "ssim": 0.8181203078291174,
+          "lpips": 0.1474731852610906
+        },
+        {
+          "checkpoint": "epoch_0180.pt",
+          "epoch": 180,
+          "sha256": "ec299d42d5ba25f0c417adcf256565f23738202676eaf6df14ab23ea22f1a548",
+          "psnr": 21.625968754915103,
+          "psnr_gtmean": 25.462569696393423,
+          "ssim": 0.8231128506282904,
+          "lpips": 0.1446329856912295
+        },
+        {
+          "checkpoint": "epoch_0190.pt",
+          "epoch": 190,
+          "sha256": "4c6a5315f8f3d1e894d6020e70e1cda711c54d772b818924de0a4154dc5e385f",
+          "psnr": 21.853104885263257,
+          "psnr_gtmean": 25.553767176785527,
+          "ssim": 0.8175592101007578,
+          "lpips": 0.14593305687109628
+        },
+        {
+          "checkpoint": "epoch_0200.pt",
+          "epoch": 200,
+          "sha256": "0603b6d3a4b881b1fa40f1dc88af91b533947fa7263183415461afc439100037",
+          "psnr": 22.413756749317145,
+          "psnr_gtmean": 25.962112563268306,
+          "ssim": 0.8244298175013394,
+          "lpips": 0.13655398587385814
+        },
+        {
+          "checkpoint": "epoch_0210.pt",
+          "epoch": 210,
+          "sha256": "f22b45c9a757613bd6e34906ad00fae98ba39613118a90132fb31847136b11d0",
+          "psnr": 22.85446132052758,
+          "psnr_gtmean": 26.0260836850187,
+          "ssim": 0.8263131189744115,
+          "lpips": 0.13706589589516321
+        },
+        {
+          "checkpoint": "epoch_0220.pt",
+          "epoch": 220,
+          "sha256": "43fa141df78e3149040a6f7193fad396f13f4d659ee93d39ab72044b261671cf",
+          "psnr": 22.933569573253383,
+          "psnr_gtmean": 25.865309220935913,
+          "ssim": 0.828619237428881,
+          "lpips": 0.140888516108195
+        },
+        {
+          "checkpoint": "epoch_0230.pt",
+          "epoch": 230,
+          "sha256": "9d077eecd069e3fe32b31f896ce33bfd100425a49bf9442beb3d4a4fb051218b",
+          "psnr": 23.089609999421512,
+          "psnr_gtmean": 26.11176668168002,
+          "ssim": 0.8319078861393205,
+          "lpips": 0.1273210048675537
+        },
+        {
+          "checkpoint": "epoch_0240.pt",
+          "epoch": 240,
+          "sha256": "14d7e49e0eecc607056fa354ad10dc83c30c8a3c9c048c546e849a209ade616b",
+          "psnr": 22.23498906912566,
+          "psnr_gtmean": 25.86936101216122,
+          "ssim": 0.8250943432617738,
+          "lpips": 0.13467541784048082
+        },
+        {
+          "checkpoint": "epoch_0250.pt",
+          "epoch": 250,
+          "sha256": "24ba7294f4bd041b42b5e9af12db4ec34948804c49e2ff9e569080a8f7195695",
+          "psnr": 21.607705689463284,
+          "psnr_gtmean": 26.136884575309338,
+          "ssim": 0.8311932047428336,
+          "lpips": 0.131022543211778
+        },
+        {
+          "checkpoint": "epoch_0260.pt",
+          "epoch": 260,
+          "sha256": "8c730c135392188bc78293312a67b2e76873266ee5510e67c2329553bb52f372",
+          "psnr": 23.20906565263357,
+          "psnr_gtmean": 26.146742871143882,
+          "ssim": 0.8315371340443303,
+          "lpips": 0.13253064900636674
+        },
+        {
+          "checkpoint": "epoch_0270.pt",
+          "epoch": 270,
+          "sha256": "5e84660fee529d902b70e9e596959986307386e959e09b3d68d4d6160181791d",
+          "psnr": 22.757329167411875,
+          "psnr_gtmean": 26.0222519292101,
+          "ssim": 0.8319619009383703,
+          "lpips": 0.12838905801375708
+        },
+        {
+          "checkpoint": "epoch_0280.pt",
+          "epoch": 280,
+          "sha256": "106908f7442ab6610dd208834c5f4efabba85d0a6284e15cb16a2b470173d4c2",
+          "psnr": 22.362347904584357,
+          "psnr_gtmean": 26.065794094425552,
+          "ssim": 0.8302886751818976,
+          "lpips": 0.13094585090875627
+        },
+        {
+          "checkpoint": "epoch_0290.pt",
+          "epoch": 290,
+          "sha256": "887e7f212a6eb2be4c268300dca0c6edfebe0de81a56bb5a81bd3914955796a0",
+          "psnr": 23.12196492441674,
+          "psnr_gtmean": 26.256286398700173,
+          "ssim": 0.8319844089655208,
+          "lpips": 0.13199230780204138
+        },
+        {
+          "checkpoint": "epoch_0300.pt",
+          "epoch": 300,
+          "sha256": "04ec5f0816cbe144d197d475c48fc6c8b8d41889fe6790bcb6d8be5c577eac97",
+          "psnr": 23.822750390034475,
+          "psnr_gtmean": 26.214163102101804,
+          "ssim": 0.8350264540336759,
+          "lpips": 0.12621096620957056
+        },
+        {
+          "checkpoint": "epoch_0310.pt",
+          "epoch": 310,
+          "sha256": "d770e380bc30d093ad16dd702f22b5b15bfee27d2b8d6e5bb1e39ddf06f00e5e",
+          "psnr": 23.286749467540893,
+          "psnr_gtmean": 26.068734125121445,
+          "ssim": 0.8326799838719691,
+          "lpips": 0.1356493502855301
+        },
+        {
+          "checkpoint": "epoch_0320.pt",
+          "epoch": 320,
+          "sha256": "bb946d1991f7ace03a02b1db83261254c94f56b4442a5543c7d409cafc20bc74",
+          "psnr": 22.647737073974984,
+          "psnr_gtmean": 26.35866900111878,
+          "ssim": 0.8337103394789118,
+          "lpips": 0.12551971177260082
+        },
+        {
+          "checkpoint": "epoch_0330.pt",
+          "epoch": 330,
+          "sha256": "e6cc6578c6d0efea735cadedf2771bf07843ae856669b5fbaeb237462eb18bc8",
+          "psnr": 22.867865545253782,
+          "psnr_gtmean": 26.312212638962325,
+          "ssim": 0.834495091167654,
+          "lpips": 0.12609308908383052
+        },
+        {
+          "checkpoint": "epoch_0340.pt",
+          "epoch": 340,
+          "sha256": "c34aa285b98bdc990a2f37bbba5c63d408de305a328627fa4d3335d3d26fa8bb",
+          "psnr": 21.772898482107006,
+          "psnr_gtmean": 25.917777035090424,
+          "ssim": 0.8304777600053563,
+          "lpips": 0.12931433270374934
+        },
+        {
+          "checkpoint": "epoch_0350.pt",
+          "epoch": 350,
+          "sha256": "d006f88daf53966ed965eb4292a79bc9b0420d8676890f4b6724623b8fb49484",
+          "psnr": 22.317804020226855,
+          "psnr_gtmean": 26.279865395732223,
+          "ssim": 0.8337033859452464,
+          "lpips": 0.12447453439235687
+        },
+        {
+          "checkpoint": "epoch_0360.pt",
+          "epoch": 360,
+          "sha256": "6ffa17c36ca26f815b6476d52d13eea3287b8352942b02ceacccc249f833c8c5",
+          "psnr": 23.025077301081772,
+          "psnr_gtmean": 26.289414789808696,
+          "ssim": 0.8340346544058066,
+          "lpips": 0.12150142093499501
+        },
+        {
+          "checkpoint": "epoch_0370.pt",
+          "epoch": 370,
+          "sha256": "9682f6664d2c38caaa4516b3c3ff1cae87d5d6c821091ae98d76926c871e495c",
+          "psnr": 23.624991883508134,
+          "psnr_gtmean": 26.538179134257465,
+          "ssim": 0.8401272682763892,
+          "lpips": 0.11914463688929876
+        },
+        {
+          "checkpoint": "epoch_0380.pt",
+          "epoch": 380,
+          "sha256": "c014cd2428c26460297abe058e60e7e4f26d4fd5dafd56b0c4688ebfa4f3b6aa",
+          "psnr": 23.16510249399607,
+          "psnr_gtmean": 26.372530355044812,
+          "ssim": 0.8348899213833839,
+          "lpips": 0.12140292823314666
+        },
+        {
+          "checkpoint": "epoch_0390.pt",
+          "epoch": 390,
+          "sha256": "d3a6fe00f43d7da877ccfa760e52b2cef7e978a84d631b619ce2b13e325564b0",
+          "psnr": 23.137203848778515,
+          "psnr_gtmean": 26.48449362557418,
+          "ssim": 0.8375218237561649,
+          "lpips": 0.12150714099407196
+        },
+        {
+          "checkpoint": "epoch_0400.pt",
+          "epoch": 400,
+          "sha256": "cbba06611a1eb8add7dc0ab5d58f21d57f817b3ea1f4a920cf7b9d15998fe089",
+          "psnr": 22.608123886480403,
+          "psnr_gtmean": 26.39360240503181,
+          "ssim": 0.8381310833965598,
+          "lpips": 0.11868213464816411
+        },
+        {
+          "checkpoint": "epoch_0410.pt",
+          "epoch": 410,
+          "sha256": "7e137e08c6f4385df8bc4b13a7c1d1c0e7d8f38ae66e8c40a47173761a0e3a82",
+          "psnr": 22.605718069847953,
+          "psnr_gtmean": 26.40095220779233,
+          "ssim": 0.8350354339048568,
+          "lpips": 0.119821930428346
+        },
+        {
+          "checkpoint": "epoch_0420.pt",
+          "epoch": 420,
+          "sha256": "ac84ad1bda3285e99f3bd72bb94925ad6c513707a0b90b331c65bb352405aef3",
+          "psnr": 22.913877897988083,
+          "psnr_gtmean": 26.242685058505025,
+          "ssim": 0.8384727016720871,
+          "lpips": 0.11713137626647949
+        },
+        {
+          "checkpoint": "epoch_0430.pt",
+          "epoch": 430,
+          "sha256": "f8d25f4b43e593da7e0c97267e118cf27f53bc5217452c6b58298b1e2257bcdb",
+          "psnr": 22.71703554791113,
+          "psnr_gtmean": 26.26959430166779,
+          "ssim": 0.8364719813925815,
+          "lpips": 0.12085423370202382
+        },
+        {
+          "checkpoint": "epoch_0440.pt",
+          "epoch": 440,
+          "sha256": "599e898a1f2c6015f03040f2a83386ccd9682afbb3e21e3cf19057dcd700b66b",
+          "psnr": 23.36502687654482,
+          "psnr_gtmean": 26.773929648184758,
+          "ssim": 0.8441226180162632,
+          "lpips": 0.11676349540551503
+        },
+        {
+          "checkpoint": "epoch_0450.pt",
+          "epoch": 450,
+          "sha256": "dc6c652ea518ade8f55503049a276a4060251e5e532a01df714d164b17071cf0",
+          "psnr": 23.201418982314593,
+          "psnr_gtmean": 26.466432592047642,
+          "ssim": 0.8390969629520931,
+          "lpips": 0.11684676011403401
+        },
+        {
+          "checkpoint": "epoch_0460.pt",
+          "epoch": 460,
+          "sha256": "10ab423a2bb08614bda1f28acbac593f423e75483f1332327a2981bb09a96ee9",
+          "psnr": 23.023024002201467,
+          "psnr_gtmean": 26.498615721503256,
+          "ssim": 0.8385371682148024,
+          "lpips": 0.1153704971075058
+        },
+        {
+          "checkpoint": "epoch_0470.pt",
+          "epoch": 470,
+          "sha256": "58cd9d217a2c55e1a418dbb98ce204e9745dd8fcd21788d8dff6d6e65939dc83",
+          "psnr": 23.44762794943512,
+          "psnr_gtmean": 26.388037305609405,
+          "ssim": 0.8392791610218707,
+          "lpips": 0.11776132533947627
+        },
+        {
+          "checkpoint": "epoch_0480.pt",
+          "epoch": 480,
+          "sha256": "7012edee14864e4b5f2fb56b3dd1cb330df6e6a467e27c5a11fab5248476d1f4",
+          "psnr": 23.604001890844014,
+          "psnr_gtmean": 26.622243723656045,
+          "ssim": 0.8423690433100467,
+          "lpips": 0.11289799759785334
+        },
+        {
+          "checkpoint": "epoch_0490.pt",
+          "epoch": 490,
+          "sha256": "191515280d362e30f8462dd881efecf0f96a475881a48404a8008c3d01a1cb8c",
+          "psnr": 22.60796245268815,
+          "psnr_gtmean": 26.041441690599477,
+          "ssim": 0.83525295053722,
+          "lpips": 0.11893192181984584
+        },
+        {
+          "checkpoint": "epoch_0500.pt",
+          "epoch": 500,
+          "sha256": "70f40c53c114edb0e530dd96944a9ad847e09c8d90e5253bfdf02659a765fdfe",
+          "psnr": 22.90338207628234,
+          "psnr_gtmean": 26.36278404418435,
+          "ssim": 0.8377742973018645,
+          "lpips": 0.11376495510339737
+        },
+        {
+          "checkpoint": "epoch_0510.pt",
+          "epoch": 510,
+          "sha256": "72d41ea27a71fa9b40b95ac8d62d8c0a5e3ca1f45fcd15e5ec3683d3016a9179",
+          "psnr": 22.671877690273597,
+          "psnr_gtmean": 26.466495641031663,
+          "ssim": 0.8384127918132338,
+          "lpips": 0.11509342541297277
+        },
+        {
+          "checkpoint": "epoch_0520.pt",
+          "epoch": 520,
+          "sha256": "cecc8ecca99bc083cee5dadd694ddae460f8f63cbe09243a6d1e20f38e3d49be",
+          "psnr": 23.959837531920957,
+          "psnr_gtmean": 26.614544054430507,
+          "ssim": 0.8376303770544701,
+          "lpips": 0.11559954633315404
+        },
+        {
+          "checkpoint": "epoch_0530.pt",
+          "epoch": 530,
+          "sha256": "df443fe499833c4b1b40d2acf477b52b64bb61ceb65df03869ea45b4ec2f0840",
+          "psnr": 23.244630673218822,
+          "psnr_gtmean": 26.54415011842593,
+          "ssim": 0.8397680971901001,
+          "lpips": 0.1155595804254214
+        },
+        {
+          "checkpoint": "epoch_0540.pt",
+          "epoch": 540,
+          "sha256": "34de6133450124d99975a1493a56fe46058ce2df2067f51bb2551ff571143d95",
+          "psnr": 23.333811105365516,
+          "psnr_gtmean": 26.516878971578258,
+          "ssim": 0.8411639520234713,
+          "lpips": 0.11393796702226003
+        },
+        {
+          "checkpoint": "epoch_0550.pt",
+          "epoch": 550,
+          "sha256": "36c35133dee40e2ee48d07fe81d15424ab28d66c69f32f7a31839281f810ebb4",
+          "psnr": 23.127644279241103,
+          "psnr_gtmean": 26.392788478442846,
+          "ssim": 0.8396568422241679,
+          "lpips": 0.1142405832807223
+        },
+        {
+          "checkpoint": "epoch_0560.pt",
+          "epoch": 560,
+          "sha256": "db61c7dc210edefca0bb9bfe7de131206d407720b6ccf6a673571541c5c8ca20",
+          "psnr": 22.988953518680976,
+          "psnr_gtmean": 26.290493851126925,
+          "ssim": 0.8382784367906819,
+          "lpips": 0.11481497387091319
+        },
+        {
+          "checkpoint": "epoch_0570.pt",
+          "epoch": 570,
+          "sha256": "46f42640bbf40a89699326caed0281d25e59cc6ee239844314f115b3b5f40cdb",
+          "psnr": 23.380369907571588,
+          "psnr_gtmean": 26.606975264663824,
+          "ssim": 0.8424083148368025,
+          "lpips": 0.11218696335951488
+        },
+        {
+          "checkpoint": "epoch_0580.pt",
+          "epoch": 580,
+          "sha256": "70cab1dfe7c6e507b08018edba8004b59b8b6abed17ed1b0cd821ddf328bc0a0",
+          "psnr": 23.716573700064334,
+          "psnr_gtmean": 26.70923360466368,
+          "ssim": 0.844357468430471,
+          "lpips": 0.1108092541495959
+        },
+        {
+          "checkpoint": "epoch_0590.pt",
+          "epoch": 590,
+          "sha256": "f094ffbf44e1be70fba23ce32e1fe841a8ad401578df2cce0d83ba998827b84f",
+          "psnr": 23.12291784482069,
+          "psnr_gtmean": 26.340212222510047,
+          "ssim": 0.8404419351224921,
+          "lpips": 0.11225182960430781
+        },
+        {
+          "checkpoint": "epoch_0600.pt",
+          "epoch": 600,
+          "sha256": "f7b8d2c9dc5592b73596e10360dc24ee96ea5ac15f015257ba72d991abc63130",
+          "psnr": 23.169694974855116,
+          "psnr_gtmean": 26.414328427680378,
+          "ssim": 0.8406802861240834,
+          "lpips": 0.11332869281371434
+        },
+        {
+          "checkpoint": "epoch_0610.pt",
+          "epoch": 610,
+          "sha256": "e518acc137e5f2d3532c2383313e8aa07007e076ce2b329e0c3a4d51b038fb9c",
+          "psnr": 23.02451200577643,
+          "psnr_gtmean": 26.581704308087176,
+          "ssim": 0.8416697268882299,
+          "lpips": 0.1148142675558726
+        },
+        {
+          "checkpoint": "epoch_0620.pt",
+          "epoch": 620,
+          "sha256": "4935203471aee26f694a8329b34a56707576afe1366448ae30d2f62f446ebb4c",
+          "psnr": 22.964530850932718,
+          "psnr_gtmean": 26.553535656477706,
+          "ssim": 0.8415342321099666,
+          "lpips": 0.11247263848781586
+        },
+        {
+          "checkpoint": "epoch_0630.pt",
+          "epoch": 630,
+          "sha256": "742db88dc1d4d0e2992591034c310eccd6c956715a93f0df29e7566f4138fb1a",
+          "psnr": 23.617181829834564,
+          "psnr_gtmean": 26.571886670393173,
+          "ssim": 0.8421260556462986,
+          "lpips": 0.11129501809676488
+        },
+        {
+          "checkpoint": "epoch_0640.pt",
+          "epoch": 640,
+          "sha256": "e5496fc34c2a9a5e510c6ee184b346230b8251cd3ad80b5fd84de899493577e6",
+          "psnr": 23.50020393048352,
+          "psnr_gtmean": 26.506256735159152,
+          "ssim": 0.8392227054971525,
+          "lpips": 0.11030594259500504
+        },
+        {
+          "checkpoint": "epoch_0650.pt",
+          "epoch": 650,
+          "sha256": "5bb0950aa6320fba567c1fc7f2876ff81ca8fcd0a171a1b833b86ce1c049dfd2",
+          "psnr": 23.46773226043238,
+          "psnr_gtmean": 26.61901082424597,
+          "ssim": 0.8429880539986707,
+          "lpips": 0.11058339277903238
+        },
+        {
+          "checkpoint": "epoch_0660.pt",
+          "epoch": 660,
+          "sha256": "77468f7bbb6182bf16c1a7c6c5f370da7b58392d027b3669149ef832dba6a91e",
+          "psnr": 23.817837579063056,
+          "psnr_gtmean": 26.638879209855645,
+          "ssim": 0.8420465803908265,
+          "lpips": 0.1103900690873464
+        },
+        {
+          "checkpoint": "epoch_0670.pt",
+          "epoch": 670,
+          "sha256": "3b9940cbc7b258c806d566f8669dd14af9b5b8d089567453f19fa86ba61e59cc",
+          "psnr": 23.104907438075,
+          "psnr_gtmean": 26.69383539237158,
+          "ssim": 0.8408017200795502,
+          "lpips": 0.10987129509449005
+        },
+        {
+          "checkpoint": "epoch_0680.pt",
+          "epoch": 680,
+          "sha256": "1080be878be4331dae940265f79ea23dbe1f0a4b2cb65ec1f3fd253401fe834b",
+          "psnr": 23.597023445545585,
+          "psnr_gtmean": 26.70246774700694,
+          "ssim": 0.8428355810248576,
+          "lpips": 0.10888025959332784
+        },
+        {
+          "checkpoint": "epoch_0690.pt",
+          "epoch": 690,
+          "sha256": "8c8fc7141dcce36914dd0a4a376e0365c79fc0f89ba6434fa91e0f0e930de2cc",
+          "psnr": 23.438851399062894,
+          "psnr_gtmean": 26.725538752312833,
+          "ssim": 0.8436787437354542,
+          "lpips": 0.10996059775352478
+        },
+        {
+          "checkpoint": "epoch_0700.pt",
+          "epoch": 700,
+          "sha256": "a4931bdbc6e472e31ec57d6ee7d82c0a1bcf7a2292d8a6a38b24ca9e0df01bc6",
+          "psnr": 23.466838590411143,
+          "psnr_gtmean": 26.618963595222112,
+          "ssim": 0.8413662262509188,
+          "lpips": 0.11061410556236903
+        },
+        {
+          "checkpoint": "epoch_0710.pt",
+          "epoch": 710,
+          "sha256": "d8eb42e6937d1cf05ddffca602e66f6c3f5a42a67280e3b857c0606d30588e7c",
+          "psnr": 23.440147881089143,
+          "psnr_gtmean": 26.73305381469216,
+          "ssim": 0.8448115241696116,
+          "lpips": 0.10950894902149837
+        },
+        {
+          "checkpoint": "epoch_0720.pt",
+          "epoch": 720,
+          "sha256": "43a7b97ee3bcfd8eb07910bc621d40c1dd532bf8917683b95ad3e0d72261cf14",
+          "psnr": 23.49918620973546,
+          "psnr_gtmean": 26.67264040168957,
+          "ssim": 0.8437122534666075,
+          "lpips": 0.10981294512748718
+        },
+        {
+          "checkpoint": "epoch_0730.pt",
+          "epoch": 730,
+          "sha256": "125fe18a4d026ee9989deb33d46c1ce75fc7abd8a287016008ffede8a96ef3e4",
+          "psnr": 23.710973743401546,
+          "psnr_gtmean": 26.795740271744283,
+          "ssim": 0.8442890404526562,
+          "lpips": 0.107710733016332
+        },
+        {
+          "checkpoint": "epoch_0740.pt",
+          "epoch": 740,
+          "sha256": "1a634c38d8a258443108ffcb4bc075007297354905e74e04fc30c935ea14c068",
+          "psnr": 23.505544680791925,
+          "psnr_gtmean": 26.755778866687066,
+          "ssim": 0.841994394835968,
+          "lpips": 0.10753491818904877
+        },
+        {
+          "checkpoint": "epoch_0750.pt",
+          "epoch": 750,
+          "sha256": "f823e3deefbad4874c979104a48cd7e66cc939fef75d9e242be0420f654ed041",
+          "psnr": 23.44558889689745,
+          "psnr_gtmean": 26.684853078799524,
+          "ssim": 0.8440253564972497,
+          "lpips": 0.10978797326485316
+        },
+        {
+          "checkpoint": "epoch_0760.pt",
+          "epoch": 760,
+          "sha256": "457fdfb0f43bfbc6e5bbe3d32d678ecbfe5c237a3d33d4015fc1f50038ceace5",
+          "psnr": 23.42769209379546,
+          "psnr_gtmean": 26.69497761600594,
+          "ssim": 0.8434381843001375,
+          "lpips": 0.10942751914262772
+        },
+        {
+          "checkpoint": "epoch_0770.pt",
+          "epoch": 770,
+          "sha256": "976de9b28a08ff0f5245d4c999ee891ade40dcbbc69a3b03a8d78449996cce5e",
+          "psnr": 23.53222761006523,
+          "psnr_gtmean": 26.750363659581478,
+          "ssim": 0.8438746145360809,
+          "lpips": 0.10874862174193065
+        },
+        {
+          "checkpoint": "epoch_0780.pt",
+          "epoch": 780,
+          "sha256": "c7e64724214167b4648f7dad42645da4bfe95f4f11839a85a65fbb170922de04",
+          "psnr": 23.577659399322272,
+          "psnr_gtmean": 26.752870225307333,
+          "ssim": 0.8441620812124883,
+          "lpips": 0.10763266930977504
+        },
+        {
+          "checkpoint": "epoch_0790.pt",
+          "epoch": 790,
+          "sha256": "5f4e9b972306939f7281a5978bff478bf6fd9fda45e4418647d85fff990d76ad",
+          "psnr": 23.7363689491218,
+          "psnr_gtmean": 26.698287322483743,
+          "ssim": 0.8440597941911321,
+          "lpips": 0.10905206501483918
+        },
+        {
+          "checkpoint": "epoch_0800.pt",
+          "epoch": 800,
+          "sha256": "474fa332cd480c31ad070112f88d046a59c6812b3ccb6b0140a0fdfeab376fa3",
+          "psnr": 24.111803973606804,
+          "psnr_gtmean": 26.734156195534084,
+          "ssim": 0.8440754007859552,
+          "lpips": 0.10861622939507166
+        },
+        {
+          "checkpoint": "epoch_0810.pt",
+          "epoch": 810,
+          "sha256": "2e8d9ee41051f4e26f1db2aa27bf48d40ea21fc69f7c73cc19ca2fd14c22d278",
+          "psnr": 23.522388833378155,
+          "psnr_gtmean": 26.674132833737435,
+          "ssim": 0.8435526605864611,
+          "lpips": 0.10867990652720133
+        },
+        {
+          "checkpoint": "epoch_0820.pt",
+          "epoch": 820,
+          "sha256": "bd4cf38d3fe281678fbe849b4d263dde20d96d6c3341d107097ad9a10301da11",
+          "psnr": 23.765165193628516,
+          "psnr_gtmean": 26.63784984150469,
+          "ssim": 0.8422447769885043,
+          "lpips": 0.10819967190424601
+        },
+        {
+          "checkpoint": "epoch_0830.pt",
+          "epoch": 830,
+          "sha256": "055dd805de5cffe4b861d89d095f1aaeea3cf2072bdad0af5a5b5fa654df7b6a",
+          "psnr": 23.625073535532756,
+          "psnr_gtmean": 26.67244810552085,
+          "ssim": 0.8417562465449961,
+          "lpips": 0.10896292279163997
+        },
+        {
+          "checkpoint": "epoch_0840.pt",
+          "epoch": 840,
+          "sha256": "1b274e7f72d2bf4971012c742da22fd82ffefe36dcd08ff66fad88d558e57278",
+          "psnr": 23.605807342838116,
+          "psnr_gtmean": 26.701251299016445,
+          "ssim": 0.8428730353818862,
+          "lpips": 0.10789700349171956
+        },
+        {
+          "checkpoint": "epoch_0850.pt",
+          "epoch": 850,
+          "sha256": "05910b121ab713d5ef4b953da66a71f16848da553b89510ab8d47bb83c594be6",
+          "psnr": 23.663362725370213,
+          "psnr_gtmean": 26.695403014902123,
+          "ssim": 0.8426022696776088,
+          "lpips": 0.10711289023359617
+        },
+        {
+          "checkpoint": "epoch_0860.pt",
+          "epoch": 860,
+          "sha256": "6c15149b24d061342e661b50fa73c134520f1f0ce79f63fc8c9eb4f827500f2c",
+          "psnr": 23.547644840576247,
+          "psnr_gtmean": 26.685766958373957,
+          "ssim": 0.8429195154760752,
+          "lpips": 0.10754209508498509
+        },
+        {
+          "checkpoint": "epoch_0870.pt",
+          "epoch": 870,
+          "sha256": "efcbf26c02671857d6bf17c785bbb02915aaa7c64c2f4c74cfbe3b42adb88135",
+          "psnr": 23.750889714911843,
+          "psnr_gtmean": 26.667956823355585,
+          "ssim": 0.8425250238002221,
+          "lpips": 0.10826797336339951
+        },
+        {
+          "checkpoint": "epoch_0880.pt",
+          "epoch": 880,
+          "sha256": "6fa5474bef3abf74000f69892c4c1058ad9982f9c5c987d2cb6c14bf6da943a4",
+          "psnr": 23.735367279793316,
+          "psnr_gtmean": 26.668531634626365,
+          "ssim": 0.8428238186843667,
+          "lpips": 0.10869527459144593
+        },
+        {
+          "checkpoint": "epoch_0890.pt",
+          "epoch": 890,
+          "sha256": "bec2ab8560a57e4c095e71496a8f88e007f5cb66440d3dd83058a76581b6136e",
+          "psnr": 23.68993969291243,
+          "psnr_gtmean": 26.698848562673184,
+          "ssim": 0.8434568464670138,
+          "lpips": 0.10773103535175324
+        },
+        {
+          "checkpoint": "epoch_0900.pt",
+          "epoch": 900,
+          "sha256": "d3b4d26ac64af234ac1098c6cd90d153b5fb1dfb03e1ffadd01c4279c7f85b79",
+          "psnr": 23.69299667182578,
+          "psnr_gtmean": 26.68538370993717,
+          "ssim": 0.8430631770997687,
+          "lpips": 0.10784289836883545
+        },
+        {
+          "checkpoint": "epoch_0910.pt",
+          "epoch": 910,
+          "sha256": "1c77f7f99927089ed3034cfc089a6bac7fade072ce011f1054998c3f225e0607",
+          "psnr": 23.722662597045428,
+          "psnr_gtmean": 26.69399199260732,
+          "ssim": 0.8431037078488257,
+          "lpips": 0.10823152015606562
+        },
+        {
+          "checkpoint": "epoch_0920.pt",
+          "epoch": 920,
+          "sha256": "0ec961a9efb5f8d571524c72bea49dc40bf0f86731ee7b708781687117490e8c",
+          "psnr": 23.657611032982608,
+          "psnr_gtmean": 26.711021496761386,
+          "ssim": 0.8430099834970274,
+          "lpips": 0.10760622471570969
+        },
+        {
+          "checkpoint": "epoch_0930.pt",
+          "epoch": 930,
+          "sha256": "9add1b159657fda98847ec7be99ac34152d2c8616fb617f9aeca5dd75af1a05d",
+          "psnr": 23.68994270283656,
+          "psnr_gtmean": 26.691648649514605,
+          "ssim": 0.8430031499003062,
+          "lpips": 0.10774123022953669
+        },
+        {
+          "checkpoint": "epoch_0940.pt",
+          "epoch": 940,
+          "sha256": "8f6b3b0f6fa1c8d83e5e92be48becd5cf069bdd4809152f594532d01c6c030b4",
+          "psnr": 23.67025741937605,
+          "psnr_gtmean": 26.714075095104086,
+          "ssim": 0.8432328231120074,
+          "lpips": 0.1076064904530843
+        },
+        {
+          "checkpoint": "epoch_0950.pt",
+          "epoch": 950,
+          "sha256": "3ddb4d4e47961aeb94a2acc35ee066794f4eb4412b639521fdd90370c1aa4856",
+          "psnr": 23.751500012969935,
+          "psnr_gtmean": 26.69587182073054,
+          "ssim": 0.8430410636001917,
+          "lpips": 0.10779147123297056
+        },
+        {
+          "checkpoint": "epoch_0960.pt",
+          "epoch": 960,
+          "sha256": "cce8832c2924cda2c4ddbd4f6ecf46988c0cb9d6b02f9cc25266649537e04917",
+          "psnr": 23.679401222251933,
+          "psnr_gtmean": 26.701815144867524,
+          "ssim": 0.8429529795906745,
+          "lpips": 0.10783623705307642
+        },
+        {
+          "checkpoint": "epoch_0970.pt",
+          "epoch": 970,
+          "sha256": "9c51ed76d831550bff23d21dfc0d1217c8eeb4fde546ad544ca7a54a726e051a",
+          "psnr": 23.656242821407222,
+          "psnr_gtmean": 26.699997772505277,
+          "ssim": 0.8429459656074132,
+          "lpips": 0.10773229449987412
+        },
+        {
+          "checkpoint": "epoch_0980.pt",
+          "epoch": 980,
+          "sha256": "f1ab60eda9430b64eb245054178960e21c408eac09d6d88af80eb1b1b9e73f4e",
+          "psnr": 23.674732130310698,
+          "psnr_gtmean": 26.69836553084075,
+          "ssim": 0.8430672623809554,
+          "lpips": 0.10772942155599594
+        },
+        {
+          "checkpoint": "epoch_0990.pt",
+          "epoch": 990,
+          "sha256": "4d1f9b0d94f234dac1c48fbb47b590a3bbe56063e221c4a011bf4ce27ec3c1fb",
+          "psnr": 23.66822151129949,
+          "psnr_gtmean": 26.694017242307716,
+          "ssim": 0.8429539061044089,
+          "lpips": 0.10768832316001256
+        },
+        {
+          "checkpoint": "epoch_1000.pt",
+          "epoch": 1000,
+          "sha256": "a7a5112f285acf08fc139767c6c2040cc2b6a7f3c548daa53a82822c6213ebeb",
+          "psnr": 23.67983657881951,
+          "psnr_gtmean": 26.698517655543263,
+          "ssim": 0.8429833246786004,
+          "lpips": 0.10772593816121419
+        },
+        {
+          "checkpoint": "last.pt",
+          "epoch": 1000,
+          "sha256": "5412b05009f5bca177a31a33c18753f28356ebca932628f37990af0874a2a439",
+          "psnr": 23.67983657881951,
+          "psnr_gtmean": 26.698517655543263,
+          "ssim": 0.8429833246786004,
+          "lpips": 0.10772593816121419
+        }
+      ],
+      "n_checkpoints": 101,
+      "max_psnr_gtmean": 26.795740271744283,
+      "warning": "ORACLE: test-split scores of every saved checkpoint; NEVER used for selection or ranking"
+    },
+    "oracle_gateA_L0_seed48": {
+      "kind": "oracle",
+      "label": "oracle_gateA_L0_seed48",
+      "job": "/home/work/research/outputs/gateA/a0_l0_v2/L0_seed48",
+      "split": "eval15 (15 pairs)",
+      "notes": "Gate A K0 decomposition (DECISIONS 2026-09-24): paper-style max over saved checkpoints; NOT for selection",
+      "config": {
+        "arm": "L0",
+        "seed": 48,
+        "split_sha256": "b0dde62736e3f59148fda31dd9dfa56a1b76af8b2be6637a57b5119b35428909",
+        "script_sha256": "138696b4147efc3de9300a636e06e5bfa0bc633b5780a31c0cc390246353fa8e",
+        "commit": "eb43d7d91e9a336c66856824ff9e4603ae41f408"
+      },
+      "test_split_access": {
+        "test_split_accessed": true,
+        "scope": "evaluate: the one final evaluation per reported configuration",
+        "reason": "oracle evaluation of oracle_gateA_L0_seed48",
+        "script": "/home/work/research/paper/auto-research/final_eval_test.py"
+      },
+      "evaluated_at": "2026-09-25T10:22:49",
+      "curve": [
+        {
+          "checkpoint": "epoch_0010.pt",
+          "epoch": 10,
+          "sha256": "4e6d646733bd92a966c2aaddffb106b5e49ac7f17ca24ed6e3af413878275bfb",
+          "psnr": 19.651703790369,
+          "psnr_gtmean": 23.517130817554158,
+          "ssim": 0.7414199541481792,
+          "lpips": 0.26363933086395264
+        },
+        {
+          "checkpoint": "epoch_0020.pt",
+          "epoch": 20,
+          "sha256": "cf20c7c0b6c1fdcbb07e710328f2164fa663b4dd97e011dc472b33e346aa1cb8",
+          "psnr": 19.9227132617503,
+          "psnr_gtmean": 23.995531550616835,
+          "ssim": 0.7728714478856471,
+          "lpips": 0.2622235874334971
+        },
+        {
+          "checkpoint": "epoch_0030.pt",
+          "epoch": 30,
+          "sha256": "7a5b309e8d9192278e0677385fd5a50afb6731dc9a6aad48c9f3c2af8312b088",
+          "psnr": 20.279923407025553,
+          "psnr_gtmean": 24.091287685488826,
+          "ssim": 0.7744185175540887,
+          "lpips": 0.2642277012268702
+        },
+        {
+          "checkpoint": "epoch_0040.pt",
+          "epoch": 40,
+          "sha256": "97e10e6ffe7e5755cd3f2f76b31411d6cbd196081eb90efc0087275f9a916b67",
+          "psnr": 20.181655814256178,
+          "psnr_gtmean": 24.391662652766417,
+          "ssim": 0.770272414949312,
+          "lpips": 0.24981343150138854
+        },
+        {
+          "checkpoint": "epoch_0050.pt",
+          "epoch": 50,
+          "sha256": "d12d7f4b46a2bba6445153bb6c7965e48c4690f614a4839a3151338197e7db1b",
+          "psnr": 20.57571222861011,
+          "psnr_gtmean": 24.46045836660782,
+          "ssim": 0.7838772295241122,
+          "lpips": 0.23889285425345103
+        },
+        {
+          "checkpoint": "epoch_0060.pt",
+          "epoch": 60,
+          "sha256": "83bb850436a976f95b675dc51f598942c0d9969ef0d191d62d1c81b560bc94e0",
+          "psnr": 20.819004047093834,
+          "psnr_gtmean": 24.864655721073014,
+          "ssim": 0.7929152763052921,
+          "lpips": 0.22318682670593262
+        },
+        {
+          "checkpoint": "epoch_0070.pt",
+          "epoch": 70,
+          "sha256": "84bd424ac39ab40d7263dff9b35fedf63b9a0539e136dec111aef35727f126e6",
+          "psnr": 21.289729573923676,
+          "psnr_gtmean": 24.846134041185262,
+          "ssim": 0.7918081868963094,
+          "lpips": 0.2156059831380844
+        },
+        {
+          "checkpoint": "epoch_0080.pt",
+          "epoch": 80,
+          "sha256": "f9aa5b9cffd2bbc8b9491a1849061bbb4999a9b436b9ac5659df4a7d6a790a45",
+          "psnr": 21.45431493453698,
+          "psnr_gtmean": 24.916346772828796,
+          "ssim": 0.8023498261828595,
+          "lpips": 0.2037748912970225
+        },
+        {
+          "checkpoint": "epoch_0090.pt",
+          "epoch": 90,
+          "sha256": "fafd75f300c75a582634a3276b557f76a9cbcce4434c51cf8286d81dfee0381c",
+          "psnr": 21.44679045057024,
+          "psnr_gtmean": 24.767346299616715,
+          "ssim": 0.8035739964914507,
+          "lpips": 0.1994638830423355
+        },
+        {
+          "checkpoint": "epoch_0100.pt",
+          "epoch": 100,
+          "sha256": "e85e59dd0b89547cb60e69547cde5c6c054929620a90e32193f9c4903fef7ddb",
+          "psnr": 22.529671854057277,
+          "psnr_gtmean": 25.19778124050076,
+          "ssim": 0.8132181423814414,
+          "lpips": 0.1878621533513069
+        },
+        {
+          "checkpoint": "epoch_0110.pt",
+          "epoch": 110,
+          "sha256": "3dd0c638dbbc2e6e7485b94fdc0c78faf5044201f00b7e808ec08afddf356493",
+          "psnr": 20.672092230074757,
+          "psnr_gtmean": 25.08612746931432,
+          "ssim": 0.8052435354614288,
+          "lpips": 0.18115936170021693
+        },
+        {
+          "checkpoint": "epoch_0120.pt",
+          "epoch": 120,
+          "sha256": "daa6eafeba03a888bade719e7bbbe3ab9a0e4a2e0e7974cdfb75a15b74d13cc9",
+          "psnr": 21.4545124790131,
+          "psnr_gtmean": 25.136804261051893,
+          "ssim": 0.8146881914240012,
+          "lpips": 0.16804492076237995
+        },
+        {
+          "checkpoint": "epoch_0130.pt",
+          "epoch": 130,
+          "sha256": "8c3210478a7b2e658ad07b5f26ef93282f8162a0e6e2b5249d0fdc7364307129",
+          "psnr": 21.312925587301486,
+          "psnr_gtmean": 25.232194425122955,
+          "ssim": 0.8163580107332808,
+          "lpips": 0.15633709877729415
+        },
+        {
+          "checkpoint": "epoch_0140.pt",
+          "epoch": 140,
+          "sha256": "3de41d2fb251fbfffe2923eaf341902e0ed4c47e16fda942251e455ae8ca331a",
+          "psnr": 21.771505624018893,
+          "psnr_gtmean": 25.467012149310836,
+          "ssim": 0.8212850843699118,
+          "lpips": 0.1454637110233307
+        },
+        {
+          "checkpoint": "epoch_0150.pt",
+          "epoch": 150,
+          "sha256": "979aa8f5eeb0ee949dcdd982a8ee0ef6cde7eb7c6556035eb62eddb524784e9e",
+          "psnr": 21.226477112173892,
+          "psnr_gtmean": 25.725772933267628,
+          "ssim": 0.8244652851945485,
+          "lpips": 0.14330169409513474
+        },
+        {
+          "checkpoint": "epoch_0160.pt",
+          "epoch": 160,
+          "sha256": "e16824c6be28b991aa3873fa26059a9f239f3e381648fa7254e99168b91ca8af",
+          "psnr": 21.81462821691779,
+          "psnr_gtmean": 25.60132147843497,
+          "ssim": 0.8262538424334623,
+          "lpips": 0.1432420700788498
+        },
+        {
+          "checkpoint": "epoch_0170.pt",
+          "epoch": 170,
+          "sha256": "70209f10ca767a3f5a2c0ca8bde8a497f32ee442e0a601797347ffff6a618128",
+          "psnr": 22.206127590090105,
+          "psnr_gtmean": 25.916265010474955,
+          "ssim": 0.8274146259690186,
+          "lpips": 0.1399115468064944
+        },
+        {
+          "checkpoint": "epoch_0180.pt",
+          "epoch": 180,
+          "sha256": "b030aeda49d644701261a3200fde825169e2db2b76d48e6882bc98e174b1513d",
+          "psnr": 22.148181509751126,
+          "psnr_gtmean": 25.760562902669793,
+          "ssim": 0.831296966823108,
+          "lpips": 0.14036003599564234
+        },
+        {
+          "checkpoint": "epoch_0190.pt",
+          "epoch": 190,
+          "sha256": "fe35a099129a095abae48aecec4b1d0166181579d924fdb38906954eb98a8a76",
+          "psnr": 22.778423831078566,
+          "psnr_gtmean": 25.95356135361148,
+          "ssim": 0.8277481625329991,
+          "lpips": 0.13102032244205475
+        },
+        {
+          "checkpoint": "epoch_0200.pt",
+          "epoch": 200,
+          "sha256": "a76858d1957ff0d98d65baec0bf29d4cf88f83f47e20b583dcfb698f9dd2feb1",
+          "psnr": 22.88864649110628,
+          "psnr_gtmean": 25.922482219556276,
+          "ssim": 0.8301372703699579,
+          "lpips": 0.13655444780985515
+        },
+        {
+          "checkpoint": "epoch_0210.pt",
+          "epoch": 210,
+          "sha256": "4ea7f4a5b6f3ebdc2fdb64e9ebf737764f73533b040943f762f6b0b7a69f4673",
+          "psnr": 22.01144390782,
+          "psnr_gtmean": 25.748260633371906,
+          "ssim": 0.8300034831605835,
+          "lpips": 0.13086986392736435
+        },
+        {
+          "checkpoint": "epoch_0220.pt",
+          "epoch": 220,
+          "sha256": "068620faa88c3e5678bef793758691b0ce062f27ff97c9b06696ec159e9e3403",
+          "psnr": 23.176033055475425,
+          "psnr_gtmean": 26.149233840237148,
+          "ssim": 0.836214273991161,
+          "lpips": 0.12887221624453862
+        },
+        {
+          "checkpoint": "epoch_0230.pt",
+          "epoch": 230,
+          "sha256": "0177dee177daf59617b2c1c4579db85e07869c87d3fec3f931bcbea695654aef",
+          "psnr": 22.808553280135307,
+          "psnr_gtmean": 25.74964560534732,
+          "ssim": 0.8317229673748707,
+          "lpips": 0.13130511393149694
+        },
+        {
+          "checkpoint": "epoch_0240.pt",
+          "epoch": 240,
+          "sha256": "13ec38eecc43cf0e533f926a12f85e3b8921d73864ab72896bd78e80f5b0c8c1",
+          "psnr": 22.59896096720995,
+          "psnr_gtmean": 25.96867476675176,
+          "ssim": 0.8341869634457296,
+          "lpips": 0.12661124418179195
+        },
+        {
+          "checkpoint": "epoch_0250.pt",
+          "epoch": 250,
+          "sha256": "3a3bb90739a6eb0da122932936630bffa1e500f4c3aa78233025c5956c0de420",
+          "psnr": 22.149960424861888,
+          "psnr_gtmean": 26.062967968629614,
+          "ssim": 0.8304392664826394,
+          "lpips": 0.12867593715588252
+        },
+        {
+          "checkpoint": "epoch_0260.pt",
+          "epoch": 260,
+          "sha256": "156a59f48d50b829d3e712505f892da0c8f39b6578d17554b044c76bc86620c1",
+          "psnr": 23.108556195490564,
+          "psnr_gtmean": 26.474834974916273,
+          "ssim": 0.8380688121336604,
+          "lpips": 0.12077167183160782
+        },
+        {
+          "checkpoint": "epoch_0270.pt",
+          "epoch": 270,
+          "sha256": "ffb8359e3813219133e4993cbb460cb94452310eb83b15e4881449b71aab989f",
+          "psnr": 22.475573397522584,
+          "psnr_gtmean": 25.880136826817317,
+          "ssim": 0.8346013093345054,
+          "lpips": 0.12522649665673574
+        },
+        {
+          "checkpoint": "epoch_0280.pt",
+          "epoch": 280,
+          "sha256": "f3d812f938505d9c404096db3a6f0e2b2cf5c143210fe3c17922f8e0070fe3e4",
+          "psnr": 22.403467209614625,
+          "psnr_gtmean": 25.785616414940513,
+          "ssim": 0.8326223273897321,
+          "lpips": 0.13308234463135402
+        },
+        {
+          "checkpoint": "epoch_0290.pt",
+          "epoch": 290,
+          "sha256": "da141c91b40ebac6e6a930fd281af9089fb0615d887f2604ced0046a96b57bc6",
+          "psnr": 23.18260679845064,
+          "psnr_gtmean": 26.323028720736108,
+          "ssim": 0.8384663444950936,
+          "lpips": 0.12191292544205984
+        },
+        {
+          "checkpoint": "epoch_0300.pt",
+          "epoch": 300,
+          "sha256": "b061dee36a8dc344456d7808c0f7c8f22fe6ce345abb2d6130fd481edb9a1648",
+          "psnr": 22.987648456258192,
+          "psnr_gtmean": 26.40281776897966,
+          "ssim": 0.8406929556008781,
+          "lpips": 0.11773284673690795
+        },
+        {
+          "checkpoint": "epoch_0310.pt",
+          "epoch": 310,
+          "sha256": "6b82e54ba5d6365cb8bdf26f9cbfbc1033d4da7ea8052c3e9286ee4c76529ea7",
+          "psnr": 22.692441719937328,
+          "psnr_gtmean": 26.239611006239684,
+          "ssim": 0.8376813979058126,
+          "lpips": 0.1217140739162763
+        },
+        {
+          "checkpoint": "epoch_0320.pt",
+          "epoch": 320,
+          "sha256": "01f179bfbce60f2c2e2a8417e98fcde929df181967847b9900e47c798625b421",
+          "psnr": 22.974822208067906,
+          "psnr_gtmean": 26.434144043014555,
+          "ssim": 0.8401394691225953,
+          "lpips": 0.11945984264214833
+        },
+        {
+          "checkpoint": "epoch_0330.pt",
+          "epoch": 330,
+          "sha256": "3ed553ff4141ec8c871353623cbf39353f070be6e52a190575ad71c8dbec7fb9",
+          "psnr": 23.097166655764926,
+          "psnr_gtmean": 26.119271059035277,
+          "ssim": 0.836232521525512,
+          "lpips": 0.12000460426012675
+        },
+        {
+          "checkpoint": "epoch_0340.pt",
+          "epoch": 340,
+          "sha256": "4420eb19a3d9c4ce14220e22595c54df4c2fd000ed09ca4e70946cd8cdbfc233",
+          "psnr": 23.024924837709573,
+          "psnr_gtmean": 26.23975041859491,
+          "ssim": 0.841262518906974,
+          "lpips": 0.12136297971010208
+        },
+        {
+          "checkpoint": "epoch_0350.pt",
+          "epoch": 350,
+          "sha256": "50c7c3b6febec3ae64e3ee3f2e07d9efd33d057c096787b8bfe674f2da94e812",
+          "psnr": 23.25645269380629,
+          "psnr_gtmean": 26.305988807171403,
+          "ssim": 0.8385063874997976,
+          "lpips": 0.12145122388998668
+        },
+        {
+          "checkpoint": "epoch_0360.pt",
+          "epoch": 360,
+          "sha256": "99209ce66c03d63d485902a2790fb633297abaf7881266e4318e2fd2f5cdc9c2",
+          "psnr": 22.8758818452741,
+          "psnr_gtmean": 26.538143114026116,
+          "ssim": 0.8388862024851906,
+          "lpips": 0.11553683231274287
+        },
+        {
+          "checkpoint": "epoch_0370.pt",
+          "epoch": 370,
+          "sha256": "83311f31ad7bba1f8727c4b908b79e49173d76f56dd51d0c2547bab00beef2ef",
+          "psnr": 22.937423232671698,
+          "psnr_gtmean": 26.56247507970315,
+          "ssim": 0.8395494890528139,
+          "lpips": 0.11743208815654119
+        },
+        {
+          "checkpoint": "epoch_0380.pt",
+          "epoch": 380,
+          "sha256": "7f4c74f1d86c9048fed7bb8ed9095bc8eb24382e53a8c5e3b5a0882e33ef7eda",
+          "psnr": 23.361985164929,
+          "psnr_gtmean": 26.264540643854147,
+          "ssim": 0.8410697504139792,
+          "lpips": 0.11738517383734386
+        },
+        {
+          "checkpoint": "epoch_0390.pt",
+          "epoch": 390,
+          "sha256": "b6a9f4ca0b25d799b2f795892d52baf82b8199e104bf14c966a689f42c012bd5",
+          "psnr": 23.425437207030203,
+          "psnr_gtmean": 26.5324901882394,
+          "ssim": 0.8448214231449553,
+          "lpips": 0.11302121778329213
+        },
+        {
+          "checkpoint": "epoch_0400.pt",
+          "epoch": 400,
+          "sha256": "c254aa42ae09e8fdf071202b8e193355976fd72c890a34c183d25368925e503d",
+          "psnr": 23.344556020993647,
+          "psnr_gtmean": 26.441725874245094,
+          "ssim": 0.8434080185714733,
+          "lpips": 0.11612473726272583
+        },
+        {
+          "checkpoint": "epoch_0410.pt",
+          "epoch": 410,
+          "sha256": "637bc24edac4abd790007aeca283319ea3e3dcea06c091067097040f3f94b797",
+          "psnr": 23.433864355194903,
+          "psnr_gtmean": 26.717314184231093,
+          "ssim": 0.8449202595500793,
+          "lpips": 0.11356463531653087
+        },
+        {
+          "checkpoint": "epoch_0420.pt",
+          "epoch": 420,
+          "sha256": "b687ac7a8f0caea2b9181c9bd42e8ecc32458833218e33bc1b6ab529fa2015dc",
+          "psnr": 23.57852512519594,
+          "psnr_gtmean": 26.604537838282436,
+          "ssim": 0.8434649947049349,
+          "lpips": 0.1100017045934995
+        },
+        {
+          "checkpoint": "epoch_0430.pt",
+          "epoch": 430,
+          "sha256": "2fde5f0b4a209d1009b34d0e9543dbd18b1a5f22352a634435038ac6a44c686c",
+          "psnr": 22.66685127406277,
+          "psnr_gtmean": 26.608979931231843,
+          "ssim": 0.8407465235731594,
+          "lpips": 0.11740524421135584
+        },
+        {
+          "checkpoint": "epoch_0440.pt",
+          "epoch": 440,
+          "sha256": "132ac22c57cf52527367e7c8bf7dfb77860ef5c90f2f2f3a530349c598fa800e",
+          "psnr": 23.178252863223737,
+          "psnr_gtmean": 26.590798645114514,
+          "ssim": 0.8408844066479068,
+          "lpips": 0.11247737407684326
+        },
+        {
+          "checkpoint": "epoch_0450.pt",
+          "epoch": 450,
+          "sha256": "7111d29c84031c76b6910005ff8013d5466da2449b13b2b0e67efe3efb879eee",
+          "psnr": 22.840589521172358,
+          "psnr_gtmean": 26.421916300527172,
+          "ssim": 0.8426986331626966,
+          "lpips": 0.11414589683214824
+        },
+        {
+          "checkpoint": "epoch_0460.pt",
+          "epoch": 460,
+          "sha256": "77d0b0e3a7ef96376ba3738bbc39480ac8209d64d39442dd9434a26e5a847522",
+          "psnr": 22.991728531762792,
+          "psnr_gtmean": 26.31779711849153,
+          "ssim": 0.8387393116430485,
+          "lpips": 0.11569205969572068
+        },
+        {
+          "checkpoint": "epoch_0470.pt",
+          "epoch": 470,
+          "sha256": "31d309decf36d4cb79ce2ed3f96e27badcb961482f0c8287f82882bb3e78a1e0",
+          "psnr": 22.67568505925996,
+          "psnr_gtmean": 26.81258835495533,
+          "ssim": 0.8452425873340973,
+          "lpips": 0.10956668853759766
+        },
+        {
+          "checkpoint": "epoch_0480.pt",
+          "epoch": 480,
+          "sha256": "a5f27db090918513bbc614448b00a481883fd7342466d3a292375da0a8f54508",
+          "psnr": 23.633462913798134,
+          "psnr_gtmean": 26.81522139560956,
+          "ssim": 0.843872639108581,
+          "lpips": 0.11122228801250458
+        },
+        {
+          "checkpoint": "epoch_0490.pt",
+          "epoch": 490,
+          "sha256": "10f05517f2ede25dbaba6d452a42f52c1c891490996de7f62d5222f78d42739c",
+          "psnr": 22.994105961635842,
+          "psnr_gtmean": 26.557980171007557,
+          "ssim": 0.8422177672976355,
+          "lpips": 0.11120726664861043
+        },
+        {
+          "checkpoint": "epoch_0500.pt",
+          "epoch": 500,
+          "sha256": "c5edde55bc1e1a689349ad5b1db1fc7e4a2f9d9dc56827224c39ef943581d959",
+          "psnr": 22.56015093219227,
+          "psnr_gtmean": 26.505559903646333,
+          "ssim": 0.8391472539349537,
+          "lpips": 0.11257361620664597
+        },
+        {
+          "checkpoint": "epoch_0510.pt",
+          "epoch": 510,
+          "sha256": "794bb586094e5cd729954117b248218e52badb5c94db798fd34be85b38197b4b",
+          "psnr": 23.356950714575188,
+          "psnr_gtmean": 26.711564299103937,
+          "ssim": 0.8425577062417349,
+          "lpips": 0.11525352150201798
+        },
+        {
+          "checkpoint": "epoch_0520.pt",
+          "epoch": 520,
+          "sha256": "52a9dc919a748909b57113c0673d9d2e531bf67e644de2da949e983dea1976f5",
+          "psnr": 23.112029760870794,
+          "psnr_gtmean": 26.66704113012262,
+          "ssim": 0.8405565261869679,
+          "lpips": 0.11669899473587672
+        },
+        {
+          "checkpoint": "epoch_0530.pt",
+          "epoch": 530,
+          "sha256": "955ba16e35f83fce28a605a411c020f2a5e8dfd3e3edc26c622effb4f294a0c7",
+          "psnr": 23.067953021662706,
+          "psnr_gtmean": 26.553201113967294,
+          "ssim": 0.8402710909371554,
+          "lpips": 0.11149096687634787
+        },
+        {
+          "checkpoint": "epoch_0540.pt",
+          "epoch": 540,
+          "sha256": "8f52d39b3e2208244b2bbada260874e93a0e095f4e80ac1d2771cb8a13ed3479",
+          "psnr": 23.17362168056195,
+          "psnr_gtmean": 26.71205294487769,
+          "ssim": 0.8476700262496971,
+          "lpips": 0.10772549708684286
+        },
+        {
+          "checkpoint": "epoch_0550.pt",
+          "epoch": 550,
+          "sha256": "68aec137fc1ee3655b4d57a44214c51a94b2a73d86b85b56645a201eed4b4c24",
+          "psnr": 23.497796416218083,
+          "psnr_gtmean": 26.75528708620104,
+          "ssim": 0.8481685194022942,
+          "lpips": 0.10620255370934804
+        },
+        {
+          "checkpoint": "epoch_0560.pt",
+          "epoch": 560,
+          "sha256": "dcc4fcc088f91bc7acc4d312709eae1ac147640b1d27685e4de16c51afe90589",
+          "psnr": 23.176772226531675,
+          "psnr_gtmean": 26.50053250383787,
+          "ssim": 0.8413671594765398,
+          "lpips": 0.1101623073220253
+        },
+        {
+          "checkpoint": "epoch_0570.pt",
+          "epoch": 570,
+          "sha256": "eb11abbdcf4cbd36561a5125d12676f65ae55902e5b2d0521e4a468bbe560b6c",
+          "psnr": 23.61408516572792,
+          "psnr_gtmean": 26.700804468419552,
+          "ssim": 0.8427572836511725,
+          "lpips": 0.10845113595326741
+        },
+        {
+          "checkpoint": "epoch_0580.pt",
+          "epoch": 580,
+          "sha256": "6b26934af3b24cc4060e749d8b4acc0d0064d12fae7d861ed6739f8a9f9f9697",
+          "psnr": 22.79040405245124,
+          "psnr_gtmean": 26.3569121618183,
+          "ssim": 0.8400244106956567,
+          "lpips": 0.1136321226755778
+        },
+        {
+          "checkpoint": "epoch_0590.pt",
+          "epoch": 590,
+          "sha256": "e4cee90b0f8dec5708e477c35d84d2d660ff1154ac9db0a8aeef8448f9bc5868",
+          "psnr": 22.703142701948725,
+          "psnr_gtmean": 26.38817950594644,
+          "ssim": 0.837891113782437,
+          "lpips": 0.11460678776105244
+        },
+        {
+          "checkpoint": "epoch_0600.pt",
+          "epoch": 600,
+          "sha256": "eb016f3b200e56994d1304c5f1c5a4f547000bd42d4f5b787c0302b665cebf24",
+          "psnr": 22.634416805108764,
+          "psnr_gtmean": 26.58287434204386,
+          "ssim": 0.8402282772519402,
+          "lpips": 0.11099151919285456
+        },
+        {
+          "checkpoint": "epoch_0610.pt",
+          "epoch": 610,
+          "sha256": "e73db691e191b77c89acdde33d803ec1e04bedf47b93b91603cc505e1d237ed7",
+          "psnr": 22.884311597333532,
+          "psnr_gtmean": 26.706052887992247,
+          "ssim": 0.8412875164268987,
+          "lpips": 0.10845980991919836
+        },
+        {
+          "checkpoint": "epoch_0620.pt",
+          "epoch": 620,
+          "sha256": "b6318ae41c02cc763bbb3eb1ab5ff83c60322233c173e84911f824a10fe683e8",
+          "psnr": 23.390288479845594,
+          "psnr_gtmean": 26.677385768058738,
+          "ssim": 0.842243382443549,
+          "lpips": 0.10946897566318511
+        },
+        {
+          "checkpoint": "epoch_0630.pt",
+          "epoch": 630,
+          "sha256": "2d9d1a5751293b7c9100dce87a62f310c25392fb8f8ea887c957c8555a8b3f9d",
+          "psnr": 22.91613658502285,
+          "psnr_gtmean": 26.62486136945021,
+          "ssim": 0.8434130265675572,
+          "lpips": 0.10770329684019089
+        },
+        {
+          "checkpoint": "epoch_0640.pt",
+          "epoch": 640,
+          "sha256": "0bbb7b2a9c2a8f555c94eb0d245feeae89044f9b0a7ddea551ffcc364fa3b0dd",
+          "psnr": 23.31029850517754,
+          "psnr_gtmean": 26.742547542747864,
+          "ssim": 0.8425486148630135,
+          "lpips": 0.10774156848589579
+        },
+        {
+          "checkpoint": "epoch_0650.pt",
+          "epoch": 650,
+          "sha256": "268d2c1ca094b7972d1b7be0f2f3026ba9849ef93b80ce5fddb531f250471c93",
+          "psnr": 23.030067690690476,
+          "psnr_gtmean": 26.69574629937538,
+          "ssim": 0.8430705170250189,
+          "lpips": 0.10763909965753556
+        },
+        {
+          "checkpoint": "epoch_0660.pt",
+          "epoch": 660,
+          "sha256": "06e5a745dd437da371f1c9b299be7ccbe8487e19ce1df09962918fcf408ebda1",
+          "psnr": 22.842882416747837,
+          "psnr_gtmean": 26.656802840931213,
+          "ssim": 0.8426093278501897,
+          "lpips": 0.10881157666444778
+        },
+        {
+          "checkpoint": "epoch_0670.pt",
+          "epoch": 670,
+          "sha256": "c29ab1df217e505b3c782da427895b0189afd57450163476dda94caae97467a1",
+          "psnr": 23.024342303512277,
+          "psnr_gtmean": 26.66103860900945,
+          "ssim": 0.841635609754604,
+          "lpips": 0.11026389499505361
+        },
+        {
+          "checkpoint": "epoch_0680.pt",
+          "epoch": 680,
+          "sha256": "b7968a5819e9e0977c3d6e67fbc0a30f7aa2932e4bd20a216db7e174715a5734",
+          "psnr": 23.52767717009175,
+          "psnr_gtmean": 26.661195079628904,
+          "ssim": 0.8431398206766231,
+          "lpips": 0.11043493747711182
+        },
+        {
+          "checkpoint": "epoch_0690.pt",
+          "epoch": 690,
+          "sha256": "c1cd1c310d1eed22c688d9c0330343212784e9c5bd21064d32f3ab440da5507c",
+          "psnr": 23.09432825390194,
+          "psnr_gtmean": 26.697976420460098,
+          "ssim": 0.842303051689299,
+          "lpips": 0.10956887602806091
+        },
+        {
+          "checkpoint": "epoch_0700.pt",
+          "epoch": 700,
+          "sha256": "c771fd58c750d18a0d9f33ef072f6c346c895e3fc8dec3dcb42c1df58d386e92",
+          "psnr": 22.907755634500806,
+          "psnr_gtmean": 26.75413519832133,
+          "ssim": 0.8439465484938471,
+          "lpips": 0.10848657935857772
+        },
+        {
+          "checkpoint": "epoch_0710.pt",
+          "epoch": 710,
+          "sha256": "8e486515423926498a64268f8622e1a9b79968e6ca2a5bd512759b6285aa501f",
+          "psnr": 23.19833819538089,
+          "psnr_gtmean": 26.82416429048282,
+          "ssim": 0.8436955847990956,
+          "lpips": 0.10580527807275454
+        },
+        {
+          "checkpoint": "epoch_0720.pt",
+          "epoch": 720,
+          "sha256": "77220d01c29364ba36943d494fcc3ce9d5c8562b099004168f60cd4568900ddf",
+          "psnr": 23.08052690358243,
+          "psnr_gtmean": 26.736790313864564,
+          "ssim": 0.840793349263561,
+          "lpips": 0.10818099379539489
+        },
+        {
+          "checkpoint": "epoch_0730.pt",
+          "epoch": 730,
+          "sha256": "97372d70f3664bcf516f8774cb2d7896c4ba650644083e421beec9205f10b5a8",
+          "psnr": 23.334495567145602,
+          "psnr_gtmean": 26.751522505174695,
+          "ssim": 0.841776523917072,
+          "lpips": 0.10760696480671565
+        },
+        {
+          "checkpoint": "epoch_0740.pt",
+          "epoch": 740,
+          "sha256": "7fd494e41474d53762a48b3dbd6b00bb9d2477bf20252c38610229ddee3b043d",
+          "psnr": 22.940662765464108,
+          "psnr_gtmean": 26.607998212391596,
+          "ssim": 0.8395832995414165,
+          "lpips": 0.10890939484039942
+        },
+        {
+          "checkpoint": "epoch_0750.pt",
+          "epoch": 750,
+          "sha256": "49885a818585aa3d3fbf5d7bfe4fa57588bfce05bbecea02d3f189707d1b9714",
+          "psnr": 23.186847461783763,
+          "psnr_gtmean": 26.813105479746355,
+          "ssim": 0.8430186314015214,
+          "lpips": 0.10617300470670064
+        },
+        {
+          "checkpoint": "epoch_0760.pt",
+          "epoch": 760,
+          "sha256": "d5d9ff30f046c157e4e1d2087629b202f3ddb4ae841dfaf6fceb91593defc9d3",
+          "psnr": 23.092070806805623,
+          "psnr_gtmean": 26.67381563343683,
+          "ssim": 0.841493047294494,
+          "lpips": 0.10724709729353586
+        },
+        {
+          "checkpoint": "epoch_0770.pt",
+          "epoch": 770,
+          "sha256": "18d8f8537fec465691b3f541193934889cf961bc8cc7076f39526dd1a8778b96",
+          "psnr": 23.06705449510788,
+          "psnr_gtmean": 26.623409347499766,
+          "ssim": 0.8422368777250439,
+          "lpips": 0.10749221593141556
+        },
+        {
+          "checkpoint": "epoch_0780.pt",
+          "epoch": 780,
+          "sha256": "d3b27fee7671ff877550d748a167620e1865f94a5c993c16fc311fc94268caa7",
+          "psnr": 23.272095815811767,
+          "psnr_gtmean": 26.690922300122445,
+          "ssim": 0.8427772713733277,
+          "lpips": 0.10751382062832514
+        },
+        {
+          "checkpoint": "epoch_0790.pt",
+          "epoch": 790,
+          "sha256": "15f436f093bd9092e9a79316e5fdfd47a8a2a8bd9b00ac3c5e10425b8b95469f",
+          "psnr": 22.989948184303,
+          "psnr_gtmean": 26.696085688600125,
+          "ssim": 0.8410585581260743,
+          "lpips": 0.10770228356122971
+        },
+        {
+          "checkpoint": "epoch_0800.pt",
+          "epoch": 800,
+          "sha256": "abf6a397c012b095ba91febb5301de0e931de5825ac66f5848aed21ed35abddb",
+          "psnr": 23.123505288453725,
+          "psnr_gtmean": 26.702900857010636,
+          "ssim": 0.8413754787539233,
+          "lpips": 0.10634227643410364
+        },
+        {
+          "checkpoint": "epoch_0810.pt",
+          "epoch": 810,
+          "sha256": "741008c68de3c9dbb054c856ac6343d53a5c59fa43c8b251346c93f4d180078b",
+          "psnr": 22.94623054284041,
+          "psnr_gtmean": 26.696845515496822,
+          "ssim": 0.8411455471108554,
+          "lpips": 0.10707155962785085
+        },
+        {
+          "checkpoint": "epoch_0820.pt",
+          "epoch": 820,
+          "sha256": "c169b63a8318e6ceb73a67b2effd66f046cafe88d365fceed95013b9a5f6d9ff",
+          "psnr": 23.12497627869922,
+          "psnr_gtmean": 26.750305519574695,
+          "ssim": 0.8421248641694198,
+          "lpips": 0.10651986598968506
+        },
+        {
+          "checkpoint": "epoch_0830.pt",
+          "epoch": 830,
+          "sha256": "98117a6d36f7c38ebf4fadda197158883ba5f4f4c530e738d4cff35b8a87442b",
+          "psnr": 23.13842522324743,
+          "psnr_gtmean": 26.74640690063008,
+          "ssim": 0.8415818614380447,
+          "lpips": 0.10550546372930208
+        },
+        {
+          "checkpoint": "epoch_0840.pt",
+          "epoch": 840,
+          "sha256": "2c04947fcaaef57f77eeb64a71b333d959b29bd62418368082b36ec4a68aebc5",
+          "psnr": 23.286019550729726,
+          "psnr_gtmean": 26.775560833764466,
+          "ssim": 0.8425453587849824,
+          "lpips": 0.1060439924399058
+        },
+        {
+          "checkpoint": "epoch_0850.pt",
+          "epoch": 850,
+          "sha256": "31444e32d193e623edab6c8989956f2ff05a78af999a5bacd0ebc2e4067eb78c",
+          "psnr": 23.178649241076762,
+          "psnr_gtmean": 26.74556100462411,
+          "ssim": 0.84172910549996,
+          "lpips": 0.10681709696849187
+        },
+        {
+          "checkpoint": "epoch_0860.pt",
+          "epoch": 860,
+          "sha256": "517ad8f39ffb659dbab0ee95fadf1f189925f8d46ecba81bd04a2e08d82da6d5",
+          "psnr": 23.141586472257018,
+          "psnr_gtmean": 26.754909602524723,
+          "ssim": 0.8419427072544049,
+          "lpips": 0.10597414523363113
+        },
+        {
+          "checkpoint": "epoch_0870.pt",
+          "epoch": 870,
+          "sha256": "0ea32e6a4437972f2faa2d6d2a3d30324a3f02ad9c7487dca4ffe52b918d02c2",
+          "psnr": 23.16171232084843,
+          "psnr_gtmean": 26.771748418387112,
+          "ssim": 0.8423151448116392,
+          "lpips": 0.10734406312306723
+        },
+        {
+          "checkpoint": "epoch_0880.pt",
+          "epoch": 880,
+          "sha256": "f0264f2a8394339ae8744547e9f9029016f2b0276e2ac6c022c3098f237d2baa",
+          "psnr": 23.149666385783057,
+          "psnr_gtmean": 26.723605164196474,
+          "ssim": 0.841930332399798,
+          "lpips": 0.1068117598692576
+        },
+        {
+          "checkpoint": "epoch_0890.pt",
+          "epoch": 890,
+          "sha256": "f791c2e042a6c3cd6146bdc23b7b7c357fd4c8bc73e12e4e7edbf8f5ef13920d",
+          "psnr": 23.181543107996635,
+          "psnr_gtmean": 26.71725468224734,
+          "ssim": 0.8417950214896327,
+          "lpips": 0.10619053443272909
+        },
+        {
+          "checkpoint": "epoch_0900.pt",
+          "epoch": 900,
+          "sha256": "7520b8cf105effe6f372af70229f4f3665dc6761af0b50951b1f0e8d3f4d871e",
+          "psnr": 23.23123852191101,
+          "psnr_gtmean": 26.741433957844453,
+          "ssim": 0.8416041728560054,
+          "lpips": 0.1067151591181755
+        },
+        {
+          "checkpoint": "epoch_0910.pt",
+          "epoch": 910,
+          "sha256": "3b4c2aa2278ab16b9da066e12d30c8f267baf7c0d0ef891cce8c781361599c26",
+          "psnr": 23.255173945896505,
+          "psnr_gtmean": 26.742587533179826,
+          "ssim": 0.8424507123951689,
+          "lpips": 0.10608237336079279
+        },
+        {
+          "checkpoint": "epoch_0920.pt",
+          "epoch": 920,
+          "sha256": "3c760c3e730e4934ef1775ccb067f8758613c05efb18e3a4a5cfa0c22bbc4c7b",
+          "psnr": 23.28325450707988,
+          "psnr_gtmean": 26.785582555552416,
+          "ssim": 0.8423208644355147,
+          "lpips": 0.10645753145217896
+        },
+        {
+          "checkpoint": "epoch_0930.pt",
+          "epoch": 930,
+          "sha256": "e12c63fc1e8b083c7e938795178219f4eb8babf41ae3210ac13c191ec62490e5",
+          "psnr": 23.253006813590186,
+          "psnr_gtmean": 26.736684460084987,
+          "ssim": 0.8422164975986095,
+          "lpips": 0.10683321555455526
+        },
+        {
+          "checkpoint": "epoch_0940.pt",
+          "epoch": 940,
+          "sha256": "07452415feeb2f86d60208d0ef9e5b28bbafc50cce6b8dd18cb24ae021ed7e5d",
+          "psnr": 23.241986016576814,
+          "psnr_gtmean": 26.745725328430623,
+          "ssim": 0.8421664756535016,
+          "lpips": 0.10661065777142843
+        },
+        {
+          "checkpoint": "epoch_0950.pt",
+          "epoch": 950,
+          "sha256": "3c72f1a0e581c8120176eb18fbbf88f490c50e91692ed1e5bf8590b68dc52bc6",
+          "psnr": 23.211853806272742,
+          "psnr_gtmean": 26.73025497934299,
+          "ssim": 0.8420391725424473,
+          "lpips": 0.10649202267328899
+        },
+        {
+          "checkpoint": "epoch_0960.pt",
+          "epoch": 960,
+          "sha256": "b439c03eae25d85a353c7cf32b892138a65e5942474df2dea49ce6fd73d16f32",
+          "psnr": 23.200055578610172,
+          "psnr_gtmean": 26.734670048984718,
+          "ssim": 0.8420657011826868,
+          "lpips": 0.10660179505745569
+        },
+        {
+          "checkpoint": "epoch_0970.pt",
+          "epoch": 970,
+          "sha256": "c8491110fc87a228c116344f5ca210aa1264d5785bc2c561403fd111a766c8d6",
+          "psnr": 23.18819982402397,
+          "psnr_gtmean": 26.742599786750013,
+          "ssim": 0.8420047483862334,
+          "lpips": 0.10665927330652873
+        },
+        {
+          "checkpoint": "epoch_0980.pt",
+          "epoch": 980,
+          "sha256": "156c4f8f76ebfcfc23b584805ffbf7e4f78c2cf3100ff895250a4a8f1d533eae",
+          "psnr": 23.19262887215512,
+          "psnr_gtmean": 26.744114816018097,
+          "ssim": 0.8419207831155853,
+          "lpips": 0.10663798352082571
+        },
+        {
+          "checkpoint": "epoch_0990.pt",
+          "epoch": 990,
+          "sha256": "00dc196f4f013eda023237a6bb2ce83d33dc0a0dab1f07302c642f5d855e5af2",
+          "psnr": 23.22271282330129,
+          "psnr_gtmean": 26.739395405738872,
+          "ssim": 0.8419231427304427,
+          "lpips": 0.1066826860109965
+        },
+        {
+          "checkpoint": "epoch_1000.pt",
+          "epoch": 1000,
+          "sha256": "41d418556b9ef494e4be87a4132c128c1b8694affd7cebcd5dd7483f880e7f44",
+          "psnr": 23.19810718967581,
+          "psnr_gtmean": 26.73470638045747,
+          "ssim": 0.8419547006415488,
+          "lpips": 0.10664606243371963
+        },
+        {
+          "checkpoint": "last.pt",
+          "epoch": 1000,
+          "sha256": "f4d0c43a14ac356c9b477c9676cd9772a05de04195ccf1a6323be353e8e12f86",
+          "psnr": 23.19810718967581,
+          "psnr_gtmean": 26.73470638045747,
+          "ssim": 0.8419547006415488,
+          "lpips": 0.10664606243371963
+        }
+      ],
+      "n_checkpoints": 101,
+      "max_psnr_gtmean": 26.82416429048282,
+      "warning": "ORACLE: test-split scores of every saved checkpoint; NEVER used for selection or ranking"
+    },
+    "oracle_gateA_L0_seed49": {
+      "kind": "oracle",
+      "label": "oracle_gateA_L0_seed49",
+      "job": "/home/work/research/outputs/gateA/a0_l0_v2/L0_seed49",
+      "split": "eval15 (15 pairs)",
+      "notes": "Gate A K0 decomposition (DECISIONS 2026-09-24): paper-style max over saved checkpoints; NOT for selection",
+      "config": {
+        "arm": "L0",
+        "seed": 49,
+        "split_sha256": "b0dde62736e3f59148fda31dd9dfa56a1b76af8b2be6637a57b5119b35428909",
+        "script_sha256": "138696b4147efc3de9300a636e06e5bfa0bc633b5780a31c0cc390246353fa8e",
+        "commit": "eb43d7d91e9a336c66856824ff9e4603ae41f408"
+      },
+      "test_split_access": {
+        "test_split_accessed": true,
+        "scope": "evaluate: the one final evaluation per reported configuration",
+        "reason": "oracle evaluation of oracle_gateA_L0_seed49",
+        "script": "/home/work/research/paper/auto-research/final_eval_test.py"
+      },
+      "evaluated_at": "2026-09-25T10:39:53",
+      "curve": [
+        {
+          "checkpoint": "epoch_0010.pt",
+          "epoch": 10,
+          "sha256": "655f4519f3e1a124f19a13d33a775c656ad91cc618124e37d2bd7f2ae6190b64",
+          "psnr": 18.565401134433444,
+          "psnr_gtmean": 22.72442971388144,
+          "ssim": 0.7460299634886912,
+          "lpips": 0.2704780101776123
+        },
+        {
+          "checkpoint": "epoch_0020.pt",
+          "epoch": 20,
+          "sha256": "e657af84ef78c569baf0b897cd8ea766fb20677b0aa97a5e772fce130b0e1a05",
+          "psnr": 18.47135169113242,
+          "psnr_gtmean": 23.766042804167363,
+          "ssim": 0.7598104182048113,
+          "lpips": 0.2746318280696869
+        },
+        {
+          "checkpoint": "epoch_0030.pt",
+          "epoch": 30,
+          "sha256": "5190ad547babc3f564aef3769035038e53de0deddf0cf7ca50cced359081c9cd",
+          "psnr": 19.912254735631617,
+          "psnr_gtmean": 24.195214749950562,
+          "ssim": 0.7672595911325951,
+          "lpips": 0.26091509461402895
+        },
+        {
+          "checkpoint": "epoch_0040.pt",
+          "epoch": 40,
+          "sha256": "7daf23fc4f9f13134e8f93a929e35911a8c693087330e43f3314c23ab8306f0c",
+          "psnr": 19.771396849213307,
+          "psnr_gtmean": 23.705580523962723,
+          "ssim": 0.7743766444048922,
+          "lpips": 0.2633235226074854
+        },
+        {
+          "checkpoint": "epoch_0050.pt",
+          "epoch": 50,
+          "sha256": "5e8b8a7e4da53faac9c2bbd0fa9e5ac25eb1655992643542a6459aaeb8105fc2",
+          "psnr": 19.824286230287026,
+          "psnr_gtmean": 24.029325540637497,
+          "ssim": 0.7775963859021326,
+          "lpips": 0.24570027589797974
+        },
+        {
+          "checkpoint": "epoch_0060.pt",
+          "epoch": 60,
+          "sha256": "604e3515fae5e9b7cad2fd34f569cba5accfba8fa0fef3a99c61774d151935a7",
+          "psnr": 20.281047688773928,
+          "psnr_gtmean": 24.56203053963609,
+          "ssim": 0.7799915412707653,
+          "lpips": 0.24169671734174092
+        },
+        {
+          "checkpoint": "epoch_0070.pt",
+          "epoch": 70,
+          "sha256": "a006a46986b3f1fc730a226ceb149462889a0650066e9ed093f2a7c1ecffdf56",
+          "psnr": 20.21902998446362,
+          "psnr_gtmean": 24.18245193330834,
+          "ssim": 0.7845941301116891,
+          "lpips": 0.2435699810584386
+        },
+        {
+          "checkpoint": "epoch_0080.pt",
+          "epoch": 80,
+          "sha256": "17879fae67ed9cc5ab958aebcc552ecfbb7b5bc646be0d258c4501efe4fbe2ba",
+          "psnr": 20.017996079562074,
+          "psnr_gtmean": 24.34581224926727,
+          "ssim": 0.7840764739053616,
+          "lpips": 0.2357183893521627
+        },
+        {
+          "checkpoint": "epoch_0090.pt",
+          "epoch": 90,
+          "sha256": "51f6c849204de33077308f1e45ab712b3b1942339703b33a6f989704d729f187",
+          "psnr": 20.79359179244504,
+          "psnr_gtmean": 25.04843308208048,
+          "ssim": 0.7952149467598372,
+          "lpips": 0.21115802079439164
+        },
+        {
+          "checkpoint": "epoch_0100.pt",
+          "epoch": 100,
+          "sha256": "f7d0d7d349f04e74b5d31e3d5d3785457b5e3120c40d6aa206f32b78dcafee65",
+          "psnr": 19.904570641939493,
+          "psnr_gtmean": 24.570301995362616,
+          "ssim": 0.7881137061208745,
+          "lpips": 0.2136739283800125
+        },
+        {
+          "checkpoint": "epoch_0110.pt",
+          "epoch": 110,
+          "sha256": "ab63e50da47fe0b74355fd5a4a0c2f0ab574f4d3ef816806a19e460af398825f",
+          "psnr": 20.676734003430077,
+          "psnr_gtmean": 25.032234468887207,
+          "ssim": 0.7962404659453879,
+          "lpips": 0.20659052729606628
+        },
+        {
+          "checkpoint": "epoch_0120.pt",
+          "epoch": 120,
+          "sha256": "08cfad1775250d7cedb9f0e77e12881b0bdacb996eacfa600028ddd4d304f138",
+          "psnr": 20.94989451293029,
+          "psnr_gtmean": 25.00847627924137,
+          "ssim": 0.8021981542475262,
+          "lpips": 0.1984093149503072
+        },
+        {
+          "checkpoint": "epoch_0130.pt",
+          "epoch": 130,
+          "sha256": "9506ab0e7d80a4cf47ee703729b511c0a1e574a88ee4cc67e7df4c929962b758",
+          "psnr": 21.591235061651055,
+          "psnr_gtmean": 25.306183276038972,
+          "ssim": 0.8070751464224397,
+          "lpips": 0.1819662183523178
+        },
+        {
+          "checkpoint": "epoch_0140.pt",
+          "epoch": 140,
+          "sha256": "e5bb2be5934e92d6334cafe595199876619a645d271afb1f01c6c8ca0c77653c",
+          "psnr": 21.46966455079386,
+          "psnr_gtmean": 25.25814341555172,
+          "ssim": 0.8070018679112196,
+          "lpips": 0.17977359592914582
+        },
+        {
+          "checkpoint": "epoch_0150.pt",
+          "epoch": 150,
+          "sha256": "faa705bfba975890661a6d2d66259690de16cc0f47654ef26b503d4584dc8c18",
+          "psnr": 21.563563571980733,
+          "psnr_gtmean": 25.180896214714494,
+          "ssim": 0.8093385963281149,
+          "lpips": 0.17331840842962265
+        },
+        {
+          "checkpoint": "epoch_0160.pt",
+          "epoch": 160,
+          "sha256": "1320a30e9a1114888e5c71e89651c554e0a35a50d165147e86d648fa4994ba35",
+          "psnr": 21.550507879335914,
+          "psnr_gtmean": 25.427736093836902,
+          "ssim": 0.8163024322165702,
+          "lpips": 0.15950021545092266
+        },
+        {
+          "checkpoint": "epoch_0170.pt",
+          "epoch": 170,
+          "sha256": "e9febcca612abdd814337a88a2d0b4d4658888fa770bd64532fffea8342388f6",
+          "psnr": 22.725980903973188,
+          "psnr_gtmean": 25.719264330150224,
+          "ssim": 0.8211620195185837,
+          "lpips": 0.152444555858771
+        },
+        {
+          "checkpoint": "epoch_0180.pt",
+          "epoch": 180,
+          "sha256": "8a6dfe16f05bb414473d1381d70c71230c0bccc3aea962470632a74e5c232174",
+          "psnr": 20.952386485795333,
+          "psnr_gtmean": 25.191424856073994,
+          "ssim": 0.8117885147322178,
+          "lpips": 0.16081526031096777
+        },
+        {
+          "checkpoint": "epoch_0190.pt",
+          "epoch": 190,
+          "sha256": "ac7f94d91e02c3083b257a0e58a41b0a7ff3e4008be22f735897b03dbee58a25",
+          "psnr": 21.119376800038427,
+          "psnr_gtmean": 25.699220318098124,
+          "ssim": 0.816030062261941,
+          "lpips": 0.14935976564884185
+        },
+        {
+          "checkpoint": "epoch_0200.pt",
+          "epoch": 200,
+          "sha256": "d5d521daa56fed614bb9b1337085d729c77f2114df222098ea5db7077fa57f7e",
+          "psnr": 21.78204183412455,
+          "psnr_gtmean": 25.746348306961316,
+          "ssim": 0.8200917580561076,
+          "lpips": 0.14443736424048742
+        },
+        {
+          "checkpoint": "epoch_0210.pt",
+          "epoch": 210,
+          "sha256": "7a1ce839e257c30c24b82ce0900d77a6004467cf6f4f3128c9bc9502fc1c3e46",
+          "psnr": 22.013452524518396,
+          "psnr_gtmean": 25.842291776773745,
+          "ssim": 0.823044438919919,
+          "lpips": 0.14072184910376867
+        },
+        {
+          "checkpoint": "epoch_0220.pt",
+          "epoch": 220,
+          "sha256": "58be5e90987010d1132fdef31d06ce7655a077406e5d4ee7c1cc070c1fcb8b6c",
+          "psnr": 22.570221255296442,
+          "psnr_gtmean": 26.03648733842879,
+          "ssim": 0.8277913873620679,
+          "lpips": 0.13958751708269118
+        },
+        {
+          "checkpoint": "epoch_0230.pt",
+          "epoch": 230,
+          "sha256": "d6bf51d8db370658eaf9b3e0ec131ee6922939ef1d31426ac9cc86f5b40fb15c",
+          "psnr": 22.155494796674155,
+          "psnr_gtmean": 26.16943595618578,
+          "ssim": 0.8280563449195598,
+          "lpips": 0.13630886723597843
+        },
+        {
+          "checkpoint": "epoch_0240.pt",
+          "epoch": 240,
+          "sha256": "2fb7c8c333544dee5d2f10c50a844071269b948a2f9a62cc8a6bc141fdc063ca",
+          "psnr": 21.571089930360806,
+          "psnr_gtmean": 25.844786137684082,
+          "ssim": 0.8258193828744623,
+          "lpips": 0.13620371172825496
+        },
+        {
+          "checkpoint": "epoch_0250.pt",
+          "epoch": 250,
+          "sha256": "17ad8189a31386425ff4aed23f1531fbc746aaea48e5fa6e73c2fbb5f040743e",
+          "psnr": 22.343997484196667,
+          "psnr_gtmean": 26.208332906548513,
+          "ssim": 0.8247796014348783,
+          "lpips": 0.13621848076581955
+        },
+        {
+          "checkpoint": "epoch_0260.pt",
+          "epoch": 260,
+          "sha256": "3e504726c41bdd08823f0f6ae6787a4b923b56c9f101e1bbffe9a1d988931eb2",
+          "psnr": 21.839057243681427,
+          "psnr_gtmean": 25.996786978486732,
+          "ssim": 0.8213892421546678,
+          "lpips": 0.13668821901082992
+        },
+        {
+          "checkpoint": "epoch_0270.pt",
+          "epoch": 270,
+          "sha256": "fe3d85dbbcd024d7656cccadbc74399cd1ff307001b44faaae6d0ed22de2dfb6",
+          "psnr": 22.236394181700028,
+          "psnr_gtmean": 26.065862601302353,
+          "ssim": 0.8230185166887545,
+          "lpips": 0.13363542258739472
+        },
+        {
+          "checkpoint": "epoch_0280.pt",
+          "epoch": 280,
+          "sha256": "f1d8da0f2cff4899274662c43c80700c4ddfbe613386ee925450069c4d9a054f",
+          "psnr": 22.498306388917854,
+          "psnr_gtmean": 25.938115202586978,
+          "ssim": 0.8243981891381486,
+          "lpips": 0.13811940997838973
+        },
+        {
+          "checkpoint": "epoch_0290.pt",
+          "epoch": 290,
+          "sha256": "45932ad2df51101252c1f3f2a29c517c8abf3c0fc8064f8abfa6d46a9af908cc",
+          "psnr": 21.92952272906968,
+          "psnr_gtmean": 26.061999097457818,
+          "ssim": 0.8265949094869395,
+          "lpips": 0.1340207020441691
+        },
+        {
+          "checkpoint": "epoch_0300.pt",
+          "epoch": 300,
+          "sha256": "9a8127b904a6368e8dcbfd404b49915d8d7eff451799f183d9fd6e229613d951",
+          "psnr": 22.13591149357006,
+          "psnr_gtmean": 26.144185680945366,
+          "ssim": 0.830642941266039,
+          "lpips": 0.1303528517484665
+        },
+        {
+          "checkpoint": "epoch_0310.pt",
+          "epoch": 310,
+          "sha256": "3c08a3bd88118cbc9c749e6425fa5851e4c450ab7affcfc052ed0bf6e468c37f",
+          "psnr": 22.165012812980443,
+          "psnr_gtmean": 25.798089840212146,
+          "ssim": 0.8267294066684321,
+          "lpips": 0.13310600221157073
+        },
+        {
+          "checkpoint": "epoch_0320.pt",
+          "epoch": 320,
+          "sha256": "acd7320649dafe329b04b94ee2fdc25a958880960b20aff67310f301426f3a09",
+          "psnr": 22.35109724954833,
+          "psnr_gtmean": 26.16532699002837,
+          "ssim": 0.8290810915676164,
+          "lpips": 0.13261529356241225
+        },
+        {
+          "checkpoint": "epoch_0330.pt",
+          "epoch": 330,
+          "sha256": "9f601cc8d891d48674c12d80e69cc2c660573d17f93fbf32fb3abe396744c726",
+          "psnr": 23.50305915038134,
+          "psnr_gtmean": 26.36733155979207,
+          "ssim": 0.8330445735970309,
+          "lpips": 0.1297699769337972
+        },
+        {
+          "checkpoint": "epoch_0340.pt",
+          "epoch": 340,
+          "sha256": "ce8699e1466d52e9c33364df9f7ac531fb6ee9774cdff962fe0fc150b6dc8f1b",
+          "psnr": 23.0779688251496,
+          "psnr_gtmean": 26.457237112563085,
+          "ssim": 0.8305302193139209,
+          "lpips": 0.1272189403573672
+        },
+        {
+          "checkpoint": "epoch_0350.pt",
+          "epoch": 350,
+          "sha256": "b3a9d4712dcffbfee046e7e7333a7d88b55135ae2c5f41754cdc95d96dc96135",
+          "psnr": 23.503576980480464,
+          "psnr_gtmean": 26.485832061286096,
+          "ssim": 0.8322520746507253,
+          "lpips": 0.12892259260018665
+        },
+        {
+          "checkpoint": "epoch_0360.pt",
+          "epoch": 360,
+          "sha256": "485b0a754cd6390948e9730381cbe4d3c9df024bdf859af18bc3928802578df5",
+          "psnr": 22.833509247208944,
+          "psnr_gtmean": 26.045792274331667,
+          "ssim": 0.8317631487309735,
+          "lpips": 0.13032210866610208
+        },
+        {
+          "checkpoint": "epoch_0370.pt",
+          "epoch": 370,
+          "sha256": "df47b7056d33e775aea138145502ba62aecfe1edf0151cb356b26eca53c629db",
+          "psnr": 23.067250812143072,
+          "psnr_gtmean": 26.202074393048573,
+          "ssim": 0.8307689434339948,
+          "lpips": 0.12559176087379456
+        },
+        {
+          "checkpoint": "epoch_0380.pt",
+          "epoch": 380,
+          "sha256": "915161b2c1f847b88750e50744cb857a3f68e4b8286618bb4d03e2bbeb02c229",
+          "psnr": 23.445412758289876,
+          "psnr_gtmean": 26.390228424441514,
+          "ssim": 0.8370378451392815,
+          "lpips": 0.12493866582711538
+        },
+        {
+          "checkpoint": "epoch_0390.pt",
+          "epoch": 390,
+          "sha256": "f7ced518f9b47428e64b88d1a493c5e1b5f7a4ffaac499e5949c3cccc38ab4d3",
+          "psnr": 22.51807926605363,
+          "psnr_gtmean": 26.16875833573912,
+          "ssim": 0.8299562748045448,
+          "lpips": 0.12764261762301127
+        },
+        {
+          "checkpoint": "epoch_0400.pt",
+          "epoch": 400,
+          "sha256": "07a058d3a759ae10605aa19840b9ef8603ffe5f5c3f75e9c4447b13bcc044afc",
+          "psnr": 22.057802246730237,
+          "psnr_gtmean": 26.268915408166034,
+          "ssim": 0.8303426996414385,
+          "lpips": 0.12795927872260413
+        },
+        {
+          "checkpoint": "epoch_0410.pt",
+          "epoch": 410,
+          "sha256": "5032384e5c0cb095d12324e6837c35bab9e0126420e3a90d1aad731d0829aef0",
+          "psnr": 23.425303341699827,
+          "psnr_gtmean": 26.533498160372528,
+          "ssim": 0.8373583797394022,
+          "lpips": 0.12190803736448289
+        },
+        {
+          "checkpoint": "epoch_0420.pt",
+          "epoch": 420,
+          "sha256": "6949d723ef52cf92a3fe895e69a320c1ccda71651a6c5645e54c4c5bbdd6d3c7",
+          "psnr": 22.78844832490836,
+          "psnr_gtmean": 26.478109543391632,
+          "ssim": 0.8363265365022471,
+          "lpips": 0.12355746179819108
+        },
+        {
+          "checkpoint": "epoch_0430.pt",
+          "epoch": 430,
+          "sha256": "8d6fb56fe6a53bc564220f2ddd1fe7ed8df5131748a84e2a9b204baaea42ff73",
+          "psnr": 23.27811208823035,
+          "psnr_gtmean": 26.394022267858396,
+          "ssim": 0.8361261936596843,
+          "lpips": 0.12176866382360459
+        },
+        {
+          "checkpoint": "epoch_0440.pt",
+          "epoch": 440,
+          "sha256": "f51e3e94f6939458ba97b0f903bb90d060588ba0783f27b3a8766f1d0729489f",
+          "psnr": 22.886684594618746,
+          "psnr_gtmean": 26.384300102336855,
+          "ssim": 0.8376197190609909,
+          "lpips": 0.1196932410200437
+        },
+        {
+          "checkpoint": "epoch_0450.pt",
+          "epoch": 450,
+          "sha256": "dd38fa7d59dd771bd6403c1f91e8a7999f5ca77ef5c32c993767a9306433b72d",
+          "psnr": 22.95250636953553,
+          "psnr_gtmean": 26.226489364919853,
+          "ssim": 0.8323612475030172,
+          "lpips": 0.1257820710539818
+        },
+        {
+          "checkpoint": "epoch_0460.pt",
+          "epoch": 460,
+          "sha256": "f5daddbf37d0a77aacc94dfd25d7106d7c68b71c01c83ac4b2f18c60b331f860",
+          "psnr": 22.900133488807942,
+          "psnr_gtmean": 26.376283624796724,
+          "ssim": 0.8328780276520398,
+          "lpips": 0.12113542407751084
+        },
+        {
+          "checkpoint": "epoch_0470.pt",
+          "epoch": 470,
+          "sha256": "e6cba62fa323860441958f998cbf8b4b6eb0a5f932932c9ccb0234bc07716cd7",
+          "psnr": 22.586679964977556,
+          "psnr_gtmean": 26.245465530663317,
+          "ssim": 0.8328029004462902,
+          "lpips": 0.122934623559316
+        },
+        {
+          "checkpoint": "epoch_0480.pt",
+          "epoch": 480,
+          "sha256": "c7e0249991061a8be673f3bf99ff0c45cb01ff0878d9387e1c02c59ce261bee3",
+          "psnr": 22.499044646461208,
+          "psnr_gtmean": 26.105491677755477,
+          "ssim": 0.8359805192880683,
+          "lpips": 0.12229703466097513
+        },
+        {
+          "checkpoint": "epoch_0490.pt",
+          "epoch": 490,
+          "sha256": "87f05beb41ec4282cf5a3893654aad84c5dd55b5ca917349cd841bd7d06a9d18",
+          "psnr": 23.016198012727685,
+          "psnr_gtmean": 26.311587725651588,
+          "ssim": 0.8359845438948132,
+          "lpips": 0.12139175087213516
+        },
+        {
+          "checkpoint": "epoch_0500.pt",
+          "epoch": 500,
+          "sha256": "ba9f4c5a83e740eba1f2bf82e9774b3ac944560eba9e4e8d092610d09472d9ac",
+          "psnr": 22.254625259687675,
+          "psnr_gtmean": 26.23153499634996,
+          "ssim": 0.8345664642987884,
+          "lpips": 0.11849574496348698
+        },
+        {
+          "checkpoint": "epoch_0510.pt",
+          "epoch": 510,
+          "sha256": "37396f05a5fc7dfcfcd7b64e47b4cbb7b1aa2da07c1f5eef838a10d7519e1782",
+          "psnr": 22.849387457985944,
+          "psnr_gtmean": 26.32300463010801,
+          "ssim": 0.8324156342969353,
+          "lpips": 0.12246593783299128
+        },
+        {
+          "checkpoint": "epoch_0520.pt",
+          "epoch": 520,
+          "sha256": "2782fbc44a8ce9fb70cf788ed187ff3b44c930bb10ff66f4717e954d63a3fbed",
+          "psnr": 23.122231667296816,
+          "psnr_gtmean": 26.30806296492584,
+          "ssim": 0.8356175138863853,
+          "lpips": 0.11917631377776464
+        },
+        {
+          "checkpoint": "epoch_0530.pt",
+          "epoch": 530,
+          "sha256": "50b234f545a532026ad6bd94c1989a0f07c7a7b5329003f823f97734270b960e",
+          "psnr": 22.960130585388438,
+          "psnr_gtmean": 26.49241873885184,
+          "ssim": 0.8338512013750079,
+          "lpips": 0.1181591957807541
+        },
+        {
+          "checkpoint": "epoch_0540.pt",
+          "epoch": 540,
+          "sha256": "7e7771d9439c9c5df637f5b445e5d5b4ed00d6a239250e884358394bae98b370",
+          "psnr": 23.442243966416168,
+          "psnr_gtmean": 26.461322354310525,
+          "ssim": 0.8379499437723644,
+          "lpips": 0.1161292776465416
+        },
+        {
+          "checkpoint": "epoch_0550.pt",
+          "epoch": 550,
+          "sha256": "f105d33d70eeae1ae6ad3dfe5957653322d3cda87daff23b752003d763880a48",
+          "psnr": 22.572317784448426,
+          "psnr_gtmean": 26.401856762979452,
+          "ssim": 0.8337082185161023,
+          "lpips": 0.12097076177597046
+        },
+        {
+          "checkpoint": "epoch_0560.pt",
+          "epoch": 560,
+          "sha256": "fcc72dd7bf9654ac965015f767a129f44151d6b681e6c301d7e41e501af6d2bf",
+          "psnr": 22.76472987186374,
+          "psnr_gtmean": 26.35614617078588,
+          "ssim": 0.8339133839233583,
+          "lpips": 0.1190469558040301
+        },
+        {
+          "checkpoint": "epoch_0570.pt",
+          "epoch": 570,
+          "sha256": "3c57d9e8998cc6032062430a6e657e8a218d9e0f827da184ef29088998fcac10",
+          "psnr": 22.5697348968501,
+          "psnr_gtmean": 26.317122372856243,
+          "ssim": 0.8331279004820017,
+          "lpips": 0.11682618061701457
+        },
+        {
+          "checkpoint": "epoch_0580.pt",
+          "epoch": 580,
+          "sha256": "e017a99958ec072eae7f8de69af37e280cc66d4a29a4f4c3ca17b055454349d5",
+          "psnr": 23.048236539275756,
+          "psnr_gtmean": 26.452236814639203,
+          "ssim": 0.8373667853311185,
+          "lpips": 0.1153328870733579
+        },
+        {
+          "checkpoint": "epoch_0590.pt",
+          "epoch": 590,
+          "sha256": "260f63b8dcf7db4c8aac3d45fad055cd084924f0f87f271268bdee3fc1ccf303",
+          "psnr": 22.82464737848013,
+          "psnr_gtmean": 26.327072724957425,
+          "ssim": 0.8368765850990727,
+          "lpips": 0.11628029445807139
+        },
+        {
+          "checkpoint": "epoch_0600.pt",
+          "epoch": 600,
+          "sha256": "bdbc832b85f5cd750bb07a0f923010155552c318f8e05e4bbfaba4139edf3eda",
+          "psnr": 22.793108322116783,
+          "psnr_gtmean": 26.40777337073341,
+          "ssim": 0.8355366724135546,
+          "lpips": 0.11580136269330979
+        },
+        {
+          "checkpoint": "epoch_0610.pt",
+          "epoch": 610,
+          "sha256": "57f0a6987813d84e99e1c12bbe32c6271b78bd22e5a13240c89da0f3e96c48dd",
+          "psnr": 22.84499741520865,
+          "psnr_gtmean": 26.355372763283274,
+          "ssim": 0.8358126294218742,
+          "lpips": 0.11687264641125997
+        },
+        {
+          "checkpoint": "epoch_0620.pt",
+          "epoch": 620,
+          "sha256": "6fc06a12e5539f595af4ee643c4e0fa650f0018fe2eaf88c853abaf9f1400665",
+          "psnr": 22.989592697539827,
+          "psnr_gtmean": 26.30510175844294,
+          "ssim": 0.8361673881186509,
+          "lpips": 0.11855995307366053
+        },
+        {
+          "checkpoint": "epoch_0630.pt",
+          "epoch": 630,
+          "sha256": "fc7dd71d6e0d7eb3cf57363b5f5ae45a152a5930a55898bd04ec78e95aa4958e",
+          "psnr": 22.697926893657016,
+          "psnr_gtmean": 26.316980745595618,
+          "ssim": 0.8370074705676035,
+          "lpips": 0.11682142068942387
+        },
+        {
+          "checkpoint": "epoch_0640.pt",
+          "epoch": 640,
+          "sha256": "8ad712f3e3f08df22ec911083baccb47c8e4646c57c0eda406ebbc6dceb1423d",
+          "psnr": 23.070015628619885,
+          "psnr_gtmean": 26.309826748417454,
+          "ssim": 0.8369585513581705,
+          "lpips": 0.1162010058760643
+        },
+        {
+          "checkpoint": "epoch_0650.pt",
+          "epoch": 650,
+          "sha256": "614e5c6a67fd45d6bbab08a3cb1693abb88ff733d4ea47b29a78897abe8766de",
+          "psnr": 23.001300870520467,
+          "psnr_gtmean": 26.36536674780036,
+          "ssim": 0.8371945278991959,
+          "lpips": 0.11593891382217407
+        },
+        {
+          "checkpoint": "epoch_0660.pt",
+          "epoch": 660,
+          "sha256": "c06e3505e4a990323dd5197868f0fc540b961a2c5382186b54ae125641421173",
+          "psnr": 22.89951166437808,
+          "psnr_gtmean": 26.312220174324967,
+          "ssim": 0.8348818580581885,
+          "lpips": 0.11819339096546173
+        },
+        {
+          "checkpoint": "epoch_0670.pt",
+          "epoch": 670,
+          "sha256": "c0f8f1b490caf3e82784c9ac3f7d3dcabd864ed7284c97a5849ac32872666a8f",
+          "psnr": 23.07482293989248,
+          "psnr_gtmean": 26.383618228198806,
+          "ssim": 0.8367408944945445,
+          "lpips": 0.11466618875662486
+        },
+        {
+          "checkpoint": "epoch_0680.pt",
+          "epoch": 680,
+          "sha256": "21d197e126d89771fb5f43c73aa589ee9002c623438da0753a2739edc61fc80d",
+          "psnr": 22.895137938777335,
+          "psnr_gtmean": 26.410345667301122,
+          "ssim": 0.8350706610952282,
+          "lpips": 0.1175579771399498
+        },
+        {
+          "checkpoint": "epoch_0690.pt",
+          "epoch": 690,
+          "sha256": "792fa46a3912de85a92583f8cbdc0c6cf70c23fbd1b0fbaf938029fb55642348",
+          "psnr": 22.6160801235716,
+          "psnr_gtmean": 26.405066302166173,
+          "ssim": 0.8335227836900906,
+          "lpips": 0.11471094886461894
+        },
+        {
+          "checkpoint": "epoch_0700.pt",
+          "epoch": 700,
+          "sha256": "534c25597cd3a7e9a8a0dfbaf8b9d98ca8048b0ec60f53c669ec787fb476a7d4",
+          "psnr": 22.6759413231511,
+          "psnr_gtmean": 26.467878883208577,
+          "ssim": 0.834449177070159,
+          "lpips": 0.11420337508122126
+        },
+        {
+          "checkpoint": "epoch_0710.pt",
+          "epoch": 710,
+          "sha256": "0c8d79eaebff2950c16ff6c5a2f3e8acb6685518c741a44796b095243000b3f4",
+          "psnr": 22.897046582110715,
+          "psnr_gtmean": 26.29992695619281,
+          "ssim": 0.835094626740172,
+          "lpips": 0.1157002478837967
+        },
+        {
+          "checkpoint": "epoch_0720.pt",
+          "epoch": 720,
+          "sha256": "c00b8590d6c7c69b9739d7c2a7ba67a6a8aef0074ff0632f2b0332bab1c1b7f0",
+          "psnr": 23.16677371584223,
+          "psnr_gtmean": 26.414377914325605,
+          "ssim": 0.8367908878208259,
+          "lpips": 0.11611344565947851
+        },
+        {
+          "checkpoint": "epoch_0730.pt",
+          "epoch": 730,
+          "sha256": "19cb101ff981d73f7148d280a97cdbb955415003255b25aae17af0080d2d664b",
+          "psnr": 22.941332105673975,
+          "psnr_gtmean": 26.39985203888671,
+          "ssim": 0.8360240203301099,
+          "lpips": 0.11550765732924144
+        },
+        {
+          "checkpoint": "epoch_0740.pt",
+          "epoch": 740,
+          "sha256": "f591a67828170ab2be50dc684a562c44c526a027267b7cff9dcf0d97aa57dc2e",
+          "psnr": 22.74351192154956,
+          "psnr_gtmean": 26.395285435155948,
+          "ssim": 0.8359243892502164,
+          "lpips": 0.11426438838243484
+        },
+        {
+          "checkpoint": "epoch_0750.pt",
+          "epoch": 750,
+          "sha256": "3130ab83ec1d257f5d1bd2a3f9f6cea83c56eaa5a6a42480b4790503135b12d9",
+          "psnr": 22.901062535535893,
+          "psnr_gtmean": 26.328627441376625,
+          "ssim": 0.8366249733939994,
+          "lpips": 0.11506144404411316
+        },
+        {
+          "checkpoint": "epoch_0760.pt",
+          "epoch": 760,
+          "sha256": "c0de1430c1e79993fb65c6cd3b42ebb8251ccff61bbc5e73834658440c5b777a",
+          "psnr": 22.987443994228457,
+          "psnr_gtmean": 26.420537724636567,
+          "ssim": 0.8362734761891112,
+          "lpips": 0.1139262874921163
+        },
+        {
+          "checkpoint": "epoch_0770.pt",
+          "epoch": 770,
+          "sha256": "ef0a1178644f75c8a91abd11ea94ad1969ecaaf503a80619eeed314210cd052f",
+          "psnr": 22.903620373242283,
+          "psnr_gtmean": 26.382008012940354,
+          "ssim": 0.8363913413485035,
+          "lpips": 0.11476156314214071
+        },
+        {
+          "checkpoint": "epoch_0780.pt",
+          "epoch": 780,
+          "sha256": "1702aa751d485299f127e34582fb12141783d91e4f1054abeb2b480f7560cb2b",
+          "psnr": 23.252889877600232,
+          "psnr_gtmean": 26.514655847557353,
+          "ssim": 0.8371192885937657,
+          "lpips": 0.1128009041150411
+        },
+        {
+          "checkpoint": "epoch_0790.pt",
+          "epoch": 790,
+          "sha256": "20b617f310b48dae32001a7196f23ae3011a48b896348a78b1923d416d8ba273",
+          "psnr": 22.944815521450902,
+          "psnr_gtmean": 26.420455340365365,
+          "ssim": 0.8368191774077895,
+          "lpips": 0.11420066406329472
+        },
+        {
+          "checkpoint": "epoch_0800.pt",
+          "epoch": 800,
+          "sha256": "71e0173e00cba13cb36655ee1bdb05ad97950b66a705f5832c9713ff759946c9",
+          "psnr": 22.977381248445273,
+          "psnr_gtmean": 26.384132059055794,
+          "ssim": 0.8356803484464531,
+          "lpips": 0.11358029594024023
+        },
+        {
+          "checkpoint": "epoch_0810.pt",
+          "epoch": 810,
+          "sha256": "d28fc67a9ba9b05d1e8c37e33ab96c6cb4811d8f466bbb5655467fcb0ecc28ea",
+          "psnr": 22.998457027474743,
+          "psnr_gtmean": 26.424986860450264,
+          "ssim": 0.8366803236720189,
+          "lpips": 0.11300606429576873
+        },
+        {
+          "checkpoint": "epoch_0820.pt",
+          "epoch": 820,
+          "sha256": "ad635fc21459957bb7bde53d82ad054c294ba02ea6ee3af11292ad7ed3815006",
+          "psnr": 23.110167140328702,
+          "psnr_gtmean": 26.44039723245258,
+          "ssim": 0.8363211636305592,
+          "lpips": 0.11405999561150869
+        },
+        {
+          "checkpoint": "epoch_0830.pt",
+          "epoch": 830,
+          "sha256": "1cb0505e767132691ec5164672c6763437749ac320dc0043da9ef24cf3835613",
+          "psnr": 22.996692494960932,
+          "psnr_gtmean": 26.39787365936142,
+          "ssim": 0.8364135185725385,
+          "lpips": 0.11302769432465236
+        },
+        {
+          "checkpoint": "epoch_0840.pt",
+          "epoch": 840,
+          "sha256": "4cc32a9e719f43b124f6d04df50dae40f285f8b13c83fc398030d541cdbc351a",
+          "psnr": 22.83137289147189,
+          "psnr_gtmean": 26.35861904364001,
+          "ssim": 0.8353862945279459,
+          "lpips": 0.11498480240503947
+        },
+        {
+          "checkpoint": "epoch_0850.pt",
+          "epoch": 850,
+          "sha256": "826af19d079b029c9e1064e1bfdee4103cc32a77c65d224cca79df5bebf55276",
+          "psnr": 22.94030650323498,
+          "psnr_gtmean": 26.32743493488019,
+          "ssim": 0.835656261776434,
+          "lpips": 0.11459344476461411
+        },
+        {
+          "checkpoint": "epoch_0860.pt",
+          "epoch": 860,
+          "sha256": "d7539ff53c4f7f2619df644c1144424cf404efda548929b3cd79e5a40e73d008",
+          "psnr": 22.8985227849101,
+          "psnr_gtmean": 26.403048272983856,
+          "ssim": 0.8354566239611496,
+          "lpips": 0.1141477515300115
+        },
+        {
+          "checkpoint": "epoch_0870.pt",
+          "epoch": 870,
+          "sha256": "9532626c63e9a84f0b289c3526e434128fc49fd8c1f67e03e4d53471f7bd9592",
+          "psnr": 22.9539742437401,
+          "psnr_gtmean": 26.399341639536555,
+          "ssim": 0.8358660891399567,
+          "lpips": 0.11447175890207291
+        },
+        {
+          "checkpoint": "epoch_0880.pt",
+          "epoch": 880,
+          "sha256": "e3e4bce6e173c933cdb4340ada57f53bff34f454dabdef163e7feb31cf4f8e1c",
+          "psnr": 22.902720755132165,
+          "psnr_gtmean": 26.409785795154846,
+          "ssim": 0.8358682673466086,
+          "lpips": 0.11442147294680277
+        },
+        {
+          "checkpoint": "epoch_0890.pt",
+          "epoch": 890,
+          "sha256": "5c5b4de762cbdcd45c7ce463a8bb5835a38e2b36998975f527f088df70a3b449",
+          "psnr": 22.99197347056048,
+          "psnr_gtmean": 26.433422842148723,
+          "ssim": 0.8362007008345512,
+          "lpips": 0.11343083480993907
+        },
+        {
+          "checkpoint": "epoch_0900.pt",
+          "epoch": 900,
+          "sha256": "76a61da6f0a25e9c564034ab9ab86c2a26aa035ebf41bb9b1aa09d6d7126d811",
+          "psnr": 22.95852715464897,
+          "psnr_gtmean": 26.38614887142143,
+          "ssim": 0.8358024130284136,
+          "lpips": 0.11404885500669479
+        },
+        {
+          "checkpoint": "epoch_0910.pt",
+          "epoch": 910,
+          "sha256": "b114d35f058a95c2b13be5ccda9674a7862877b5ff9d16e123d0a76d449790b5",
+          "psnr": 22.971844790106896,
+          "psnr_gtmean": 26.39875167858339,
+          "ssim": 0.8357153596005947,
+          "lpips": 0.11396065900723139
+        },
+        {
+          "checkpoint": "epoch_0920.pt",
+          "epoch": 920,
+          "sha256": "970ba20c8c989e322d9733d2942fd0b84b45333f05bb5e2ea5c13969dc53ea30",
+          "psnr": 22.989670640803485,
+          "psnr_gtmean": 26.40232063720622,
+          "ssim": 0.8360043864145806,
+          "lpips": 0.1134763240814209
+        },
+        {
+          "checkpoint": "epoch_0930.pt",
+          "epoch": 930,
+          "sha256": "5765416457729a2e86074bbd7f08e83789857a1fbb97ffe83dfecde6824e2393",
+          "psnr": 22.98739065568929,
+          "psnr_gtmean": 26.381804600548744,
+          "ssim": 0.8354197076700121,
+          "lpips": 0.11394918411970138
+        },
+        {
+          "checkpoint": "epoch_0940.pt",
+          "epoch": 940,
+          "sha256": "fdd013f1db054366cfc3e5db98aa03d6c779a6682b31d6e9bdad6a081e019514",
+          "psnr": 22.954132278049737,
+          "psnr_gtmean": 26.416415972132217,
+          "ssim": 0.8361798510265068,
+          "lpips": 0.11357397039731344
+        },
+        {
+          "checkpoint": "epoch_0950.pt",
+          "epoch": 950,
+          "sha256": "6353ad7b635a409b3986781b4e8a29de86ecf27b3eb9b943e47afb299299325f",
+          "psnr": 22.963374368232728,
+          "psnr_gtmean": 26.39469824089674,
+          "ssim": 0.8360624122877484,
+          "lpips": 0.11391830295324326
+        },
+        {
+          "checkpoint": "epoch_0960.pt",
+          "epoch": 960,
+          "sha256": "29e689e2c21f373174a288905027a5bd7d1b1ad7940791c435ea976e2d29d842",
+          "psnr": 22.979057368234276,
+          "psnr_gtmean": 26.409584842537964,
+          "ssim": 0.8360338211983126,
+          "lpips": 0.11364207367102305
+        },
+        {
+          "checkpoint": "epoch_0970.pt",
+          "epoch": 970,
+          "sha256": "9b89acae7ace4d1ef7b0caf182f5e9cb885a539e916ab22f4c448046c92e17bf",
+          "psnr": 22.978785983710353,
+          "psnr_gtmean": 26.40245851063316,
+          "ssim": 0.8360247778494696,
+          "lpips": 0.11383689790964127
+        },
+        {
+          "checkpoint": "epoch_0980.pt",
+          "epoch": 980,
+          "sha256": "d2645a7e7d80026192dc9ec9d80218c370eaef7f1e8100feeee5ce4ab689b607",
+          "psnr": 22.966137862617625,
+          "psnr_gtmean": 26.39722391830556,
+          "ssim": 0.836007241949042,
+          "lpips": 0.11400099893411
+        },
+        {
+          "checkpoint": "epoch_0990.pt",
+          "epoch": 990,
+          "sha256": "713215201ac5adbddab09c4cb696e0b00eac3f8d0bb933e2faafc13f4cdbfd28",
+          "psnr": 22.97120966775524,
+          "psnr_gtmean": 26.393777324332557,
+          "ssim": 0.8359518529913569,
+          "lpips": 0.11385736415783564
+        },
+        {
+          "checkpoint": "epoch_1000.pt",
+          "epoch": 1000,
+          "sha256": "19fe9cbd535cb06e573365b2fd2f3b0c4615b7273d89def2681d8c1d876b0890",
+          "psnr": 22.962975876043224,
+          "psnr_gtmean": 26.383865637990468,
+          "ssim": 0.8359001059434782,
+          "lpips": 0.11390809267759323
+        },
+        {
+          "checkpoint": "last.pt",
+          "epoch": 1000,
+          "sha256": "587a604a8964ab9b9787b6978f64619b3428ba2607331000a79ee764fac01134",
+          "psnr": 22.962975876043224,
+          "psnr_gtmean": 26.383865637990468,
+          "ssim": 0.8359001059434782,
+          "lpips": 0.11390809267759323
+        }
+      ],
+      "n_checkpoints": 101,
+      "max_psnr_gtmean": 26.533498160372528,
+      "warning": "ORACLE: test-split scores of every saved checkpoint; NEVER used for selection or ranking"
     }
   },
-  "exported_at": "2026-09-25T03:47:09",
+  "exported_at": "2026-09-25T10:39:53",
   "script_sha256": "0cdc31e0b89059f74ecac645717485de31863d28e4f7c198e77ac245e74c9c8b",
   "metrics_sha256": "4a9b66f0aeab34a36dcad9d1093e9fcc14422b465bfb56350e3e76f64675118f"
 }

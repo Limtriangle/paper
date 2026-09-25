@@ -1,7 +1,7 @@
 {
   "run_id": "gateA__summary_v1",
   "seeds_included": "all present",
-  "written_at": "2026-09-25T09:51:51",
+  "written_at": "2026-09-25T10:41:07",
   "script_sha256": "47471712563d6e6edf3685d52d2b23d10df94584f4385a86ca6d2be2b5b0725f",
   "summary": {
     "gateA_L0": {
@@ -114,14 +114,14 @@
       "oracle": {
         "max_over_ckpt_mean": {
           "raw_psnr": {
-            "mean": 23.66230728651168,
-            "sd": 0.4398025610187465,
-            "n": 5
+            "mean": 23.695047537555475,
+            "sd": 0.3766780281063846,
+            "n": 8
           },
           "gtmean_psnr": {
-            "mean": 26.706232618962378,
-            "sd": 0.15155862446575416,
-            "n": 5
+            "mean": 26.71057072717644,
+            "sd": 0.14317132862176543,
+            "n": 8
           }
         },
         "max_over_seeds": {
@@ -152,6 +152,21 @@
           "46": {
             "raw_psnr": 23.52527266580718,
             "gtmean_psnr": 26.73743053659617,
+            "n_checkpoints": 101
+          },
+          "47": {
+            "raw_psnr": 24.111803973606804,
+            "gtmean_psnr": 26.795740271744283,
+            "n_checkpoints": 101
+          },
+          "48": {
+            "raw_psnr": 23.633462913798134,
+            "gtmean_psnr": 26.82416429048282,
+            "n_checkpoints": 101
+          },
+          "49": {
+            "raw_psnr": 23.503576980480464,
+            "gtmean_psnr": 26.533498160372528,
             "n_checkpoints": 101
           }
         },
@@ -184,14 +199,14 @@
           "n": 5
         },
         "oracle_minus_final": {
-          "mean": 0.4084376615051788,
-          "sd": 0.14388270096975,
-          "n": 5
+          "mean": 0.43126406635909387,
+          "sd": 0.1179503373555446,
+          "n": 8
         },
         "oracle_minus_final_gtmean": {
-          "mean": 0.06074051282904804,
-          "sd": 0.01182525578068017,
-          "n": 5
+          "mean": 0.08000195159420853,
+          "sd": 0.0330556773624395,
+          "n": 8
         },
         "notes": "per-seed differences on eval15 (raw PSNR unless suffixed _gtmean), aggregated over seeds; decomposition only, never selection"
       },
@@ -206,7 +221,7 @@
     }
   },
   "sources": {
-    "final_eval__test.json": "f4b0245dbcf38efc7ec5125bc81e6112939fd431501df13156fb2d178c2d7394",
+    "final_eval__test.json": "60cb6b2fe31f912ae4122c554db43c29a212eb323d110120f45415a6cbffffb5",
     "gateA__a0_l0_v1.json": "dbf5e1e2e8bb00c1cae41b9ec33165e713459b054c5efb3ee56c919130a4c48f",
     "a0_l0_v1/L0_seed42/metrics.csv": "43dca6b6929fbad341f643954c02199c5687f221f25c6c67f5992ad96dfd98f5",
     "a0_l0_v1/L0_seed43/metrics.csv": "1c0427320f308ac2cfee5c3b29e487c7de01195cdaae61163e1728ef413abe73",
@@ -217,7 +232,7 @@
     "a0_l0_v2/L0_seed47/metrics.csv": "6ab4ee3cbd995674c3d609afa8f3191997b4b48a8cc75ffa35fc05a12d458695",
     "a0_l0_v2/L0_seed48/metrics.csv": "9130ee6b6e91da4b7b69d624c8c5b2e343cb3e644a8aee6d3de4df0d22a014d5",
     "a0_l0_v2/L0_seed49/metrics.csv": "0439a7bfc6bde142e2faacebeff4c43da6357cba8da8daad88665ad386cc5ad6",
-    "final_eval__oracle.json": "dbfbbca60e8b338b15e4bb5e32e3c4f255d4b0f4bc3dbea52d5f321029416464"
+    "final_eval__oracle.json": "c92f58f6e0d622d03d500a21aba9ddee5450eaaaf0cbd6fe1234d5b7a1786f8a"
   },
   "status": "complete",
   "notes": "derived by script from final_eval__test.json / gateA exports / final_eval__oracle.json; gated, valsel and oracle are Gate A decomposition columns, not selection"
