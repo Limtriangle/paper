@@ -1,0 +1,241 @@
+{
+  "run_id": "gateA__summary_n5_v1",
+  "seeds_included": [
+    42,
+    43,
+    44,
+    45,
+    46
+  ],
+  "written_at": "2026-09-25T04:13:45",
+  "script_sha256": "47471712563d6e6edf3685d52d2b23d10df94584f4385a86ca6d2be2b5b0725f",
+  "summary": {
+    "gateA_L0": {
+      "final": {
+        "raw_psnr": {
+          "mean": 23.2538696250065,
+          "sd": 0.46985048302750304,
+          "n": 5
+        },
+        "gtmean_psnr": {
+          "mean": 26.64549210613333,
+          "sd": 0.16020932505630922,
+          "n": 5
+        },
+        "ssim": {
+          "mean": 0.8414818726208597,
+          "sd": 0.0044329704590147425,
+          "n": 5
+        },
+        "lpips": {
+          "mean": 0.10823267509539922,
+          "sd": 0.002656652710325885,
+          "n": 5
+        },
+        "seeds": [
+          42,
+          43,
+          44,
+          45,
+          46
+        ]
+      },
+      "gated": {
+        "raw_psnr": {
+          "mean": 23.67108265182616,
+          "sd": 0.48714164498907325,
+          "n": 5
+        },
+        "gtmean_psnr": {
+          "mean": 27.733225117474404,
+          "sd": 0.18592101215116327,
+          "n": 5
+        },
+        "ssim": {
+          "mean": 0.8562940483974621,
+          "sd": 0.004116925452987808,
+          "n": 5
+        },
+        "lpips": {
+          "mean": 0.09227881411711375,
+          "sd": 0.0023031218526366275,
+          "n": 5
+        },
+        "seeds": [
+          42,
+          43,
+          44,
+          45,
+          46
+        ]
+      },
+      "valsel": {
+        "raw_psnr": {
+          "mean": 22.141377653951974,
+          "sd": 1.412161992963752,
+          "n": 5
+        },
+        "gtmean_psnr": {
+          "mean": 25.932056252949508,
+          "sd": 0.7519410272288888,
+          "n": 5
+        },
+        "ssim": {
+          "mean": 0.8257212039205036,
+          "sd": 0.019757357629288427,
+          "n": 5
+        },
+        "lpips": {
+          "mean": 0.14176387339830399,
+          "sd": 0.038280447485103564,
+          "n": 5
+        },
+        "seeds": [
+          42,
+          43,
+          44,
+          45,
+          46
+        ]
+      },
+      "k_final": {
+        "median": 0.8498159050941467,
+        "min": 0.8095167875289917,
+        "max": 0.8701199889183044,
+        "per_seed": {
+          "42": 0.8498159050941467,
+          "43": 0.8095167875289917,
+          "44": 0.8444452285766602,
+          "45": 0.8701199889183044,
+          "46": 0.8585001826286316
+        },
+        "n": 5
+      },
+      "oracle": {
+        "max_over_ckpt_mean": {
+          "raw_psnr": {
+            "mean": 23.66230728651168,
+            "sd": 0.4398025610187465,
+            "n": 5
+          },
+          "gtmean_psnr": {
+            "mean": 26.706232618962378,
+            "sd": 0.15155862446575416,
+            "n": 5
+          }
+        },
+        "max_over_seeds": {
+          "raw_psnr": 24.30021595329055,
+          "gtmean_psnr": 26.956625786256133
+        },
+        "per_seed": {
+          "42": {
+            "raw_psnr": 23.107034114952462,
+            "gtmean_psnr": 26.595609226245106,
+            "n_checkpoints": 101
+          },
+          "43": {
+            "raw_psnr": 23.82769383997896,
+            "gtmean_psnr": 26.594695870892313,
+            "n_checkpoints": 101
+          },
+          "44": {
+            "raw_psnr": 24.30021595329055,
+            "gtmean_psnr": 26.956625786256133,
+            "n_checkpoints": 101
+          },
+          "45": {
+            "raw_psnr": 23.551319858529258,
+            "gtmean_psnr": 26.64680167482216,
+            "n_checkpoints": 101
+          },
+          "46": {
+            "raw_psnr": 23.52527266580718,
+            "gtmean_psnr": 26.73743053659617,
+            "n_checkpoints": 101
+          }
+        },
+        "notes": "paper-style numbers: max over saved checkpoints on the test split; NEVER used for selection"
+      },
+      "decomposition": {
+        "gtmean_minus_raw": {
+          "mean": 3.391622481126826,
+          "sd": 0.37340513495075306,
+          "n": 5
+        },
+        "gated_minus_ungated": {
+          "mean": 0.41721302681965894,
+          "sd": 0.09560047568140753,
+          "n": 5
+        },
+        "gated_minus_ungated_gtmean": {
+          "mean": 1.0877330113410764,
+          "sd": 0.0567428393193686,
+          "n": 5
+        },
+        "valsel_minus_final": {
+          "mean": -1.11249197105453,
+          "sd": 1.1838757149325068,
+          "n": 5
+        },
+        "valsel_minus_final_gtmean": {
+          "mean": -0.713435853183821,
+          "sd": 0.7437399349643123,
+          "n": 5
+        },
+        "oracle_minus_final": {
+          "mean": 0.4084376615051788,
+          "sd": 0.14388270096975,
+          "n": 5
+        },
+        "oracle_minus_final_gtmean": {
+          "mean": 0.06074051282904804,
+          "sd": 0.01182525578068017,
+          "n": 5
+        },
+        "notes": "per-seed differences on eval15 (raw PSNR unless suffixed _gtmean), aggregated over seeds; decomposition only, never selection"
+      },
+      "window": {
+        "lower": 23.3,
+        "upper": 24.3,
+        "source": "HVI-PLAN.md \u00a75 Gate A",
+        "final_raw_mean_minus_lower": -0.046130374993499146,
+        "final_raw_mean_inside": false,
+        "gated_raw_mean_minus_lower": 0.3710826518261605
+      }
+    }
+  },
+  "sources": {
+    "final_eval__test.json": "d54ba9cde8a2b7bbad187446ffa2ec8278c3c2a220c8276dc39e7ed3c1d5a585",
+    "final_eval__test.json#entries.gateA_L0_seed42": "988e13d9a1a148a28d8607224a824b6266ce11f3942b194916f8502ed0e26231",
+    "final_eval__test.json#entries.gateA_L0_seed44": "0434cba2fb58b55f657622852a9c7432b900ae619b7b33506d6f9e10fa6781a5",
+    "final_eval__test.json#entries.gateA_L0_seed42_gated": "b4df6313a3b515612c52475e36210c2b4e12eea3d000317f598e35aac7613403",
+    "final_eval__test.json#entries.gateA_L0_seed42_valsel": "1f37e742916a57577dc9b446dd535a0cdf949a8735196605521e009d2cf39226",
+    "final_eval__test.json#entries.gateA_L0_seed44_gated": "5c297c7dd637adf2e71b46dbdcfd398929781b1b34b4394ad44e063e24b38229",
+    "final_eval__test.json#entries.gateA_L0_seed44_valsel": "b1bc50e8ebecb9b6654abc6f383ee07518175d22f3933bc756cd6be87026f5a1",
+    "final_eval__test.json#entries.gateA_L0_seed43": "9da083714037a95859f37abd36425084dadbf91074147fd182088148a163d8d2",
+    "final_eval__test.json#entries.gateA_L0_seed43_gated": "e8c7732c956ab6cf72724eb404fbb22cf950c2260f2d3f60b014c64340528cb1",
+    "final_eval__test.json#entries.gateA_L0_seed43_valsel": "00f213522ea01d673e76009bedeb73061eb1c96cd25aa6959de0bc8cf15b061e",
+    "final_eval__test.json#entries.gateA_L0_seed45": "ac736e55b5379209ef9757bfb91c64654b6f7f1266bb8b4679f665acc31bb66b",
+    "final_eval__test.json#entries.gateA_L0_seed45_gated": "3033c6ecad7d4f975ddf81fe23274b69c2fdc3bfbb5672e668c1f900ab286ec5",
+    "final_eval__test.json#entries.gateA_L0_seed45_valsel": "0f868b3babcb59013821ea1f1083162db58b259b15fc8abc88a128582e8d11cd",
+    "final_eval__test.json#entries.gateA_L0_seed46": "98120cb7c10df588c0bad653320791a3cf62397a6ce89a5ed8907f38b2e48416",
+    "final_eval__test.json#entries.gateA_L0_seed46_gated": "0e8299a93d814fa08d7109f51dd1f6eeebdd2569dda8748908f3a255be66e106",
+    "final_eval__test.json#entries.gateA_L0_seed46_valsel": "a00066fd7902eadc71237d72df859048fb14ba247e54320c9ee9ed0f478e30d0",
+    "gateA__a0_l0_v1.json": "dbf5e1e2e8bb00c1cae41b9ec33165e713459b054c5efb3ee56c919130a4c48f",
+    "a0_l0_v1/L0_seed42/metrics.csv": "43dca6b6929fbad341f643954c02199c5687f221f25c6c67f5992ad96dfd98f5",
+    "a0_l0_v1/L0_seed43/metrics.csv": "1c0427320f308ac2cfee5c3b29e487c7de01195cdaae61163e1728ef413abe73",
+    "a0_l0_v1/L0_seed44/metrics.csv": "d6ba6c80a6f6aa96421e040244d0a5e78abfd4ba04acac55b3d0624824f33236",
+    "a0_l0_v1/L0_seed45/metrics.csv": "48f3dfce66c5b28126e14bb528b21fb4d35a082bdfee19e2587abe86aa48b43d",
+    "a0_l0_v1/L0_seed46/metrics.csv": "a93ecc9d08e636407e5ea179fb31717ccad22677ad51d32f6885be2443a69793",
+    "gateA__a0_l0_v2.json": "7491d7c4c35a724fab7c7c80fc1006a9e9b82f99cda2a4e0db53f126c70faabd",
+    "final_eval__oracle.json": "dbfbbca60e8b338b15e4bb5e32e3c4f255d4b0f4bc3dbea52d5f321029416464",
+    "final_eval__oracle.json#entries.oracle_gateA_L0_seed42": "85d7703743c3937a30be8c74b61cec84f6215706f9fe50214cbe4f0b0287db13",
+    "final_eval__oracle.json#entries.oracle_gateA_L0_seed43": "b8800da2cfa4225ad486c2d18a6492ac00b425bc5d3c84418a9c6bf345e1fd0c",
+    "final_eval__oracle.json#entries.oracle_gateA_L0_seed44": "3a67f361510c0b9488323c7008445ed0e946ed02cfe3e45c11cc3215df2707a9",
+    "final_eval__oracle.json#entries.oracle_gateA_L0_seed45": "4f60a6896e23481f4ad550758b83b48d603394b8a976d54554735afafbc70429",
+    "final_eval__oracle.json#entries.oracle_gateA_L0_seed46": "28fc0790096511366a9b5934fb5bd41289b605c200f42da25021abefa982f962"
+  },
+  "status": "complete",
+  "notes": "derived by script from final_eval__test.json / gateA exports / final_eval__oracle.json; gated, valsel and oracle are Gate A decomposition columns, not selection"
+}

@@ -10,6 +10,8 @@ oracle_gateA_L0_seed<s> entries. Every number is computed here from those files;
 """
 from __future__ import annotations
 
+import hashlib
+import json
 import re
 import statistics
 import sys
@@ -29,6 +31,13 @@ def msd(vals):
 
 
 def main():
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--seeds", help="comma list; restrict every block to these seeds (e.g. 42,43,44,45,46)")
+    ap.add_argument("--out", default="gateA__summary_v1.json", help="file name under ralph/results/")
+    ap.add_argument("--run-id", default=None)
+    a = ap.parse_args()
+    keep = {int(x) for x in a.seeds.split(",")} if a.seeds else None
     sources = {}
     test = R / "final_eval__test.json"
     E = H.json_load(test)["entries"]
@@ -40,7 +49,11 @@ def main():
         if not m:
             continue
         kind = m.group(2) or "final"
+        if keep is not None and int(m.group(1)) not in keep:
+            continue
         seeds.setdefault(kind, {})[int(m.group(1))] = e["metrics"]
+        if keep is not None:
+            sources[f"final_eval__test.json#entries.{label}"] = hashlib.sha256(json.dumps(e, sort_keys=True).encode()).hexdigest()
     for kind, per in seeds.items():
         out[kind] = {k: msd([per[s][v] for s in sorted(per)]) for k, v in METRIC.items()}
         out[kind]["seeds"] = sorted(per)
@@ -51,6 +64,8 @@ def main():
         sources[exp.name] = H.sha256_file(exp)
         for job, jd in d["jobs"].items():
             if jd.get("status") != "complete" or not job.startswith("L0_seed"):
+                continue
+            if keep is not None and int(job.split("seed")[1]) not in keep:
                 continue
             mcsv = Path(d["root"]) / job / "metrics.csv"
             rows = H.csv_rows(mcsv)
@@ -63,7 +78,11 @@ def main():
     if oracle.is_file():
         O = H.json_load(oracle)["entries"]
         sources[oracle.name] = H.sha256_file(oracle)
-        per = {int(l.split("seed")[1]): e for l, e in O.items() if re.match(r"^oracle_gateA_L0_seed\d+$", l)}
+        per = {int(l.split("seed")[1]): e for l, e in O.items() if re.match(r"^oracle_gateA_L0_seed\d+$", l)
+               and (keep is None or int(l.split("seed")[1]) in keep)}
+        if keep is not None:
+            for s_ in per:
+                sources[f"final_eval__oracle.json#entries.oracle_gateA_L0_seed{s_}"] = hashlib.sha256(json.dumps(per[s_], sort_keys=True).encode()).hexdigest()
         if per:
             maxes = {s: max(c["psnr"] for c in per[s]["curve"]) for s in per}
             maxes_gm = {s: per[s]["max_psnr_gtmean"] for s in per}
@@ -98,11 +117,11 @@ def main():
                          "final_raw_mean_minus_lower": out["final"]["raw_psnr"]["mean"] - 23.3,
                          "final_raw_mean_inside": 23.3 <= out["final"]["raw_psnr"]["mean"] <= 24.3,
                          "gated_raw_mean_minus_lower": (out["gated"]["raw_psnr"]["mean"] - 23.3) if out.get("gated", {}).get("raw_psnr") else None}
-    res = {"run_id": "gateA__summary_v1", "written_at": time.strftime("%Y-%m-%dT%H:%M:%S"),
+    res = {"run_id": a.run_id or a.out[:-5], "seeds_included": sorted(keep) if keep else "all present", "written_at": time.strftime("%Y-%m-%dT%H:%M:%S"),
            "script_sha256": H.sha256_file(Path(__file__)), "summary": {"gateA_L0": out}, "sources": sources,
            "status": "complete" if len(seeds.get("final", {})) >= 5 else "partial",
            "notes": "derived by script from final_eval__test.json / gateA exports / final_eval__oracle.json; gated, valsel and oracle are Gate A decomposition columns, not selection"}
-    dest = R / "gateA__summary_v1.json"
+    dest = R / a.out
     H.json_save(dest, res)
     f = out.get("final", {})
     print("wrote", dest, "| final raw", f.get("raw_psnr"), "| k_final", out.get("k_final", {}).get("median"), "| oracle", "yes" if "oracle" in out else "no")
