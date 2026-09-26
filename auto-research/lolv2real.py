@@ -161,6 +161,31 @@ def evaluate(a):
     print(a.label, {k: round(v, 3) for k, v in entry["metrics"].items() if k in ("psnr", "psnr_gtmean", "ssim", "lpips")})
 
 
+def summarize(a):
+    """Per-arm aggregate over seeds of the descriptive reads (master 2026-09-26): summary.<arm>.<metric>.{mean,sd,n}."""
+    import re
+    import statistics
+    d = H.json_load(OUT)
+    MET = {"raw_psnr": "psnr", "gtmean_psnr": "psnr_gtmean", "ssim": "ssim", "lpips": "lpips", "de00": "delta_e00"}
+    per = {}
+    for lab, e in d["entries"].items():
+        m = re.match(r"^lolv2_(?P<arm>[A-Z]\d)_seed(?P<seed>\d+)$", lab)
+        if m:
+            per.setdefault(m["arm"], {})[int(m["seed"])] = e
+    summ = {}
+    for arm, seeds in sorted(per.items()):
+        n_img = {e["n_images"] for e in seeds.values()}
+        summ[arm] = {k: {"mean": statistics.mean(e["metrics"][v] for e in seeds.values()),
+                         "sd": (statistics.stdev(e["metrics"][v] for e in seeds.values()) if len(seeds) > 1 else None),
+                         "n": len(seeds)} for k, v in MET.items()}
+        summ[arm].update({"seeds": sorted(seeds), "n_images_per_seed": sorted(n_img), "kind": "descriptive"})
+    d["summary"] = summ
+    d["summary_note"] = ("per arm: mean and SD over seeds of each seed's mean over the kept images; n = seeds; "
+                         f"{d['counts']['n_kept']} images from {d['counts']['n_scenes_kept']} scenes; descriptive, no inference")
+    H.json_save(OUT, d)
+    print({a: (round(v["raw_psnr"]["mean"], 3), round(v["gtmean_psnr"]["mean"], 3), v["raw_psnr"]["n"]) for a, v in summ.items()})
+
+
 def link_layout():
     """load_val_pair expects <dir>/low/<n> and <dir>/high/<n>: expose Test/Input and Test/GT under that layout."""
     t = DEST / "Test_as_lol"
@@ -176,6 +201,7 @@ def main():
     ap.add_argument("--prepare", action="store_true")
     ap.add_argument("--eval", action="store_true")
     ap.add_argument("--eval15-dedup", action="store_true")
+    ap.add_argument("--summarize", action="store_true")
     ap.add_argument("--ckpt")
     ap.add_argument("--label")
     ap.add_argument("--gpu", type=int, default=-1)
@@ -184,6 +210,8 @@ def main():
     if a.prepare:
         prepare(a)
         link_layout()
+    elif a.summarize:
+        summarize(a)
     elif a.eval15_dedup:
         eval15_dedup(a)
     elif a.eval:
