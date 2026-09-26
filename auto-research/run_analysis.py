@@ -34,6 +34,19 @@ RUN = {"s1": ("s1", "loss_ladder_v1"), "s2": ("s2", "rep_ladder_v1")}
 M_FAMILY = 4
 
 
+def derived(dec):
+    """Keys the paper cites that the frozen script computes only in parts (master 2026-09-26). Pure arithmetic on
+    the frozen decision; exported as analysis.analysis_<ladder>.derived.*, never inside .decision."""
+    c = {k: v for k, v in dec["contrasts"].items() if "mean" in v}
+    tost = {k: max(v["tost"]["p_lower"], v["tost"]["p_upper"]) for k, v in c.items()}
+    mde = {k: v["mde_db"] for k, v in c.items() if v.get("mde_db") is not None}
+    return {"tost_p": tost, "mde_db": {**mde, "family_max": max(mde.values()) if mde else None},
+            "formulas": {"tost_p": "max(tost.p_lower, tost.p_upper) of the frozen decision (TOST rejects iff tost_p < 0.05; margin 0.3 dB)",
+                         "mde_db": "copied from decision.contrasts.<c>.mde_db = (t_{0.975,n-1} + t_{0.8,n-1}) * SD(delta_s) / sqrt(n) "
+                                   "(frozen analysis_c1.mde; = 1.66 * SD / sqrt(5) at n = 5); family_max = max over contrasts"},
+            "source": "analysis.analysis_<ladder>.decision (frozen analysis_c1.py)", "wrapper_sha256": H.sha256_file(Path(__file__))}
+
+
 def complete_arms(runs, ladder, planned=None):
     out = {}
     for arm, seeds in (planned or PLANNED)[ladder].items():
@@ -168,6 +181,7 @@ def main():
                         "test15": "final-checkpoint reads by final_eval_test.py; no selection"})
             (rd / f"analysis_{ladder}").mkdir(exist_ok=True)
             H.json_save(rd / f"analysis_{ladder}" / "decision.json", dec)
+            H.json_save(rd / f"analysis_{ladder}" / "derived.json", derived(dec))
             subprocess.run([sys.executable, str(H.PAPER / "tooling" / "export_results.py"), "--run", f"{study}/{run}"],
                            capture_output=True, text=True, timeout=600)
             print(ladder, "arms", sorted(sel), "|", {k: (round(c["mean"], 3), c["verdict"]) if "mean" in c else c.get("status")

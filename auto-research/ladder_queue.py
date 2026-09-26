@@ -274,6 +274,11 @@ def tick(st):
         idle = [g for g in sorted(free) if free[g] and g not in busy and (g != 0 or st.get("gpu0_released"))
                 and not (QDIR / f"hold_gpu{g}").exists()]
         pending = []
+        of = H.PAPER / "ralph" / "results" / "final_eval__oracle.json"
+        present = set(H.json_load(of).get("entries", {})) if of.is_file() else set()   # e.g. passes run on CPU by experiment
+        for lab in present:
+            if lab not in st["oracle_done"] and lab not in st.get("oracle_running", {}) and lab.startswith("oracle_"):
+                st["oracle_done"].append(lab)
         for arm in sorted({j["arm"] for j in jobs}):
             js = [j for j in jobs if j["arm"] == arm]
             if all(j["state"] == "complete" for j in js):

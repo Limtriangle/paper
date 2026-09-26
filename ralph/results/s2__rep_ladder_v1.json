@@ -146,12 +146,24 @@
      "final_eval__test.json": "99716f42e4ac2914cd681b84f043557a7ec4e96241f53e9bac12674ffe77932e"
     },
     "test15": "final-checkpoint reads by final_eval_test.py; no selection",
-    "wrapper_sha256": "5862e7bfa0059f552d89e4f0ad4b00b22b2d5be9e2831d6d7d3e06249b0eb71e",
-    "written_at": "2026-09-26T07:42:01"
+    "wrapper_sha256": "025f881ea2266a0ec02d6bacd1c96cc8f658344c1c67bb2e11ed8608f4184bf6",
+    "written_at": "2026-09-26T07:43:57"
+   },
+   "derived": {
+    "formulas": {
+     "mde_db": "copied from decision.contrasts.<c>.mde_db = (t_{0.975,n-1} + t_{0.8,n-1}) * SD(delta_s) / sqrt(n) (frozen analysis_c1.mde; = 1.66 * SD / sqrt(5) at n = 5); family_max = max over contrasts",
+     "tost_p": "max(tost.p_lower, tost.p_upper) of the frozen decision (TOST rejects iff tost_p < 0.05; margin 0.3 dB)"
+    },
+    "mde_db": {
+     "family_max": null
+    },
+    "source": "analysis.analysis_<ladder>.decision (frozen analysis_c1.py)",
+    "tost_p": {},
+    "wrapper_sha256": "025f881ea2266a0ec02d6bacd1c96cc8f658344c1c67bb2e11ed8608f4184bf6"
    }
   }
  },
- "exported_at": "2026-09-26T07:42:01",
+ "exported_at": "2026-09-26T07:43:57",
  "jobs": {
   "A2_seed42": {
    "config": {
@@ -196,10 +208,10 @@
    "curve": {
     "best_val_psnr": 22.842505958785402,
     "best_val_psnr_epoch": 270,
-    "final_train_loss": 0.474192921604429,
-    "final_val_psnr": 22.220923363808264,
-    "n_epochs": 285,
-    "train_seconds_total": 6362.587295293808
+    "final_train_loss": 0.471257389656135,
+    "final_val_psnr": 22.099877148914224,
+    "n_epochs": 290,
+    "train_seconds_total": 6474.341042518616
    },
    "epochs_trained": 1000,
    "status": "running"
@@ -247,10 +259,10 @@
    "curve": {
     "best_val_psnr": 22.91170392051979,
     "best_val_psnr_epoch": 65,
-    "final_train_loss": 0.4722480938902923,
-    "final_val_psnr": 21.936964025575538,
-    "n_epochs": 265,
-    "train_seconds_total": 5884.883526802063
+    "final_train_loss": 0.47603300160595347,
+    "final_val_psnr": 22.37182402749945,
+    "n_epochs": 270,
+    "train_seconds_total": 5996.224091053009
    },
    "epochs_trained": 1000,
    "status": "running"
@@ -298,10 +310,61 @@
    "curve": {
     "best_val_psnr": 20.907839923228597,
     "best_val_psnr_epoch": 20,
-    "final_train_loss": 0.7671442308596202,
+    "final_train_loss": 0.7443639636039734,
     "final_val_psnr": "",
-    "n_epochs": 28,
-    "train_seconds_total": 628.5853040218353
+    "n_epochs": 33,
+    "train_seconds_total": 741.1872038841248
+   },
+   "epochs_trained": 1000,
+   "status": "running"
+  },
+  "A2_seed45": {
+   "config": {
+    "CUDA_VISIBLE_DEVICES": "3",
+    "amp": false,
+    "batch_size": 8,
+    "channels": [
+     36,
+     36,
+     72,
+     144
+    ],
+    "condition": "A2",
+    "crop": 256,
+    "epochs_schedule": 1000,
+    "epochs_trained": 1000,
+    "gpu": "NVIDIA GeForce RTX 2080 Ti",
+    "heads": [
+     1,
+     2,
+     4,
+     8
+    ],
+    "lr": 0.0001,
+    "parameters": 1975569,
+    "script_sha256": "138696b4147efc3de9300a636e06e5bfa0bc633b5780a31c0cc390246353fa8e",
+    "seed": 45,
+    "step_limit": 0,
+    "test15": "NEVER READ",
+    "torch": "2.7.0a0+7c8ec84dab.nv25.03",
+    "val_limit": 0,
+    "variant": "A2",
+    "weights": {
+     "HVI": 1.0,
+     "L1": 1.0,
+     "SSIM": 0.5,
+     "edge": 50.0,
+     "perceptual": 0.01
+    },
+    "width": 36
+   },
+   "curve": {
+    "best_val_psnr": "",
+    "best_val_psnr_epoch": 1,
+    "final_train_loss": 1.3959715004478181,
+    "final_val_psnr": "",
+    "n_epochs": 4,
+    "train_seconds_total": 90.05308270454407
    },
    "epochs_trained": 1000,
    "status": "running"
@@ -313,7 +376,7 @@
  },
  "n_jobs": {
   "complete": 0,
-  "total": 3
+  "total": 4
  },
  "protocol": {
   "augmentation": "RandomCrop(crop) + RandomHorizontalFlip + RandomVerticalFlip, same crop/flips for low and high (data/data.py:7-13)",
@@ -403,16 +466,20 @@
  "run_id": "s2__rep_ladder_v1",
  "sources": {
   "A2_seed42/config.json": "2fe8ee3ee07a0790d95fc7b114040cc690e94e20d24d09d3e58cd89a2648dc58",
-  "A2_seed42/metrics.csv": "7c62e7120a951935db0982235a2e51150f48702bfde7140d575453a4e256a6c9",
-  "A2_seed42/status.json": "4fb7b64637e68b7cf1f3da5c1f9a53c1d605c72938cf7ea3dcb5bc972d48549a",
+  "A2_seed42/metrics.csv": "483d5fc97900e6d7f5f600d77f76d204fb0c158e7220a70ec6286a88cfd0c0b2",
+  "A2_seed42/status.json": "29632cfc452b378e38bfba488588731db7caf2d19c9a1b04804dd43941419d6e",
   "A2_seed43/config.json": "4072a5b519df3013dab2e294ac9407f805d6ca2b5163cc097735286ee79cb564",
-  "A2_seed43/metrics.csv": "083d549a22f22d4fa2920edb6a8cacb8d0e293253f940c3d1c543bec7efd1a9e",
-  "A2_seed43/status.json": "63785199012eb001887772a02331285de2c3ffebe3993fdbd1719b1a91def31f",
+  "A2_seed43/metrics.csv": "8dffae81685bcec42392bfd45d6115dddc2e372136b940d1040b3dfd2e1cd0db",
+  "A2_seed43/status.json": "a730ff563aba73fe36c8973edb42ef0e99245cb5cafcb5b7a667d248f97fab77",
   "A2_seed44/config.json": "92066be930326751a9ce5482ca91f161ee809f0fd5908f04665f71cb02eef7f3",
-  "A2_seed44/metrics.csv": "4cc52a54226a8d8555d74f193f65b9a5fbbe96f584f39435ef6432771d183bd6",
-  "A2_seed44/status.json": "2f25f5692835bb17e67d9643883ca44fa95a56e7dff352f0e049e2be8b7ed0e6",
-  "analysis_s2/decision.json": "978b37ac083468884ff0e3c15dc3c99b558e03b21eb959c5088b0b38871e3692",
-  "manifest.json": "3a9959aa9fa615cb466a05f1e8a0e4b48148bd40c031f642c77f2eb72dbea3da"
+  "A2_seed44/metrics.csv": "2c4f9f1308bcd0ba1ba3cf6d59427840b96cbb22081d08389fb45c81793f7422",
+  "A2_seed44/status.json": "d5e6ac10a88ac1d3904095e7804d8b02d5ca3d0f9e95403a5e3d058fcda68338",
+  "A2_seed45/config.json": "4a77d7e806adb2078ed2516613000db492fc71e5ca457e450bd8592a618750cf",
+  "A2_seed45/metrics.csv": "1981ac3b3b575c0e0b3e3e6a04d417174cd20bc5ec1135f699bec6c3d71428e3",
+  "A2_seed45/status.json": "652fd9870e12e1b402b14f601533ff51571e031ee8b9e0c2ebf039bd896f9346",
+  "analysis_s2/decision.json": "1bc9fa565fde69dde223bff1ddb3d4d23c43fc59d7d1493e72418ef90ea093d6",
+  "analysis_s2/derived.json": "621f8d9f9be4920e41743400d50f98f9846feaf37378fc856900c391e4f82d51",
+  "manifest.json": "7eb8a1b9904035b741fca32860ad14c54c3ad78b2f034e75ad05a5ab1d11caa6"
  },
  "status": "partial",
  "study": "s2"

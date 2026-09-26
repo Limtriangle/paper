@@ -120,10 +120,10 @@
       }
     }
   },
-  "written_at": "2026-09-26T07:42:01",
+  "written_at": "2026-09-26T07:43:57",
   "analysis_script": "auto-research/analysis_c1.py (frozen, imported unchanged)",
   "analysis_sha256": "7fc297afdd08392e83709a31e5e687e029b75ff679a433a4c47ddd6dcd163d07",
-  "wrapper_sha256": "5862e7bfa0059f552d89e4f0ad4b00b22b2d5be9e2831d6d7d3e06249b0eb71e",
+  "wrapper_sha256": "025f881ea2266a0ec02d6bacd1c96cc8f658344c1c67bb2e11ed8608f4184bf6",
   "arms_included": {
     "L0": [
       42,

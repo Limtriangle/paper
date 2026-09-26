@@ -1006,12 +1006,33 @@
      "final_eval__test.json": "99716f42e4ac2914cd681b84f043557a7ec4e96241f53e9bac12674ffe77932e"
     },
     "test15": "final-checkpoint reads by final_eval_test.py; no selection",
-    "wrapper_sha256": "5862e7bfa0059f552d89e4f0ad4b00b22b2d5be9e2831d6d7d3e06249b0eb71e",
-    "written_at": "2026-09-26T07:42:00"
+    "wrapper_sha256": "025f881ea2266a0ec02d6bacd1c96cc8f658344c1c67bb2e11ed8608f4184bf6",
+    "written_at": "2026-09-26T07:43:57"
+   },
+   "derived": {
+    "formulas": {
+     "mde_db": "copied from decision.contrasts.<c>.mde_db = (t_{0.975,n-1} + t_{0.8,n-1}) * SD(delta_s) / sqrt(n) (frozen analysis_c1.mde; = 1.66 * SD / sqrt(5) at n = 5); family_max = max over contrasts",
+     "tost_p": "max(tost.p_lower, tost.p_upper) of the frozen decision (TOST rejects iff tost_p < 0.05; margin 0.3 dB)"
+    },
+    "mde_db": {
+     "L0-L1": 0.284786997475232,
+     "L1-L2": 0.11030631756692719,
+     "L2-L3": 0.27899540041062504,
+     "L2-L4": 0.338698434057358,
+     "family_max": 0.338698434057358
+    },
+    "source": "analysis.analysis_<ladder>.decision (frozen analysis_c1.py)",
+    "tost_p": {
+     "L0-L1": 0.019206957772384722,
+     "L1-L2": 0.0040828572798808915,
+     "L2-L3": 0.989524935239653,
+     "L2-L4": 0.08619707086724418
+    },
+    "wrapper_sha256": "025f881ea2266a0ec02d6bacd1c96cc8f658344c1c67bb2e11ed8608f4184bf6"
    }
   }
  },
- "exported_at": "2026-09-26T07:42:00",
+ "exported_at": "2026-09-26T07:43:57",
  "jobs": {
   "L1_seed42": {
    "best": {
@@ -2850,7 +2871,8 @@
   "L4_seed46/status.json": "85f4019675343d4db9068ee70a3ba7b2031990bcd2601fb10934f34ae2a39f7a",
   "L4_seed46/validation_summary.csv": "b860f41b2a850e3c12578ab729f716773d2660172b737492e0eec4ec702dd89d",
   "analysis_k/decision.json": "1e79ad3aff7b5314ac23a494d8903734457b9267f8e847e6c59ab12189af2888",
-  "analysis_s1/decision.json": "11db1add8ec1102b957d9741154fd9d471fcd1a8fe37fa50961360dcfd0e8fc5",
+  "analysis_s1/decision.json": "7deebe17777fbda5bd0602ab8a039bcc54e0eb62bdc281f79cc75564e1f27d96",
+  "analysis_s1/derived.json": "03d6f70103abeefb4769dbf99686377b68506a2de8e48bcbe29b4f616675551d",
   "manifest.json": "30ce48b81a317b5627d0295087efd4c3ba7656bf1991d296b209140c4fbf073c"
  },
  "status": "complete",

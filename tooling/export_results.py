@@ -123,6 +123,8 @@ def export_run(study, run):
             a = {}
             if (d / "decision.json").exists():
                 a["decision"] = json.load(open(d / "decision.json")); sources[f"{d.name}/decision.json"] = sha(d / "decision.json")
+            if (d / "derived.json").exists():
+                a["derived"] = json.load(open(d / "derived.json")); sources[f"{d.name}/derived.json"] = sha(d / "derived.json")
             for c in ("seed_summary.csv", "paired_metrics.csv"):
                 if (d / c).exists():
                     a[c.replace(".csv", "")] = read_csv(d / c); sources[f"{d.name}/{c}"] = sha(d / c)
