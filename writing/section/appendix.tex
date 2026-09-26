@@ -100,8 +100,16 @@ miscalibration, using no training. On the validation split we blend each input t
 ground truth at $\alpha \in \{0.1, 0.2, 0.35, 0.5\}$ and scale it by $\{0.5, 2, 4\}$, then
 compare three per-image oracles that read the ground truth: identity, a closed-form
 mean-matching pre-gain, and a joint search over the pre-gain and \mname's inference knobs
-$(k, \alpha_s, \alpha_i, \gamma)$. Scenes are the replication unit. Under this design
-\ph{80}\% of the brightness-shift loss is recovered by the scalar pre-gain alone, and the
-\hvi-specific knobs add at most \ph{0.3}~dB beyond it. Because the oracles read the ground
-truth, these numbers bound what any adaptation method could recover and do not constitute
-one.
+$(k, \alpha_s, \alpha_i, \gamma)$. Scenes are the replication unit (\phm{18} scenes, scene-bootstrap 95\% intervals).
+A single pre-gain recovers a fraction \phm{0.755} of the loss that the full oracle recovers
+on shifted inputs. The full oracle adds \phm{2.48}~dB raw PSNR beyond the gain
+[\phm{2.04}, \phm{2.98}] and \phm{3.15}~dB GT-mean PSNR [\phm{2.69}, \phm{3.62}], so the
+pre-registered condition that the knobs add less than $0.3$~dB beyond a gain fails.
+The split of that extra recovery is descriptive: nearly the same gap, \phm{2.31}~dB
+[\phm{1.65}, \phm{3.01}], appears on unshifted inputs, so it is not specific to the shift;
+its chroma and hue part is $\phm{-0.10}$ CIEDE2000 units [$\phm{-0.35}$, \phm{0.16}], so it
+is not a color correction; and the selected $k$ stays at a median of \phm{1.125}, the
+released value. The extra recovery is per-image oracle flexibility on tone. The validation
+images are part of the released model's training data, so these reads describe a model on
+images it has memorised. Because every oracle selects its knobs with the ground truth, the
+numbers are upper bounds on what adaptation could recover, not a method.

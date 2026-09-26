@@ -1222,6 +1222,126 @@
    "only_in": [
     "appendix.tex"
    ]
+  },
+  {
+   "written": "18",
+   "src": "s4__oracle_decomp_v1.json",
+   "key": "decomposition.shifted_all.P1_raw_psnr__O_all_minus_O_gain.n_scenes",
+   "only_in": [
+    "appendix.tex"
+   ]
+  },
+  {
+   "written": "0.755",
+   "src": "s4__oracle_decomp_v1.json",
+   "key": "decomposition.shifted_all.share_of_oracle_recovery_by_gain_only",
+   "only_in": [
+    "appendix.tex"
+   ]
+  },
+  {
+   "written": "2.48",
+   "src": "s4__oracle_decomp_v1.json",
+   "key": "decomposition.shifted_all.P1_raw_psnr__O_all_minus_O_gain.mean",
+   "only_in": [
+    "appendix.tex"
+   ]
+  },
+  {
+   "written": "2.04",
+   "src": "s4__oracle_decomp_v1.json",
+   "key": "decomposition.shifted_all.P1_raw_psnr__O_all_minus_O_gain.ci95_scene_bootstrap.0",
+   "only_in": [
+    "appendix.tex"
+   ]
+  },
+  {
+   "written": "2.98",
+   "src": "s4__oracle_decomp_v1.json",
+   "key": "decomposition.shifted_all.P1_raw_psnr__O_all_minus_O_gain.ci95_scene_bootstrap.1",
+   "only_in": [
+    "appendix.tex"
+   ]
+  },
+  {
+   "written": "3.15",
+   "src": "s4__oracle_decomp_v1.json",
+   "key": "decomposition.shifted_all.P2_gtmean_psnr__O_all_minus_O_gain.mean",
+   "only_in": [
+    "appendix.tex"
+   ]
+  },
+  {
+   "written": "2.69",
+   "src": "s4__oracle_decomp_v1.json",
+   "key": "decomposition.shifted_all.P2_gtmean_psnr__O_all_minus_O_gain.ci95_scene_bootstrap.0",
+   "only_in": [
+    "appendix.tex"
+   ]
+  },
+  {
+   "written": "3.62",
+   "src": "s4__oracle_decomp_v1.json",
+   "key": "decomposition.shifted_all.P2_gtmean_psnr__O_all_minus_O_gain.ci95_scene_bootstrap.1",
+   "only_in": [
+    "appendix.tex"
+   ]
+  },
+  {
+   "written": "2.31",
+   "src": "s4__oracle_decomp_v1.json",
+   "key": "decomposition.none.P1_raw_psnr__O_all_minus_O_gain.mean",
+   "only_in": [
+    "appendix.tex"
+   ]
+  },
+  {
+   "written": "1.65",
+   "src": "s4__oracle_decomp_v1.json",
+   "key": "decomposition.none.P1_raw_psnr__O_all_minus_O_gain.ci95_scene_bootstrap.0",
+   "only_in": [
+    "appendix.tex"
+   ]
+  },
+  {
+   "written": "3.01",
+   "src": "s4__oracle_decomp_v1.json",
+   "key": "decomposition.none.P1_raw_psnr__O_all_minus_O_gain.ci95_scene_bootstrap.1",
+   "only_in": [
+    "appendix.tex"
+   ]
+  },
+  {
+   "written": "-0.10",
+   "src": "s4__oracle_decomp_v1.json",
+   "key": "decomposition.shifted_all.P2_dE00_chroma_hue__O_all_minus_O_gain.mean",
+   "only_in": [
+    "appendix.tex"
+   ]
+  },
+  {
+   "written": "-0.35",
+   "src": "s4__oracle_decomp_v1.json",
+   "key": "decomposition.shifted_all.P2_dE00_chroma_hue__O_all_minus_O_gain.ci95_scene_bootstrap.0",
+   "only_in": [
+    "appendix.tex"
+   ]
+  },
+  {
+   "written": "0.16",
+   "src": "s4__oracle_decomp_v1.json",
+   "key": "decomposition.shifted_all.P2_dE00_chroma_hue__O_all_minus_O_gain.ci95_scene_bootstrap.1",
+   "only_in": [
+    "appendix.tex"
+   ]
+  },
+  {
+   "written": "1.125",
+   "src": "s4__oracle_decomp_v1.json",
+   "key": "knob_trajectories.k__P2.median",
+   "only_in": [
+    "appendix.tex"
+   ]
   }
  ]
 }
