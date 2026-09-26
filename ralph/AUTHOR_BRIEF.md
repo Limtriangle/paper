@@ -51,7 +51,12 @@ decile mechanism rule; vocabulary contributes / removable / inconclusive.
 
 ## 5. Open questions for the author
 - Gate A reporting n (ruled by master on 2026-09-25: gate at n = 5, reference arm pooled n = 8; reversible).
-- *(more as they arise)*
+- The "contributes" verdict for HVI-space supervision (L2−L3) meets rule S-3 conditions (a)–(c); condition (d)'s mixed
+  model reported converged = false. Master's default: keep the verdict, state the non-convergence in the paper, add a
+  supplementary non-rule model as a robustness check. Please confirm or overrule.
+- The pre-registered LOL-v2-Real cross-dataset check (plan §3, zero training) was started on 2026-09-26 while you were
+  away; it is plan-listed, not new scope. Say if you want it dropped.
+- Whether the S4 oracle-decomposition chapter stays in the appendix depends on its result (arrives 2026-09-26).
 
 ## 6. Every decision taken while the author was away
 *(list of DECISIONS.md lines from 2026-09-25 20:30 UTC onward; filled at the end)*
