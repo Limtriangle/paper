@@ -63,8 +63,8 @@ detectable with five seeds, and the question above has an answer for every step.
 We make four contributions. (1)~A frozen, fully specified protocol for \mname with a
 scene-disjoint validation split, matched seeds, final-checkpoint read-out, and one test read
 per arm (\Cref{sec:method}). (2)~A loss ladder: \hvi-space supervision contributes
-\phm{0.58}~dB over RGB-only training, while the VGG term on \hvi tensors and the coupling of $k$ through the loss are removable
-at $\pm 0.3$~dB (\Cref{sec:experiments}).
+\phm{0.58}~dB over RGB-only training, the VGG term on \hvi tensors and the coupling of $k$ through the loss are removable at
+$\pm 0.3$~dB, and a $\Ck$-weighted chroma loss is inconclusive (\Cref{sec:experiments}).
 (3)~A representation ladder under the frozen loss: the intensity collapse $\Ck$ contributes
 \ph{0.4}~dB, and its gain sits in the three darkest intensity deciles as its mechanism
 predicts, while learning $k$, polar versus linear chroma, and max versus luma intensity are

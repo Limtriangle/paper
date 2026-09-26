@@ -25,10 +25,9 @@ and the seed SD sets the paired minimum detectable effect at \ph{0.5}~dB below.
 
 \input{tables/s1_contrasts}
 
-\paragraph{Loss ladder.} \Cref{tab:s1}: three of four contrasts measured so far
-(Holm over all four, missing $p = 1$). Removing the VGG term from the \hvi-space loss changes GT-mean PSNR by \phm{0.07}~dB,
+\paragraph{Loss ladder.} \Cref{tab:s1} reports the four nested contrasts. Removing the VGG term from the \hvi-space loss changes GT-mean PSNR by \phm{0.07}~dB,
 within the equivalence margin: the perceptual term on non-RGB tensors is \phm{removable}.
-Detaching $k$ from the loss transform raises GT-mean PSNR: L1$-$L2 is
+Detaching $k$ from the loss transform makes the model slightly better: L1$-$L2 is
 $\phm{-0.16}$~dB, negative in \phm{5} of 5 seeds;
 the Holm interval excludes zero, but the effect lies inside $\pm 0.3$~dB, so the step is
 \phm{removable} under the pre-registered rules. It changes what $k$ does: coupled through the loss (L0), $k$ converges from its initial
@@ -36,7 +35,8 @@ the Holm interval excludes zero, but the effect lies inside $\pm 0.3$~dB, so the
 \phm{0.29}; the released checkpoint carries \phm{1.13}. Removing \hvi-space supervision
 entirely costs \phm{0.58}~dB (\phm{5} of 5 seeds), so the second loss space \phm{contributes}, and this is the one step of
 the released recipe that survives the seeded test. Weighting the \hvi chroma terms by the
-collapse $\Ck(I_{\mathrm{gt}})$ is removable relative to uniform weighting at $\pm 0.3$~dB. The frozen loss used in the representation ladder, L2, therefore differs from the released
+collapse $\Ck(I_{\mathrm{gt}})$ changes GT-mean PSNR by \phm{0.15}~dB; the interval
+includes zero and equivalence at $\pm 0.3$~dB is not shown, so it is \phm{inconclusive}. The frozen loss used in the representation ladder, L2, therefore differs from the released
 recipe by two removable steps.
 
 \paragraph{What the coupling of $k$ does.} In the released code $k$ receives gradient only

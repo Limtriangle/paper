@@ -7,7 +7,7 @@
    "label": "tab:s1",
    "star": false,
    "row_label": "Contrast",
-   "caption": "\\textbf{Loss ladder (S1).} Paired-by-seed difference in GT-mean PSNR between neighbouring loss arms of \\mname on the A0 representation, \\dataset test split (eval15), final checkpoint, five matched seeds, on \\hw. SD is the seed-to-seed SD of the difference; CI$^{-}$/CI$^{+}$ bound the Holm-adjusted 95\\% paired $t$ interval across the four contrasts. The verdict follows the pre-registered rules: \\emph{contributes} if the CI excludes zero and $|\\Delta| \\ge 0.3$~dB, \\emph{removable} if TOST at $\\pm 0.3$~dB rejects, else \\emph{inconclusive}. Partial: three contrasts measured; Holm counts the fourth as $p = 1$. No value is highlighted; a contrast is not a ranking.",
+   "caption": "\\textbf{Loss ladder (S1).} Paired-by-seed difference in GT-mean PSNR between neighbouring loss arms of \\mname on the A0 representation, \\dataset test split (eval15), final checkpoint, five matched seeds, on \\hw. SD is the seed-to-seed SD of the difference; CI$^{-}$/CI$^{+}$ bound the Holm-adjusted 95\\% paired $t$ interval across the four contrasts. The verdict follows the pre-registered rules: \\emph{contributes} if the CI excludes zero and $|\\Delta| \\ge 0.3$~dB, \\emph{removable} if TOST at $\\pm 0.3$~dB rejects, else \\emph{inconclusive}. No value is highlighted; a contrast is not a ranking.",
    "rows": [
     {
      "label": "L0$-$L1: VGG on \\hvi",

@@ -18,12 +18,11 @@ Files: `abs` = abstract, `intro`, `exp` = experiments, `concl`, `app` = appendix
 |---|---|---|---|
 | 23.3, 24.3 | exp | Gate A window | HVI-PLAN §5 (protocol constant, not a measurement; becomes plain text) |
 | 0.5 | abs, intro, exp, concl | achieved paired MDE | analysis decision_rules.mde (to be added by experiment) or derived 1.66·SD(Δ) |
-| 0.0 removable | exp, tables | L2−L4 | contrasts.L2-L4.* |
 | 0.1 removable | tables | A0−A1 | `s2__rep_ladder_v1.json` analysis.analysis_s2.decision.contrasts.A0-A1.* |
 | 0.4 contributes, deciles 1–3 | abs, intro, exp, concl, tables | A0−A2 + mechanism rule | contrasts.A0-A2.*; mechanism_A0_vs_A2.{hue_err,delta_e00}.rule5, stress.monotone |
 | 0.1 inconclusive | exp, tables | A2−A3 | contrasts.A2-A3.* |
 | 0.2 raw / 0.0 GT-mean, removable | exp, tables | A3−A4 | contrasts.A3-A4.* (GT-mean); raw contrast key TBD |
-| 26.7 (L4) | app_s1_arms | per-arm GT-mean PSNR, re-derived 2026-09-25 from measured L2 26.73 minus plan §7 Δ (was 27.0/27.6 from the §7 27.7 base) | arm_summary.<arm>.psnr_gtmean.mean |
+| (none left) | app_s1_arms | per-arm GT-mean PSNR, re-derived 2026-09-25 from measured L2 26.73 minus plan §7 Δ (was 27.0/27.6 from the §7 27.7 base) | arm_summary.<arm>.psnr_gtmean.mean |
 | 23.8 … (derived −3.9; A3 23.2, A4 23.0 so that A3−A4 raw = 0.2 per §7) | app_s1_arms, app_s2_arms | per-arm raw PSNR | arm_summary.<arm>.psnr.mean |
 | 26.7, 26.6, 26.3, 26.2, 26.2 (raw 23.3 … 22.6) | app_s2_arms | per-arm GT-mean / raw PSNR, re-derived from measured L2 base minus §7 Δ | arm_summary.<arm>.* |
 | 0.3 (SD cells) | app tables | per-arm seed SD | arm_summary.<arm>.<metric>.sd |
@@ -62,6 +61,7 @@ deleted. Literature rows (first three) become citations with the number attribut
 | `28.2`, `24.0`, `23.6`, `23.50`, `0.2`, `0.4` | abstract, introduction, experiments | `literature_v1.json: entries.{hvi_paper_lolv1,pal_cidnet_lolv1,issue66_retrain_lolv1,fusionnet_cidnet_lolv1}.value.psnr`, `shafi2026_seed_sd.value.psnr_sd_{low,high}` | 28.201, 23.97, 23.5881, 23.5, 0.2, 0.4 |
 | app_s3 rows L0 (42-46), L1, L2 | app_s3.tex | `s3__selection_bias_v1.json: analysis.analysis_s3.decision.<arm>.*` (partial) | 0.06/26.96, 0.11/26.78, 0.07/26.91 |
 | `0.58`, `5`, `contributes` (L2−L3) | abstract, introduction, experiments, conclusion | `s1__loss_ladder_v1.json: analysis.analysis_s1.decision.contrasts.L2-L3.{mean,sign_agreement,verdict}` | 0.577, 5 |
+| `0.15`, `inconclusive` (L2−L4) | experiments.tex | `s1__loss_ladder_v1.json: contrasts.L2-L4.{mean,verdict}` (final, Gate B) | 0.149 |
 | `-0.71` | appendix.tex | `decomposition.valsel_minus_final_gtmean.mean` (n=5; seed 46's val-selected checkpoint is 2 dB low) | -0.713 |
 | `0.06` | abstract, introduction, experiments (headline selection term, GT-mean) | `decomposition.oracle_minus_final_gtmean.mean` (n=4) | 0.064 |
 | `0.41` | abstract, introduction, experiments (raw selection inflation) | `decomposition.oracle_minus_final.mean` (n=5) | 0.408 |

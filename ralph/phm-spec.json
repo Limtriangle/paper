@@ -432,6 +432,22 @@
    ]
   },
   {
+   "written": "0.15",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.contrasts.L2-L4.mean",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "inconclusive",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.contrasts.L2-L4.verdict",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
    "written": "0.07",
    "src": "s1__loss_ladder_v1.json",
    "key": "analysis.analysis_s1.decision.contrasts.L0-L1.mean",
@@ -448,7 +464,7 @@
    ]
   },
   {
-   "written": "-0.20",
+   "written": "-0.15",
    "src": "s1__loss_ladder_v1.json",
    "key": "analysis.analysis_s1.decision.contrasts.L0-L1.ci_holm.0",
    "only_in": [
@@ -456,7 +472,7 @@
    ]
   },
   {
-   "written": "0.33",
+   "written": "0.28",
    "src": "s1__loss_ladder_v1.json",
    "key": "analysis.analysis_s1.decision.contrasts.L0-L1.ci_holm.1",
    "only_in": [
@@ -547,6 +563,46 @@
    "written": "contributes",
    "src": "s1__loss_ladder_v1.json",
    "key": "analysis.analysis_s1.decision.contrasts.L2-L3.verdict",
+   "only_in": [
+    "s1_contrasts.tex"
+   ]
+  },
+  {
+   "written": "0.15",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.contrasts.L2-L4.mean",
+   "only_in": [
+    "s1_contrasts.tex"
+   ]
+  },
+  {
+   "written": "0.20",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.contrasts.L2-L4.sd",
+   "only_in": [
+    "s1_contrasts.tex"
+   ]
+  },
+  {
+   "written": "-0.17",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.contrasts.L2-L4.ci_holm.0",
+   "only_in": [
+    "s1_contrasts.tex"
+   ]
+  },
+  {
+   "written": "0.47",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.contrasts.L2-L4.ci_holm.1",
+   "only_in": [
+    "s1_contrasts.tex"
+   ]
+  },
+  {
+   "written": "inconclusive",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.contrasts.L2-L4.verdict",
    "only_in": [
     "s1_contrasts.tex"
    ]
@@ -675,6 +731,38 @@
    "written": "0.14",
    "src": "s1__loss_ladder_v1.json",
    "key": "analysis.analysis_s1.decision.arm_summary.L3.psnr.sd",
+   "only_in": [
+    "app_s1_arms.tex"
+   ]
+  },
+  {
+   "written": "26.58",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.arm_summary.L4.psnr_gtmean.mean",
+   "only_in": [
+    "app_s1_arms.tex"
+   ]
+  },
+  {
+   "written": "0.16",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.arm_summary.L4.psnr_gtmean.sd",
+   "only_in": [
+    "app_s1_arms.tex"
+   ]
+  },
+  {
+   "written": "23.06",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.arm_summary.L4.psnr.mean",
+   "only_in": [
+    "app_s1_arms.tex"
+   ]
+  },
+  {
+   "written": "0.34",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.arm_summary.L4.psnr.sd",
    "only_in": [
     "app_s1_arms.tex"
    ]
