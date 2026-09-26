@@ -27,7 +27,7 @@ decile mechanism rule; vocabulary contributes / removable / inconclusive.
 - **k drift (S1 side result).** Final k median 0.85 when k is coupled through the loss (L0), 0.29 when detached (L2),
   from init 0.2; released weights 1.13. Most of upstream's k drift is loss-side coupling. Key: analysis_k in
   s1__loss_ladder_v1.json.
-- **Gate B — loss ladder (2026-09-26 07:5x UTC, PASS).** 25 runs, 5 arms × 5 seeds, GT-mean PSNR at the final
+- **Gate B — loss ladder (2026-09-26 ≈ 07:30 UTC, PASS).** 25 runs, 5 arms × 5 seeds, GT-mean PSNR at the final
   checkpoint, paired by seed, Holm across four contrasts:
   | Step | Δ (dB) | SD | Holm 95 % CI | Verdict |
   |---|---|---|---|---|

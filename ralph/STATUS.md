@@ -7,15 +7,15 @@
 |---|---|---|
 | 0 — topic | **PASS** 2026-09-24 04:51 UTC | INBOX line 29 |
 | A — instrument + reproduction | **PASS-with-P-A (final, n=5)** 20:30 UTC: raw final 23.25 ± 0.47 (0.05 below window); under upstream reporting conditions 23.79 raw / 27.74 GT-mean, inside. Seeds 47–49 queued | ralph/results/final_eval__test.json |
-| B — loss ladder S1 (25 runs) | **PASS** 2026-09-26 ≈ 07:55 UTC: removable / removable / contributes (+0.58) / inconclusive; P-L not triggered | HVI-PLAN.md §4–§5 |
+| B — loss ladder S1 (25 runs) | **PASS** 2026-09-26 ≈ 07:30 UTC: removable / removable / contributes (+0.58) / inconclusive; P-L not triggered | HVI-PLAN.md §4–§5 |
 | C — representation ladder S2 (26 runs) | running: A2 seeds 42/43 on GPUs; A2×8, A3×8, A4×5, A1×5 queued; ETA ≈ Mon 2026-09-28 | HVI-PLAN.md §4–§5 |
 | D — final | pending | |
 
 ## Agents
 | Agent | Doing | Since |
 |---|---|---|
-| master | Gate B stamped PASS; brief updated; mde/tost keys requested; next: Gate C ≈ Mon, S4 result today | 2026-09-26 08:00 UTC |
-| writing | Gate B draft audited (3 auditors + master) and accepted: 137 values by key; S1 complete, S3 partial, S2/S4/LOL-v2 provisional. Next: bind S4 (today), S3 rows (≈18:00), S2 at Gate C | 2026-09-26 08:45 UTC |
+| master | Gate B stamped PASS; brief updated; mde/tost keys requested; next: Gate C ≈ Mon, S4 result today | 2026-09-26 07:35 UTC |
+| writing | Gate B draft audited (3 auditors + master) and accepted: 137 values by key; S1 complete, S3 partial, S2/S4/LOL-v2 provisional. Next: bind S4 (today), S3 rows (≈18:00), S2 at Gate C | 2026-09-26 07:50 UTC |
 
 ## Next actions
 - **Author away until Thu 2026-10-01** (INBOX line 42): master decides pre-registered rules and §8 pivots and logs them; no new scope; when training ends → final evals, analysis, final draft, full audit, push; paper NOT marked complete; `ralph/AUTHOR_BRIEF.md` is the hand-over document.
@@ -24,8 +24,8 @@
 - writing: bind keys as they appear; never compute a number; storyline move 2 now has its first measured sentence (reproduction under upstream's reporting conditions).
 
 ## Log
-- 2026-09-26 08:45 UTC Gate B draft milestone audit passed after 14 fixes; S-3(d) ruling logged (verdict stands, non-convergence stated).
-- 2026-09-26 ≈ 07:55 UTC GATE B PASS: HVI-space supervision contributes (+0.58 dB); VGG-on-HVI and k coupling removable; C_k-weighted chroma inconclusive.
+- 2026-09-26 07:50 UTC Gate B draft milestone audit passed after 14 fixes; S-3(d) ruling logged (verdict stands, non-convergence stated).
+- 2026-09-26 ≈ 07:30 UTC GATE B PASS: HVI-space supervision contributes (+0.58 dB); VGG-on-HVI and k coupling removable; C_k-weighted chroma inconclusive.
 - 2026-09-25 20:30 UTC master back after a quota pause; author away until 2026-10-01 with standing instructions; 17/25 S1 runs exported.
 - 2026-09-25 04:00 UTC agents switched to Opus 5.5 until Fri 20:00 UTC; decision authority restricted to pre-registered PASS stamps.
 - 2026-09-24 20:50 UTC milestone audit of the n=5 draft passed after 12 fixes; draft fit for the author.
