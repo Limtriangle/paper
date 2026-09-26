@@ -120,7 +120,7 @@
       }
     }
   },
-  "written_at": "2026-09-26T00:56:23",
+  "written_at": "2026-09-26T01:08:27",
   "analysis_script": "auto-research/analysis_c1.py (frozen, imported unchanged)",
   "analysis_sha256": "7fc297afdd08392e83709a31e5e687e029b75ff679a433a4c47ddd6dcd163d07",
   "wrapper_sha256": "5862e7bfa0059f552d89e4f0ad4b00b22b2d5be9e2831d6d7d3e06249b0eb71e",
@@ -149,7 +149,7 @@
   },
   "status": "partial",
   "sources": {
-    "final_eval__test.json": "88854a808fe5ab91b5aba8404ea5c366757e14dbe641b152f3e66b91c1b955ef",
+    "final_eval__test.json": "dcbeb4caea77af3fdf800e988a96fe8c104fc7a61a7406c2ff08416032553718",
     "final_eval__oracle.json": "315eb91d417553863d1a4ef7e46b561f99e09f15baf7bb99f5011a1cca0e84ea"
   },
   "notes": "oracle numbers are never used to rank arms"
