@@ -67,6 +67,7 @@ deleted. Literature rows (first three) become citations with the number attribut
 | `100`, `91`, `0`, `9`, `3` | appendix.tex (LOL-v2-Real dedup; transfer claim dropped) | `lolv2real_v1.json: counts.{n_test,n_dup_train_any,n_dup_eval15,n_kept,n_scenes_kept}` | 100, 91, 0, 9, 3 |
 | `30.15`, `29.77`, `29.98`, `28.74`, `30.50`; `5`, `4` | appendix.tex (LOL-v2-Real descriptive, 9 images / 3 scenes, no verdict) | `lolv2real_v1.json: summary.<arm>.gtmean_psnr.{mean,n}` | L1 n=4 (seed-44 read failed twice) |
 | S4: `18`, `0.755`, `2.48` [2.04, 2.98], `3.15` [2.69, 3.62], `2.31` [1.65, 3.01], `-0.10` [-0.35, 0.16], `1.125` | appendix.tex (S4 chapter; §7 80 % and ≤ 0.3 dB replaced; pre-registered <0.3 dB condition FAILS) | `s4__oracle_decomp_v1.json: decomposition.{shifted_all,none}.*`, `knob_trajectories.k__P2.median` | see verify-phm --ledger |
+| dedup v2: `86`, `40`, `46`, `0` (kept-9 inputs), `0`/`100`/`0`/`689` (v2 own splits), `417`/`689`, `399`, `0` (GT vs eval15), `12`, `3` (inputs vs eval15) | appendix.tex (descriptive, exact = decisive) | `lolv2real_dedup_v2.json: counts.*.{exact,n}` | as written |
 | `-0.71` | appendix.tex | `decomposition.valsel_minus_final_gtmean.mean` (n=5; seed 46's val-selected checkpoint is 2 dB low) | -0.713 |
 | `0.06` | abstract, introduction, experiments (headline selection term, GT-mean) | `decomposition.oracle_minus_final_gtmean.mean` (n=4) | 0.064 |
 | `0.41` | abstract, introduction, experiments (raw selection inflation) | `decomposition.oracle_minus_final.mean` (n=5) | 0.408 |

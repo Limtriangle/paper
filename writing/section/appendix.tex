@@ -72,7 +72,18 @@ as a cross-dataset check. That check is not possible for models trained on \data
 ground truth (the same \phm{91} are flagged by perceptual hash and by DINOv2 embedding),
 and \phm{0} match a \dataset test image. Only \phm{9} images from \phm{3} scenes remain.
 LOL-v2-Real's test split therefore cannot serve as a generalisation test for \dataset-trained
-models, and no cross-dataset claim is made in this paper. Because at least five images
+models, and no cross-dataset claim is made in this paper. A second audit compares inputs
+as well as ground truths; exact pixel identity is the decisive test, since perceptual hashes
+and embeddings discriminate poorly on very dark inputs. Of the \phm{91} duplicated test
+pairs, \phm{86} also have an input pixel-identical to a \dataset training input; of the
+exact ground-truth matches, \phm{40} pair with the same \dataset input and \phm{46} with a
+different one. None of the \phm{9} kept pairs has an input match (\phm{0}). LOL-v2-Real's
+own splits share no image: \phm{0} of its \phm{100} test and \phm{0} of its \phm{689}
+training pairs match across the split, for inputs and for ground truths. Its training split
+overlaps \dataset training heavily, with \phm{417} of \phm{689} ground truths and
+\phm{399} inputs pixel-identical. Against the \dataset test split, no ground truth is
+pixel-identical (\phm{0}), but \phm{12} LOL-v2-Real training inputs and \phm{3} test
+inputs are. Because at least five images
 survive, each loss-arm final checkpoint is scored once on the \phm{9} remaining images as a
 descriptive read; with \phm{3} scenes these reads carry no verdict and are not used by any
 contrast. Mean GT-mean PSNR over seeds on the \phm{9} images is \phm{30.15}~dB for L0,

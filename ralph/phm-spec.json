@@ -1342,6 +1342,158 @@
    "only_in": [
     "appendix.tex"
    ]
+  },
+  {
+   "written": "91",
+   "src": "lolv2real_dedup_v2.json",
+   "key": "counts.q1_test_input_vs_v1train_input__dup91.n",
+   "only_in": [
+    "appendix.tex"
+   ]
+  },
+  {
+   "written": "86",
+   "src": "lolv2real_dedup_v2.json",
+   "key": "counts.q1_test_input_vs_v1train_input__dup91.exact",
+   "only_in": [
+    "appendix.tex"
+   ]
+  },
+  {
+   "written": "40",
+   "src": "lolv2real_dedup_v2.json",
+   "key": "counts.q1_exact_gt_matches_input_pairing.same_lolv1_pair_input_exact",
+   "only_in": [
+    "appendix.tex"
+   ]
+  },
+  {
+   "written": "46",
+   "src": "lolv2real_dedup_v2.json",
+   "key": "counts.q1_exact_gt_matches_input_pairing.different_lolv1_input_exact",
+   "only_in": [
+    "appendix.tex"
+   ]
+  },
+  {
+   "written": "9",
+   "src": "lolv2real_dedup_v2.json",
+   "key": "counts.q1_test_input_vs_v1train_input__kept9.n",
+   "only_in": [
+    "appendix.tex"
+   ]
+  },
+  {
+   "written": "0",
+   "src": "lolv2real_dedup_v2.json",
+   "key": "counts.q1_test_input_vs_v1train_input__kept9.exact",
+   "only_in": [
+    "appendix.tex"
+   ]
+  },
+  {
+   "written": "0",
+   "src": "lolv2real_dedup_v2.json",
+   "key": "counts.q2a_v2test_gt_in_v2train.exact",
+   "only_in": [
+    "appendix.tex"
+   ]
+  },
+  {
+   "written": "100",
+   "src": "lolv2real_dedup_v2.json",
+   "key": "counts.q2a_v2test_gt_in_v2train.n",
+   "only_in": [
+    "appendix.tex"
+   ]
+  },
+  {
+   "written": "0",
+   "src": "lolv2real_dedup_v2.json",
+   "key": "counts.q2a_v2train_gt_in_v2test.exact",
+   "only_in": [
+    "appendix.tex"
+   ]
+  },
+  {
+   "written": "689",
+   "src": "lolv2real_dedup_v2.json",
+   "key": "counts.q2a_v2train_gt_in_v2test.n",
+   "only_in": [
+    "appendix.tex"
+   ]
+  },
+  {
+   "written": "0",
+   "src": "lolv2real_dedup_v2.json",
+   "key": "counts.q2a_v2test_input_in_v2train.exact",
+   "only_in": [
+    "appendix.tex"
+   ]
+  },
+  {
+   "written": "0",
+   "src": "lolv2real_dedup_v2.json",
+   "key": "counts.q2a_v2train_input_in_v2test.exact",
+   "only_in": [
+    "appendix.tex"
+   ]
+  },
+  {
+   "written": "417",
+   "src": "lolv2real_dedup_v2.json",
+   "key": "counts.q2b_v2train_gt_in_v1train.exact",
+   "only_in": [
+    "appendix.tex"
+   ]
+  },
+  {
+   "written": "689",
+   "src": "lolv2real_dedup_v2.json",
+   "key": "counts.q2b_v2train_gt_in_v1train.n",
+   "only_in": [
+    "appendix.tex"
+   ]
+  },
+  {
+   "written": "399",
+   "src": "lolv2real_dedup_v2.json",
+   "key": "counts.q2b_v2train_input_in_v1train.exact",
+   "only_in": [
+    "appendix.tex"
+   ]
+  },
+  {
+   "written": "0",
+   "src": "lolv2real_dedup_v2.json",
+   "key": "counts.q2c_v2train_gt_in_eval15.exact",
+   "only_in": [
+    "appendix.tex"
+   ]
+  },
+  {
+   "written": "0",
+   "src": "lolv2real_dedup_v2.json",
+   "key": "counts.extra_v2test_gt_in_eval15.exact",
+   "only_in": [
+    "appendix.tex"
+   ]
+  },
+  {
+   "written": "12",
+   "src": "lolv2real_dedup_v2.json",
+   "key": "counts.q2c_v2train_input_in_eval15.exact",
+   "only_in": [
+    "appendix.tex"
+   ]
+  },
+  {
+   "written": "3",
+   "src": "lolv2real_dedup_v2.json",
+   "key": "counts.extra_v2test_input_in_eval15.exact",
+   "only_in": [
+    "appendix.tex"
+   ]
   }
  ]
 }
