@@ -68,7 +68,9 @@ decile mechanism rule; vocabulary contributes / removable / inconclusive.
   counts in lolv2real_v1.json). Master's ruling: dedup by hash (eval15 hashed for exclusion only, permit logged);
   descriptive evaluation only if ≥ 5 images survive; the duplication itself is reported as the cross-dataset result.
   Say if you want it dropped.
-- Whether the S4 oracle-decomposition chapter stays in the appendix depends on its result (arrives 2026-09-26).
+- S4 result is in (see §3); whether the chapter stays in the appendix is your call.
+- Thesis-template conversion (admin/thesis_template/, GIST gist.cls, pdfLaTeX + kotex) is untouched, per INBOX line 54;
+  it is a separate step after the advisor meeting and needs a pdfLaTeX TeX Live rather than tectonic.
 
 ## 6. Every decision taken while the author was away
 *(list of DECISIONS.md lines from 2026-09-25 20:30 UTC onward; filled at the end)*
