@@ -143,11 +143,11 @@
      "L2": 5
     },
     "sources": {
-     "final_eval__test.json": "99716f42e4ac2914cd681b84f043557a7ec4e96241f53e9bac12674ffe77932e"
+     "final_eval__test.json": "b68c627779b68b62de343504571eb39eee7910ef2fc5e34f9c4ead18cfe37abf"
     },
     "test15": "final-checkpoint reads by final_eval_test.py; no selection",
     "wrapper_sha256": "e0687ab28b0dfe488dcdc7dca5f90392886a44945456c61631222644d3097075",
-    "written_at": "2026-09-26T07:49:07"
+    "written_at": "2026-09-26T12:21:36"
    },
    "derived": {
     "formulas": {
@@ -167,9 +167,25 @@
    }
   }
  },
- "exported_at": "2026-09-26T07:49:07",
+ "exported_at": "2026-09-26T12:21:36",
  "jobs": {
   "A2_seed42": {
+   "best": {
+    "ab_error": 4.242212982500632,
+    "delta_e00": 8.20613572358804,
+    "edge_ab_error": 5.2804494358206835,
+    "edge_delta_e00": 8.778725159455966,
+    "edge_psnr": 22.328952998647633,
+    "epoch": 530,
+    "lpips": 0.13252715007402002,
+    "lpips_gtmean": 0.11772558744996786,
+    "n": 40,
+    "n_images": 40,
+    "psnr": 23.14916983449821,
+    "psnr_gtmean": 28.243276933964587,
+    "ssim": 0.86447374497886,
+    "ssim_gtmean": 0.8930009330066493
+   },
    "config": {
     "CUDA_VISIBLE_DEVICES": "2",
     "amp": false,
@@ -210,15 +226,31 @@
     "width": 36
    },
    "curve": {
-    "best_val_psnr": 22.842505958785402,
-    "best_val_psnr_epoch": 270,
-    "final_train_loss": 0.46200799516269137,
-    "final_val_psnr": "",
-    "n_epochs": 304,
-    "train_seconds_total": 6786.863922119141
+    "best_val_psnr": 23.149169834498203,
+    "best_val_psnr_epoch": 530,
+    "final_train_loss": 0.38990471991045134,
+    "final_val_psnr": 22.330574901162077,
+    "n_epochs": 1000,
+    "train_seconds_total": 22332.824009895325
    },
    "epochs_trained": 1000,
-   "status": "running"
+   "last": {
+    "ab_error": 4.0851377486049,
+    "delta_e00": 8.644078548913159,
+    "edge_ab_error": 5.089344892824707,
+    "edge_delta_e00": 9.122145022580675,
+    "edge_psnr": 21.729141467254536,
+    "epoch": 1000,
+    "lpips": 0.13005782905966043,
+    "lpips_gtmean": 0.11348896156996488,
+    "n": 40,
+    "n_images": 40,
+    "psnr": 22.330574901162073,
+    "psnr_gtmean": 28.34655680274462,
+    "ssim": 0.8632405889550767,
+    "ssim_gtmean": 0.8944031318569593
+   },
+   "status": "complete"
   },
   "A2_seed43": {
    "config": {
@@ -263,10 +295,10 @@
    "curve": {
     "best_val_psnr": 22.91170392051979,
     "best_val_psnr_epoch": 65,
-    "final_train_loss": 0.47206845453807283,
+    "final_train_loss": 0.3894376414162772,
     "final_val_psnr": "",
-    "n_epochs": 283,
-    "train_seconds_total": 6285.325366973877
+    "n_epochs": 989,
+    "train_seconds_total": 21974.504283428192
    },
    "epochs_trained": 1000,
    "status": "running"
@@ -312,12 +344,12 @@
     "width": 36
    },
    "curve": {
-    "best_val_psnr": 21.900334967251464,
-    "best_val_psnr_epoch": 40,
-    "final_train_loss": 0.7037017153842109,
+    "best_val_psnr": 22.58729522327142,
+    "best_val_psnr_epoch": 95,
+    "final_train_loss": 0.39113664467419895,
     "final_val_psnr": "",
-    "n_epochs": 46,
-    "train_seconds_total": 1033.1543736457825
+    "n_epochs": 744,
+    "train_seconds_total": 16716.303904771805
    },
    "epochs_trained": 1000,
    "status": "running"
@@ -363,12 +395,12 @@
     "width": 36
    },
    "curve": {
-    "best_val_psnr": 20.77796534588125,
-    "best_val_psnr_epoch": 15,
-    "final_train_loss": 0.8131083228758403,
+    "best_val_psnr": 23.098653003209513,
+    "best_val_psnr_epoch": 310,
+    "final_train_loss": 0.39389679660754545,
     "final_val_psnr": "",
-    "n_epochs": 17,
-    "train_seconds_total": 381.3524115085602
+    "n_epochs": 717,
+    "train_seconds_total": 16082.492943048477
    },
    "epochs_trained": 1000,
    "status": "running"
@@ -379,7 +411,7 @@
   "split_sha256": "b0dde62736e3f59148fda31dd9dfa56a1b76af8b2be6637a57b5119b35428909"
  },
  "n_jobs": {
-  "complete": 0,
+  "complete": 1,
   "total": 4
  },
  "protocol": {
@@ -469,19 +501,20 @@
  "run": "rep_ladder_v1",
  "run_id": "s2__rep_ladder_v1",
  "sources": {
-  "A2_seed42/config.json": "2fe8ee3ee07a0790d95fc7b114040cc690e94e20d24d09d3e58cd89a2648dc58",
-  "A2_seed42/metrics.csv": "8fadd12355a7bf92dacf91638469f6afd31e459331d08ca73390bc01bf8e44fb",
-  "A2_seed42/status.json": "83e8b5733b98ae449077169cc408f033b02d92df84a0297420f0abc134270378",
+  "A2_seed42/config.json": "1bbce40137ada0eac9fd22de77c81d514febbcbe5ce97255f231a8db8d603c1c",
+  "A2_seed42/metrics.csv": "934e72b61116a6f7fc4d56c1e37fe66826b88db2eeac207fe025748ee3ab1de0",
+  "A2_seed42/status.json": "a96eecbf0b3646f18baafe5ce0e91b6ccfe9eee5e8adc08cd41d8bcb5eb16d84",
+  "A2_seed42/validation_summary.csv": "69bf2cf58de2e7ac20c09d0d49ffcb6cba2ce6ac1153b237c81f1d8f790cf5fc",
   "A2_seed43/config.json": "4072a5b519df3013dab2e294ac9407f805d6ca2b5163cc097735286ee79cb564",
-  "A2_seed43/metrics.csv": "71dbeca12d2cf8b4d7446d3d9e17dc04d5467481f1e5b5354829347a595b3ac7",
-  "A2_seed43/status.json": "ba9cb40f174de021b7d90320c307d545082bf8902cb7c827afe15d9ab50e8a14",
+  "A2_seed43/metrics.csv": "d81de9138a482f92394a34e0f7b73727f7479ab85c4f45d926b984466de38b58",
+  "A2_seed43/status.json": "df22bf23528dc995408dca3a142e9634ef55d849fb497130e4dbc1e08f172a50",
   "A2_seed44/config.json": "92066be930326751a9ce5482ca91f161ee809f0fd5908f04665f71cb02eef7f3",
-  "A2_seed44/metrics.csv": "a86ffb9faf298752068f074f31217917f3ccb6fb4b7a1d181c8b6192e5755ad8",
-  "A2_seed44/status.json": "631941768380d947700d920b4fff92bce871503f12f1ec60fcc00c40b29d3e29",
+  "A2_seed44/metrics.csv": "da0cfd046d3a36a2588b5e55384d9d577a816f379fb7d89eedd9ef218753a3c4",
+  "A2_seed44/status.json": "71b082977f3cd7058c5cf792b7fd5c1b6f84c49f156cb6fc3c227a66c2cf56c5",
   "A2_seed45/config.json": "4a77d7e806adb2078ed2516613000db492fc71e5ca457e450bd8592a618750cf",
-  "A2_seed45/metrics.csv": "4f661bef5d1693b910814d27ebc3c4165f7f567fc8ee33b402df8e3184dced74",
-  "A2_seed45/status.json": "44d5ca8c3912d9606ad92ed1dbad61925ca1ad87fe5e230b1871f0410aca5704",
-  "analysis_s2/decision.json": "2c9a9af7f2fb0c32dfe1b9c755b27204bec741986f4beb1bacc1389152a67cd9",
+  "A2_seed45/metrics.csv": "8bf4688aa03e2af35822355145c3efc137b63b3ba3c3c64ba4b3d492917e138c",
+  "A2_seed45/status.json": "eb121e66bcb62b1ed67e6b4f2cb10bb33e6b1b3e6a64e49cff665a755f4bb09a",
+  "analysis_s2/decision.json": "80c8ca6ac5071a33b9c4cfd0743498e92d922c815d5c7ced8b93047a049300ed",
   "analysis_s2/derived.json": "3808c7cab85dad0c39091d168e54cb313f79a8c6e817cbaa4f4d24d4b8c25eb1",
   "manifest.json": "7eb8a1b9904035b741fca32860ad14c54c3ad78b2f034e75ad05a5ab1d11caa6"
  },
