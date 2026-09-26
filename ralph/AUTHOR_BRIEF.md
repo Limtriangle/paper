@@ -43,6 +43,11 @@ decile mechanism rule; vocabulary contributes / removable / inconclusive.
   pixel-identical to LOL-v1 training ground truths (exact, pHash and DINOv2 agree); none duplicates eval15; 9 images in
   3 scenes remain. No generalisation claim is possible; the duplication is reported as the result, and the 9-image reads
   are listed descriptively per arm (GT-mean 28.7–30.5 dB), not ranked. Keys: lolv2real_v1.json.
+  Your audit v2 (2026-09-26): 86 of the 91 duplicated pairs also share the low-light input with LOL-v1 train (40 the
+  same pair, 46 another exposure of the same scene); LOL-v2-Real train and test do not overlap each other; LOL-v2-Real
+  train duplicates 417/689 LOL-v1 training GTs (399 inputs); versus eval15, 0 GTs but 12 train and 3 test inputs are
+  exact eval15 inputs — none of the 3 is among the 9 kept, so the descriptive reads never touched test content.
+  Keys: lolv2real_dedup_v2.json.
 - **S4 oracle decomposition (2026-09-26, zero training, released weights, 40 val images / 18 scenes).** A single
   scalar pre-gain recovers 75.5 % of the brightness-shift loss (O-gain +7.62 dB raw vs F0 over all shifts); all knobs
   together add a further +2.48 dB [2.04, 2.98] raw (+3.15 GT-mean), so the pre-registered "nothing beyond a gain"
