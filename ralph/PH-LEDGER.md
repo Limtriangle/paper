@@ -66,6 +66,7 @@ deleted. Literature rows (first three) become citations with the number attribut
 | `0.58` (mixed model), `0.005`, `0.58` (image-only check) | experiments.tex, appendix.tex | `contrasts.L2-L3.mixed_model.{coef,vc.seed}`, `derived.mixed_supplementary.L2-L3.mixedlm_image_only.coef` | 0.577, 0.0049, 0.577 |
 | `0.2` (k init), `0.5`, `50`, `0.01` (loss weights) | method.tex, introduction.tex | `phase0_codebase.json: measured.density_k_init`, `instrument.protocol.weights.{SSIM,edge,perceptual}` | 0.2, 0.5, 50.0, 0.01 |
 | `100`, `91`, `0`, `9`, `3` | appendix.tex (LOL-v2-Real dedup; transfer claim dropped) | `lolv2real_v1.json: counts.{n_test,n_dup_train_any,n_dup_eval15,n_kept,n_scenes_kept}` | 100, 91, 0, 9, 3 |
+| `30.15`, `29.77`, `29.98`, `28.74`, `30.50`; `5`, `4` | appendix.tex (LOL-v2-Real descriptive, 9 images / 3 scenes, no verdict) | `lolv2real_v1.json: summary.<arm>.gtmean_psnr.{mean,n}` | L1 n=4 (seed-44 read failed twice) |
 | `-0.71` | appendix.tex | `decomposition.valsel_minus_final_gtmean.mean` (n=5; seed 46's val-selected checkpoint is 2 dB low) | -0.713 |
 | `0.06` | abstract, introduction, experiments (headline selection term, GT-mean) | `decomposition.oracle_minus_final_gtmean.mean` (n=4) | 0.064 |
 | `0.41` | abstract, introduction, experiments (raw selection inflation) | `decomposition.oracle_minus_final.mean` (n=5) | 0.408 |

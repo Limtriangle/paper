@@ -1166,6 +1166,62 @@
    "only_in": [
     "appendix.tex"
    ]
+  },
+  {
+   "written": "30.15",
+   "src": "lolv2real_v1.json",
+   "key": "summary.L0.gtmean_psnr.mean",
+   "only_in": [
+    "appendix.tex"
+   ]
+  },
+  {
+   "written": "29.77",
+   "src": "lolv2real_v1.json",
+   "key": "summary.L1.gtmean_psnr.mean",
+   "only_in": [
+    "appendix.tex"
+   ]
+  },
+  {
+   "written": "29.98",
+   "src": "lolv2real_v1.json",
+   "key": "summary.L2.gtmean_psnr.mean",
+   "only_in": [
+    "appendix.tex"
+   ]
+  },
+  {
+   "written": "28.74",
+   "src": "lolv2real_v1.json",
+   "key": "summary.L3.gtmean_psnr.mean",
+   "only_in": [
+    "appendix.tex"
+   ]
+  },
+  {
+   "written": "30.50",
+   "src": "lolv2real_v1.json",
+   "key": "summary.L4.gtmean_psnr.mean",
+   "only_in": [
+    "appendix.tex"
+   ]
+  },
+  {
+   "written": "5",
+   "src": "lolv2real_v1.json",
+   "key": "summary.L0.gtmean_psnr.n",
+   "only_in": [
+    "appendix.tex"
+   ]
+  },
+  {
+   "written": "4",
+   "src": "lolv2real_v1.json",
+   "key": "summary.L1.gtmean_psnr.n",
+   "only_in": [
+    "appendix.tex"
+   ]
   }
  ]
 }

@@ -75,7 +75,10 @@ LOL-v2-Real's test split therefore cannot serve as a generalisation test for \da
 models, and no cross-dataset claim is made in this paper. Because at least five images
 survive, each loss-arm final checkpoint is scored once on the \phm{9} remaining images as a
 descriptive read; with \phm{3} scenes these reads carry no verdict and are not used by any
-contrast.
+contrast. Mean GT-mean PSNR over seeds on the \phm{9} images is \phm{30.15}~dB for L0,
+\phm{29.77}~dB for L1, \phm{29.98}~dB for L2, \phm{28.74}~dB for L3, and \phm{30.50}~dB
+for L4; every arm has \phm{5} seeds except L1 with \phm{4}, whose seed-44 read failed twice
+and is not repeated. These numbers are listed, not ranked.
 
 \subsection{Mixed-Model Check for the Loss Ladder}
 \label{sec:app-mixed}
