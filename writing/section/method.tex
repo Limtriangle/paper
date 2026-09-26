@@ -8,14 +8,14 @@ blocks (six per branch, one of which in the intensity branch receives no gradien
 the released code overwrites its output before use) couple the two, the network predicts a residual in the working space, and the result is
 mapped back to sRGB. In \hvi the working space is $I = \max(R,G,B)$ and
 $(H, V) = \Ck(I)\, S\, (\cos h, \sin h)$ with $\Ck(I) = (\sin(\pi I/2) + \epsilon)^{k}$, where
-$k$ is a learned scalar initialised at $0.2$ and $S, h$ are HSV saturation and hue. Every arm
+$k$ is a learned scalar initialised at \phm{0.2} and $S, h$ are HSV saturation and hue. Every arm
 below keeps the branch split, the residual in its own working space, the block structure,
 and the parameter count (\phm{1975569}, asserted per run); only the step named in its row
 changes.
 
 \paragraph{Loss ladder (S1).} The released objective is
 $\mathcal{L} = \ell(\hat{x}, x) + \lambda\, \ell(T_k(\hat{x}), T_k(x))$ with
-$\ell = \mathrm{L1} + 0.5\,\mathrm{SSIM} + 50\,\mathrm{edge} + 0.01\,\mathrm{VGG}$, $\lambda = 1$,
+$\ell = \mathrm{L1} + \phm{0.5}\,\mathrm{SSIM} + \phm{50}\,\mathrm{edge} + \phm{0.01}\,\mathrm{VGG}$, $\lambda = 1$,
 and $T_k$ the forward \hvi transform through which the learned $k$ also receives gradient.
 Two properties of this recipe are unexamined: the VGG term is applied to \hvi tensors after a
 range shift that leaves the sRGB input in $[0.5, 1]$, and $k$ can lower the second term by
@@ -40,7 +40,7 @@ $0.05$ in the A0 runs.
 \paragraph{Frozen protocol.} All 45 runs share one protocol, pinned by the SHA-256 of the
 training script, the upstream commit, and the split file in every run manifest. Training
 follows the released code: 1000 epochs, batch 8, $256^2$ crops, random flips, Adam at
-$10^{-4}$ with a 3-epoch warm-up and cosine decay to $10^{-7}$, FP32, on \hw. The 485
+$10^{-4}$ with a 3-epoch warm-up and cosine decay to $10^{-7}$, on \hw. The 485
 \dataset training pairs are split into \phm{445} training and 40 validation pairs by scene, using
 DINOv2 and perceptual-hash clusters so that no validation scene appears in training and no
 validation cluster contains a test image. Each arm is trained with the five seeds

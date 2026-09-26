@@ -448,6 +448,101 @@
    ]
   },
   {
+   "written": "0.34",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.derived.mde_db.family_max",
+   "only_in": [
+    "abstract.tex",
+    "introduction.tex",
+    "conclusion.tex",
+    "method.tex",
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "0.02",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.derived.tost_p.L0-L1",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "0.004",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.derived.tost_p.L1-L2",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "0.09",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.derived.tost_p.L2-L4",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "0.25",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.contrasts.L2-L3.ci_holm.0",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "0.90",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.contrasts.L2-L3.ci_holm.1",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "0.17",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.contrasts.L2-L3.sd",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "0.2",
+   "src": "phase0_codebase.json",
+   "key": "measured.density_k_init",
+   "only_in": [
+    "method.tex"
+   ]
+  },
+  {
+   "written": "0.5",
+   "src": "phase0_codebase.json",
+   "key": "instrument.protocol.weights.SSIM",
+   "only_in": [
+    "method.tex",
+    "introduction.tex"
+   ]
+  },
+  {
+   "written": "50",
+   "src": "phase0_codebase.json",
+   "key": "instrument.protocol.weights.edge",
+   "only_in": [
+    "method.tex",
+    "introduction.tex"
+   ]
+  },
+  {
+   "written": "0.01",
+   "src": "phase0_codebase.json",
+   "key": "instrument.protocol.weights.perceptual",
+   "only_in": [
+    "method.tex",
+    "introduction.tex"
+   ]
+  },
+  {
    "written": "0.07",
    "src": "s1__loss_ladder_v1.json",
    "key": "analysis.analysis_s1.decision.contrasts.L0-L1.mean",
@@ -1008,39 +1103,28 @@
    ]
   },
   {
-   "written": "0.34",
+   "written": "0.58",
    "src": "s1__loss_ladder_v1.json",
-   "key": "analysis.analysis_s1.derived.mde_db.family_max",
+   "key": "analysis.analysis_s1.decision.contrasts.L2-L3.mixed_model.coef",
    "only_in": [
-    "abstract.tex",
-    "introduction.tex",
-    "conclusion.tex",
-    "method.tex",
-    "experiments.tex"
+    "experiments.tex",
+    "appendix.tex"
    ]
   },
   {
-   "written": "0.02",
+   "written": "0.005",
    "src": "s1__loss_ladder_v1.json",
-   "key": "analysis.analysis_s1.derived.tost_p.L0-L1",
+   "key": "analysis.analysis_s1.decision.contrasts.L2-L3.mixed_model.vc.seed",
    "only_in": [
-    "experiments.tex"
+    "appendix.tex"
    ]
   },
   {
-   "written": "0.004",
+   "written": "0.58",
    "src": "s1__loss_ladder_v1.json",
-   "key": "analysis.analysis_s1.derived.tost_p.L1-L2",
+   "key": "analysis.analysis_s1.derived.mixed_supplementary.L2-L3.mixedlm_image_only.coef",
    "only_in": [
-    "experiments.tex"
-   ]
-  },
-  {
-   "written": "0.09",
-   "src": "s1__loss_ladder_v1.json",
-   "key": "analysis.analysis_s1.derived.tost_p.L2-L4",
-   "only_in": [
-    "experiments.tex"
+    "appendix.tex"
    ]
   }
  ]

@@ -93,16 +93,16 @@
    "label": "tab:s2",
    "star": false,
    "row_label": "Contrast",
-   "caption": "\\textbf{Representation ladder (S2).} Paired-by-seed difference in GT-mean PSNR between neighbouring representation arms of \\mname under the frozen loss L2, \\dataset test split (eval15), final checkpoint, five matched seeds, on \\hw. Columns and verdict rules as in \\Cref{tab:s1}. No value is highlighted.",
+   "caption": "\\textbf{Representation ladder (S2), provisional:} no contrast is measured yet. Paired-by-seed difference in GT-mean PSNR between neighbouring representation arms of \\mname under the frozen loss L2, \\dataset test split (eval15), final checkpoint, five matched seeds, on \\hw. Columns and verdict rules as in \\Cref{tab:s1}. No value is highlighted.",
    "rows": [
     {
      "label": "A0$-$A1: learned vs.\\ fixed $k$",
      "job": "A0-A1",
      "ph": {
       "/analysis.analysis_s2.decision.contrasts.{cond}.mean": 0.1,
-      "/analysis.analysis_s2.decision.contrasts.{cond}.sd": 0.3,
-      "/analysis.analysis_s2.decision.contrasts.{cond}.ci_holm.0": -0.3,
-      "/analysis.analysis_s2.decision.contrasts.{cond}.ci_holm.1": 0.5,
+      "/analysis.analysis_s2.decision.contrasts.{cond}.sd": 0.1,
+      "/analysis.analysis_s2.decision.contrasts.{cond}.ci_holm.0": -0.05,
+      "/analysis.analysis_s2.decision.contrasts.{cond}.ci_holm.1": 0.25,
       "/analysis.analysis_s2.decision.contrasts.{cond}.verdict": "removable"
      }
     },
@@ -111,9 +111,9 @@
      "job": "A0-A2",
      "ph": {
       "/analysis.analysis_s2.decision.contrasts.{cond}.mean": 0.4,
-      "/analysis.analysis_s2.decision.contrasts.{cond}.sd": 0.3,
-      "/analysis.analysis_s2.decision.contrasts.{cond}.ci_holm.0": 0.0,
-      "/analysis.analysis_s2.decision.contrasts.{cond}.ci_holm.1": 0.8,
+      "/analysis.analysis_s2.decision.contrasts.{cond}.sd": 0.1,
+      "/analysis.analysis_s2.decision.contrasts.{cond}.ci_holm.0": 0.25,
+      "/analysis.analysis_s2.decision.contrasts.{cond}.ci_holm.1": 0.55,
       "/analysis.analysis_s2.decision.contrasts.{cond}.verdict": "contributes"
      }
     },
@@ -133,9 +133,9 @@
      "job": "A3-A4",
      "ph": {
       "/analysis.analysis_s2.decision.contrasts.{cond}.mean": 0.0,
-      "/analysis.analysis_s2.decision.contrasts.{cond}.sd": 0.3,
-      "/analysis.analysis_s2.decision.contrasts.{cond}.ci_holm.0": -0.4,
-      "/analysis.analysis_s2.decision.contrasts.{cond}.ci_holm.1": 0.4,
+      "/analysis.analysis_s2.decision.contrasts.{cond}.sd": 0.1,
+      "/analysis.analysis_s2.decision.contrasts.{cond}.ci_holm.0": -0.15,
+      "/analysis.analysis_s2.decision.contrasts.{cond}.ci_holm.1": 0.15,
       "/analysis.analysis_s2.decision.contrasts.{cond}.verdict": "removable"
      }
     }
@@ -179,7 +179,7 @@
    "label": "tab:app-s1",
    "star": false,
    "row_label": "Arm",
-   "caption": "\\textbf{Loss arms, absolute values.} Under our protocol (\\Cref{sec:method}): mean and seed SD over five seeds (the L0 row pools all eight seeds of the released recipe; the paired contrasts of \\Cref{tab:s1} use seeds 42--46 only) of GT-mean PSNR (one scalar luminance gain) and raw PSNR of \\mname on the \\dataset test split (eval15), final checkpoint, on \\hw. The test split is read once per arm by the final-evaluation script. Bold marks the best measured mean in each PSNR column, whichever arm attains it; a provisional cell is never bold.",
+   "caption": "\\textbf{Loss arms, absolute values.} Under our protocol (\\Cref{sec:method}): mean and seed SD over five seeds (L0 row pooled, $n = 8$; the paired contrasts of \\Cref{tab:s1} use seeds 42--46 only) of GT-mean PSNR (one scalar luminance gain) and raw PSNR of \\mname on the \\dataset test split (eval15), final checkpoint, on \\hw. The test split is read once per arm by the final-evaluation script. Bold marks the best measured mean in each PSNR column, whichever arm attains it; a provisional cell is never bold.",
    "rows": [
     {
      "label": "L0 (upstream loss)",
@@ -264,7 +264,7 @@
    "label": "tab:app-s2",
    "star": false,
    "row_label": "Arm",
-   "caption": "\\textbf{Representation arms, absolute values.} Under our protocol (\\Cref{sec:method}): mean and seed SD over five seeds of GT-mean PSNR (one scalar luminance gain) and raw PSNR of \\mname for the five representation arms under the frozen loss L2, on the \\dataset test split (eval15), final checkpoint, on \\hw. The test split is read once per arm by the final-evaluation script. Bold marks the best measured mean in each PSNR column, whichever arm attains it; a provisional cell is never bold.",
+   "caption": "\\textbf{Representation arms, absolute values; provisional} except A0. Under our protocol (\\Cref{sec:method}): mean and seed SD over five seeds of GT-mean PSNR (one scalar luminance gain) and raw PSNR of \\mname for the five representation arms under the frozen loss L2, on the \\dataset test split (eval15), final checkpoint, on \\hw. The test split is read once per arm by the final-evaluation script. Bold marks the best measured mean in each PSNR column, whichever arm attains it; a provisional cell is never bold.",
    "rows": [
     {
      "label": "A0 (HVI, learned $k$)",
@@ -361,6 +361,22 @@
     {
      "label": "L2 (= A0)",
      "job": "L2"
+    },
+    {
+     "label": "L3",
+     "job": "L3",
+     "ph": {
+      "/analysis.analysis_s3.decision.{cond}.oracle_minus_final_mean": 0.3,
+      "/analysis.analysis_s3.decision.{cond}.paper_style_max_over_seeds": 26.2
+     }
+    },
+    {
+     "label": "L4",
+     "job": "L4",
+     "ph": {
+      "/analysis.analysis_s3.decision.{cond}.oracle_minus_final_mean": 0.3,
+      "/analysis.analysis_s3.decision.{cond}.paper_style_max_over_seeds": 26.6
+     }
     },
     {
      "label": "A2",

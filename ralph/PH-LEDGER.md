@@ -28,7 +28,7 @@ Files: `abs` = abstract, `intro`, `exp` = experiments, `concl`, `app` = appendix
 | 0.3 | app_s3 (arms A0-A4 only; L0 row now measured) | oracle − final per ladder arm | `s3__selection_bias_v1.json` analysis.analysis_s3.decision.<arm>.oracle_minus_final_mean |
 | 26.8, 26.4, 26.3, 26.3 | app_s3 (A0-A4, re-derived from measured L0 oracle max 26.96) | paper-style max per arm (derived) | <arm>.paper_style_max_over_seeds |
 | 3.3 | abs, intro, exp, app | GT-mean rescaling gain (26.63 − 23.34 from the summary keys; the difference itself is not a key) | a derived key gtmean_minus_raw.mean, or state both means and drop the difference |
-| 4 of 5; 22.0 | exp, transfer paragraph | contrasts keeping sign on LOL-v2-Real (dedup); A0-L0 GT-mean PSNR there | §7 row (R6 §7 placeholder); cross-dataset export, keys TBD |
+| 4 of 5; 22.0 | app (cross-dataset; moved from results) | contrasts keeping sign on LOL-v2-Real (dedup); A0-L0 GT-mean PSNR there | §7 row (R6 §7 placeholder); cross-dataset export, keys TBD |
 | 80 %, 0.3 dB | app S4 | brightness-shift loss explained by pre-gain; HVI knobs add ≤ 0.3 dB beyond gain-only (§7 rows) | S4 analysis JSON (not yet defined) |
 
 Rule: at the first milestone every row either becomes a `\phm{}` row below or its sentence is
@@ -63,6 +63,9 @@ deleted. Literature rows (first three) become citations with the number attribut
 | `0.15`, `inconclusive` (L2−L4) | experiments.tex | `s1__loss_ladder_v1.json: contrasts.L2-L4.{mean,verdict}` (final, Gate B) | 0.149 |
 | `0.34` | abstract, intro, method, results x2, conclusion (achieved MDE; loss ladder family max, master ruling) | `s1__loss_ladder_v1.json: analysis.analysis_s1.derived.mde_db.family_max` | 0.339 |
 | `0.02`, `0.004`, `0.09` | experiments.tex (TOST p beside removable/removable/inconclusive) | `analysis.analysis_s1.derived.tost_p.{L0-L1,L1-L2,L2-L4}` | 0.019, 0.0041, 0.086 |
+| `0.25`, `0.90`, `0.17` (L2−L3 Holm CI, SD) | experiments.tex | `contrasts.L2-L3.{ci_holm.0,ci_holm.1,sd}` | 0.253, 0.901, 0.168 |
+| `0.58` (mixed model), `0.005`, `0.58` (image-only check) | experiments.tex, appendix.tex | `contrasts.L2-L3.mixed_model.{coef,vc.seed}`, `derived.mixed_supplementary.L2-L3.mixedlm_image_only.coef` | 0.577, 0.0049, 0.577 |
+| `0.2` (k init), `0.5`, `50`, `0.01` (loss weights) | method.tex, introduction.tex | `phase0_codebase.json: measured.density_k_init`, `instrument.protocol.weights.{SSIM,edge,perceptual}` | 0.2, 0.5, 50.0, 0.01 |
 | `-0.71` | appendix.tex | `decomposition.valsel_minus_final_gtmean.mean` (n=5; seed 46's val-selected checkpoint is 2 dB low) | -0.713 |
 | `0.06` | abstract, introduction, experiments (headline selection term, GT-mean) | `decomposition.oracle_minus_final_gtmean.mean` (n=4) | 0.064 |
 | `0.41` | abstract, introduction, experiments (raw selection inflation) | `decomposition.oracle_minus_final.mean` (n=5) | 0.408 |

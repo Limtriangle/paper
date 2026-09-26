@@ -23,12 +23,11 @@ spread. The released code selects checkpoints on the \dataset test split, which 
 images, and ships several checkpoints per dataset named by the metric they maximize; we
 measure that this inflates raw PSNR by \phm{0.41}~dB but GT-mean PSNR by only
 \phm{0.06}~dB. The headline \dataset value, \phm{28.2}~dB \citep{yan2025hvi}, is reported after
-rescaling the output to the ground-truth mean and with a test-time saturation gate; without
-them, a retraining with the original configuration reports \phm{24.0}~dB \citep{li2026pal}
-and a user retraining \phm{23.6}~dB \citep{hvicidnet_issue66}; the authors' own
+rescaling the output to the ground-truth mean and with a test-time saturation gate; third-party retrainings report \phm{24.0}~dB (GT-mean status not stated)
+\citep{li2026pal} and \phm{23.6}~dB (presumably without it) \citep{hvicidnet_issue66}; the authors' own
 \phm{23.50}~dB \citep{shi2025fusionnet} equals their released weights without GT-mean
 \citep{hvicidnet_readme}. The color-space ablation used a proxy network, and the loss weights
-($1$, $0.5$, $50$, $0.01$, in two spaces) are stated nowhere. A reader cannot tell which parts of the design carry the result.
+($1$, $\phm{0.5}$, $\phm{50}$, $\phm{0.01}$, in two spaces) are stated nowhere. A reader cannot tell which parts of the design carry the result.
 
 Follow-ups do not settle this. They replace the intensity definition \citep{yang2026rhvifdd,
 ai2026bcihv}, the branch interaction \citep{wang2026haimnet, wu2026tcanet}, or the loss
@@ -57,8 +56,8 @@ The key observation that makes the study decidable is that the published spread 
 number. Under our protocol, rescaling the output to the ground-truth mean adds \phm{3.39}~dB to a
 raw \phm{23.25}~dB and the saturation gate adds \phm{1.09}~dB more; picking the best of
 \phm{101} checkpoints on the test split adds only \phm{0.06}~dB under GT-mean; the seed SD of
-GT-mean PSNR is \phm{0.16}~dB. Once those are separated, a step of \phm{0.34}~dB is
-detectable with five seeds, and the question above has an answer for every step.
+GT-mean PSNR is \phm{0.16}~dB. Once those are separated, a step of \phm{0.34}~dB is detectable with five seeds on the
+loss ladder.
 
 We make four contributions. (1)~A frozen, fully specified protocol for \mname with a
 scene-disjoint validation split, matched seeds, final-checkpoint read-out, and one test read

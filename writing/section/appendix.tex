@@ -69,7 +69,22 @@ per-decile curves for every other contrast are reported descriptively, without a
 Every final checkpoint is also scored on the LOL-v2-Real test split, deduplicated against
 the \dataset training set by hash and embedding, without retraining. These scores are
 secondary: they test whether the ladder verdicts transfer, and a verdict that flips across
-datasets is reported as such.
+datasets is reported as such. Scoring every final checkpoint on the deduplicated
+LOL-v2-Real test split without retraining preserves the two verdicts that contribute: both
+keep their sign in \ph{4} of 5 seeds, and the removable steps stay within $\pm 0.3$~dB.
+The level drops to \ph{22.0}~dB GT-mean PSNR for the released recipe; we claim nothing
+about the ranking of arms there.
+
+\subsection{Mixed-Model Check for the Loss Ladder}
+\label{sec:app-mixed}
+
+For L2$-$L3 the pre-registered mixed model agrees in direction (coefficient \phm{0.58}).
+Its seed variance sat at the zero boundary (\phm{0.005}) and the fit did not converge, so
+we also fit an image-only random-intercept model as a robustness check outside the rules,
+which converges and gives the same estimate (\phm{0.58}). The frozen rule tests the sign
+of the mixed-model coefficient, not its convergence flag, so the verdict does not depend on
+this check.
+
 
 \subsection{Oracle Decomposition of the Brightness-Shift Failure}
 \label{sec:app-s4}

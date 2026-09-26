@@ -7,17 +7,18 @@
 recipe reach a raw test PSNR between \phm{22.78} and \phm{23.97}~dB at the final
 checkpoint, mean \phm{23.25}~dB with a seed SD of \phm{0.47}~dB, and between \phm{26.52}
 and \phm{26.90}~dB after the GT-mean gain, mean \phm{26.65}~dB with a seed SD of
-\phm{0.16}~dB (per seed in \Cref{tab:app-gatea}). The raw mean minus the lower edge of the pre-registered reproduction window,
-\ph{23.3}--\ph{24.3}~dB, is $\phm{-0.05}$~dB, while two other raw reads of the same runs
+\phm{0.16}~dB (per seed in \Cref{tab:app-gatea}). The raw final-checkpoint mean misses the pre-registered reproduction window,
+\ph{23.3}--\ph{24.3}~dB, by $\phm{-0.05}$~dB, so pivot P-A applies, while two other raw reads of the same runs
 sit inside the window: the test-split oracle over checkpoints, \phm{23.66}~dB, and the
 final checkpoint with the upstream saturation gate, \phm{23.67}~dB. Gated and GT-mean
 together, the checkpoints score \phm{27.55}--\phm{28.05}~dB (mean \phm{27.73}~dB; the
 gate adds \phm{1.09}~dB), matching the \phm{27.71}~dB the authors report for their
-checkpoint. The shortfall is protocol, not model: we read the final checkpoint rather than
-a test-selected one, without the gate, after training on \phm{445} rather than 485 images.
+checkpoint. The shortfall coincides with three protocol differences: the final rather than a
+test-selected checkpoint, no gate, and \phm{445} rather than 485 training images; selection
+and gating are measured here, the training-set reduction is not isolated.
 Every absolute number in this paper is therefore \emph{under our protocol}; the contrasts
-are unaffected, since every arm shares it. The seed SD of \phm{0.47}~dB passes the $\le 0.5$~dB gate but lies in the $0.4$--$0.5$
-band, so the pre-registered rule adds seeds 47--49 to A0, A2 and A3. Pooled over all
+are unaffected, since every arm shares it. The separate seed-SD criterion passes (\phm{0.47}~dB $\le 0.5$~dB), but the value lies in
+the $0.4$--$0.5$ band, so seeds 47--49 were added to A0 and will be added to A2 and A3. Pooled over all
 \phm{8} seeds, the released recipe reaches \phm{23.26}~dB raw (SD \phm{0.41}~dB),
 $\phm{-0.04}$~dB from the window's lower edge; the gate verdict stays on the
 pre-registered five. The learned $k$ ends at a median of \phm{0.85},
@@ -25,18 +26,19 @@ and the loss ladder's achieved MDE is \phm{0.34}~dB.
 
 \input{tables/s1_contrasts}
 
-\paragraph{Loss ladder.} \Cref{tab:s1} reports the four nested contrasts. Removing the VGG term from the \hvi-space loss changes GT-mean PSNR by \phm{0.07}~dB,
-within the equivalence margin: the perceptual term on non-RGB tensors is \phm{removable} (TOST
+\paragraph{Loss ladder.} \Cref{tab:s1} reports the four nested contrasts. Removing the VGG term from the \hvi-space loss lowers GT-mean PSNR by \phm{0.07}~dB,
+within noise: the perceptual term on non-RGB tensors is \phm{removable} (TOST
 $p = \phm{0.02}$).
-Detaching $k$ from the loss transform makes the model slightly better: L1$-$L2 is
-$\phm{-0.16}$~dB, negative in \phm{5} of 5 seeds;
+Detaching $k$ from the loss transform raises it: L1$-$L2 is $\phm{-0.16}$~dB, negative in
+\phm{5} of 5 seeds;
 the Holm interval excludes zero, but the effect is inside $\pm 0.3$~dB, so it is
 \phm{removable} under the pre-registered rules (TOST $p = \phm{0.004}$). It changes what $k$ does: coupled through the loss (L0), $k$ converges from its initial
 \phm{0.2} to a median of \phm{0.85} over five seeds; detached (L2), it stops at a median of
-\phm{0.29}; the released checkpoint carries \phm{1.13}. Removing \hvi-space supervision
-entirely costs \phm{0.58}~dB (\phm{5} of 5 seeds), so the second loss space \phm{contributes}, and this is the one step of
-the released recipe that survives the seeded test. Weighting the \hvi chroma terms by the
-collapse $\Ck(I_{\mathrm{gt}})$ changes GT-mean PSNR by \phm{0.15}~dB; the interval
+\phm{0.29}; the released checkpoint carries \phm{1.13}. Removing \hvi-space supervision entirely costs \phm{0.58}~dB, with a Holm
+interval of [\phm{0.25}, \phm{0.90}]~dB, a mean more than twice its SD of \phm{0.17}~dB,
+the sign in \phm{5} of 5 seeds, and the pre-registered mixed model agreeing in direction
+(coefficient \phm{0.58}; \Cref{sec:app-mixed}), so the second loss space \phm{contributes}; it is the one loss step that does. Weighting the \hvi chroma terms by the collapse $\Ck(I_{\mathrm{gt}})$ lowers it by
+\phm{0.15}~dB; the interval
 includes zero and equivalence is not shown, so it is \phm{inconclusive} (TOST
 $p = \phm{0.09}$). The frozen loss used in the representation ladder, L2, therefore differs from the released
 recipe by two removable steps.
@@ -67,22 +69,20 @@ effect, absorbed by one scalar gain.
 \paragraph{Seed variance and selection bias.}
 \label{sec:selection}
 For the released recipe the seed SD of test GT-mean PSNR is \phm{0.16}~dB (\phm{0.47}~dB on
-raw PSNR); the ladder arms are listed per arm in the appendix. The post-hoc oracle, which
+raw PSNR). The post-hoc oracle, which
 scores every tenth checkpoint on the test split, exceeds the final checkpoint by
 \phm{0.41}~dB of raw PSNR but by only \phm{0.06}~dB of GT-mean PSNR: test-set selection
 mostly picks checkpoints whose brightness happens to match, and the GT-mean gain absorbs
 that. Its maximum over seeds, the number a paper would report after test-split selection,
-is listed per arm in \Cref{tab:app-s3}. The \phm{23.6}--\phm{28.2}~dB spread of reported \dataset values
-\citep{yan2025hvi, hvicidnet_issue66} is therefore mostly the GT-mean gain (\phm{3.39}~dB) and the saturation gate (\phm{1.09}~dB), with
-selection (\phm{0.06}~dB) and seed noise (\phm{0.16}~dB) a small remainder. Oracle numbers never rank arms; they size the practice and justify the final-checkpoint
+is in \Cref{tab:app-s3}, partial (L0, L1, L2) until all loss-arm oracle passes land. The \phm{23.6}--\phm{28.2}~dB spread of reported \dataset values
+\citep{yan2025hvi, hvicidnet_issue66} is therefore mostly the GT-mean gain (\phm{3.39}~dB) and the saturation gate
+(\phm{1.09}~dB), with selection adding \phm{0.06}~dB; seed noise is a separate spread of
+\phm{0.16}~dB around each mean. Oracle numbers never rank arms; they size the practice and justify the final-checkpoint
 read-out.
 
-\paragraph{Transfer to LOL-v2-Real.} Scoring every final checkpoint on the deduplicated
-LOL-v2-Real test split without retraining preserves the two verdicts that contribute: both
-keep their sign in \ph{4} of 5 seeds, and the removable steps stay within $\pm 0.3$~dB. The level drops to \ph{22.0}~dB GT-mean PSNR for the released recipe; we claim nothing
-about the ranking of arms there.
+
 
 \paragraph{The recipe that follows.} Keep the \hvi space with its collapse and a second
 loss space; drop the VGG term on \hvi and the loss-side coupling of $k$; choose the rest by
-convenience at the \phm{0.34}~dB resolution of five seeds (details in
+convenience at the \phm{0.34}~dB resolution of five seeds (details, including LOL-v2-Real transfer, in
 \Cref{sec:app-experiments}).
