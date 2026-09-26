@@ -1041,5 +1041,156 @@
     }
   },
   "entries": {},
-  "script_sha256": "3854906cac915205df66e5ebec946ccab594e6b09dfea026bac21c381057d734"
+  "script_sha256": "3854906cac915205df66e5ebec946ccab594e6b09dfea026bac21c381057d734",
+  "eval15_dedup": {
+    "permit": {
+      "test_split_accessed": true,
+      "scope": "hash eval15 GT pixels (sha256 + pHash) for LOL-v2-Real dedup only; no metric, no model output",
+      "reason": "master ruling 2026-09-26: eval15 GT pixel hashes for LOL-v2-Real deduplication",
+      "script": "auto-research/lolv2real.py"
+    },
+    "eval15_gt_hashes": {
+      "1.png": {
+        "pixel_sha256": "d3e297b956bf08f2d52918e91f415ce2d25aa50fd64a87a4dd56d7d3463bdfaf",
+        "phash": "1010011011010010001011011011110100001010110011011010010010100011"
+      },
+      "111.png": {
+        "pixel_sha256": "e9f4662dca889e84741a1f18e813fec5fec91441cd6fdc3d53564b04c268ac8e",
+        "phash": "1010000001011010101010101010111010111101010100110101100110101000"
+      },
+      "146.png": {
+        "pixel_sha256": "e5ef172cea12b8212b0f78dbe01d95ea563dde8605954d3e8df1f0a62ed710b2",
+        "phash": "1000111011101101011100001100100011110001110001000111001110001100"
+      },
+      "179.png": {
+        "pixel_sha256": "99430a64167bae86d84eadde682478f02663dc1e961594de34e7083ee8dbba49",
+        "phash": "1001001110110111010010100100000001000000001100110101111111011111"
+      },
+      "22.png": {
+        "pixel_sha256": "5f206edda585a17f90a29e0029a4ead06d4c975e1641cd7492cd99e3d1f09a68",
+        "phash": "1000110011010011110001100110000100111011100101100011001111001001"
+      },
+      "23.png": {
+        "pixel_sha256": "10eb7a2d23adbd134af26d458241bd77758364451cc1d335b5113c55a8fb59f6",
+        "phash": "1000110011010011110001100110000100111011100101100011001111001001"
+      },
+      "493.png": {
+        "pixel_sha256": "7910b00381db492d8885074552aff13246afea7e8817f1e20e1be950f4069642",
+        "phash": "1000110011011000110011101010011101111001010010101011010010110000"
+      },
+      "547.png": {
+        "pixel_sha256": "0105299aee8f54395bbee53b326aca32af0924d2cb96886d34c2d900e5464df9",
+        "phash": "1100110100110010001100001100001110010111110011111001011010001100"
+      },
+      "55.png": {
+        "pixel_sha256": "58afbbc79be360e689802c5e0cec9a8f861b952bdd05f0f7da00594eeae7efd1",
+        "phash": "1110010000010010100100001100011011110101011110010111100101101001"
+      },
+      "665.png": {
+        "pixel_sha256": "9f58eb32e58cc8a75d563427e50e9dde9e7e3d4a6a44b629834efafb14bb1c64",
+        "phash": "1001011111110011000010000000011101011000101101110100011010011101"
+      },
+      "669.png": {
+        "pixel_sha256": "cd638e530897499ec0c5e904917183289644036d65276d39a1c4cee3f6faaa7f",
+        "phash": "1001010010110100010001111100100111011101001101100011011000110100"
+      },
+      "748.png": {
+        "pixel_sha256": "11752c09becf9438443029e9691a7aa2f95a43b2a765e27a1b89754147891449",
+        "phash": "1100111001101001010110011011000100001010111101101100100000011101"
+      },
+      "778.png": {
+        "pixel_sha256": "a1b749a6702b73a7789cb99dc54e57ef491ac2a896ad1248446996bb66f1e469",
+        "phash": "1100001100001110101100111110011001011100010111000110110001100100"
+      },
+      "780.png": {
+        "pixel_sha256": "c55cd29c71254f2f487618d0ff308be953274a7c33a4f3f89652de423ff60a50",
+        "phash": "1111110111111111000000100000000000000001011100000111011011110111"
+      },
+      "79.png": {
+        "pixel_sha256": "be0878c35a5018d313a837711e16cc18ed01b2b42c674e56873935e56f734eed",
+        "phash": "1111110001011000100101110110110001111010111000000000011110010001"
+      }
+    },
+    "per_image": {
+      "00705.png": {
+        "eval15_exact": null,
+        "eval15_min_hamming": 26,
+        "dropped": false
+      },
+      "00706.png": {
+        "eval15_exact": null,
+        "eval15_min_hamming": 26,
+        "dropped": false
+      },
+      "00707.png": {
+        "eval15_exact": null,
+        "eval15_min_hamming": 26,
+        "dropped": false
+      },
+      "00753.png": {
+        "eval15_exact": null,
+        "eval15_min_hamming": 24,
+        "dropped": false
+      },
+      "00754.png": {
+        "eval15_exact": null,
+        "eval15_min_hamming": 24,
+        "dropped": false
+      },
+      "00755.png": {
+        "eval15_exact": null,
+        "eval15_min_hamming": 24,
+        "dropped": false
+      },
+      "00756.png": {
+        "eval15_exact": null,
+        "eval15_min_hamming": 24,
+        "dropped": false
+      },
+      "00767.png": {
+        "eval15_exact": null,
+        "eval15_min_hamming": 22,
+        "dropped": false
+      },
+      "00768.png": {
+        "eval15_exact": null,
+        "eval15_min_hamming": 22,
+        "dropped": false
+      }
+    },
+    "kept": [
+      "00705.png",
+      "00706.png",
+      "00707.png",
+      "00753.png",
+      "00754.png",
+      "00755.png",
+      "00756.png",
+      "00767.png",
+      "00768.png"
+    ],
+    "scenes": {
+      "00705.png": 0,
+      "00706.png": 0,
+      "00707.png": 0,
+      "00753.png": 1,
+      "00754.png": 1,
+      "00755.png": 1,
+      "00756.png": 1,
+      "00767.png": 2,
+      "00768.png": 2
+    }
+  },
+  "counts": {
+    "n_test": 100,
+    "n_dup_train_exact": 91,
+    "n_dup_train_phash": 91,
+    "n_dup_train_dino": 91,
+    "n_dup_train_any": 91,
+    "n_dup_eval15": 0,
+    "n_kept": 9,
+    "n_scenes_kept": 3,
+    "eval_rule": "evaluate every S1 final checkpoint once iff n_kept >= 5 (master ruling 2026-09-26)",
+    "evaluate": true
+  }
 }

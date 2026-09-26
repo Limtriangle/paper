@@ -8,7 +8,8 @@ Source: Hugging Face dataset mirror okhater/lolv2-real (unofficial mirror of LOL
 the official releases are Baidu/OneDrive/Google-Drive links), pinned to revision REV; every file's sha256 is logged.
 Dedup: a LOL-v2-Real test pair is DROPPED if its GT matches any LOL-v1 our485 GT (all 485, a superset of our train split)
 by (a) identical decoded pixels, (b) pHash Hamming <= 10 (scene_split rule), or (c) DINOv2-small cosine > 0.9.
-Never touches LOL-v1 eval15. No selection on these reads.
+eval15: only --eval15-dedup reads it, GT pixel hashes (sha256 + pHash) under a recorded permit (master ruling 2026-09-26);
+no metric, model output or embedding on eval15. No selection on these reads; they are labelled descriptive.
 """
 from __future__ import annotations
 
@@ -75,6 +76,62 @@ def prepare(a):
     print("kept", len(keep), "dropped", len(names) - len(keep), res["dedup"]["n_dropped_by"])
 
 
+def eval15_dedup(a):
+    """Master ruling 2026-09-26: hash LOL-v1 eval15 GT PIXELS for deduplication only (exact sha256 of decoded pixels
+    + pHash); no metric, no model output, no embedding. Permit registered at runtime (hvilib.py is hash-pinned by the
+    run manifests, so its whitelist is not edited) and recorded in the JSON."""
+    import numpy as np
+    from scipy.sparse import coo_matrix
+    from scipy.sparse.csgraph import connected_components
+    import scene_split as S
+    os.environ["CUDA_VISIBLE_DEVICES"] = ""
+    H.import_repo()
+    H._TEST_ALLOWED_SCRIPTS["lolv2real.py"] = "hash eval15 GT pixels (sha256 + pHash) for LOL-v2-Real dedup only; no metric, no model output"
+    permit = H.allow_test_split("master ruling 2026-09-26: eval15 GT pixel hashes for LOL-v2-Real deduplication")
+    d = H.json_load(OUT)
+    e15 = [n for n in H.list_dir(H.TEST_DIR / "high") if H.is_image(n)]
+    ims = [H.open_rgb(H.TEST_DIR / "high" / n) for n in e15]
+    e15_hash = {n: {"pixel_sha256": hashlib.sha256(np.asarray(im).tobytes()).hexdigest(),
+                    "phash": "".join("1" if b else "0" for b in S.phash(im))} for n, im in zip(e15, ims)}
+    by_pix = {v["pixel_sha256"]: n for n, v in e15_hash.items()}
+    ph15 = np.stack([S.phash(im) for im in ims])
+    kept_train = d["dedup"]["kept"]
+    per, keep = {}, []
+    for n in kept_train:
+        im = H.open_rgb(DEST / "Test" / "GT" / n)
+        ham = int((ph15 != S.phash(im)[None, :]).sum(-1).min())
+        exact = by_pix.get(hashlib.sha256(np.asarray(im).tobytes()).hexdigest())
+        dup = bool(exact) or ham <= S.HASH_EDGE
+        per[n] = {"eval15_exact": exact, "eval15_min_hamming": ham, "dropped": dup}
+        if not dup:
+            keep.append(n)
+    # scenes among the kept LOL-v2 images (same DINOv2 + pHash rule as scene_split.py; LOL-v2 images only)
+    n_sc, scenes = 0, {}
+    if keep:
+        v2 = [H.open_rgb(DEST / "Test" / "GT" / n) for n in keep]
+        e, _ = S.embed(v2, "cpu")
+        cos = (e @ e.T).numpy()
+        hs = np.stack([S.phash(im) for im in v2])
+        ham = (hs[:, None, :] != hs[None, :, :]).sum(-1)
+        adj = ((cos >= S.COS_EDGE) | (ham <= S.HASH_EDGE)) & ~np.eye(len(keep), dtype=bool)
+        ii, jj = np.nonzero(adj)
+        n_sc, lab = connected_components(coo_matrix((np.ones(len(ii)), (ii, jj)), shape=(len(keep),) * 2), directed=False)
+        scenes = {n: int(l) for n, l in zip(keep, lab)}
+    pi = d["dedup"]["per_image"]
+    d["eval15_dedup"] = {"permit": permit, "eval15_gt_hashes": e15_hash, "per_image": per, "kept": keep, "scenes": scenes}
+    d["counts"] = {"n_test": d["source"]["n_test_pairs"],
+                   "n_dup_train_exact": sum(1 for p in pi if p["exact_pixel_match"]),
+                   "n_dup_train_phash": sum(1 for p in pi if p["min_hamming"] <= S.HASH_EDGE),
+                   "n_dup_train_dino": sum(1 for p in pi if p["cos"] > COS_DUP),
+                   "n_dup_train_any": sum(1 for p in pi if p["dropped"]),
+                   "n_dup_eval15": sum(1 for v in per.values() if v["dropped"]),
+                   "n_kept": len(keep), "n_scenes_kept": int(n_sc),
+                   "eval_rule": "evaluate every S1 final checkpoint once iff n_kept >= 5 (master ruling 2026-09-26)",
+                   "evaluate": len(keep) >= 5}
+    H.json_save(OUT, d)
+    print("counts", d["counts"])
+
+
 def evaluate(a):
     if a.gpu >= 0:
         os.environ["CUDA_VISIBLE_DEVICES"] = str(a.gpu)
@@ -90,10 +147,11 @@ def evaluate(a):
     ck = Path(a.ckpt).resolve()
     model, cfg, epoch = F.load_checkpoint(ck, device)
     lp = H.LPIPSMetric(device)
-    rows = F.measure(model, d["dedup"]["kept"], DEST / "Test_as_lol", device, lp, full=True)
+    H.require(d.get("counts", {}).get("evaluate"), "evaluation not permitted: eval15 dedup missing or fewer than 5 images kept")
+    rows = F.measure(model, d["eval15_dedup"]["kept"], DEST / "Test_as_lol", device, lp, full=True)
     entry = {"label": a.label, "checkpoint": str(ck), "checkpoint_sha256": H.sha256_file(ck), "checkpoint_epoch": epoch,
              "config": {k: cfg.get(k) for k in ("arm", "seed", "split_sha256", "script_sha256")},
-             "n_images": len(rows), "device": device, "evaluated_at": time.strftime("%Y-%m-%dT%H:%M:%S"),
+             "kind": "descriptive", "n_images": len(rows), "n_scenes": d["counts"]["n_scenes_kept"], "device": device, "evaluated_at": time.strftime("%Y-%m-%dT%H:%M:%S"),
              "metrics": F.means(rows, F.SUMMARY_KEYS), "per_image": rows,
              "eval_sha256": {"lolv2real.py": H.sha256_file(Path(__file__)), "final_eval_test.py": H.sha256_file(HERE / "final_eval_test.py")}}
     d = H.json_load(OUT)                       # re-read: another label may have been written meanwhile
@@ -117,6 +175,7 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--prepare", action="store_true")
     ap.add_argument("--eval", action="store_true")
+    ap.add_argument("--eval15-dedup", action="store_true")
     ap.add_argument("--ckpt")
     ap.add_argument("--label")
     ap.add_argument("--gpu", type=int, default=-1)
@@ -125,6 +184,8 @@ def main():
     if a.prepare:
         prepare(a)
         link_layout()
+    elif a.eval15_dedup:
+        eval15_dedup(a)
     elif a.eval:
         H.require(a.ckpt and a.label and a.label.startswith("lolv2_"), "--eval needs --ckpt and --label lolv2_<arm>_seed<s>")
         link_layout()
