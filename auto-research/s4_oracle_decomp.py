@@ -258,6 +258,39 @@ def run(args):
         print("PREFLIGHT", {x["shift"]: {a: round(v["psnr"], 2) for a, v in x["arms"].items()} for x in r})
 
 
+# ------------------------------------------------------------------ extra arm: O-gain+gamma (master approval 2026-09-26)
+def run_gain_gamma(args):
+    """Attribution pass inside S4: oracle over (pre-gain p, input gamma y) only, other knobs official, coordinate
+    descent from the O-gain optimum (2 sweeps), both objectives. Appends to records_gg.jsonl in the same run dir
+    (records.jsonl is not modified). Same images, shifts, grids and metrics as the main pass."""
+    H.import_repo()
+    H.set_determinism(args.threads)
+    out = H.OUTPUTS / STUDY / args.run
+    man = H.json_load(out / "manifest.json")
+    H.require(H.json_load(out / "status.json")["state"] == "complete", "main pass not complete")
+    gg = out / "records_gg.jsonl"
+    H.require(not gg.exists(), f"{gg} exists; no overwrite")
+    main_recs = [json.loads(l) for l in (out / "records.jsonl").read_text().splitlines()]
+    start = {(r["image"], r["shift"], w): r["arms"][f"O-gain-{w}"]["knobs"] for r in main_recs for w in ("P1", "P2")}
+    lp = H.LPIPSMetric("cpu")
+    model = Model(args.threads)
+    H.json_save(out / "status_gg.json", {"state": "running", "pid": os.getpid(), "done": 0, "total": len(man["images"])})
+    for i, name in enumerate(man["images"]):
+        x0, gt, gt_u8 = H.load_val_pair(name)
+        with gg.open("a") as fh:
+            for sname, x in shifts(x0, gt).items():
+                model.cache.clear()
+                rec = {"image": name, "shift": sname, "scene": man["scenes"][name], "arms": {}}
+                for w in ("P1", "P2"):
+                    k0 = dict(start[(name, sname, w)])
+                    kn, _, _ = oracle(model, x, gt, gt_u8, w, k0, ("p", "y"))
+                    rec["arms"][f"O-gg-{w}"] = {"knobs": kn, **full_metrics(model.run(x, kn), gt, gt_u8, lp)}
+                fh.write(json.dumps(rec) + "\n")
+        H.json_save(out / "status_gg.json", {"state": "running", "pid": os.getpid(), "done": i + 1, "total": len(man["images"])})
+        print(f"gg {i+1}/{len(man['images'])} {name}", flush=True)
+    H.json_save(out / "status_gg.json", {"state": "complete", "pid": os.getpid(), "done": len(man["images"]), "total": len(man["images"])})
+
+
 # ------------------------------------------------------------------ aggregation
 def boot_ci(vals, n=10000, seed=0):
     rng = random.Random(seed)
@@ -273,6 +306,12 @@ def aggregate(args):
     man = H.json_load(out / "manifest.json")
     H.require(H.json_load(out / "status.json")["state"] == "complete", "run not complete")
     recs = [json.loads(l) for l in (out / "records.jsonl").read_text().splitlines()]
+    gg_f = out / "records_gg.jsonl"
+    has_gg = gg_f.is_file() and (out / "status_gg.json").is_file() and H.json_load(out / "status_gg.json")["state"] == "complete"
+    if has_gg:
+        extra = {(r["image"], r["shift"]): r["arms"] for r in (json.loads(l) for l in gg_f.read_text().splitlines())}
+        for r in recs:
+            r["arms"].update(extra[(r["image"], r["shift"])])
     metrics = ("psnr", "psnr_gtmean", "delta_e00", "delta_e00_gtmean", "delta_e00_lightness", "delta_e00_chroma_hue", "clip_frac", "ssim")
     arms = sorted(recs[0]["arms"])
     groups = {"none": ["none"], "blend_20_50": ["blend0.2", "blend0.35", "blend0.5"], "blend_all": [f"blend{a}" for a in man["blends"]],
@@ -315,6 +354,14 @@ def aggregate(args):
                       d1[g]["G0_minus_F0_raw_psnr"]["mean"])
         d1[g]["share_of_oracle_recovery_by_gain_only"] = (og / oa) if oa > 1e-9 else None
         d1[g]["share_of_oracle_recovery_by_G0"] = (g0 / oa) if oa > 1e-9 else None
+        if has_gg:
+            d1[g]["D1_split"] = {
+                "P1_raw_psnr__O_gg_minus_O_gain": contrast(groups[g], "O-gg-P1", "O-gain-P1", "psnr"),
+                "P1_raw_psnr__O_all_minus_O_gg": contrast(groups[g], "O-all-P1", "O-gg-P1", "psnr"),
+                "P2_gtmean_psnr__O_gg_minus_O_gain": contrast(groups[g], "O-gg-P2", "O-gain-P2", "psnr_gtmean"),
+                "P2_gtmean_psnr__O_all_minus_O_gg": contrast(groups[g], "O-all-P2", "O-gg-P2", "psnr_gtmean"),
+                "P2_dE00_chroma_hue__O_all_minus_O_gg": contrast(groups[g], "O-all-P2", "O-gg-P2", "delta_e00_chroma_hue"),
+                "note": "O-gg = oracle over pre-gain + input gamma only; O-all adds k, alpha_s, alpha_i on top"}
         d1[g]["D1_rule"] = {"O_all_minus_O_gain_P1_lt_0.3dB": d1[g]["P1_raw_psnr__O_all_minus_O_gain"]["mean"] < 0.3,
                             "O_all_minus_O_gain_dE00_lt_1": abs(d1[g]["P2_dE00__O_all_minus_O_gain"]["mean"]) < 1.0}
     traj = {}
@@ -334,7 +381,9 @@ def aggregate(args):
                        "oracle arms select knobs with the GT: upper bounds, not methods",
                        "blend shifts inject GT into the input; gain shifts do not"],
            "summary": summary, "decomposition": d1, "knob_trajectories": traj, "n_records": len(recs), "n_images": len(man["images"]),
+           "gain_gamma_arm": ("included (O-gg-P1/P2; D1_split under decomposition.<group>)" if has_gg else "not run"),
            "sources": {"manifest.json": H.sha256_file(out / "manifest.json"), "records.jsonl": H.sha256_file(out / "records.jsonl"),
+                       **({"records_gg.jsonl": H.sha256_file(gg_f)} if has_gg else {}),
                        "script": man["script_sha256"], "weights": man["weights_sha256"], "split": man["split_sha256"]},
            "test15": "NEVER READ"}
     H.json_save(H.PAPER / "ralph" / "results" / "s4__oracle_decomp_v1.json", res)
@@ -349,12 +398,15 @@ def main():
     ap.add_argument("--threads", type=int, default=4)
     ap.add_argument("--preflight", action="store_true")
     ap.add_argument("--aggregate", action="store_true")
+    ap.add_argument("--gain-gamma", action="store_true", help="extra O-gain+gamma attribution arm (after the main pass)")
     a = ap.parse_args()
     os.environ["CUDA_VISIBLE_DEVICES"] = ""
     if a.preflight:
         a.run = f"_preflight_{int(time.time())}"
     if a.aggregate:
         aggregate(a)
+    elif a.gain_gamma:
+        run_gain_gamma(a)
     else:
         run(a)
 
