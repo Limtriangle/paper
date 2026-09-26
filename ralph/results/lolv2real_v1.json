@@ -1,0 +1,1045 @@
+{
+  "run_id": "lolv2real_v1",
+  "written_at": "2026-09-26T07:53:28",
+  "source": {
+    "hf_dataset": "https://huggingface.co/datasets/okhater/lolv2-real",
+    "revision": "db2979107f7c22d372c6e4f1b06fd6203069af0a",
+    "note": "unofficial mirror of LOL-v2 Real_captured (Yang et al., TIP 2021); official links are Baidu/OneDrive/Google Drive",
+    "local_dir": "/home/work/research/datasets/LOLv2_Real_hf",
+    "n_test_pairs": 100,
+    "files_sha256": {
+      "Test/GT/00690.png": "310e2d0531e0109f18425c17d854e4e7ce634b1761ec264c9029b029aab7adc1",
+      "Test/GT/00691.png": "310e2d0531e0109f18425c17d854e4e7ce634b1761ec264c9029b029aab7adc1",
+      "Test/GT/00692.png": "c76bedc4e349c8b547ecdbe27ab4976349f65315296823d2d3d7271b0ad09892",
+      "Test/GT/00693.png": "c76bedc4e349c8b547ecdbe27ab4976349f65315296823d2d3d7271b0ad09892",
+      "Test/GT/00694.png": "c088836479db972020679507b1b3eb9c96f32d0df1cfc21a364755b04af0e179",
+      "Test/GT/00695.png": "c088836479db972020679507b1b3eb9c96f32d0df1cfc21a364755b04af0e179",
+      "Test/GT/00696.png": "f7118b2251a5a030ef9a29206c698f9883c186a7cb95c066208b3f415793f525",
+      "Test/GT/00697.png": "f7118b2251a5a030ef9a29206c698f9883c186a7cb95c066208b3f415793f525",
+      "Test/GT/00698.png": "8c68c7d1d91010be3a29edb9ecbf427ff17ba6c551fcde6e627dc5fed3f7966a",
+      "Test/GT/00699.png": "8c68c7d1d91010be3a29edb9ecbf427ff17ba6c551fcde6e627dc5fed3f7966a",
+      "Test/GT/00700.png": "8c68c7d1d91010be3a29edb9ecbf427ff17ba6c551fcde6e627dc5fed3f7966a",
+      "Test/GT/00701.png": "8c68c7d1d91010be3a29edb9ecbf427ff17ba6c551fcde6e627dc5fed3f7966a",
+      "Test/GT/00702.png": "2537803af2361568dabe0c25caecf86e488c51bb4c8cde1adaac3ab157d16aa8",
+      "Test/GT/00703.png": "2537803af2361568dabe0c25caecf86e488c51bb4c8cde1adaac3ab157d16aa8",
+      "Test/GT/00704.png": "2537803af2361568dabe0c25caecf86e488c51bb4c8cde1adaac3ab157d16aa8",
+      "Test/GT/00705.png": "955efda1be9f6b888636583973cfef77902490b2ad646c2b76698803082e0565",
+      "Test/GT/00706.png": "955efda1be9f6b888636583973cfef77902490b2ad646c2b76698803082e0565",
+      "Test/GT/00707.png": "955efda1be9f6b888636583973cfef77902490b2ad646c2b76698803082e0565",
+      "Test/GT/00708.png": "ade9d7c959f6557aceba8b1137d3231be1ccdb6beaacdfaa9fdcb26a9a9b2530",
+      "Test/GT/00709.png": "ade9d7c959f6557aceba8b1137d3231be1ccdb6beaacdfaa9fdcb26a9a9b2530",
+      "Test/GT/00710.png": "5a7682014c8416c5152dd00908f1d32d248f6b92fd8c1b2c76d5bd6f040c5ff1",
+      "Test/GT/00711.png": "5a7682014c8416c5152dd00908f1d32d248f6b92fd8c1b2c76d5bd6f040c5ff1",
+      "Test/GT/00712.png": "811994b31936424b79aded970fe3e777925077d7795b305c05851b161295e90d",
+      "Test/GT/00713.png": "811994b31936424b79aded970fe3e777925077d7795b305c05851b161295e90d",
+      "Test/GT/00714.png": "096d88fdcaf33947d4311fbbd23a58fa709cc64fa9cc5e5bb24416da951519aa",
+      "Test/GT/00715.png": "096d88fdcaf33947d4311fbbd23a58fa709cc64fa9cc5e5bb24416da951519aa",
+      "Test/GT/00716.png": "387977a827e03162a17b1b21645107829240aa7a75ee64b235d71eca591f12d3",
+      "Test/GT/00717.png": "387977a827e03162a17b1b21645107829240aa7a75ee64b235d71eca591f12d3",
+      "Test/GT/00718.png": "bd8b9a9831d923afb3da31824efa748415a5adc9fd6f828b94abc909c710983a",
+      "Test/GT/00719.png": "bd8b9a9831d923afb3da31824efa748415a5adc9fd6f828b94abc909c710983a",
+      "Test/GT/00720.png": "69fa7a506a47d69f2dfb7d3c47525b3a460acd487ebdcc8fc34594d84823d5b5",
+      "Test/GT/00721.png": "69fa7a506a47d69f2dfb7d3c47525b3a460acd487ebdcc8fc34594d84823d5b5",
+      "Test/GT/00722.png": "f3ae8c4507ab466a0d04174dbbefa94f3726ca81b1012b56c1189431a943f263",
+      "Test/GT/00723.png": "f3ae8c4507ab466a0d04174dbbefa94f3726ca81b1012b56c1189431a943f263",
+      "Test/GT/00724.png": "2080e9a3de87617a3d427b27a8a8133a08adea9c19847ebf2459013256707734",
+      "Test/GT/00725.png": "2080e9a3de87617a3d427b27a8a8133a08adea9c19847ebf2459013256707734",
+      "Test/GT/00726.png": "74c063db6d05356bf7e3ff2dcd83b17f9754cb7e303372a104e738cb15d51c60",
+      "Test/GT/00727.png": "74c063db6d05356bf7e3ff2dcd83b17f9754cb7e303372a104e738cb15d51c60",
+      "Test/GT/00728.png": "74c063db6d05356bf7e3ff2dcd83b17f9754cb7e303372a104e738cb15d51c60",
+      "Test/GT/00729.png": "5bf739df6237ea0d5f728cbdef741e0c02a38d2907039d5102deb324bbaa337a",
+      "Test/GT/00730.png": "5bf739df6237ea0d5f728cbdef741e0c02a38d2907039d5102deb324bbaa337a",
+      "Test/GT/00731.png": "7f8be1987f2200ab186331fa6dbf50a0a529cd3f9a1434578b594f415c827a45",
+      "Test/GT/00732.png": "7f8be1987f2200ab186331fa6dbf50a0a529cd3f9a1434578b594f415c827a45",
+      "Test/GT/00733.png": "029a28e53407e7a6953495d3f738779a78a8f638215b4a7203692d353246310b",
+      "Test/GT/00734.png": "029a28e53407e7a6953495d3f738779a78a8f638215b4a7203692d353246310b",
+      "Test/GT/00735.png": "530e5cc19afe62044e65ae0c610158e32bc29c211c888bb258fd21f54fb64c3f",
+      "Test/GT/00736.png": "530e5cc19afe62044e65ae0c610158e32bc29c211c888bb258fd21f54fb64c3f",
+      "Test/GT/00737.png": "781118c228f86aee478ef68af6827f4331bc5937a6e59b556880c1e63cda99fe",
+      "Test/GT/00738.png": "781118c228f86aee478ef68af6827f4331bc5937a6e59b556880c1e63cda99fe",
+      "Test/GT/00739.png": "5ab56b5c70043bc36cb57a0915cdd0d35ec4e4ff3fe6605654dd86b6506ff7bb",
+      "Test/GT/00740.png": "5ab56b5c70043bc36cb57a0915cdd0d35ec4e4ff3fe6605654dd86b6506ff7bb",
+      "Test/GT/00741.png": "c74919a01598239884ccd69d3def178a8b35c9e3a79ca9b24688678e89f4dfe1",
+      "Test/GT/00742.png": "c74919a01598239884ccd69d3def178a8b35c9e3a79ca9b24688678e89f4dfe1",
+      "Test/GT/00743.png": "5026cdb9c88e4cbd00c95f5d680e7bae50409815c3e00861f65203d808f677ec",
+      "Test/GT/00744.png": "5026cdb9c88e4cbd00c95f5d680e7bae50409815c3e00861f65203d808f677ec",
+      "Test/GT/00745.png": "fea6b16cc94c8091ef1d05a1d59c8bcd21e63089937b611026b39eaa307c1989",
+      "Test/GT/00746.png": "fea6b16cc94c8091ef1d05a1d59c8bcd21e63089937b611026b39eaa307c1989",
+      "Test/GT/00747.png": "64133deb814e9983038f46d65e5668dc02828d3187c84ef535f06c7733c450ca",
+      "Test/GT/00748.png": "64133deb814e9983038f46d65e5668dc02828d3187c84ef535f06c7733c450ca",
+      "Test/GT/00749.png": "5a90c66f6dd1f2a6afd1e365193a2612489486b5db6fe4a8ace643bc0a295638",
+      "Test/GT/00750.png": "5a90c66f6dd1f2a6afd1e365193a2612489486b5db6fe4a8ace643bc0a295638",
+      "Test/GT/00751.png": "337119f7a5fc2f09a9663181aebcab075fe227615b08323dc7010bb9007a8900",
+      "Test/GT/00752.png": "337119f7a5fc2f09a9663181aebcab075fe227615b08323dc7010bb9007a8900",
+      "Test/GT/00753.png": "9504c69b64a14fcdc09c7d08b470e33594ebc48cd1c5f623d116746d75ec45a8",
+      "Test/GT/00754.png": "9504c69b64a14fcdc09c7d08b470e33594ebc48cd1c5f623d116746d75ec45a8",
+      "Test/GT/00755.png": "9504c69b64a14fcdc09c7d08b470e33594ebc48cd1c5f623d116746d75ec45a8",
+      "Test/GT/00756.png": "9504c69b64a14fcdc09c7d08b470e33594ebc48cd1c5f623d116746d75ec45a8",
+      "Test/GT/00757.png": "8aa67f12acb1a78e3a3d299b91f3008e87ad1ec1ac91661e21a14b95e9cbed46",
+      "Test/GT/00758.png": "8aa67f12acb1a78e3a3d299b91f3008e87ad1ec1ac91661e21a14b95e9cbed46",
+      "Test/GT/00759.png": "494847243e55623c58eacd098d60740ebc97de4ffce23d7e66de48e8d5d8fc4d",
+      "Test/GT/00760.png": "494847243e55623c58eacd098d60740ebc97de4ffce23d7e66de48e8d5d8fc4d",
+      "Test/GT/00761.png": "32cf330c7402fd8a3ac463fd69c40193b3c24b5ffcb2192b31986a183a46acbe",
+      "Test/GT/00762.png": "32cf330c7402fd8a3ac463fd69c40193b3c24b5ffcb2192b31986a183a46acbe",
+      "Test/GT/00763.png": "73f7517380347dbd12d7756560edc052bfe5250d9a43d108f6b7509a2b22e54f",
+      "Test/GT/00764.png": "73f7517380347dbd12d7756560edc052bfe5250d9a43d108f6b7509a2b22e54f",
+      "Test/GT/00765.png": "59ad4d62f98fdfb7a41d89e045e013d042f8d7f1fef284c03b1d49e523b5d00f",
+      "Test/GT/00766.png": "59ad4d62f98fdfb7a41d89e045e013d042f8d7f1fef284c03b1d49e523b5d00f",
+      "Test/GT/00767.png": "397b1c455456e0eca52106c5b1110eb28bec451aa7b5dd5207d6708f267ecb85",
+      "Test/GT/00768.png": "397b1c455456e0eca52106c5b1110eb28bec451aa7b5dd5207d6708f267ecb85",
+      "Test/GT/00769.png": "f8139e6c678809cc8ff76388e1637a78cb9384c9e1febc4092e2b71fa5095a04",
+      "Test/GT/00770.png": "f8139e6c678809cc8ff76388e1637a78cb9384c9e1febc4092e2b71fa5095a04",
+      "Test/GT/00771.png": "6170492e7ea5c903c59b88e2b9ba16bf685f1561dd27a3c27296faf696590ada",
+      "Test/GT/00772.png": "6170492e7ea5c903c59b88e2b9ba16bf685f1561dd27a3c27296faf696590ada",
+      "Test/GT/00773.png": "e8b6ef5a125de71150eb5d6217da05789f8198c55c0daad147eedf2fef18ad83",
+      "Test/GT/00774.png": "e8b6ef5a125de71150eb5d6217da05789f8198c55c0daad147eedf2fef18ad83",
+      "Test/GT/00775.png": "e50e00b02148a9408bffa545a7f0bc2ffb01a3c68a24977916cc26c022760e58",
+      "Test/GT/00776.png": "e50e00b02148a9408bffa545a7f0bc2ffb01a3c68a24977916cc26c022760e58",
+      "Test/GT/00777.png": "e50e00b02148a9408bffa545a7f0bc2ffb01a3c68a24977916cc26c022760e58",
+      "Test/GT/00778.png": "e50e00b02148a9408bffa545a7f0bc2ffb01a3c68a24977916cc26c022760e58",
+      "Test/GT/00779.png": "78dbc708ccb83312f838934a081480ba3595b363bed9b3f590fe192527db1ed4",
+      "Test/GT/00780.png": "78dbc708ccb83312f838934a081480ba3595b363bed9b3f590fe192527db1ed4",
+      "Test/GT/00781.png": "a10b6c0bbcf9b1e33aa1b402e961406a6e5a283352387cdde1d5f792dae99c41",
+      "Test/GT/00782.png": "a10b6c0bbcf9b1e33aa1b402e961406a6e5a283352387cdde1d5f792dae99c41",
+      "Test/GT/00783.png": "a10b6c0bbcf9b1e33aa1b402e961406a6e5a283352387cdde1d5f792dae99c41",
+      "Test/GT/00784.png": "a10b6c0bbcf9b1e33aa1b402e961406a6e5a283352387cdde1d5f792dae99c41",
+      "Test/GT/00785.png": "a10b6c0bbcf9b1e33aa1b402e961406a6e5a283352387cdde1d5f792dae99c41",
+      "Test/GT/00786.png": "a10b6c0bbcf9b1e33aa1b402e961406a6e5a283352387cdde1d5f792dae99c41",
+      "Test/GT/00787.png": "e9e249ba5276535ebe3e56229cd34f97e707e0e6807b9efa87e9e636f19f3ad9",
+      "Test/GT/00788.png": "e9e249ba5276535ebe3e56229cd34f97e707e0e6807b9efa87e9e636f19f3ad9",
+      "Test/GT/00789.png": "e9e249ba5276535ebe3e56229cd34f97e707e0e6807b9efa87e9e636f19f3ad9",
+      "Test/Input/00690.png": "7f8cdf2ca55801031f23829161ca96a381f3134dbda0da9dcdaa3815c870dacb",
+      "Test/Input/00691.png": "e87c278738a5d971c5a2fef4fe84006f61b5d27efa03727b0d58049b91422484",
+      "Test/Input/00692.png": "a877bf960eac6051c11f2abd43534693bd29bc359db1ad10ec26952b718eec09",
+      "Test/Input/00693.png": "6dad45129f3007a7d61f1b4fe757f5dca53d92765476e660517da2cd0afb0fa0",
+      "Test/Input/00694.png": "ed0d82c8e33a5a03166ee7dc0dd0666472a8b288db3e273ebb1e4d60aed7738e",
+      "Test/Input/00695.png": "ed1aa8a879f9f1c9e70c52f34f855c13921a5d0bb66351fa7847868f6e001c15",
+      "Test/Input/00696.png": "090c9c3a17554d8e4494d6fb01b26bdd50d6d23d29d0dc1de534dc66d72cc0ec",
+      "Test/Input/00697.png": "9ec51698c0114abdde47e6f595bbbfec28f37def6d1dbe1be8bac8ce478944c3",
+      "Test/Input/00698.png": "cf25b7f8b12064e45e502ef8ff9e6998f4d8150a1dde9f842ef5db618080d6bc",
+      "Test/Input/00699.png": "67d808818f68b9d28de54f0659e7062ae420b763b1e2616304a4efff9f20c53b",
+      "Test/Input/00700.png": "752d49c6ebe1541b435cf83aae992da0df8d6e1a36798bd2d2b388952ecc895d",
+      "Test/Input/00701.png": "f22a51ff37a2fce8dc2cf2cf1ee6875b324c74a2db82799e43386ed173957350",
+      "Test/Input/00702.png": "dc71c4535a269fdc1c91f3d0398b767b81e977d37df3267bd3e27fe942bb00ee",
+      "Test/Input/00703.png": "8d67fb83a55062a44a23f790005bb70cea0a1f4c34c00e5bad54a3c4cfa4c284",
+      "Test/Input/00704.png": "53684f677c20476a0ecab1ec6cef229a00bfcc097426c20b0b6c4e89bcca4446",
+      "Test/Input/00705.png": "fa598707a4eb957a325c105897f5fddadb1ecbae8919de849d96cdb77a8ef251",
+      "Test/Input/00706.png": "15cb47bd557e8aaf465e223104a83d9271c20e820b37e231f400a716ca65a5b1",
+      "Test/Input/00707.png": "857ee110e98f4161a86e458df08b2543454d88b7559b9a3d60f605467ac24288",
+      "Test/Input/00708.png": "381220d07dadf72ee75ab5b10a70afea12ff317dea605dfc02412aea50e1b1c6",
+      "Test/Input/00709.png": "94eb9a8a713bace919b65816b0aea3095c7580959da3625780cfb28d6fbccf4b",
+      "Test/Input/00710.png": "07f883cbde75f7215f089b75c6d7b422a99bea4d1cddec80e9e8d0528cb7e361",
+      "Test/Input/00711.png": "b0af6666535439741b13363ca35bb65584a5ff7df39f5d33db0c77f30a9b1828",
+      "Test/Input/00712.png": "e9fd526f7866fc8087c58d82a774a50a769014e64651dd018381ca7aaf564a53",
+      "Test/Input/00713.png": "0a1eb9fa773d9f911a71dd6daaa3e177cb32b88adecf73919ce68d49642b7534",
+      "Test/Input/00714.png": "df84eb73c3391a0331d1b464a2f6aba112ac49a4a90d51d7f8ad65e8c2a7a306",
+      "Test/Input/00715.png": "9a0bcf7b95223063d467bb849e4e69a9b66cb08e25a2a6ce023a5d2b868fd556",
+      "Test/Input/00716.png": "02d0e34b3529d8ab07cc8c78b9d23c8a5459fcb83128d546c344a415fa54d0a6",
+      "Test/Input/00717.png": "0d38a3af48ba9d2389535c4c5bd3cd091b1575af7364e8fa914bf0f8af944e69",
+      "Test/Input/00718.png": "125b42fd471fc6a9e602817d8f32ae8675b29976230c42bf25c3470d847bbd23",
+      "Test/Input/00719.png": "2c3b0788f670926bf75f585816e4ed017f59ebc6155f7dacc143d9ba3940e804",
+      "Test/Input/00720.png": "6cfa00ad991e7e452ed1c6dddbc00eef6477f01859a0d02d6ffb16f087cef189",
+      "Test/Input/00721.png": "a72545ef7dde658a071ee46be72d78ed4d5cdbf7c21ee738af719b4db8c90cbf",
+      "Test/Input/00722.png": "a4f46b1c28bec55b6a8305415cc91f6fdccd4d43a2685a937b4897fe223498f4",
+      "Test/Input/00723.png": "d8dfa980763a2b108388f7c979a567b858ad9ab7dc8a7c13ccd8997f0087a77f",
+      "Test/Input/00724.png": "91002d92de461acd75eb659db7942a933e633bd041b041eb124d1629556ca88d",
+      "Test/Input/00725.png": "b167ecbc1717f0c0590aa43972f1d28b39a8e91e341caa737124e68701f7242e",
+      "Test/Input/00726.png": "b9c597ee75a3e860dd3e8116ffbee3c783be2ff8addf2ede90a3cfa1dd8c1e5d",
+      "Test/Input/00727.png": "63a67ad5baef986843bfc2d9e4077a34ab14d4df38b2041764ad0ce420677eb4",
+      "Test/Input/00728.png": "066205a173a6025301d5b4fe10f6a4ad709eb7127cddc982600641df31c64b62",
+      "Test/Input/00729.png": "bbab57ce47b0d552ce4c81596c81791d7e63f0615c438113efb1bd599bed9cf1",
+      "Test/Input/00730.png": "7b57a6ecf87b9b77347c5c42b1d67908a54899dbbff84b892d75e15c822e1ab9",
+      "Test/Input/00731.png": "ca5cdb67fc95e9352dbd844b94a83a8745a03a5c6405489ac472db607ea85ed3",
+      "Test/Input/00732.png": "0a3e15d1dff0efb82a40ac8233b99344506c9bee014ca40766a4f0d0efeef764",
+      "Test/Input/00733.png": "26471c3e904d817e3e79f67ab9ea89f5bed35b66c788d6007161662a9e3d39e3",
+      "Test/Input/00734.png": "61a5c1062287649e0f6952c7ee3b0e6331ace81b69d760be621f710af132db63",
+      "Test/Input/00735.png": "971e4d7c4b982224505487e49bad8bbf54f52fce457d9dcac52494755efd91cd",
+      "Test/Input/00736.png": "f5558e3d749ac0a5368dc4e9aca6424728b35390a4617c67834362a3146b31f5",
+      "Test/Input/00737.png": "ab7a033cfad7a2aac0810589639e5c98eb6b271e19c96ba8d7c6e3f0ca9f9ba2",
+      "Test/Input/00738.png": "5da4ef0d3040fcc5fa53c54ca8f104e729a10170dcf76a54291daed97c843b17",
+      "Test/Input/00739.png": "2d25997c61cccfeab6ae8efc8396f5b538128a5ec68f389c3e6d96cd25e7a897",
+      "Test/Input/00740.png": "4c27ba5f77baffd2c2c6fe76214e808bfc634b6b849e0d9992e0c82d1c0e6572",
+      "Test/Input/00741.png": "2138b68d7e0d5ed0e7242120232bcfc2f26e110862f109872ae35f23ab496205",
+      "Test/Input/00742.png": "fe5c817ee33be5e294d61f616e73e404edb3288e268a76163bbb4cf3b4196376",
+      "Test/Input/00743.png": "bcda3a0afc450e7aad0813098108dda25314d71e901a99c7078b895f081cd9a1",
+      "Test/Input/00744.png": "c95f7bbb8eedbb249868d3e1ab3755dd6622fb97d39b8a1bfad3d9ed8233942f",
+      "Test/Input/00745.png": "f7a39764d02391e82bbe318befa58934be62d8695159e0e23e55f6519c971c86",
+      "Test/Input/00746.png": "a6c8ca038544806c6408960077331005ba8ecc41fb565278abe0b9ce3e16c10a",
+      "Test/Input/00747.png": "936acd1168739c5491358a15c2dab0e01fdc4e2dcaaa2f0ca1005d3b941095e1",
+      "Test/Input/00748.png": "325c720df5669e37b9f192bfa9a60add144b82e5e68d9f684c0010a0047b0056",
+      "Test/Input/00749.png": "60e6eb9d0a806abac4d85b000399feb8eb477c5a00d524962e6e72463d799504",
+      "Test/Input/00750.png": "315a54142475f9b68b007ee0e084b6b24ce0926a52c7e670e4bcfc829c9e8bfe",
+      "Test/Input/00751.png": "bbd7b09e15ea8ba705b3d80c16fc6e3cefb02c5cccce18c868d77b0e72569c14",
+      "Test/Input/00752.png": "e4ed9e34676630d0e6c4a98014273165a6ffe3ac3685ae30cb78e0fb8d58e419",
+      "Test/Input/00753.png": "3a827ab5b939fbfca4edd5c6c9c02c497d38c2eddffa64b61f85b069b7f6ffde",
+      "Test/Input/00754.png": "8e91275ecefd3f44a575017ecdb8944acc0f0ea367073276d19303016360b273",
+      "Test/Input/00755.png": "7e45cb6aa8e613dd0ac0de6fc5a1615ff6d3c3a821551229f3ac9643619689f6",
+      "Test/Input/00756.png": "8639eb472576c0f089a5a5d5250844a1f4ee684293729090eb19f6a1d176271e",
+      "Test/Input/00757.png": "df52ffdfcc209c2f53397f007638796a3173dfe051a844e6cbe541c9f140b1c3",
+      "Test/Input/00758.png": "f74f4c71ed6c94f602030990586642e981ff7955471db42a05715f5aa869e2b3",
+      "Test/Input/00759.png": "441ca169a4dbf062e37697586bf3cc4fc004dda00ae804fc03f28cb77c7f8ed4",
+      "Test/Input/00760.png": "ac26a4f786b5b4f37f14d37708bff6a6bbd5bb94a8cf5ec0d5ff9563db9f1e1d",
+      "Test/Input/00761.png": "3f9f9bf383aa6ffe657360ba623ec586d0a1f01252b8f6855c93a3aa49f7ff8d",
+      "Test/Input/00762.png": "349787672bd07ea7372f710a2a142401ab44bf8051d8412ba60b334e42d5b06f",
+      "Test/Input/00763.png": "7c3c50ff1885fc726f4d481f5238e21c6afbc827a087a6946213d2e7e30637b9",
+      "Test/Input/00764.png": "8a1f2b6332aab6205e279e2a0a46ce5b99b39b41522685e09ccc345bbe4d919a",
+      "Test/Input/00765.png": "6a49696dc002b52d74a45787b7f29cab2902c6eeb4491c90f9279262a0f7ff16",
+      "Test/Input/00766.png": "6777b0faf076fa40c7d9f38164b1b57092b247f4c50510160cb91aa16806889b",
+      "Test/Input/00767.png": "8701cafeb5cc3669911dfd53951fba1bf98535e6e20492b0ac29c545c40cc966",
+      "Test/Input/00768.png": "a9977127cb9dcf87ccbb89e7a97ad643deb667f30b674a58241c04f52d88ee33",
+      "Test/Input/00769.png": "860c32c92721a72ee2c5f95ea036abb995872fa229345007fd5847f4879b3e01",
+      "Test/Input/00770.png": "664ac5e57a53adb8009cfe74c848201cae7b3ffc4a9b3d5dcf1fb6cf30ed30b0",
+      "Test/Input/00771.png": "a65a178257d2f2158e4b856b5418edee2c8a920ca24cb803180441fab54cc551",
+      "Test/Input/00772.png": "c6dbabf4b5dc28976963c817052b73841516335815378bcb0eb07291d4511a61",
+      "Test/Input/00773.png": "f9f758791d32f88554de9510389e831ae28824604addfdf1c5efb40804830d7d",
+      "Test/Input/00774.png": "cd116efff2aee08f232758855e42fbe7a27a2d1c87bdf11ff9c247a701036d84",
+      "Test/Input/00775.png": "0e25810cea9d2bf812463d6bd3ddff7ab6bc32355ee8c143e3f9df38385292c8",
+      "Test/Input/00776.png": "07fd511fbd148cb07dd20a94b03ca14e558cc7e3fb32e130515474fd0525621b",
+      "Test/Input/00777.png": "281882ffde0ed06a1a68b8c67a16800b9aeab1288cf94d7b4e44704f77d5b722",
+      "Test/Input/00778.png": "26667c53ff5d97a794c3bfed729a6fb88ed5298e834787b28a21852853a2e830",
+      "Test/Input/00779.png": "f593a0f7fd0dac7713f6596c4fab6495e766710ac51d7d684ce1c475ac52efb3",
+      "Test/Input/00780.png": "f78aad566110d3c2efc7dc3ebc086043385af27231f44d3b03780becb492e972",
+      "Test/Input/00781.png": "05311ef6ffc6bd403b481a72d90a0bd467547e513f5817f6914de0d0d3b755c9",
+      "Test/Input/00782.png": "7680b89f759ba3599d0a1fe0e318bba8560f31fb47c7d4bb460ed581820a3ded",
+      "Test/Input/00783.png": "40bb08b5533904b5acf3a7edfc621fc351f9162ce4f433b304d9b0bda8a99fe6",
+      "Test/Input/00784.png": "b5881598c7818816b1795b55fed82a365785f01348ebe2ee29a84c5c9ee097aa",
+      "Test/Input/00785.png": "14a1948289a813de7ab8ff04064bea4fe473ab2144608ea430b2979eac9c55f1",
+      "Test/Input/00786.png": "dcfb551261a56cb581e72d6485230bcf9bbdc64d59a15ee8aba348815f5bf797",
+      "Test/Input/00787.png": "406e50441057d5d12f5425a37db2317682cce9cc89f37c511be53b0df013915d",
+      "Test/Input/00788.png": "ef2312ac69afcff788f9eb92afcda7c9a3f568e76514f3e3c7971e3b6216a455",
+      "Test/Input/00789.png": "5bf9f5a81ab9f4ffba6980839cdaac1245f0c805b4df4c3c9564a51446da0a9c"
+    },
+    "files_manifest_sha256": "afa8135a2515ad18eb1d386c18818c242ee711adbb77b77dd3da9ea91c3a41bc"
+  },
+  "dedup": {
+    "against": "LOL-v1 our485 GT (all 485 pairs; superset of the training split)",
+    "embedding": "facebook/dinov2-small",
+    "rules": {
+      "exact_pixels": true,
+      "phash_hamming_le": 10,
+      "dinov2_cos_gt": 0.9
+    },
+    "n_dropped": 91,
+    "n_kept": 9,
+    "kept": [
+      "00705.png",
+      "00706.png",
+      "00707.png",
+      "00753.png",
+      "00754.png",
+      "00755.png",
+      "00756.png",
+      "00767.png",
+      "00768.png"
+    ],
+    "per_image": [
+      {
+        "name": "00690.png",
+        "nearest_lolv1": "690.png",
+        "cos": 1.0,
+        "min_hamming": 0,
+        "exact_pixel_match": "691.png",
+        "dropped": true
+      },
+      {
+        "name": "00691.png",
+        "nearest_lolv1": "690.png",
+        "cos": 1.0,
+        "min_hamming": 0,
+        "exact_pixel_match": "691.png",
+        "dropped": true
+      },
+      {
+        "name": "00692.png",
+        "nearest_lolv1": "692.png",
+        "cos": 1.000000238418579,
+        "min_hamming": 0,
+        "exact_pixel_match": "693.png",
+        "dropped": true
+      },
+      {
+        "name": "00693.png",
+        "nearest_lolv1": "692.png",
+        "cos": 1.000000238418579,
+        "min_hamming": 0,
+        "exact_pixel_match": "693.png",
+        "dropped": true
+      },
+      {
+        "name": "00694.png",
+        "nearest_lolv1": "694.png",
+        "cos": 1.000000238418579,
+        "min_hamming": 0,
+        "exact_pixel_match": "695.png",
+        "dropped": true
+      },
+      {
+        "name": "00695.png",
+        "nearest_lolv1": "694.png",
+        "cos": 1.000000238418579,
+        "min_hamming": 0,
+        "exact_pixel_match": "695.png",
+        "dropped": true
+      },
+      {
+        "name": "00696.png",
+        "nearest_lolv1": "696.png",
+        "cos": 0.9999998807907104,
+        "min_hamming": 0,
+        "exact_pixel_match": "697.png",
+        "dropped": true
+      },
+      {
+        "name": "00697.png",
+        "nearest_lolv1": "696.png",
+        "cos": 0.9999998807907104,
+        "min_hamming": 0,
+        "exact_pixel_match": "697.png",
+        "dropped": true
+      },
+      {
+        "name": "00698.png",
+        "nearest_lolv1": "698.png",
+        "cos": 0.9999998807907104,
+        "min_hamming": 0,
+        "exact_pixel_match": "701.png",
+        "dropped": true
+      },
+      {
+        "name": "00699.png",
+        "nearest_lolv1": "698.png",
+        "cos": 0.9999998807907104,
+        "min_hamming": 0,
+        "exact_pixel_match": "701.png",
+        "dropped": true
+      },
+      {
+        "name": "00700.png",
+        "nearest_lolv1": "698.png",
+        "cos": 0.9999998807907104,
+        "min_hamming": 0,
+        "exact_pixel_match": "701.png",
+        "dropped": true
+      },
+      {
+        "name": "00701.png",
+        "nearest_lolv1": "698.png",
+        "cos": 0.9999998807907104,
+        "min_hamming": 0,
+        "exact_pixel_match": "701.png",
+        "dropped": true
+      },
+      {
+        "name": "00702.png",
+        "nearest_lolv1": "702.png",
+        "cos": 1.0,
+        "min_hamming": 0,
+        "exact_pixel_match": "704.png",
+        "dropped": true
+      },
+      {
+        "name": "00703.png",
+        "nearest_lolv1": "702.png",
+        "cos": 1.0,
+        "min_hamming": 0,
+        "exact_pixel_match": "704.png",
+        "dropped": true
+      },
+      {
+        "name": "00704.png",
+        "nearest_lolv1": "702.png",
+        "cos": 1.0,
+        "min_hamming": 0,
+        "exact_pixel_match": "704.png",
+        "dropped": true
+      },
+      {
+        "name": "00705.png",
+        "nearest_lolv1": "702.png",
+        "cos": 0.79899001121521,
+        "min_hamming": 22,
+        "exact_pixel_match": null,
+        "dropped": false
+      },
+      {
+        "name": "00706.png",
+        "nearest_lolv1": "702.png",
+        "cos": 0.79899001121521,
+        "min_hamming": 22,
+        "exact_pixel_match": null,
+        "dropped": false
+      },
+      {
+        "name": "00707.png",
+        "nearest_lolv1": "702.png",
+        "cos": 0.79899001121521,
+        "min_hamming": 22,
+        "exact_pixel_match": null,
+        "dropped": false
+      },
+      {
+        "name": "00708.png",
+        "nearest_lolv1": "708.png",
+        "cos": 1.0,
+        "min_hamming": 0,
+        "exact_pixel_match": "709.png",
+        "dropped": true
+      },
+      {
+        "name": "00709.png",
+        "nearest_lolv1": "708.png",
+        "cos": 1.0,
+        "min_hamming": 0,
+        "exact_pixel_match": "709.png",
+        "dropped": true
+      },
+      {
+        "name": "00710.png",
+        "nearest_lolv1": "710.png",
+        "cos": 1.0,
+        "min_hamming": 0,
+        "exact_pixel_match": "711.png",
+        "dropped": true
+      },
+      {
+        "name": "00711.png",
+        "nearest_lolv1": "710.png",
+        "cos": 1.0,
+        "min_hamming": 0,
+        "exact_pixel_match": "711.png",
+        "dropped": true
+      },
+      {
+        "name": "00712.png",
+        "nearest_lolv1": "712.png",
+        "cos": 0.9999997615814209,
+        "min_hamming": 0,
+        "exact_pixel_match": "713.png",
+        "dropped": true
+      },
+      {
+        "name": "00713.png",
+        "nearest_lolv1": "712.png",
+        "cos": 0.9999997615814209,
+        "min_hamming": 0,
+        "exact_pixel_match": "713.png",
+        "dropped": true
+      },
+      {
+        "name": "00714.png",
+        "nearest_lolv1": "714.png",
+        "cos": 0.9999998211860657,
+        "min_hamming": 0,
+        "exact_pixel_match": "715.png",
+        "dropped": true
+      },
+      {
+        "name": "00715.png",
+        "nearest_lolv1": "714.png",
+        "cos": 0.9999998211860657,
+        "min_hamming": 0,
+        "exact_pixel_match": "715.png",
+        "dropped": true
+      },
+      {
+        "name": "00716.png",
+        "nearest_lolv1": "716.png",
+        "cos": 1.0,
+        "min_hamming": 0,
+        "exact_pixel_match": "717.png",
+        "dropped": true
+      },
+      {
+        "name": "00717.png",
+        "nearest_lolv1": "716.png",
+        "cos": 1.0,
+        "min_hamming": 0,
+        "exact_pixel_match": "717.png",
+        "dropped": true
+      },
+      {
+        "name": "00718.png",
+        "nearest_lolv1": "718.png",
+        "cos": 0.9999999403953552,
+        "min_hamming": 0,
+        "exact_pixel_match": "719.png",
+        "dropped": true
+      },
+      {
+        "name": "00719.png",
+        "nearest_lolv1": "718.png",
+        "cos": 0.9999999403953552,
+        "min_hamming": 0,
+        "exact_pixel_match": "719.png",
+        "dropped": true
+      },
+      {
+        "name": "00720.png",
+        "nearest_lolv1": "720.png",
+        "cos": 1.000000238418579,
+        "min_hamming": 0,
+        "exact_pixel_match": "721.png",
+        "dropped": true
+      },
+      {
+        "name": "00721.png",
+        "nearest_lolv1": "720.png",
+        "cos": 1.000000238418579,
+        "min_hamming": 0,
+        "exact_pixel_match": "721.png",
+        "dropped": true
+      },
+      {
+        "name": "00722.png",
+        "nearest_lolv1": "722.png",
+        "cos": 0.9999999403953552,
+        "min_hamming": 0,
+        "exact_pixel_match": "723.png",
+        "dropped": true
+      },
+      {
+        "name": "00723.png",
+        "nearest_lolv1": "722.png",
+        "cos": 0.9999999403953552,
+        "min_hamming": 0,
+        "exact_pixel_match": "723.png",
+        "dropped": true
+      },
+      {
+        "name": "00724.png",
+        "nearest_lolv1": "724.png",
+        "cos": 1.0000001192092896,
+        "min_hamming": 0,
+        "exact_pixel_match": "725.png",
+        "dropped": true
+      },
+      {
+        "name": "00725.png",
+        "nearest_lolv1": "724.png",
+        "cos": 1.0000001192092896,
+        "min_hamming": 0,
+        "exact_pixel_match": "725.png",
+        "dropped": true
+      },
+      {
+        "name": "00726.png",
+        "nearest_lolv1": "726.png",
+        "cos": 1.0,
+        "min_hamming": 0,
+        "exact_pixel_match": "728.png",
+        "dropped": true
+      },
+      {
+        "name": "00727.png",
+        "nearest_lolv1": "726.png",
+        "cos": 1.0,
+        "min_hamming": 0,
+        "exact_pixel_match": "728.png",
+        "dropped": true
+      },
+      {
+        "name": "00728.png",
+        "nearest_lolv1": "726.png",
+        "cos": 1.0,
+        "min_hamming": 0,
+        "exact_pixel_match": "728.png",
+        "dropped": true
+      },
+      {
+        "name": "00729.png",
+        "nearest_lolv1": "729.png",
+        "cos": 0.9999996423721313,
+        "min_hamming": 0,
+        "exact_pixel_match": "730.png",
+        "dropped": true
+      },
+      {
+        "name": "00730.png",
+        "nearest_lolv1": "729.png",
+        "cos": 0.9999996423721313,
+        "min_hamming": 0,
+        "exact_pixel_match": "730.png",
+        "dropped": true
+      },
+      {
+        "name": "00731.png",
+        "nearest_lolv1": "731.png",
+        "cos": 0.9999999403953552,
+        "min_hamming": 0,
+        "exact_pixel_match": "732.png",
+        "dropped": true
+      },
+      {
+        "name": "00732.png",
+        "nearest_lolv1": "731.png",
+        "cos": 0.9999999403953552,
+        "min_hamming": 0,
+        "exact_pixel_match": "732.png",
+        "dropped": true
+      },
+      {
+        "name": "00733.png",
+        "nearest_lolv1": "733.png",
+        "cos": 0.9999998807907104,
+        "min_hamming": 0,
+        "exact_pixel_match": "734.png",
+        "dropped": true
+      },
+      {
+        "name": "00734.png",
+        "nearest_lolv1": "733.png",
+        "cos": 0.9999998807907104,
+        "min_hamming": 0,
+        "exact_pixel_match": "734.png",
+        "dropped": true
+      },
+      {
+        "name": "00735.png",
+        "nearest_lolv1": "736.png",
+        "cos": 0.9999998807907104,
+        "min_hamming": 0,
+        "exact_pixel_match": "736.png",
+        "dropped": true
+      },
+      {
+        "name": "00736.png",
+        "nearest_lolv1": "736.png",
+        "cos": 0.9999998807907104,
+        "min_hamming": 0,
+        "exact_pixel_match": "736.png",
+        "dropped": true
+      },
+      {
+        "name": "00737.png",
+        "nearest_lolv1": "737.png",
+        "cos": 1.0000003576278687,
+        "min_hamming": 0,
+        "exact_pixel_match": "738.png",
+        "dropped": true
+      },
+      {
+        "name": "00738.png",
+        "nearest_lolv1": "737.png",
+        "cos": 1.0000003576278687,
+        "min_hamming": 0,
+        "exact_pixel_match": "738.png",
+        "dropped": true
+      },
+      {
+        "name": "00739.png",
+        "nearest_lolv1": "739.png",
+        "cos": 1.0,
+        "min_hamming": 0,
+        "exact_pixel_match": "740.png",
+        "dropped": true
+      },
+      {
+        "name": "00740.png",
+        "nearest_lolv1": "739.png",
+        "cos": 1.0,
+        "min_hamming": 0,
+        "exact_pixel_match": "740.png",
+        "dropped": true
+      },
+      {
+        "name": "00741.png",
+        "nearest_lolv1": "741.png",
+        "cos": 0.9999998211860657,
+        "min_hamming": 0,
+        "exact_pixel_match": "741.png",
+        "dropped": true
+      },
+      {
+        "name": "00742.png",
+        "nearest_lolv1": "741.png",
+        "cos": 0.9999998211860657,
+        "min_hamming": 0,
+        "exact_pixel_match": "741.png",
+        "dropped": true
+      },
+      {
+        "name": "00743.png",
+        "nearest_lolv1": "743.png",
+        "cos": 1.0000001192092896,
+        "min_hamming": 0,
+        "exact_pixel_match": "744.png",
+        "dropped": true
+      },
+      {
+        "name": "00744.png",
+        "nearest_lolv1": "743.png",
+        "cos": 1.0000001192092896,
+        "min_hamming": 0,
+        "exact_pixel_match": "744.png",
+        "dropped": true
+      },
+      {
+        "name": "00745.png",
+        "nearest_lolv1": "745.png",
+        "cos": 1.000000238418579,
+        "min_hamming": 0,
+        "exact_pixel_match": "746.png",
+        "dropped": true
+      },
+      {
+        "name": "00746.png",
+        "nearest_lolv1": "745.png",
+        "cos": 1.000000238418579,
+        "min_hamming": 0,
+        "exact_pixel_match": "746.png",
+        "dropped": true
+      },
+      {
+        "name": "00747.png",
+        "nearest_lolv1": "747.png",
+        "cos": 1.0,
+        "min_hamming": 0,
+        "exact_pixel_match": "747.png",
+        "dropped": true
+      },
+      {
+        "name": "00748.png",
+        "nearest_lolv1": "747.png",
+        "cos": 1.0,
+        "min_hamming": 0,
+        "exact_pixel_match": "747.png",
+        "dropped": true
+      },
+      {
+        "name": "00749.png",
+        "nearest_lolv1": "750.png",
+        "cos": 0.9999997615814209,
+        "min_hamming": 0,
+        "exact_pixel_match": "750.png",
+        "dropped": true
+      },
+      {
+        "name": "00750.png",
+        "nearest_lolv1": "750.png",
+        "cos": 0.9999997615814209,
+        "min_hamming": 0,
+        "exact_pixel_match": "750.png",
+        "dropped": true
+      },
+      {
+        "name": "00751.png",
+        "nearest_lolv1": "751.png",
+        "cos": 1.000000238418579,
+        "min_hamming": 0,
+        "exact_pixel_match": "752.png",
+        "dropped": true
+      },
+      {
+        "name": "00752.png",
+        "nearest_lolv1": "751.png",
+        "cos": 1.000000238418579,
+        "min_hamming": 0,
+        "exact_pixel_match": "752.png",
+        "dropped": true
+      },
+      {
+        "name": "00753.png",
+        "nearest_lolv1": "757.png",
+        "cos": 0.28006333112716675,
+        "min_hamming": 22,
+        "exact_pixel_match": null,
+        "dropped": false
+      },
+      {
+        "name": "00754.png",
+        "nearest_lolv1": "757.png",
+        "cos": 0.28006333112716675,
+        "min_hamming": 22,
+        "exact_pixel_match": null,
+        "dropped": false
+      },
+      {
+        "name": "00755.png",
+        "nearest_lolv1": "757.png",
+        "cos": 0.28006333112716675,
+        "min_hamming": 22,
+        "exact_pixel_match": null,
+        "dropped": false
+      },
+      {
+        "name": "00756.png",
+        "nearest_lolv1": "757.png",
+        "cos": 0.28006333112716675,
+        "min_hamming": 22,
+        "exact_pixel_match": null,
+        "dropped": false
+      },
+      {
+        "name": "00757.png",
+        "nearest_lolv1": "757.png",
+        "cos": 0.9999997615814209,
+        "min_hamming": 0,
+        "exact_pixel_match": "758.png",
+        "dropped": true
+      },
+      {
+        "name": "00758.png",
+        "nearest_lolv1": "757.png",
+        "cos": 0.9999997615814209,
+        "min_hamming": 0,
+        "exact_pixel_match": "758.png",
+        "dropped": true
+      },
+      {
+        "name": "00759.png",
+        "nearest_lolv1": "759.png",
+        "cos": 0.9999998807907104,
+        "min_hamming": 0,
+        "exact_pixel_match": "760.png",
+        "dropped": true
+      },
+      {
+        "name": "00760.png",
+        "nearest_lolv1": "759.png",
+        "cos": 0.9999998807907104,
+        "min_hamming": 0,
+        "exact_pixel_match": "760.png",
+        "dropped": true
+      },
+      {
+        "name": "00761.png",
+        "nearest_lolv1": "761.png",
+        "cos": 1.0,
+        "min_hamming": 0,
+        "exact_pixel_match": "762.png",
+        "dropped": true
+      },
+      {
+        "name": "00762.png",
+        "nearest_lolv1": "761.png",
+        "cos": 1.0,
+        "min_hamming": 0,
+        "exact_pixel_match": "762.png",
+        "dropped": true
+      },
+      {
+        "name": "00763.png",
+        "nearest_lolv1": "763.png",
+        "cos": 1.0000003576278687,
+        "min_hamming": 0,
+        "exact_pixel_match": "764.png",
+        "dropped": true
+      },
+      {
+        "name": "00764.png",
+        "nearest_lolv1": "763.png",
+        "cos": 1.0000003576278687,
+        "min_hamming": 0,
+        "exact_pixel_match": "764.png",
+        "dropped": true
+      },
+      {
+        "name": "00765.png",
+        "nearest_lolv1": "765.png",
+        "cos": 1.0000001192092896,
+        "min_hamming": 0,
+        "exact_pixel_match": "766.png",
+        "dropped": true
+      },
+      {
+        "name": "00766.png",
+        "nearest_lolv1": "765.png",
+        "cos": 1.0000001192092896,
+        "min_hamming": 0,
+        "exact_pixel_match": "766.png",
+        "dropped": true
+      },
+      {
+        "name": "00767.png",
+        "nearest_lolv1": "775.png",
+        "cos": 0.5304214358329773,
+        "min_hamming": 20,
+        "exact_pixel_match": null,
+        "dropped": false
+      },
+      {
+        "name": "00768.png",
+        "nearest_lolv1": "775.png",
+        "cos": 0.5304214358329773,
+        "min_hamming": 20,
+        "exact_pixel_match": null,
+        "dropped": false
+      },
+      {
+        "name": "00769.png",
+        "nearest_lolv1": "769.png",
+        "cos": 1.0,
+        "min_hamming": 0,
+        "exact_pixel_match": "770.png",
+        "dropped": true
+      },
+      {
+        "name": "00770.png",
+        "nearest_lolv1": "769.png",
+        "cos": 1.0,
+        "min_hamming": 0,
+        "exact_pixel_match": "770.png",
+        "dropped": true
+      },
+      {
+        "name": "00771.png",
+        "nearest_lolv1": "771.png",
+        "cos": 1.0,
+        "min_hamming": 0,
+        "exact_pixel_match": "772.png",
+        "dropped": true
+      },
+      {
+        "name": "00772.png",
+        "nearest_lolv1": "771.png",
+        "cos": 1.0,
+        "min_hamming": 0,
+        "exact_pixel_match": "772.png",
+        "dropped": true
+      },
+      {
+        "name": "00773.png",
+        "nearest_lolv1": "773.png",
+        "cos": 0.9999995827674866,
+        "min_hamming": 0,
+        "exact_pixel_match": "774.png",
+        "dropped": true
+      },
+      {
+        "name": "00774.png",
+        "nearest_lolv1": "773.png",
+        "cos": 0.9999995827674866,
+        "min_hamming": 0,
+        "exact_pixel_match": "774.png",
+        "dropped": true
+      },
+      {
+        "name": "00775.png",
+        "nearest_lolv1": "775.png",
+        "cos": 1.0,
+        "min_hamming": 0,
+        "exact_pixel_match": "777.png",
+        "dropped": true
+      },
+      {
+        "name": "00776.png",
+        "nearest_lolv1": "775.png",
+        "cos": 1.0,
+        "min_hamming": 0,
+        "exact_pixel_match": "777.png",
+        "dropped": true
+      },
+      {
+        "name": "00777.png",
+        "nearest_lolv1": "775.png",
+        "cos": 1.0,
+        "min_hamming": 0,
+        "exact_pixel_match": "777.png",
+        "dropped": true
+      },
+      {
+        "name": "00778.png",
+        "nearest_lolv1": "775.png",
+        "cos": 1.0,
+        "min_hamming": 0,
+        "exact_pixel_match": "777.png",
+        "dropped": true
+      },
+      {
+        "name": "00779.png",
+        "nearest_lolv1": "779.png",
+        "cos": 0.9999998807907104,
+        "min_hamming": 0,
+        "exact_pixel_match": "779.png",
+        "dropped": true
+      },
+      {
+        "name": "00780.png",
+        "nearest_lolv1": "779.png",
+        "cos": 0.9999998807907104,
+        "min_hamming": 0,
+        "exact_pixel_match": "779.png",
+        "dropped": true
+      },
+      {
+        "name": "00781.png",
+        "nearest_lolv1": "781.png",
+        "cos": 1.000000238418579,
+        "min_hamming": 0,
+        "exact_pixel_match": "786.png",
+        "dropped": true
+      },
+      {
+        "name": "00782.png",
+        "nearest_lolv1": "781.png",
+        "cos": 1.000000238418579,
+        "min_hamming": 0,
+        "exact_pixel_match": "786.png",
+        "dropped": true
+      },
+      {
+        "name": "00783.png",
+        "nearest_lolv1": "781.png",
+        "cos": 1.000000238418579,
+        "min_hamming": 0,
+        "exact_pixel_match": "786.png",
+        "dropped": true
+      },
+      {
+        "name": "00784.png",
+        "nearest_lolv1": "781.png",
+        "cos": 1.000000238418579,
+        "min_hamming": 0,
+        "exact_pixel_match": "786.png",
+        "dropped": true
+      },
+      {
+        "name": "00785.png",
+        "nearest_lolv1": "781.png",
+        "cos": 1.000000238418579,
+        "min_hamming": 0,
+        "exact_pixel_match": "786.png",
+        "dropped": true
+      },
+      {
+        "name": "00786.png",
+        "nearest_lolv1": "781.png",
+        "cos": 1.000000238418579,
+        "min_hamming": 0,
+        "exact_pixel_match": "786.png",
+        "dropped": true
+      },
+      {
+        "name": "00787.png",
+        "nearest_lolv1": "787.png",
+        "cos": 1.0000001192092896,
+        "min_hamming": 0,
+        "exact_pixel_match": "789.png",
+        "dropped": true
+      },
+      {
+        "name": "00788.png",
+        "nearest_lolv1": "787.png",
+        "cos": 1.0000001192092896,
+        "min_hamming": 0,
+        "exact_pixel_match": "789.png",
+        "dropped": true
+      },
+      {
+        "name": "00789.png",
+        "nearest_lolv1": "787.png",
+        "cos": 1.0000001192092896,
+        "min_hamming": 0,
+        "exact_pixel_match": "789.png",
+        "dropped": true
+      }
+    ],
+    "n_dropped_by": {
+      "exact": 91,
+      "phash": 91,
+      "cos": 91
+    }
+  },
+  "entries": {},
+  "script_sha256": "3854906cac915205df66e5ebec946ccab594e6b09dfea026bac21c381057d734"
+}
