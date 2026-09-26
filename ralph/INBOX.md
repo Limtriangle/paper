@@ -16,6 +16,8 @@ default until one arrives. **Exception: Gate 0 (the topic) waits for the author.
 
 - [ ] (Default applied, master, 2026-09-26) LOL-v2-Real cross-dataset check: 91/100 test GTs are pixel-identical to LOL-v1 training GTs. Default: hash-only dedup against eval15 (permitted, logged), descriptive evaluation only if ≥ 5 images survive, and the duplication fact reported as the cross-dataset result. Say `[human] drop lolv2` to remove it from the paper entirely.
 
+- [ ] (Proposal applied by master, 2026-09-26, reversible) S4 attribution pass: one extra oracle arm O-gain+gamma (CPU, zero training) to split the 2.5 dB that all knobs add over gain-only between tone (gamma) and the rest; the S4 chapter stands without it. Say `[human] drop s4 gamma` to remove.
+
 ## Answers / notes from the author
 - 2026-09-24 ~03:45 UTC [human-pane] "R4-R6 in ralph/related/redteam/: T3/T6/T4 rejected as methods. Candidates v5 should now rank the C1 ladder first again, with T3 oracle-decomposition as an optional zero-training chapter. No runs." → done as v10 (INBOX line 27 confirms the red-teams).
 - 2026-09-24 ~03:30 UTC [human-pane] "R3 in ralph/related/redteam/: T1 rejected as proposed. Keep candidates v5 but mark T1 as broken; T3 under review. No runs." → done as v9 (INBOX line 25 confirms).

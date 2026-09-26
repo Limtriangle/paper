@@ -43,7 +43,13 @@ decile mechanism rule; vocabulary contributes / removable / inconclusive.
   pixel-identical to LOL-v1 training ground truths (exact, pHash and DINOv2 agree); none duplicates eval15; 9 images in
   3 scenes remain. No generalisation claim is possible; the duplication is reported as the result, and the 9-image reads
   are listed descriptively per arm (GT-mean 28.7–30.5 dB), not ranked. Keys: lolv2real_v1.json.
-- S4 oracle decomposition (bonus): *(pending, ETA 2026-09-26 ≈ 10:35 UTC)*
+- **S4 oracle decomposition (2026-09-26, zero training, released weights, 40 val images / 18 scenes).** A single
+  scalar pre-gain recovers 75.5 % of the brightness-shift loss (O-gain +7.62 dB raw vs F0 over all shifts); all knobs
+  together add a further +2.48 dB [2.04, 2.98] raw (+3.15 GT-mean), so the pre-registered "nothing beyond a gain"
+  condition fails — but the same gap (+2.31 [1.65, 3.01]) exists on unshifted inputs, chroma/hue ΔE00 does not move
+  (−0.10 [−0.36, 0.16]) and k stays at the released value: the extra is per-image oracle flexibility on tone, not an
+  HVI-specific or shift-specific effect. Reported descriptively; no method claim. Caveat carried: val images are in the
+  released model's training set. Keys: s4__oracle_decomp_v1.json.
 
 ## 4. What changed versus the plan
 - Gate A raw mean fell 0.05 dB below the pre-registered window; pivot P-A applied (DECISIONS 2026-09-24 20:30): the
