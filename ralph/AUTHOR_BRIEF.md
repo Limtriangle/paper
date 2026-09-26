@@ -54,8 +54,10 @@ decile mechanism rule; vocabulary contributes / removable / inconclusive.
 - The "contributes" verdict for HVI-space supervision (L2−L3) meets rule S-3 conditions (a)–(c); condition (d)'s mixed
   model reported converged = false. Master's default: keep the verdict, state the non-convergence in the paper, add a
   supplementary non-rule model as a robustness check. Please confirm or overrule.
-- The pre-registered LOL-v2-Real cross-dataset check (plan §3, zero training) was started on 2026-09-26 while you were
-  away; it is plan-listed, not new scope. Say if you want it dropped.
+- LOL-v2-Real cross-dataset check (plan §3): 91/100 of its test GTs are pixel-identical to LOL-v1 training GTs (key-bound
+  counts in lolv2real_v1.json). Master's ruling: dedup by hash (eval15 hashed for exclusion only, permit logged);
+  descriptive evaluation only if ≥ 5 images survive; the duplication itself is reported as the cross-dataset result.
+  Say if you want it dropped.
 - Whether the S4 oracle-decomposition chapter stays in the appendix depends on its result (arrives 2026-09-26).
 
 ## 6. Every decision taken while the author was away
