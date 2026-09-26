@@ -680,6 +680,38 @@
    ]
   },
   {
+   "written": "26.73",
+   "src": "s2__rep_ladder_v1.json",
+   "key": "analysis.analysis_s2.decision.arm_summary.A0.psnr_gtmean.mean",
+   "only_in": [
+    "app_s2_arms.tex"
+   ]
+  },
+  {
+   "written": "0.13",
+   "src": "s2__rep_ladder_v1.json",
+   "key": "analysis.analysis_s2.decision.arm_summary.A0.psnr_gtmean.sd",
+   "only_in": [
+    "app_s2_arms.tex"
+   ]
+  },
+  {
+   "written": "23.31",
+   "src": "s2__rep_ladder_v1.json",
+   "key": "analysis.analysis_s2.decision.arm_summary.A0.psnr.mean",
+   "only_in": [
+    "app_s2_arms.tex"
+   ]
+  },
+  {
+   "written": "0.34",
+   "src": "s2__rep_ladder_v1.json",
+   "key": "analysis.analysis_s2.decision.arm_summary.A0.psnr.sd",
+   "only_in": [
+    "app_s2_arms.tex"
+   ]
+  },
+  {
    "written": "0.06",
    "src": "s3__selection_bias_v1.json",
    "key": "analysis.analysis_s3.decision.L0.oracle_minus_final_mean",
