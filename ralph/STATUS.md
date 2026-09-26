@@ -14,8 +14,9 @@
 ## Agents
 | Agent | Doing | Since |
 |---|---|---|
-| master | Gate B stamped PASS; brief updated; mde/tost keys requested; next: Gate C ≈ Mon, S4 result today | 2026-09-26 07:35 UTC |
+| master | Gate B stamped and audited; S4 and LOL-v2 results logged; next: Gate C ≈ Mon 2026-09-28, then final evals, analysis, final draft, full audit, brief | 2026-09-26 10:20 UTC |
 | writing | Gate B draft audited (3 auditors + master) and accepted: 137 values by key; S1 complete, S3 partial, S2/S4/LOL-v2 provisional. Next: bind S4 (today), S3 rows (≈18:00), S2 at Gate C | 2026-09-26 07:50 UTC |
+| experiment | Queue on S2 (A2 ×4 running); S4 DONE (e097bbb); L3/L4 CPU oracle passes running; dedup-v2 download retrying (HF 429); S4 gamma-attribution arm queued on CPU | 2026-09-26 10:20 UTC |
 
 ## Next actions
 - **Author away until Thu 2026-10-01** (INBOX line 42): master decides pre-registered rules and §8 pivots and logs them; no new scope; when training ends → final evals, analysis, final draft, full audit, push; paper NOT marked complete; `ralph/AUTHOR_BRIEF.md` is the hand-over document.
