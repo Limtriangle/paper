@@ -34,7 +34,42 @@ RUN = {"s1": ("s1", "loss_ladder_v1"), "s2": ("s2", "rep_ladder_v1")}
 M_FAMILY = 4
 
 
-def derived(dec):
+def mixed_supplementary(sel, contrasts):
+    """NON-RULE supplementary fits (master 2026-09-26), per contrast a-b on GT-mean PSNR per image and seed:
+    (i) mixedlm y ~ arm with an image random intercept only (seed random effect dropped);
+    (ii) OLS y ~ arm + C(image) + C(seed) (paired-by-seed, per-image fixed effects). Coefficient = a - b."""
+    import pandas as pd
+    import statsmodels.formula.api as smf
+    out = {}
+    for key in contrasts:
+        a, b = key.split("-")
+        if a not in sel or b not in sel:
+            continue
+        seeds = sorted(set(sel[a]) & set(sel[b]))
+        rows = [{"arm": arm, "seed": s_, "image": r["image"], "y": r["psnr_gtmean"]}
+                for arm in (a, b) for s_ in seeds for r in sel[arm][s_]["per_image"]]
+        df = pd.DataFrame(rows)
+        df["arm"] = pd.Categorical(df["arm"], categories=[b, a])
+        name = f"arm[T.{a}]"
+        res = {}
+        try:
+            m1 = smf.mixedlm("y ~ arm", df, groups=df["image"]).fit(reml=True)
+            res["mixedlm_image_only"] = {"coef": float(m1.params[name]), "p": float(m1.pvalues[name]),
+                                         "converged": bool(m1.converged), "image_var": float(m1.cov_re.iloc[0, 0]),
+                                         "residual_var": float(m1.scale)}
+        except Exception as ex:  # noqa: BLE001
+            res["mixedlm_image_only"] = {"error": str(ex)[:200]}
+        m2 = smf.ols("y ~ arm + C(image) + C(seed)", df).fit()
+        ci = m2.conf_int().loc[name]
+        res["ols_image_seed_fixed"] = {"coef": float(m2.params[name]), "p": float(m2.pvalues[name]),
+                                       "ci95": [float(ci[0]), float(ci[1])], "df_resid": float(m2.df_resid),
+                                       "note": "treats images x seeds as independent residuals: pseudo-replicated, descriptive only"}
+        out[key] = res
+    out["label"] = "NON-RULE supplementary; rule S-3(d) is evaluated only by the frozen decision.contrasts.<c>.mixed_model"
+    return out
+
+
+def derived(dec, sel=None):
     """Keys the paper cites that the frozen script computes only in parts (master 2026-09-26). Pure arithmetic on
     the frozen decision; exported as analysis.analysis_<ladder>.derived.*, never inside .decision."""
     c = {k: v for k, v in dec["contrasts"].items() if "mean" in v}
@@ -44,7 +79,9 @@ def derived(dec):
             "formulas": {"tost_p": "max(tost.p_lower, tost.p_upper) of the frozen decision (TOST rejects iff tost_p < 0.05; margin 0.3 dB)",
                          "mde_db": "copied from decision.contrasts.<c>.mde_db = (t_{0.975,n-1} + t_{0.8,n-1}) * SD(delta_s) / sqrt(n) "
                                    "(frozen analysis_c1.mde; = 1.66 * SD / sqrt(5) at n = 5); family_max = max over contrasts"},
-            "source": "analysis.analysis_<ladder>.decision (frozen analysis_c1.py)", "wrapper_sha256": H.sha256_file(Path(__file__))}
+            "source": "analysis.analysis_<ladder>.decision (frozen analysis_c1.py)", "wrapper_sha256": H.sha256_file(Path(__file__)),
+            "frozen_rule_S3d": "analysis_c1.py:178 mm_agrees = ('coef' in mm) and sign(coef) == sign(mean): the converged flag is NOT consulted",
+            "mixed_supplementary": mixed_supplementary(sel, list(c)) if sel else None}
 
 
 def complete_arms(runs, ladder, planned=None):
@@ -181,7 +218,7 @@ def main():
                         "test15": "final-checkpoint reads by final_eval_test.py; no selection"})
             (rd / f"analysis_{ladder}").mkdir(exist_ok=True)
             H.json_save(rd / f"analysis_{ladder}" / "decision.json", dec)
-            H.json_save(rd / f"analysis_{ladder}" / "derived.json", derived(dec))
+            H.json_save(rd / f"analysis_{ladder}" / "derived.json", derived(dec, sel))
             subprocess.run([sys.executable, str(H.PAPER / "tooling" / "export_results.py"), "--run", f"{study}/{run}"],
                            capture_output=True, text=True, timeout=600)
             print(ladder, "arms", sorted(sel), "|", {k: (round(c["mean"], 3), c["verdict"]) if "mean" in c else c.get("status")

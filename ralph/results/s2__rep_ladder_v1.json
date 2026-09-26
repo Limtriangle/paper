@@ -146,24 +146,28 @@
      "final_eval__test.json": "99716f42e4ac2914cd681b84f043557a7ec4e96241f53e9bac12674ffe77932e"
     },
     "test15": "final-checkpoint reads by final_eval_test.py; no selection",
-    "wrapper_sha256": "025f881ea2266a0ec02d6bacd1c96cc8f658344c1c67bb2e11ed8608f4184bf6",
-    "written_at": "2026-09-26T07:43:57"
+    "wrapper_sha256": "e0687ab28b0dfe488dcdc7dca5f90392886a44945456c61631222644d3097075",
+    "written_at": "2026-09-26T07:49:07"
    },
    "derived": {
     "formulas": {
      "mde_db": "copied from decision.contrasts.<c>.mde_db = (t_{0.975,n-1} + t_{0.8,n-1}) * SD(delta_s) / sqrt(n) (frozen analysis_c1.mde; = 1.66 * SD / sqrt(5) at n = 5); family_max = max over contrasts",
      "tost_p": "max(tost.p_lower, tost.p_upper) of the frozen decision (TOST rejects iff tost_p < 0.05; margin 0.3 dB)"
     },
+    "frozen_rule_S3d": "analysis_c1.py:178 mm_agrees = ('coef' in mm) and sign(coef) == sign(mean): the converged flag is NOT consulted",
     "mde_db": {
      "family_max": null
     },
+    "mixed_supplementary": {
+     "label": "NON-RULE supplementary; rule S-3(d) is evaluated only by the frozen decision.contrasts.<c>.mixed_model"
+    },
     "source": "analysis.analysis_<ladder>.decision (frozen analysis_c1.py)",
     "tost_p": {},
-    "wrapper_sha256": "025f881ea2266a0ec02d6bacd1c96cc8f658344c1c67bb2e11ed8608f4184bf6"
+    "wrapper_sha256": "e0687ab28b0dfe488dcdc7dca5f90392886a44945456c61631222644d3097075"
    }
   }
  },
- "exported_at": "2026-09-26T07:43:57",
+ "exported_at": "2026-09-26T07:49:07",
  "jobs": {
   "A2_seed42": {
    "config": {
@@ -208,10 +212,10 @@
    "curve": {
     "best_val_psnr": 22.842505958785402,
     "best_val_psnr_epoch": 270,
-    "final_train_loss": 0.471257389656135,
-    "final_val_psnr": 22.099877148914224,
-    "n_epochs": 290,
-    "train_seconds_total": 6474.341042518616
+    "final_train_loss": 0.46200799516269137,
+    "final_val_psnr": "",
+    "n_epochs": 304,
+    "train_seconds_total": 6786.863922119141
    },
    "epochs_trained": 1000,
    "status": "running"
@@ -259,10 +263,10 @@
    "curve": {
     "best_val_psnr": 22.91170392051979,
     "best_val_psnr_epoch": 65,
-    "final_train_loss": 0.47603300160595347,
-    "final_val_psnr": 22.37182402749945,
-    "n_epochs": 270,
-    "train_seconds_total": 5996.224091053009
+    "final_train_loss": 0.47206845453807283,
+    "final_val_psnr": "",
+    "n_epochs": 283,
+    "train_seconds_total": 6285.325366973877
    },
    "epochs_trained": 1000,
    "status": "running"
@@ -308,12 +312,12 @@
     "width": 36
    },
    "curve": {
-    "best_val_psnr": 20.907839923228597,
-    "best_val_psnr_epoch": 20,
-    "final_train_loss": 0.7443639636039734,
+    "best_val_psnr": 21.900334967251464,
+    "best_val_psnr_epoch": 40,
+    "final_train_loss": 0.7037017153842109,
     "final_val_psnr": "",
-    "n_epochs": 33,
-    "train_seconds_total": 741.1872038841248
+    "n_epochs": 46,
+    "train_seconds_total": 1033.1543736457825
    },
    "epochs_trained": 1000,
    "status": "running"
@@ -359,12 +363,12 @@
     "width": 36
    },
    "curve": {
-    "best_val_psnr": "",
-    "best_val_psnr_epoch": 1,
-    "final_train_loss": 1.3959715004478181,
+    "best_val_psnr": 20.77796534588125,
+    "best_val_psnr_epoch": 15,
+    "final_train_loss": 0.8131083228758403,
     "final_val_psnr": "",
-    "n_epochs": 4,
-    "train_seconds_total": 90.05308270454407
+    "n_epochs": 17,
+    "train_seconds_total": 381.3524115085602
    },
    "epochs_trained": 1000,
    "status": "running"
@@ -466,19 +470,19 @@
  "run_id": "s2__rep_ladder_v1",
  "sources": {
   "A2_seed42/config.json": "2fe8ee3ee07a0790d95fc7b114040cc690e94e20d24d09d3e58cd89a2648dc58",
-  "A2_seed42/metrics.csv": "483d5fc97900e6d7f5f600d77f76d204fb0c158e7220a70ec6286a88cfd0c0b2",
-  "A2_seed42/status.json": "29632cfc452b378e38bfba488588731db7caf2d19c9a1b04804dd43941419d6e",
+  "A2_seed42/metrics.csv": "8fadd12355a7bf92dacf91638469f6afd31e459331d08ca73390bc01bf8e44fb",
+  "A2_seed42/status.json": "83e8b5733b98ae449077169cc408f033b02d92df84a0297420f0abc134270378",
   "A2_seed43/config.json": "4072a5b519df3013dab2e294ac9407f805d6ca2b5163cc097735286ee79cb564",
-  "A2_seed43/metrics.csv": "8dffae81685bcec42392bfd45d6115dddc2e372136b940d1040b3dfd2e1cd0db",
-  "A2_seed43/status.json": "a730ff563aba73fe36c8973edb42ef0e99245cb5cafcb5b7a667d248f97fab77",
+  "A2_seed43/metrics.csv": "71dbeca12d2cf8b4d7446d3d9e17dc04d5467481f1e5b5354829347a595b3ac7",
+  "A2_seed43/status.json": "ba9cb40f174de021b7d90320c307d545082bf8902cb7c827afe15d9ab50e8a14",
   "A2_seed44/config.json": "92066be930326751a9ce5482ca91f161ee809f0fd5908f04665f71cb02eef7f3",
-  "A2_seed44/metrics.csv": "2c4f9f1308bcd0ba1ba3cf6d59427840b96cbb22081d08389fb45c81793f7422",
-  "A2_seed44/status.json": "d5e6ac10a88ac1d3904095e7804d8b02d5ca3d0f9e95403a5e3d058fcda68338",
+  "A2_seed44/metrics.csv": "a86ffb9faf298752068f074f31217917f3ccb6fb4b7a1d181c8b6192e5755ad8",
+  "A2_seed44/status.json": "631941768380d947700d920b4fff92bce871503f12f1ec60fcc00c40b29d3e29",
   "A2_seed45/config.json": "4a77d7e806adb2078ed2516613000db492fc71e5ca457e450bd8592a618750cf",
-  "A2_seed45/metrics.csv": "1981ac3b3b575c0e0b3e3e6a04d417174cd20bc5ec1135f699bec6c3d71428e3",
-  "A2_seed45/status.json": "652fd9870e12e1b402b14f601533ff51571e031ee8b9e0c2ebf039bd896f9346",
-  "analysis_s2/decision.json": "1bc9fa565fde69dde223bff1ddb3d4d23c43fc59d7d1493e72418ef90ea093d6",
-  "analysis_s2/derived.json": "621f8d9f9be4920e41743400d50f98f9846feaf37378fc856900c391e4f82d51",
+  "A2_seed45/metrics.csv": "4f661bef5d1693b910814d27ebc3c4165f7f567fc8ee33b402df8e3184dced74",
+  "A2_seed45/status.json": "44d5ca8c3912d9606ad92ed1dbad61925ca1ad87fe5e230b1871f0410aca5704",
+  "analysis_s2/decision.json": "2c9a9af7f2fb0c32dfe1b9c755b27204bec741986f4beb1bacc1389152a67cd9",
+  "analysis_s2/derived.json": "3808c7cab85dad0c39091d168e54cb313f79a8c6e817cbaa4f4d24d4b8c25eb1",
   "manifest.json": "7eb8a1b9904035b741fca32860ad14c54c3ad78b2f034e75ad05a5ab1d11caa6"
  },
  "status": "partial",

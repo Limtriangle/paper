@@ -1006,20 +1006,100 @@
      "final_eval__test.json": "99716f42e4ac2914cd681b84f043557a7ec4e96241f53e9bac12674ffe77932e"
     },
     "test15": "final-checkpoint reads by final_eval_test.py; no selection",
-    "wrapper_sha256": "025f881ea2266a0ec02d6bacd1c96cc8f658344c1c67bb2e11ed8608f4184bf6",
-    "written_at": "2026-09-26T07:43:57"
+    "wrapper_sha256": "e0687ab28b0dfe488dcdc7dca5f90392886a44945456c61631222644d3097075",
+    "written_at": "2026-09-26T07:49:06"
    },
    "derived": {
     "formulas": {
      "mde_db": "copied from decision.contrasts.<c>.mde_db = (t_{0.975,n-1} + t_{0.8,n-1}) * SD(delta_s) / sqrt(n) (frozen analysis_c1.mde; = 1.66 * SD / sqrt(5) at n = 5); family_max = max over contrasts",
      "tost_p": "max(tost.p_lower, tost.p_upper) of the frozen decision (TOST rejects iff tost_p < 0.05; margin 0.3 dB)"
     },
+    "frozen_rule_S3d": "analysis_c1.py:178 mm_agrees = ('coef' in mm) and sign(coef) == sign(mean): the converged flag is NOT consulted",
     "mde_db": {
      "L0-L1": 0.284786997475232,
      "L1-L2": 0.11030631756692719,
      "L2-L3": 0.27899540041062504,
      "L2-L4": 0.338698434057358,
      "family_max": 0.338698434057358
+    },
+    "mixed_supplementary": {
+     "L0-L1": {
+      "mixedlm_image_only": {
+       "coef": 0.06713246404662582,
+       "converged": true,
+       "image_var": 6.7291208019600415,
+       "p": 0.35105752186098693,
+       "residual_var": 0.19433968732295617
+      },
+      "ols_image_seed_fixed": {
+       "ci95": [
+        -0.07357658269270353,
+        0.20784151078593774
+       ],
+       "coef": 0.0671324640466171,
+       "df_resid": 130.0,
+       "note": "treats images x seeds as independent residuals: pseudo-replicated, descriptive only",
+       "p": 0.34697790912467663
+      }
+     },
+     "L1-L2": {
+      "mixedlm_image_only": {
+       "coef": -0.15522199863729208,
+       "converged": true,
+       "image_var": 6.628716596236001,
+       "p": 0.025447462631157262,
+       "residual_var": 0.18095098255634112
+      },
+      "ols_image_seed_fixed": {
+       "ci95": [
+        -0.2902050443468468,
+        -0.0202389529277546
+       ],
+       "coef": -0.15522199863730068,
+       "df_resid": 130.0,
+       "note": "treats images x seeds as independent residuals: pseudo-replicated, descriptive only",
+       "p": 0.02454237415970743
+      }
+     },
+     "L2-L3": {
+      "mixedlm_image_only": {
+       "coef": 0.5772182384143117,
+       "converged": true,
+       "image_var": 5.955738262380923,
+       "p": 4.734690632008647e-15,
+       "residual_var": 0.20359642717470897
+      },
+      "ols_image_seed_fixed": {
+       "ci95": [
+        0.43181989250298525,
+        0.7226165843256191
+       ],
+       "coef": 0.5772182384143022,
+       "df_resid": 130.0,
+       "note": "treats images x seeds as independent residuals: pseudo-replicated, descriptive only",
+       "p": 1.3234906597185616e-12
+      }
+     },
+     "L2-L4": {
+      "mixedlm_image_only": {
+       "coef": 0.14881901698218752,
+       "converged": true,
+       "image_var": 6.4583371266088845,
+       "p": 0.04280563974567291,
+       "residual_var": 0.2024138005651752
+      },
+      "ols_image_seed_fixed": {
+       "ci95": [
+        0.004928624309182783,
+        0.2927094096551735
+       ],
+       "coef": 0.14881901698217814,
+       "df_resid": 130.0,
+       "note": "treats images x seeds as independent residuals: pseudo-replicated, descriptive only",
+       "p": 0.042758375722137115
+      }
+     },
+     "label": "NON-RULE supplementary; rule S-3(d) is evaluated only by the frozen decision.contrasts.<c>.mixed_model"
     },
     "source": "analysis.analysis_<ladder>.decision (frozen analysis_c1.py)",
     "tost_p": {
@@ -1028,11 +1108,11 @@
      "L2-L3": 0.989524935239653,
      "L2-L4": 0.08619707086724418
     },
-    "wrapper_sha256": "025f881ea2266a0ec02d6bacd1c96cc8f658344c1c67bb2e11ed8608f4184bf6"
+    "wrapper_sha256": "e0687ab28b0dfe488dcdc7dca5f90392886a44945456c61631222644d3097075"
    }
   }
  },
- "exported_at": "2026-09-26T07:43:57",
+ "exported_at": "2026-09-26T07:49:06",
  "jobs": {
   "L1_seed42": {
    "best": {
@@ -2871,8 +2951,8 @@
   "L4_seed46/status.json": "85f4019675343d4db9068ee70a3ba7b2031990bcd2601fb10934f34ae2a39f7a",
   "L4_seed46/validation_summary.csv": "b860f41b2a850e3c12578ab729f716773d2660172b737492e0eec4ec702dd89d",
   "analysis_k/decision.json": "1e79ad3aff7b5314ac23a494d8903734457b9267f8e847e6c59ab12189af2888",
-  "analysis_s1/decision.json": "7deebe17777fbda5bd0602ab8a039bcc54e0eb62bdc281f79cc75564e1f27d96",
-  "analysis_s1/derived.json": "03d6f70103abeefb4769dbf99686377b68506a2de8e48bcbe29b4f616675551d",
+  "analysis_s1/decision.json": "0b242ca01587a563a49d41b8cfce75b3a5b741f804b78a84bed4d66281f7aaa4",
+  "analysis_s1/derived.json": "9607deba9deaac819cb03af7a1d1fbd051fd66a89cd2abe5d3787345f0cc07cb",
   "manifest.json": "30ce48b81a317b5627d0295087efd4c3ba7656bf1991d296b209140c4fbf073c"
  },
  "status": "complete",
