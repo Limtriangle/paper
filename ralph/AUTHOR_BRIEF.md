@@ -39,7 +39,11 @@ decile mechanism rule; vocabulary contributes / removable / inconclusive.
   Reading: of the heuristic dual-space loss, only the presence of HVI-space supervision is measurable; the VGG term on
   HVI tensors and the loss-side k coupling are removable, and the principled reweighting is inconclusive at n = 5.
 - Gate C — representation ladder: *(pending, ETA 2026-09-28)*
-- S4 oracle decomposition (bonus): *(pending)*
+- **Cross-dataset check (plan §3), 2026-09-26.** LOL-v2-Real's test set duplicates LOL-v1: 91 of 100 ground truths are
+  pixel-identical to LOL-v1 training ground truths (exact, pHash and DINOv2 agree); none duplicates eval15; 9 images in
+  3 scenes remain. No generalisation claim is possible; the duplication is reported as the result, and the 9-image reads
+  are listed descriptively per arm (GT-mean 28.7–30.5 dB), not ranked. Keys: lolv2real_v1.json.
+- S4 oracle decomposition (bonus): *(pending, ETA 2026-09-26 ≈ 10:35 UTC)*
 
 ## 4. What changed versus the plan
 - Gate A raw mean fell 0.05 dB below the pre-registered window; pivot P-A applied (DECISIONS 2026-09-24 20:30): the

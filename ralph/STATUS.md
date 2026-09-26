@@ -24,6 +24,7 @@
 - writing: bind keys as they appear; never compute a number; storyline move 2 now has its first measured sentence (reproduction under upstream's reporting conditions).
 
 ## Log
+- 2026-09-26 08:45 UTC LOL-v2-Real cross-dataset check: 91/100 test GTs duplicate LOL-v1 train; 9 images kept, descriptive only; reported as a dataset finding.
 - 2026-09-26 07:50 UTC Gate B draft milestone audit passed after 14 fixes; S-3(d) ruling logged (verdict stands, non-convergence stated).
 - 2026-09-26 ≈ 07:30 UTC GATE B PASS: HVI-space supervision contributes (+0.58 dB); VGG-on-HVI and k coupling removable; C_k-weighted chroma inconclusive.
 - 2026-09-25 20:30 UTC master back after a quota pause; author away until 2026-10-01 with standing instructions; 17/25 S1 runs exported.
