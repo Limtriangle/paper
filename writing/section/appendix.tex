@@ -82,8 +82,8 @@ own splits share no image: \phm{0} of its \phm{100} test and \phm{0} of its \phm
 training pairs match across the split, for inputs and for ground truths. Its training split
 overlaps \dataset training heavily, with \phm{417} of \phm{689} ground truths and
 \phm{399} inputs pixel-identical. Against the \dataset test split, no ground truth is
-pixel-identical (\phm{0}), but \phm{12} LOL-v2-Real training inputs and \phm{3} test
-inputs are. Because at least five images
+pixel-identical (\phm{0}), but \phm{12} LOL-v2-Real training inputs and \phm{3} test inputs are;
+\phm{0} of the \phm{9} kept images shares an input with it. Because at least five images
 survive, each loss-arm final checkpoint is scored once on the \phm{9} remaining images as a
 descriptive read; with \phm{3} scenes these reads carry no verdict and are not used by any
 contrast. Mean GT-mean PSNR over seeds on the \phm{9} images is \phm{30.15}~dB for L0,
