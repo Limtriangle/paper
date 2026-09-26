@@ -1006,6 +1006,42 @@
    "only_in": [
     "app_gatea_seeds.tex"
    ]
+  },
+  {
+   "written": "0.34",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.derived.mde_db.family_max",
+   "only_in": [
+    "abstract.tex",
+    "introduction.tex",
+    "conclusion.tex",
+    "method.tex",
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "0.02",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.derived.tost_p.L0-L1",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "0.004",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.derived.tost_p.L1-L2",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "0.09",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.derived.tost_p.L2-L4",
+   "only_in": [
+    "experiments.tex"
+   ]
   }
  ]
 }

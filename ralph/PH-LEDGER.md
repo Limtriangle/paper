@@ -17,7 +17,6 @@ Files: `abs` = abstract, `intro`, `exp` = experiments, `concl`, `app` = appendix
 | Value | Where | Meaning | Waits on (JSON key, source) |
 |---|---|---|---|
 | 23.3, 24.3 | exp | Gate A window | HVI-PLAN §5 (protocol constant, not a measurement; becomes plain text) |
-| 0.5 | abs, intro, exp, concl | achieved paired MDE | analysis decision_rules.mde (to be added by experiment) or derived 1.66·SD(Δ) |
 | 0.1 removable | tables | A0−A1 | `s2__rep_ladder_v1.json` analysis.analysis_s2.decision.contrasts.A0-A1.* |
 | 0.4 contributes, deciles 1–3 | abs, intro, exp, concl, tables | A0−A2 + mechanism rule | contrasts.A0-A2.*; mechanism_A0_vs_A2.{hue_err,delta_e00}.rule5, stress.monotone |
 | 0.1 inconclusive | exp, tables | A2−A3 | contrasts.A2-A3.* |
@@ -62,6 +61,8 @@ deleted. Literature rows (first three) become citations with the number attribut
 | app_s3 rows L0 (42-46), L1, L2 | app_s3.tex | `s3__selection_bias_v1.json: analysis.analysis_s3.decision.<arm>.*` (partial) | 0.06/26.96, 0.11/26.78, 0.07/26.91 |
 | `0.58`, `5`, `contributes` (L2−L3) | abstract, introduction, experiments, conclusion | `s1__loss_ladder_v1.json: analysis.analysis_s1.decision.contrasts.L2-L3.{mean,sign_agreement,verdict}` | 0.577, 5 |
 | `0.15`, `inconclusive` (L2−L4) | experiments.tex | `s1__loss_ladder_v1.json: contrasts.L2-L4.{mean,verdict}` (final, Gate B) | 0.149 |
+| `0.34` | abstract, intro, method, results x2, conclusion (achieved MDE; loss ladder family max, master ruling) | `s1__loss_ladder_v1.json: analysis.analysis_s1.derived.mde_db.family_max` | 0.339 |
+| `0.02`, `0.004`, `0.09` | experiments.tex (TOST p beside removable/removable/inconclusive) | `analysis.analysis_s1.derived.tost_p.{L0-L1,L1-L2,L2-L4}` | 0.019, 0.0041, 0.086 |
 | `-0.71` | appendix.tex | `decomposition.valsel_minus_final_gtmean.mean` (n=5; seed 46's val-selected checkpoint is 2 dB low) | -0.713 |
 | `0.06` | abstract, introduction, experiments (headline selection term, GT-mean) | `decomposition.oracle_minus_final_gtmean.mean` (n=4) | 0.064 |
 | `0.41` | abstract, introduction, experiments (raw selection inflation) | `decomposition.oracle_minus_final.mean` (n=5) | 0.408 |
