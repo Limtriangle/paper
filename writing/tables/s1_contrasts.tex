@@ -3,15 +3,15 @@
 \centering
 \footnotesize
 \setlength{\tabcolsep}{3pt}
-\caption{\textbf{Loss ladder (S1).} Paired-by-seed difference in GT-mean PSNR between neighbouring loss arms of \mname on the A0 representation, \dataset test split (eval15), final checkpoint, five matched seeds, on \hw. SD is the seed-to-seed SD of the difference; CI$^{-}$/CI$^{+}$ bound the Holm-adjusted 95\% paired $t$ interval across the four contrasts. The verdict follows the pre-registered rules: \emph{contributes} if the CI excludes zero and $|\Delta| \ge 0.3$~dB, \emph{removable} if TOST at $\pm 0.3$~dB rejects, else \emph{inconclusive}. Partial: two contrasts measured; Holm counts the others as $p = 1$. No value is highlighted; a contrast is not a ranking.}
+\caption{\textbf{Loss ladder (S1).} Paired-by-seed difference in GT-mean PSNR between neighbouring loss arms of \mname on the A0 representation, \dataset test split (eval15), final checkpoint, five matched seeds, on \hw. SD is the seed-to-seed SD of the difference; CI$^{-}$/CI$^{+}$ bound the Holm-adjusted 95\% paired $t$ interval across the four contrasts. The verdict follows the pre-registered rules: \emph{contributes} if the CI excludes zero and $|\Delta| \ge 0.3$~dB, \emph{removable} if TOST at $\pm 0.3$~dB rejects, else \emph{inconclusive}. Partial: three contrasts measured; Holm counts the fourth as $p = 1$. No value is highlighted; a contrast is not a ranking.}
 \label{tab:s1}
 \begin{tabular}{lccccc}
 \toprule
 Contrast & $\Delta$ (dB) & SD & CI$^{-}$ & CI$^{+}$ & Verdict \\
 \midrule
-L0$-$L1: VGG on \hvi & \phm{0.07} & \phm{0.17} & \phm{-0.21} & \phm{0.35} & \phm{removable} \\
-L1$-$L2: $k$ in the loss & \phm{-0.16} & \phm{0.07} & \phm{-0.28} & \phm{-0.03} & \phm{removable} \\
-L2$-$L3: \hvi supervision & \ph{0.60} & \ph{0.30} & \ph{0.20} & \ph{1.00} & \ph{contributes} \\
+L0$-$L1: VGG on \hvi & \phm{0.07} & \phm{0.17} & \phm{-0.20} & \phm{0.33} & \phm{removable} \\
+L1$-$L2: $k$ in the loss & \phm{-0.16} & \phm{0.07} & \phm{-0.27} & \phm{-0.04} & \phm{removable} \\
+L2$-$L3: \hvi supervision & \phm{0.58} & \phm{0.17} & \phm{0.25} & \phm{0.90} & \phm{contributes} \\
 L2$-$L4: $\Ck$-weighted chroma & \ph{0.00} & \ph{0.30} & \ph{-0.40} & \ph{0.40} & \ph{removable} \\
 \bottomrule
 \end{tabular}

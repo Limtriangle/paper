@@ -405,6 +405,33 @@
    ]
   },
   {
+   "written": "0.58",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.contrasts.L2-L3.mean",
+   "only_in": [
+    "abstract.tex",
+    "introduction.tex",
+    "experiments.tex",
+    "conclusion.tex"
+   ]
+  },
+  {
+   "written": "contributes",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.contrasts.L2-L3.verdict",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
+   "written": "5",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.contrasts.L2-L3.sign_agreement",
+   "only_in": [
+    "experiments.tex"
+   ]
+  },
+  {
    "written": "0.07",
    "src": "s1__loss_ladder_v1.json",
    "key": "analysis.analysis_s1.decision.contrasts.L0-L1.mean",
@@ -421,7 +448,7 @@
    ]
   },
   {
-   "written": "-0.21",
+   "written": "-0.20",
    "src": "s1__loss_ladder_v1.json",
    "key": "analysis.analysis_s1.decision.contrasts.L0-L1.ci_holm.0",
    "only_in": [
@@ -429,7 +456,7 @@
    ]
   },
   {
-   "written": "0.35",
+   "written": "0.33",
    "src": "s1__loss_ladder_v1.json",
    "key": "analysis.analysis_s1.decision.contrasts.L0-L1.ci_holm.1",
    "only_in": [
@@ -461,7 +488,7 @@
    ]
   },
   {
-   "written": "-0.28",
+   "written": "-0.27",
    "src": "s1__loss_ladder_v1.json",
    "key": "analysis.analysis_s1.decision.contrasts.L1-L2.ci_holm.0",
    "only_in": [
@@ -469,7 +496,7 @@
    ]
   },
   {
-   "written": "-0.03",
+   "written": "-0.04",
    "src": "s1__loss_ladder_v1.json",
    "key": "analysis.analysis_s1.decision.contrasts.L1-L2.ci_holm.1",
    "only_in": [
@@ -480,6 +507,46 @@
    "written": "removable",
    "src": "s1__loss_ladder_v1.json",
    "key": "analysis.analysis_s1.decision.contrasts.L1-L2.verdict",
+   "only_in": [
+    "s1_contrasts.tex"
+   ]
+  },
+  {
+   "written": "0.58",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.contrasts.L2-L3.mean",
+   "only_in": [
+    "s1_contrasts.tex"
+   ]
+  },
+  {
+   "written": "0.17",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.contrasts.L2-L3.sd",
+   "only_in": [
+    "s1_contrasts.tex"
+   ]
+  },
+  {
+   "written": "0.25",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.contrasts.L2-L3.ci_holm.0",
+   "only_in": [
+    "s1_contrasts.tex"
+   ]
+  },
+  {
+   "written": "0.90",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.contrasts.L2-L3.ci_holm.1",
+   "only_in": [
+    "s1_contrasts.tex"
+   ]
+  },
+  {
+   "written": "contributes",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.contrasts.L2-L3.verdict",
    "only_in": [
     "s1_contrasts.tex"
    ]
@@ -576,6 +643,38 @@
    "written": "0.34",
    "src": "s1__loss_ladder_v1.json",
    "key": "analysis.analysis_s1.decision.arm_summary.L2.psnr.sd",
+   "only_in": [
+    "app_s1_arms.tex"
+   ]
+  },
+  {
+   "written": "26.16",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.arm_summary.L3.psnr_gtmean.mean",
+   "only_in": [
+    "app_s1_arms.tex"
+   ]
+  },
+  {
+   "written": "0.12",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.arm_summary.L3.psnr_gtmean.sd",
+   "only_in": [
+    "app_s1_arms.tex"
+   ]
+  },
+  {
+   "written": "22.88",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.arm_summary.L3.psnr.mean",
+   "only_in": [
+    "app_s1_arms.tex"
+   ]
+  },
+  {
+   "written": "0.14",
+   "src": "s1__loss_ladder_v1.json",
+   "key": "analysis.analysis_s1.decision.arm_summary.L3.psnr.sd",
    "only_in": [
     "app_s1_arms.tex"
    ]
