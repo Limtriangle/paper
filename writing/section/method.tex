@@ -78,7 +78,8 @@ analysis code were frozen with hashes before the first ladder run.
 \paragraph{What the ladders do not test.} The architecture and the two-branch split are
 fixed, so an sRGB arm without a luma/chroma split is not on the ladder (the released
 ablation's sRGB row is a different architecture), and a different backbone might prefer a
-different space. Training uses one dataset; LOL-v2-Real scores are secondary. Polar HSV
+different space. Training uses one dataset, and LOL-v2-Real cannot test transfer
+(\Cref{sec:app-cross}). Polar HSV
 with a wrapped hue axis is omitted because the paper already shows it fails; A2 is HSV
 without the wrap. An inconclusive step is not shown to be useless, only smaller than the
 \phm{0.34}~dB that five seeds resolve here.

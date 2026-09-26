@@ -1126,6 +1126,46 @@
    "only_in": [
     "appendix.tex"
    ]
+  },
+  {
+   "written": "100",
+   "src": "lolv2real_v1.json",
+   "key": "counts.n_test",
+   "only_in": [
+    "appendix.tex"
+   ]
+  },
+  {
+   "written": "91",
+   "src": "lolv2real_v1.json",
+   "key": "counts.n_dup_train_any",
+   "only_in": [
+    "appendix.tex"
+   ]
+  },
+  {
+   "written": "0",
+   "src": "lolv2real_v1.json",
+   "key": "counts.n_dup_eval15",
+   "only_in": [
+    "appendix.tex"
+   ]
+  },
+  {
+   "written": "9",
+   "src": "lolv2real_v1.json",
+   "key": "counts.n_kept",
+   "only_in": [
+    "appendix.tex"
+   ]
+  },
+  {
+   "written": "3",
+   "src": "lolv2real_v1.json",
+   "key": "counts.n_scenes_kept",
+   "only_in": [
+    "appendix.tex"
+   ]
   }
  ]
 }

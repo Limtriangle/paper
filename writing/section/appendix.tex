@@ -66,14 +66,16 @@ per-decile curves for every other contrast are reported descriptively, without a
 \subsection{Cross-Dataset Scores}
 \label{sec:app-cross}
 
-Every final checkpoint is also scored on the LOL-v2-Real test split, deduplicated against
-the \dataset training set by hash and embedding, without retraining. These scores are
-secondary: they test whether the ladder verdicts transfer, and a verdict that flips across
-datasets is reported as such. Scoring every final checkpoint on the deduplicated
-LOL-v2-Real test split without retraining preserves the two verdicts that contribute: both
-keep their sign in \ph{4} of 5 seeds, and the removable steps stay within $\pm 0.3$~dB.
-The level drops to \ph{22.0}~dB GT-mean PSNR for the released recipe; we claim nothing
-about the ranking of arms there.
+The plan scored every final checkpoint on the LOL-v2-Real test split \citep{yang2021lolv2}
+as a cross-dataset check. That check is not possible for models trained on \dataset: of its
+\phm{100} test pairs, \phm{91} have a ground truth pixel-identical to a \dataset training
+ground truth (the same \phm{91} are flagged by perceptual hash and by DINOv2 embedding),
+and \phm{0} match a \dataset test image. Only \phm{9} images from \phm{3} scenes remain.
+LOL-v2-Real's test split therefore cannot serve as a generalisation test for \dataset-trained
+models, and no cross-dataset claim is made in this paper. Because at least five images
+survive, each loss-arm final checkpoint is scored once on the \phm{9} remaining images as a
+descriptive read; with \phm{3} scenes these reads carry no verdict and are not used by any
+contrast.
 
 \subsection{Mixed-Model Check for the Loss Ladder}
 \label{sec:app-mixed}
