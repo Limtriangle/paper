@@ -143,9 +143,18 @@ def main():
     for side in ("gt", "input"):
         counts[f"q2b_v2train_{side}_in_v1train"] = crit_counts(match(F[("train", side)], F[("v1", side)]), S)
     # Q2c: LOL-v2 train (and test, for completeness) vs eval15 — exact + pHash only
+    detail["eval15_matches"] = {}
     for side in ("gt", "input"):
-        counts[f"q2c_v2train_{side}_in_eval15"] = crit_counts(match(F[("train", side)], F[("e15", side)]), S, has_dino=False)
-        counts[f"extra_v2test_{side}_in_eval15"] = crit_counts(match(F[("test", side)], F[("e15", side)]), S, has_dino=False)
+        for split, key, names in (("train", "q2c_v2train", v2["Train"]), ("test", "extra_v2test", v2["Test"])):
+            m = match(F[(split, side)], F[("e15", side)])
+            counts[f"{key}_{side}_in_eval15"] = crit_counts(m, S, has_dino=False)
+            detail["eval15_matches"][f"v2{split}_{side}"] = [
+                {"v2": names[i], "eval15": e15[r["exact"]] if r["exact"] is not None else e15[r["ham_j"]],
+                 "exact": r["exact"] is not None, "min_ham": r["min_ham"],
+                 "in_kept9": (split == "test" and names[i] in kept9)}
+                for i, r in enumerate(m) if r["exact"] is not None or r["min_ham"] <= S.HASH_EDGE]
+    counts["kept9_overlap_with_eval15"] = {
+        side: sum(1 for x in detail["eval15_matches"][f"v2test_{side}"] if x["in_kept9"]) for side in ("gt", "input")}
 
     res = {"run_id": "lolv2real_dedup_v2", "written_at": time.strftime("%Y-%m-%dT%H:%M:%S"),
            "totals": {"lolv1_train_pairs": len(v1n), "lolv1_eval15_pairs": len(e15), "lolv2_test_pairs": 100, "lolv2_train_pairs": 689,
