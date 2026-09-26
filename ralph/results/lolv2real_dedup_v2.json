@@ -3112,5 +3112,27 @@
     "files_manifest_sha256": "43bd8b332d9a22e49e4be1bc35beed54f31cf996d3f5634c6c82cca155acd628",
     "lolv2real_v1.json": "84de680b99342622403e5be3b8deea11324f552318d04badd0d9f8de0f7615ec",
     "script_sha256": "df7f149df3f1d90e0e1c6c866788a2f1eb274aec7dac73faf2033f767054a3ad"
+  },
+  "kept9_eval15_input_overlap": {
+    "n": 0,
+    "ids": [],
+    "exact_eval15_input_test_ids": [
+      "00748.png",
+      "00778.png",
+      "00780.png"
+    ],
+    "kept9": [
+      "00705.png",
+      "00706.png",
+      "00707.png",
+      "00753.png",
+      "00754.png",
+      "00755.png",
+      "00756.png",
+      "00767.png",
+      "00768.png"
+    ],
+    "derived_from": "detail.eval15_matches.v2test_input (exact) intersected with lolv2real_v1.json eval15_dedup.kept",
+    "consequence": "n = 0: no descriptive lolv2 read scored an image whose input is an eval15 input; lolv2real_v1.json unchanged (master ruling 2026-09-26)"
   }
 }
