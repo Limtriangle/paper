@@ -27,7 +27,17 @@ decile mechanism rule; vocabulary contributes / removable / inconclusive.
 - **k drift (S1 side result).** Final k median 0.85 when k is coupled through the loss (L0), 0.29 when detached (L2),
   from init 0.2; released weights 1.13. Most of upstream's k drift is loss-side coupling. Key: analysis_k in
   s1__loss_ladder_v1.json.
-- Gate B — loss ladder: *(pending, ETA 2026-09-26)*
+- **Gate B — loss ladder (2026-09-26 07:5x UTC, PASS).** 25 runs, 5 arms × 5 seeds, GT-mean PSNR at the final
+  checkpoint, paired by seed, Holm across four contrasts:
+  | Step | Δ (dB) | SD | Holm 95 % CI | Verdict |
+  |---|---|---|---|---|
+  | L0−L1: VGG term on HVI | +0.07 | 0.17 | [−0.15, 0.28] | removable |
+  | L1−L2: k coupled through the loss | −0.16 | 0.07 | [−0.27, −0.04] | removable (below the 0.3 dB SESOI; detaching k helps slightly, 5/5 seeds) |
+  | L2−L3: HVI-space supervision | +0.58 | 0.17 | [0.25, 0.90] | **contributes** |
+  | L2−L4: C_k-weighted chroma loss | +0.15 | 0.20 | [−0.17, 0.47] | inconclusive |
+  Arm means (GT-mean): L0 26.65, L1 26.58, L2 26.73, L3 26.16, L4 26.58. Pivot P-L not triggered (L0 vs L2 ≈ +0.09).
+  Reading: of the heuristic dual-space loss, only the presence of HVI-space supervision is measurable; the VGG term on
+  HVI tensors and the loss-side k coupling are removable, and the principled reweighting is inconclusive at n = 5.
 - Gate C — representation ladder: *(pending, ETA 2026-09-28)*
 - S4 oracle decomposition (bonus): *(pending)*
 

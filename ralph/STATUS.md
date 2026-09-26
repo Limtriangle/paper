@@ -7,14 +7,14 @@
 |---|---|---|
 | 0 — topic | **PASS** 2026-09-24 04:51 UTC | INBOX line 29 |
 | A — instrument + reproduction | **PASS-with-P-A (final, n=5)** 20:30 UTC: raw final 23.25 ± 0.47 (0.05 below window); under upstream reporting conditions 23.79 raw / 27.74 GT-mean, inside. Seeds 47–49 queued | ralph/results/final_eval__test.json |
-| B — loss ladder S1 (25 runs) | 17/25 exported (L0×5+3, L1×5, L2×5, L3×2); L3×3 + L4×1 training, L4×4 queued; ETA Sat 2026-09-26 ≈ 13:00 UTC | HVI-PLAN.md §4–§5 |
-| C — representation ladder S2 (20 + 6 extra-seed runs) | queued after S1's L2 arm | HVI-PLAN.md §4–§5 |
+| B — loss ladder S1 (25 runs) | **PASS** 2026-09-26 ≈ 07:55 UTC: removable / removable / contributes (+0.58) / inconclusive; P-L not triggered | HVI-PLAN.md §4–§5 |
+| C — representation ladder S2 (26 runs) | running: A2 seeds 42/43 on GPUs; A2×8, A3×8, A4×5, A1×5 queued; ETA ≈ Mon 2026-09-28 | HVI-PLAN.md §4–§5 |
 | D — final | pending | |
 
 ## Agents
 | Agent | Doing | Since |
 |---|---|---|
-| master | Back on Fable after a 16 h quota pause; rulings on Gate A n and literature keys made; early S1 contrasts + S4 dispatched; AUTHOR_BRIEF.md skeleton written; sweeping | 2026-09-25 20:35 UTC |
+| master | Gate B stamped PASS; brief updated; mde/tost keys requested; next: Gate C ≈ Mon, S4 result today | 2026-09-26 08:00 UTC |
 | writing | Gate A paragraph: n=5 gate evidence + pooled n=8 reference stats, both by key; bind literature keys when literature_v1.json lands; bind S1 contrasts as the analysis block fills | 2026-09-25 20:35 UTC |
 
 ## Next actions
@@ -24,6 +24,7 @@
 - writing: bind keys as they appear; never compute a number; storyline move 2 now has its first measured sentence (reproduction under upstream's reporting conditions).
 
 ## Log
+- 2026-09-26 ≈ 07:55 UTC GATE B PASS: HVI-space supervision contributes (+0.58 dB); VGG-on-HVI and k coupling removable; C_k-weighted chroma inconclusive.
 - 2026-09-25 20:30 UTC master back after a quota pause; author away until 2026-10-01 with standing instructions; 17/25 S1 runs exported.
 - 2026-09-25 04:00 UTC agents switched to Opus 5.5 until Fri 20:00 UTC; decision authority restricted to pre-registered PASS stamps.
 - 2026-09-24 20:50 UTC milestone audit of the n=5 draft passed after 12 fixes; draft fit for the author.
