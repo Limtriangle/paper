@@ -40,7 +40,7 @@ ORDER = [("s1", "loss_ladder_v1", "L2", [42, 43, 44, 45, 46]),
          ("s2", "rep_ladder_v1", "A2", [42, 43, 44, 45, 46, 47, 48, 49]),
          ("s2", "rep_ladder_v1", "A3", [42, 43, 44, 45, 46, 47, 48, 49]),
          ("s2", "rep_ladder_v1", "A4", [42, 43, 44, 45, 46]),
-         ("s2", "rep_ladder_v1", "A1", [42, 43, 44, 45, 46])]
+         ("s2", "rep_ladder_v1_a1", "A1", [42, 43, 44, 45, 46])]   # own run: its manifest records k_fixed
 LAUNCH_ARGS = ["--epochs", "1000", "--val-every", "5", "--snapshot-every", "10"]
 LABEL = {"gateA": "gateA_{arm}_seed{seed}"}   # others: <arm>_seed<s>
 
